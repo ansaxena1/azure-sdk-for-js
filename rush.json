@@ -2297,20 +2297,10 @@
       "projectFolder": "sdk/trustedsigning/arm-trustedsigning",
       "versionPolicyName": "management"
     },
-    {
-      "packageName": "@azure/arm-databoundaries",
-      "projectFolder": "sdk/databoundaries/arm-databoundaries",
-      "versionPolicyName": "management"
-    },
-    {
-      "packageName": "@azure/arm-containerorchestratorruntime",
-      "projectFolder": "sdk/kubernetesruntime/arm-containerorchestratorruntime",
-      "versionPolicyName": "management"
-    },
-    {
-      "packageName": "@azure/arm-connectedcache",
-      "projectFolder": "sdk/connectedcache/arm-connectedcache",
-      "versionPolicyName": "management"
+     {
+      "packageName": "@azure/ai-projects",
+      "projectFolder": "sdk/ai/ai-projects",
+      "versionPolicyName": "client"
     }
   ]
 }
