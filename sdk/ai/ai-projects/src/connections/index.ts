@@ -5,8 +5,8 @@
 import { Client } from "@azure-rest/core-client";
 import { OptionalRequestParameters } from "../agents/customModels.js";
 import { ListConnectionsQueryParamProperties } from "../generated/src/parameters.js";
-import { GetConnectionResponseOutput, GetWorkspaceResponseOutput, ListConnectionsResponseOutput } from "./inputOutput.js";
 import { getConnection, getConnectionWithSecrets, getWorkspace, listConnections } from "./connections.js";
+import { GetConnectionResponseOutput, GetWorkspaceResponseOutput, ListConnectionsResponseOutput } from "./inputOutput.js";
 
 export interface ConnectionsOperations {
   /** Gets the properties of the specified machine learning workspace. */

@@ -47,6 +47,11 @@ export class AIProjectsClient {
     this.agents = getAgentsOperations(this._client);
     this.connections = getConnectionsOperations(this._connectionClient);
     this.evaluations = getEvaluationsOperations(this._client);
+    this.scope = {
+      subscriptionId,
+      resourceGroupName,
+      projectName,
+    }
   }
 
   /**
@@ -73,6 +78,10 @@ export class AIProjectsClient {
     );
   }
 
+  // get scope() {
+  //   return this.scope;
+  // }
+
   private static praseConnectionString(connectionString: string): {
     endpointParam: string;
     subscriptionId: string;
@@ -96,4 +105,10 @@ export class AIProjectsClient {
 
   /** The operation groups for evaluations */
   public readonly evaluations: EvaluationsOperations;
+
+  public readonly scope: {
+    subscriptionId: string;
+    resourceGroupName: string;
+    projectName: string;
+  };
 }

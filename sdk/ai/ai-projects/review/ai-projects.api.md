@@ -168,6 +168,12 @@ export class AIProjectsClient {
     readonly connections: ConnectionsOperations;
     readonly evaluations: EvaluationsOperations;
     static fromConnectionString(connectionString: string, credential: TokenCredential, options?: AIProjectsClientOptions): AIProjectsClient;
+    // (undocumented)
+    readonly scope: {
+        subscriptionId: string;
+        resourceGroupName: string;
+        projectName: string;
+    };
 }
 
 // @public (undocumented)
