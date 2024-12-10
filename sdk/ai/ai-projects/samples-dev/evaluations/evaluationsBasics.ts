@@ -1,12 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { AIProjectsClient, Dataset, EvaluatorConfiguration } from "@azure/ai-projects";
+import type { Dataset, EvaluatorConfiguration } from "@azure/ai-projects";
+import { AIProjectsClient } from "@azure/ai-projects";
 import { DefaultAzureCredential } from "@azure/identity";
 
 import * as dotenv from "dotenv";
 import * as fs from "fs";
-import { Evaluation } from "../../src/index.js";
+import type { Evaluation } from "../../src/index.js";
 dotenv.config();
 
 const connectionString = process.env["AZURE_AI_PROJECTS_CONNECTION_STRING"] || "<endpoint>;<subscription>;<resource group>;<project>";
@@ -42,7 +43,7 @@ export async function main(): Promise<void> {
     const relevanceEvaluatorConfiguration: EvaluatorConfiguration = {
       id: "azureml://registries/azureml-staging/models/Relevance-Evaluator/versions/3",
       initParams: {
-        model_config: defaultConnectionModelConfig
+        modelConfig: defaultConnectionModelConfig
       }
     };
 

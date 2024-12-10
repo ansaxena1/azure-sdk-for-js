@@ -1,9 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { Client, createRestError } from "@azure-rest/core-client";
-import { EvaluationOutput, PagedEvaluationOutput } from "../agents/inputOutputs.js";
-import { CreateEvaluationParameters, GetEvaluationParameters, ListEvaluationParameters, UpdateEvaluationParameters } from "./customModels.js";
+import type { Client } from "@azure-rest/core-client";
+import { createRestError } from "@azure-rest/core-client";
+import type { EvaluationOutput, PagedEvaluationOutput } from "../agents/inputOutputs.js";
+import type { CreateEvaluationParameters, GetEvaluationParameters, ListEvaluationParameters, UpdateEvaluationParameters } from "./customModels.js";
 
 const expectedGetStatuses = ["200"];
 const expectedCreateStatuses = ["201"];
@@ -26,7 +27,7 @@ export async function getEvaluation(
 /** Run the evaluation. */
 export async function createEvaluation(
     context: Client,
-    options?: CreateEvaluationParameters,
+    options: CreateEvaluationParameters,
   ): Promise<EvaluationOutput> {
     const result = await  context
     .path("/evaluations/runs:run")
