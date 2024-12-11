@@ -144,6 +144,7 @@ export interface AgentsOperations {
     updateRun: (threadId: string, runId: string, options?: UpdateRunOptions, requestParams?: OptionalRequestParameters) => Promise<ThreadRunOutput>;
     updateThread: (threadId: string, options?: UpdateAgentThreadOptions, requestParams?: OptionalRequestParameters) => Promise<AgentThreadOutput>;
     uploadFile: (data: ReadableStream | NodeJS.ReadableStream, purpose: FilePurpose, fileName?: string, requestParams?: OptionalRequestParameters) => Promise<OpenAIFileOutput>;
+    uploadFileAndPoll: (data: ReadableStream | NodeJS.ReadableStream, purpose: FilePurpose, fileName?: string, pollingOptions?: PollingOptions, requestParams?: OptionalRequestParameters) => Promise<OpenAIFileOutput>;
 }
 
 // @public
@@ -178,6 +179,7 @@ export class AIProjectsClient {
         resourceGroupName: string;
         projectName: string;
     };
+    readonly telemetry: TelemetryOperations;
 }
 
 // @public (undocumented)
@@ -275,7 +277,7 @@ export interface ConnectionsOperations {
     getConnection: (connectionName: string, requestParams?: OptionalRequestParameters) => Promise<GetConnectionResponseOutput>;
     getConnectionWithSecrets: (connectionName: string, requestParams?: OptionalRequestParameters) => Promise<GetConnectionResponseOutput>;
     getWorkspace: (requestParams?: OptionalRequestParameters) => Promise<GetWorkspaceResponseOutput>;
-    listConnections: (options?: ListConnectionsQueryParamProperties, requestParams?: OptionalRequestParameters) => Promise<ListConnectionsResponseOutput>;
+    listConnections: (options?: ListConnectionsQueryParamProperties, requestParams?: OptionalRequestParameters) => Promise<Array<GetConnectionResponseOutput>>;
 }
 
 // @public
@@ -323,17 +325,6 @@ export interface CreateAndRunThreadOptions {
     top_p?: number | null;
     truncation_strategy?: TruncationObject | null;
 }
-
-// @public (undocumented)
-export interface CreateEvaluationBodyParam {
-    body: Evaluation;
-}
-
-// @public (undocumented)
-export type CreateEvaluationParameters = CreateEvaluationBodyParam & RequestParameters;
-
-// @public (undocumented)
-export type CreateOrReplaceEvaluationScheduleParameters = RequestParameters;
 
 // @public
 export interface CreateRunOptions {
@@ -402,9 +393,6 @@ export interface DatasetOutput extends InputDataOutputParent {
     readonly type: "dataset";
 }
 
-// @public (undocumented)
-export type DisableEvaluationScheduleParameters = RequestParameters;
-
 // @public
 export enum DoneEvent {
     Done = "done"
@@ -439,9 +427,6 @@ export interface EvaluationOutput {
 }
 
 // @public
-export type EvaluationResourceMergeAndPatch = Partial<Evaluation>;
-
-// @public
 export interface EvaluationSchedule {
     data: ApplicationInsightsConfiguration;
     description?: string;
@@ -472,8 +457,8 @@ export interface EvaluationsOperations {
     disableSchedule: (scheduleName: string, requestParams?: OptionalRequestParameters) => Promise<void>;
     getEvaluation: (evaluationId: string, requestParams?: OptionalRequestParameters) => Promise<EvaluationOutput>;
     getSchedule: (evaluationName: string, requestParams?: OptionalRequestParameters) => Promise<EvaluationSchedule>;
-    listEvaluations: (options?: ListEvaluationParameters, requestParams?: OptionalRequestParameters) => Promise<PagedEvaluationOutput>;
-    listSchedules: (options?: ListEvaluationScheduleParameters, requestParams?: OptionalRequestParameters) => Promise<PagedEvaluationScheduleOutput>;
+    listEvaluations: (options?: ListQueryParamProperties, requestParams?: OptionalRequestParameters) => Promise<PagedEvaluationOutput>;
+    listSchedules: (options?: ListQueryParamProperties, requestParams?: OptionalRequestParameters) => Promise<PagedEvaluationScheduleOutput>;
     updateEvaluation: (evaluationId: string, resource: Evaluation, requestParams?: OptionalRequestParameters) => Promise<EvaluationOutput>;
 }
 
@@ -575,9 +560,6 @@ export type Frequency = string;
 export type FrequencyOutput = string;
 
 // @public
-export function fromConnectionId(toolType: connectionToolType, connectionIds: string[]): ToolDefinitionParent;
-
-// @public
 export function fromFunctionDefinition(functionDefintion: FunctionDefinition): FunctionToolDefinition;
 
 // @public
@@ -629,12 +611,6 @@ export interface GetConnectionResponseOutput {
     name: string;
     properties: InternalConnectionPropertiesOutput;
 }
-
-// @public (undocumented)
-export type GetEvaluationParameters = RequestParameters;
-
-// @public (undocumented)
-export type GetEvaluationScheduleParameters = RequestParameters;
 
 // @public
 export interface GetWorkspaceResponseOutput {
@@ -719,18 +695,6 @@ export interface ListConnectionsQueryParamProperties {
 // @public
 export interface ListConnectionsResponseOutput {
     value: Array<GetConnectionResponseOutput>;
-}
-
-// @public (undocumented)
-export type ListEvaluationParameters = ListQueryParam & RequestParameters;
-
-// @public (undocumented)
-export type ListEvaluationScheduleParameters = ListQueryParam & RequestParameters;
-
-// @public (undocumented)
-export interface ListQueryParam {
-    // (undocumented)
-    queryParameters?: ListQueryParamProperties;
 }
 
 // @public
@@ -1520,6 +1484,14 @@ export interface SystemDataOutput {
 }
 
 // @public
+export interface TelemetryOperations {
+    getConnectionString(): Promise<string>;
+    getSettings(): TelemetryOptions;
+    // Warning: (ae-forgotten-export) The symbol "TelemetryOptions" needs to be exported by the entry point index.d.ts
+    updateSettings(options: TelemetryOptions): void;
+}
+
+// @public
 export interface ThreadDeletionStatusOutput {
     deleted: boolean;
     id: string;
@@ -1666,6 +1638,49 @@ export interface ToolResourcesOutput {
 }
 
 // @public
+export class ToolSet {
+    addAzureAISearchTool(indexConnectionId: string, indexName: string): {
+        definition: AzureAISearchToolDefinition;
+        resources: ToolResources;
+    };
+    addCodeInterpreterTool(fileIds?: string[], dataSources?: Array<VectorStoreDataSource>): {
+        definition: CodeInterpreterToolDefinition;
+        resources: ToolResources;
+    };
+    addConnectionTool(toolType: connectionToolType, connectionIds: string[]): {
+        definition: ToolDefinition;
+    };
+    addFileSearchTool(vectorStoreIds?: string[], vectorStores?: Array<VectorStoreConfigurations>, definitionDetails?: FileSearchToolDefinitionDetails): {
+        definition: FileSearchToolDefinition;
+        resources: ToolResources;
+    };
+    toolDefinitions: ToolDefinition[];
+    toolResources: ToolResources;
+}
+
+// @public
+export class ToolUtility {
+    static createAzureAISearchTool(indexConnectionId: string, indexName: string): {
+        definition: AzureAISearchToolDefinition;
+        resources: ToolResources;
+    };
+    static createCodeInterpreterTool(fileIds?: string[], dataSources?: Array<VectorStoreDataSource>): {
+        definition: CodeInterpreterToolDefinition;
+        resources: ToolResources;
+    };
+    static createConnectionTool(toolType: connectionToolType, connectionIds: string[]): {
+        definition: ToolDefinition;
+    };
+    static createFileSearchTool(vectorStoreIds?: string[], vectorStores?: Array<VectorStoreConfigurations>, definitionDetails?: FileSearchToolDefinitionDetails): {
+        definition: FileSearchToolDefinition;
+        resources: ToolResources;
+    };
+    static createFunctionTool(functionDefinition: FunctionDefinition): {
+        definition: FunctionToolDefinition;
+    };
+}
+
+// @public
 export type Trigger = TriggerParent | RecurrenceTrigger | CronTrigger;
 
 // @public
@@ -1721,11 +1736,6 @@ export interface UpdateAgentThreadOptions {
     tool_resources?: ToolResources | null;
 }
 
-// @public (undocumented)
-export interface UpdateBodyParam {
-    body: EvaluationResourceMergeAndPatch;
-}
-
 // @public
 export interface UpdateCodeInterpreterToolResourceOptions {
     file_ids?: string[];
@@ -1735,9 +1745,6 @@ export interface UpdateCodeInterpreterToolResourceOptions {
 export interface UpdateCodeInterpreterToolResourceOptionsOutput {
     file_ids?: string[];
 }
-
-// @public (undocumented)
-export type UpdateEvaluationParameters = UpdateBodyParam & RequestParameters;
 
 // @public
 export interface UpdateFileSearchToolResourceOptions {

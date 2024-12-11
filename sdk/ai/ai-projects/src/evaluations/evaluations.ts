@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Client } from "@azure-rest/core-client";
+import type { Client, RequestParameters } from "@azure-rest/core-client";
 import { createRestError } from "@azure-rest/core-client";
 import type { EvaluationOutput, PagedEvaluationOutput } from "../agents/inputOutputs.js";
-import type { CreateEvaluationParameters, GetEvaluationParameters, ListEvaluationParameters, UpdateEvaluationParameters } from "./customModels.js";
+import type { CreateParameters, ListParameters, UpdateParameters } from "../generated/src/parameters.js";
 
 const expectedGetStatuses = ["200"];
 const expectedCreateStatuses = ["201"];
@@ -13,7 +13,7 @@ const expectedCreateStatuses = ["201"];
 export async function getEvaluation(
     context: Client,
     evaluationId: string,
-    options?: GetEvaluationParameters,
+    options?: RequestParameters,
   ): Promise<EvaluationOutput> {
     const result = await context
     .path("/evaluations/runs/{evaluationId}", evaluationId)
@@ -27,9 +27,9 @@ export async function getEvaluation(
 /** Run the evaluation. */
 export async function createEvaluation(
     context: Client,
-    options: CreateEvaluationParameters,
+    options: CreateParameters,
   ): Promise<EvaluationOutput> {
-    const result = await  context
+    const result = await context
     .path("/evaluations/runs:run")
     .post(options);
     if (!expectedCreateStatuses.includes(result.status)) {
@@ -41,7 +41,7 @@ export async function createEvaluation(
   /** Resource list operation template. */
 export async function listEvaluations(
     context: Client,
-    options?: ListEvaluationParameters,
+    options?: ListParameters,
   ): Promise<PagedEvaluationOutput> {
     const result = await context
     .path("/evaluations/runs")
@@ -56,7 +56,7 @@ export async function listEvaluations(
 export async function updateEvaluation(
     context: Client,
     evaluationId: string,
-    options?: UpdateEvaluationParameters,
+    options?: UpdateParameters,
   ): Promise<EvaluationOutput> {
     const result = await context
     .path("/evaluations/runs/{evaluationId}", evaluationId)
