@@ -5,8 +5,9 @@ import type { EvaluatorConfiguration } from "@azure/ai-projects";
 import { AIProjectsClient } from "@azure/ai-projects";
 import { DefaultAzureCredential } from "@azure/identity";
 
+import type { Paged } from "@azure/core-paging";
 import * as dotenv from "dotenv";
-import type { ApplicationInsightsConfiguration, EvaluationSchedule, RecurrenceTrigger } from "../../src/index.js";
+import type { ApplicationInsightsConfiguration, EvaluationSchedule, EvaluationScheduleOutput, RecurrenceTrigger } from "../../src/index.js";
 dotenv.config();
 
 const connectionString = process.env["AZURE_AI_PROJECTS_CONNECTION_STRING"] || "<endpoint>;<subscription>;<resource group>;<project>";
@@ -25,8 +26,8 @@ export async function main(): Promise<void> {
       id: "azureml://registries/model-evaluation-dev-01/models/F1ScoreEval/versions/1",
       initParams: {
         columnMapping: {
-          response: `${data.message}`,
-          groundTruth: `${data.itemType}`,
+          response: "message", // `${data.message}`,
+          groundTruth: "itemType", // `${data.itemType}`,
 
         }
       }
@@ -35,6 +36,7 @@ export async function main(): Promise<void> {
     const recurrenceTrigger: RecurrenceTrigger = {
       frequency: "Day",
       interval: 1,
+      type: "Recurrence"
     };
 
     const evaluators = {
@@ -60,9 +62,9 @@ export async function main(): Promise<void> {
     const getEvaluationSchedule = await client.evaluations.getSchedule(name);
     console.log(`Get evaluation schedule: ${getEvaluationSchedule}`);
 
-    const schedules = await client.evaluations.listSchedules();
-    schedules.forEach(schedule => {
-      console.log(`Schedule: ${schedule}`);
+    const schedules: Paged<EvaluationScheduleOutput> = await client.evaluations.listSchedules();
+    schedules.value.forEach(x => {
+      console.log(`Schedule: ${x}`);
     });
     await client.evaluations.disableSchedule(name);
     console.log("Disabled evaluation schedule");

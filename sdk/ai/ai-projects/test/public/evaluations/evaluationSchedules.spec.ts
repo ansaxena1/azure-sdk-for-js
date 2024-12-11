@@ -29,9 +29,8 @@ describe("Evaluation schedules", () => {
       id: "azureml://registries/model-evaluation-dev-01/models/F1ScoreEval/versions/1",
       initParams: {
         columnMapping: {
-          response: `${data.message}`,
-          groundTruth: `${data.itemType}`,
-
+          response: "message", // `${data.message}`,
+          groundTruth: "itemType", // `${data.itemType}`,
         }
       }
     };
@@ -39,6 +38,7 @@ describe("Evaluation schedules", () => {
     const recurrenceTrigger: RecurrenceTrigger = {
       frequency: "Day",
       interval: 1,
+      type: "Recurrence"
     };
 
     const evaluators = {

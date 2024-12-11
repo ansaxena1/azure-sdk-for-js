@@ -17,7 +17,7 @@ describe("Evaluations", () => {
     projectsClient = createProjectsClient(recorder);
     evaluations = projectsClient.evaluations;
     const connections = await projectsClient.connections.listConnections({category: "AzureOpenAI"});
-    const defaultConnection = connections.value[0];
+    const defaultConnection = connections[0];
     const endpoint = defaultConnection.properties.target.endsWith("/") ? defaultConnection.properties.target.slice(0, -1) : defaultConnection.properties.target;
 
     const f1EvaluatorConfiguration: EvaluatorConfiguration = {
