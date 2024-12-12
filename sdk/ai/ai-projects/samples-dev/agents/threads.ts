@@ -1,6 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+/**
+ * This sample demonstrates how to use basic thread agent operations from the Azure Agents service.
+ *
+ * @summary demonstrates how to use basic thread agent operations.
+ *
+ */
+
 import {AIProjectsClient} from "@azure/ai-projects"
 import { DefaultAzureCredential } from "@azure/identity";
 
@@ -22,7 +29,7 @@ export async function main(): Promise<void> {
 
   client.agents.deleteThread(thread.id);
 
-  console.log(`Deleted thread`);
+  console.log(`Deleted thread, thread ID : ${_thread.id}`);
 }
 
 main().catch((err) => {

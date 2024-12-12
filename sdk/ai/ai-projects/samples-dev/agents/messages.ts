@@ -1,6 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+/**
+ * This sample demonstrates how to use basic message agent operations from the Azure Agents service.
+ *
+ * @summary demonstrates how to use basic message agent operations.
+ *
+ */
+
 import {AIProjectsClient, MessageTextContentOutput} from "@azure/ai-projects"
 import { DefaultAzureCredential } from "@azure/identity";
 
@@ -24,8 +31,10 @@ export async function main(): Promise<void> {
   console.log(`Updated message metadata - introduction: ${updatedMessage.metadata?.introduction}`);
 
   await client.agents.deleteThread(thread.id);
+  console.log(`Deleted thread, thread ID : ${thread.id}`);
+
   await client.agents.deleteAgent(agent.id);
-  console.log(`Deleted thread and agent`);
+  console.log(`Deleted agent, agent ID : ${agent.id}`);
 }
 
 main().catch((err) => {
