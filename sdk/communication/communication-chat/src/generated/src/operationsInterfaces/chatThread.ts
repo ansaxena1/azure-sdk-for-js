@@ -39,7 +39,7 @@ import {
   ChatThreadListChatMessagesNextResponse,
   ChatThreadListChatParticipantsNextOptionalParams,
   ChatThreadListChatParticipantsNextResponse,
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a ChatThread. */
 export interface ChatThread {

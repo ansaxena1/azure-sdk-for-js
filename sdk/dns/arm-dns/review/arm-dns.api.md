@@ -6,9 +6,9 @@
 
 import * as coreAuth from '@azure/core-auth';
 import * as coreClient from '@azure/core-client';
-import { OperationState } from '@azure/core-lro';
 import { PagedAsyncIterableIterator } from '@azure/core-paging';
-import { SimplePollerLike } from '@azure/core-lro';
+import { PollerLike } from '@azure/core-lro';
+import { PollOperationState } from '@azure/core-lro';
 
 // @public
 export interface AaaaRecord {
@@ -45,22 +45,6 @@ export interface CnameRecord {
     cname?: string;
 }
 
-// @public
-export type CreatedByType = string;
-
-// @public
-export interface DelegationSignerInfo {
-    readonly digestAlgorithmType?: number;
-    readonly digestValue?: string;
-    readonly record?: string;
-}
-
-// @public
-export interface Digest {
-    algorithmType?: number;
-    value?: string;
-}
-
 // @public (undocumented)
 export class DnsManagementClient extends coreClient.ServiceClient {
     // (undocumented)
@@ -70,8 +54,6 @@ export class DnsManagementClient extends coreClient.ServiceClient {
     apiVersion: string;
     // (undocumented)
     dnsResourceReferenceOperations: DnsResourceReferenceOperations;
-    // (undocumented)
-    dnssecConfigs: DnssecConfigs;
     // (undocumented)
     recordSets: RecordSets;
     // (undocumented)
@@ -116,108 +98,12 @@ export interface DnsResourceReferenceResult {
 }
 
 // @public
-export interface DnssecConfig {
-    etag?: string;
-    readonly id?: string;
-    readonly name?: string;
-    readonly provisioningState?: string;
-    readonly signingKeys?: SigningKey[];
-    readonly systemData?: SystemData;
-    readonly type?: string;
-}
-
-// @public
-export interface DnssecConfigListResult {
-    readonly nextLink?: string;
-    value?: DnssecConfig[];
-}
-
-// @public
-export interface DnssecConfigs {
-    beginCreateOrUpdate(resourceGroupName: string, zoneName: string, options?: DnssecConfigsCreateOrUpdateOptionalParams): Promise<SimplePollerLike<OperationState<DnssecConfigsCreateOrUpdateResponse>, DnssecConfigsCreateOrUpdateResponse>>;
-    beginCreateOrUpdateAndWait(resourceGroupName: string, zoneName: string, options?: DnssecConfigsCreateOrUpdateOptionalParams): Promise<DnssecConfigsCreateOrUpdateResponse>;
-    beginDelete(resourceGroupName: string, zoneName: string, options?: DnssecConfigsDeleteOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
-    beginDeleteAndWait(resourceGroupName: string, zoneName: string, options?: DnssecConfigsDeleteOptionalParams): Promise<void>;
-    get(resourceGroupName: string, zoneName: string, options?: DnssecConfigsGetOptionalParams): Promise<DnssecConfigsGetResponse>;
-    listByDnsZone(resourceGroupName: string, zoneName: string, options?: DnssecConfigsListByDnsZoneOptionalParams): PagedAsyncIterableIterator<DnssecConfig>;
-}
-
-// @public
-export interface DnssecConfigsCreateOrUpdateOptionalParams extends coreClient.OperationOptions {
-    ifMatch?: string;
-    ifNoneMatch?: string;
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type DnssecConfigsCreateOrUpdateResponse = DnssecConfig;
-
-// @public
-export interface DnssecConfigsDeleteHeaders {
-    location?: string;
-}
-
-// @public
-export interface DnssecConfigsDeleteOptionalParams extends coreClient.OperationOptions {
-    ifMatch?: string;
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export interface DnssecConfigsGetOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DnssecConfigsGetResponse = DnssecConfig;
-
-// @public
-export interface DnssecConfigsListByDnsZoneNextOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DnssecConfigsListByDnsZoneNextResponse = DnssecConfigListResult;
-
-// @public
-export interface DnssecConfigsListByDnsZoneOptionalParams extends coreClient.OperationOptions {
-}
-
-// @public
-export type DnssecConfigsListByDnsZoneResponse = DnssecConfigListResult;
-
-// @public
-export interface DsRecord {
-    algorithm?: number;
-    digest?: Digest;
-    keyTag?: number;
-}
-
-// @public
 export function getContinuationToken(page: unknown): string | undefined;
-
-// @public
-export enum KnownCreatedByType {
-    Application = "Application",
-    Key = "Key",
-    ManagedIdentity = "ManagedIdentity",
-    User = "User"
-}
 
 // @public
 export interface MxRecord {
     exchange?: string;
     preference?: number;
-}
-
-// @public
-export interface NaptrRecord {
-    flags?: string;
-    order?: number;
-    preference?: number;
-    regexp?: string;
-    replacement?: string;
-    services?: string;
 }
 
 // @public
@@ -236,7 +122,6 @@ export interface RecordSet {
     aRecords?: ARecord[];
     caaRecords?: CaaRecord[];
     cnameRecord?: CnameRecord;
-    dsRecords?: DsRecord[];
     etag?: string;
     readonly fqdn?: string;
     readonly id?: string;
@@ -245,15 +130,12 @@ export interface RecordSet {
     };
     mxRecords?: MxRecord[];
     readonly name?: string;
-    naptrRecords?: NaptrRecord[];
     nsRecords?: NsRecord[];
     readonly provisioningState?: string;
     ptrRecords?: PtrRecord[];
     soaRecord?: SoaRecord;
     srvRecords?: SrvRecord[];
     targetResource?: SubResource;
-    tlsaRecords?: TlsaRecord[];
-    trafficManagementProfile?: SubResource;
     ttl?: number;
     txtRecords?: TxtRecord[];
     readonly type?: string;
@@ -299,6 +181,8 @@ export type RecordSetsGetResponse = RecordSet;
 
 // @public
 export interface RecordSetsListAllByDnsZoneNextOptionalParams extends coreClient.OperationOptions {
+    recordSetNameSuffix?: string;
+    top?: number;
 }
 
 // @public
@@ -315,6 +199,8 @@ export type RecordSetsListAllByDnsZoneResponse = RecordSetListResult;
 
 // @public
 export interface RecordSetsListByDnsZoneNextOptionalParams extends coreClient.OperationOptions {
+    recordsetnamesuffix?: string;
+    top?: number;
 }
 
 // @public
@@ -331,6 +217,8 @@ export type RecordSetsListByDnsZoneResponse = RecordSetListResult;
 
 // @public
 export interface RecordSetsListByTypeNextOptionalParams extends coreClient.OperationOptions {
+    recordsetnamesuffix?: string;
+    top?: number;
 }
 
 // @public
@@ -359,7 +247,7 @@ export interface RecordSetUpdateParameters {
 }
 
 // @public
-export type RecordType = "A" | "AAAA" | "CAA" | "CNAME" | "MX" | "NS" | "PTR" | "SOA" | "SRV" | "TXT" | "TLSA" | "DS" | "NAPTR";
+export type RecordType = "A" | "AAAA" | "CAA" | "CNAME" | "MX" | "NS" | "PTR" | "SOA" | "SRV" | "TXT";
 
 // @public
 export interface Resource {
@@ -370,16 +258,6 @@ export interface Resource {
         [propertyName: string]: string;
     };
     readonly type?: string;
-}
-
-// @public
-export interface SigningKey {
-    readonly delegationSignerInfo?: DelegationSignerInfo[];
-    readonly flags?: number;
-    readonly keyTag?: number;
-    readonly protocol?: number;
-    readonly publicKey?: string;
-    readonly securityAlgorithmType?: number;
 }
 
 // @public
@@ -407,24 +285,6 @@ export interface SubResource {
 }
 
 // @public
-export interface SystemData {
-    createdAt?: Date;
-    createdBy?: string;
-    createdByType?: CreatedByType;
-    lastModifiedAt?: Date;
-    lastModifiedBy?: string;
-    lastModifiedByType?: CreatedByType;
-}
-
-// @public
-export interface TlsaRecord {
-    certAssociationData?: string;
-    matchingType?: number;
-    selector?: number;
-    usage?: number;
-}
-
-// @public
 export interface TxtRecord {
     value?: string[];
 }
@@ -438,8 +298,6 @@ export interface Zone extends Resource {
     readonly numberOfRecordSets?: number;
     registrationVirtualNetworks?: SubResource[];
     resolutionVirtualNetworks?: SubResource[];
-    readonly signingKeys?: SigningKey[];
-    readonly systemData?: SystemData;
     zoneType?: ZoneType;
 }
 
@@ -451,7 +309,7 @@ export interface ZoneListResult {
 
 // @public
 export interface Zones {
-    beginDelete(resourceGroupName: string, zoneName: string, options?: ZonesDeleteOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
+    beginDelete(resourceGroupName: string, zoneName: string, options?: ZonesDeleteOptionalParams): Promise<PollerLike<PollOperationState<void>, void>>;
     beginDeleteAndWait(resourceGroupName: string, zoneName: string, options?: ZonesDeleteOptionalParams): Promise<void>;
     createOrUpdate(resourceGroupName: string, zoneName: string, parameters: Zone, options?: ZonesCreateOrUpdateOptionalParams): Promise<ZonesCreateOrUpdateResponse>;
     get(resourceGroupName: string, zoneName: string, options?: ZonesGetOptionalParams): Promise<ZonesGetResponse>;
@@ -470,11 +328,6 @@ export interface ZonesCreateOrUpdateOptionalParams extends coreClient.OperationO
 export type ZonesCreateOrUpdateResponse = Zone;
 
 // @public
-export interface ZonesDeleteHeaders {
-    location?: string;
-}
-
-// @public
 export interface ZonesDeleteOptionalParams extends coreClient.OperationOptions {
     ifMatch?: string;
     resumeFrom?: string;
@@ -490,6 +343,7 @@ export type ZonesGetResponse = Zone;
 
 // @public
 export interface ZonesListByResourceGroupNextOptionalParams extends coreClient.OperationOptions {
+    top?: number;
 }
 
 // @public
@@ -505,6 +359,7 @@ export type ZonesListByResourceGroupResponse = ZoneListResult;
 
 // @public
 export interface ZonesListNextOptionalParams extends coreClient.OperationOptions {
+    top?: number;
 }
 
 // @public

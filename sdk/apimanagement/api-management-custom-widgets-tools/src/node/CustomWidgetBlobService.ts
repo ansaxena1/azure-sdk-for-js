@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { BlockBlobUploadResponse } from "@azure/storage-blob";
-import { BlobServiceClient } from "@azure/storage-blob";
+import { BlobServiceClient, BlockBlobUploadResponse } from "@azure/storage-blob";
 import { buildBlobConfigPath, buildBlobDataPath } from "../paths.js";
 
 export type Config = Record<string, unknown>;

@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { SingleIndexUtilizationEntity } from "./SingleIndexUtilizationEntity";
-import type { CompositeIndexUtilizationEntity } from "./CompositeIndexUtilizationEntity";
+import { SingleIndexUtilizationEntity } from "./SingleIndexUtilizationEntity";
+import { CompositeIndexUtilizationEntity } from "./CompositeIndexUtilizationEntity";
 export class IndexUtilizationInfo {
   public static readonly Empty = new IndexUtilizationInfo([], [], [], []);
 

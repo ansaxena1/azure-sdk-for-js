@@ -1,16 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { JSONObject } from "../queryExecutionContext";
+import { JSONObject } from "../queryExecutionContext";
 import { extractPartitionKeys, undefinedPartitionKey } from "../extractPartitionKey";
-import type { CosmosDiagnostics, RequestOptions } from "..";
-import type {
+import { CosmosDiagnostics, RequestOptions } from "..";
+import {
+  NonePartitionKeyLiteral,
   PartitionKey,
   PartitionKeyDefinition,
   PrimitivePartitionKeyValue,
+  convertToInternalPartitionKey,
 } from "../documents";
-import { NonePartitionKeyLiteral, convertToInternalPartitionKey } from "../documents";
-import type { PatchRequestBody } from "./patch";
+import { PatchRequestBody } from "./patch";
 import { assertNotUndefined } from "./typeChecks";
 import { bodyFromData } from "../request/request";
 import { Constants } from "../common/constants";

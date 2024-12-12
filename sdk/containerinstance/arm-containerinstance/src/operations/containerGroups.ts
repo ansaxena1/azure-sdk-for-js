@@ -16,7 +16,7 @@ import { ContainerInstanceManagementClient } from "../containerInstanceManagemen
 import {
   SimplePollerLike,
   OperationState,
-  createHttpPoller,
+  createHttpPoller
 } from "@azure/core-lro";
 import { createLroSpec } from "../lroImpl";
 import {
@@ -42,7 +42,7 @@ import {
   ContainerGroupsGetOutboundNetworkDependenciesEndpointsOptionalParams,
   ContainerGroupsGetOutboundNetworkDependenciesEndpointsResponse,
   ContainerGroupsListNextResponse,
-  ContainerGroupsListByResourceGroupNextResponse,
+  ContainerGroupsListByResourceGroupNextResponse
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
@@ -65,7 +65,7 @@ export class ContainerGroupsImpl implements ContainerGroups {
    * @param options The options parameters.
    */
   public list(
-    options?: ContainerGroupsListOptionalParams,
+    options?: ContainerGroupsListOptionalParams
   ): PagedAsyncIterableIterator<ContainerGroup> {
     const iter = this.listPagingAll(options);
     return {
@@ -80,13 +80,13 @@ export class ContainerGroupsImpl implements ContainerGroups {
           throw new Error("maxPageSize is not supported by this operation.");
         }
         return this.listPagingPage(options, settings);
-      },
+      }
     };
   }
 
   private async *listPagingPage(
     options?: ContainerGroupsListOptionalParams,
-    settings?: PageSettings,
+    settings?: PageSettings
   ): AsyncIterableIterator<ContainerGroup[]> {
     let result: ContainerGroupsListResponse;
     let continuationToken = settings?.continuationToken;
@@ -107,7 +107,7 @@ export class ContainerGroupsImpl implements ContainerGroups {
   }
 
   private async *listPagingAll(
-    options?: ContainerGroupsListOptionalParams,
+    options?: ContainerGroupsListOptionalParams
   ): AsyncIterableIterator<ContainerGroup> {
     for await (const page of this.listPagingPage(options)) {
       yield* page;
@@ -118,12 +118,12 @@ export class ContainerGroupsImpl implements ContainerGroups {
    * Get a list of container groups in a specified subscription and resource group. This operation
    * returns properties of each container group including containers, image registry credentials, restart
    * policy, IP address type, OS type, state, and volumes.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param options The options parameters.
    */
   public listByResourceGroup(
     resourceGroupName: string,
-    options?: ContainerGroupsListByResourceGroupOptionalParams,
+    options?: ContainerGroupsListByResourceGroupOptionalParams
   ): PagedAsyncIterableIterator<ContainerGroup> {
     const iter = this.listByResourceGroupPagingAll(resourceGroupName, options);
     return {
@@ -140,16 +140,16 @@ export class ContainerGroupsImpl implements ContainerGroups {
         return this.listByResourceGroupPagingPage(
           resourceGroupName,
           options,
-          settings,
+          settings
         );
-      },
+      }
     };
   }
 
   private async *listByResourceGroupPagingPage(
     resourceGroupName: string,
     options?: ContainerGroupsListByResourceGroupOptionalParams,
-    settings?: PageSettings,
+    settings?: PageSettings
   ): AsyncIterableIterator<ContainerGroup[]> {
     let result: ContainerGroupsListByResourceGroupResponse;
     let continuationToken = settings?.continuationToken;
@@ -164,7 +164,7 @@ export class ContainerGroupsImpl implements ContainerGroups {
       result = await this._listByResourceGroupNext(
         resourceGroupName,
         continuationToken,
-        options,
+        options
       );
       continuationToken = result.nextLink;
       let page = result.value || [];
@@ -175,11 +175,11 @@ export class ContainerGroupsImpl implements ContainerGroups {
 
   private async *listByResourceGroupPagingAll(
     resourceGroupName: string,
-    options?: ContainerGroupsListByResourceGroupOptionalParams,
+    options?: ContainerGroupsListByResourceGroupOptionalParams
   ): AsyncIterableIterator<ContainerGroup> {
     for await (const page of this.listByResourceGroupPagingPage(
       resourceGroupName,
-      options,
+      options
     )) {
       yield* page;
     }
@@ -192,7 +192,7 @@ export class ContainerGroupsImpl implements ContainerGroups {
    * @param options The options parameters.
    */
   private _list(
-    options?: ContainerGroupsListOptionalParams,
+    options?: ContainerGroupsListOptionalParams
   ): Promise<ContainerGroupsListResponse> {
     return this.client.sendOperationRequest({ options }, listOperationSpec);
   }
@@ -201,16 +201,16 @@ export class ContainerGroupsImpl implements ContainerGroups {
    * Get a list of container groups in a specified subscription and resource group. This operation
    * returns properties of each container group including containers, image registry credentials, restart
    * policy, IP address type, OS type, state, and volumes.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param options The options parameters.
    */
   private _listByResourceGroup(
     resourceGroupName: string,
-    options?: ContainerGroupsListByResourceGroupOptionalParams,
+    options?: ContainerGroupsListByResourceGroupOptionalParams
   ): Promise<ContainerGroupsListByResourceGroupResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, options },
-      listByResourceGroupOperationSpec,
+      listByResourceGroupOperationSpec
     );
   }
 
@@ -218,24 +218,24 @@ export class ContainerGroupsImpl implements ContainerGroups {
    * Gets the properties of the specified container group in the specified subscription and resource
    * group. The operation returns the properties of each container group including containers, image
    * registry credentials, restart policy, IP address type, OS type, state, and volumes.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsGetOptionalParams,
+    options?: ContainerGroupsGetOptionalParams
   ): Promise<ContainerGroupsGetResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, containerGroupName, options },
-      getOperationSpec,
+      getOperationSpec
     );
   }
 
   /**
    * Create or update container groups with specified configurations.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param containerGroup The properties of the container group to be created or updated.
    * @param options The options parameters.
@@ -244,7 +244,7 @@ export class ContainerGroupsImpl implements ContainerGroups {
     resourceGroupName: string,
     containerGroupName: string,
     containerGroup: ContainerGroup,
-    options?: ContainerGroupsCreateOrUpdateOptionalParams,
+    options?: ContainerGroupsCreateOrUpdateOptionalParams
   ): Promise<
     SimplePollerLike<
       OperationState<ContainerGroupsCreateOrUpdateResponse>,
@@ -253,20 +253,21 @@ export class ContainerGroupsImpl implements ContainerGroups {
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<ContainerGroupsCreateOrUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -275,8 +276,8 @@ export class ContainerGroupsImpl implements ContainerGroups {
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -284,22 +285,22 @@ export class ContainerGroupsImpl implements ContainerGroups {
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
     const lro = createLroSpec({
       sendOperationFn,
       args: { resourceGroupName, containerGroupName, containerGroup, options },
-      spec: createOrUpdateOperationSpec,
+      spec: createOrUpdateOperationSpec
     });
     const poller = await createHttpPoller<
       ContainerGroupsCreateOrUpdateResponse,
       OperationState<ContainerGroupsCreateOrUpdateResponse>
     >(lro, {
       restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
+      intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
     return poller;
@@ -307,7 +308,7 @@ export class ContainerGroupsImpl implements ContainerGroups {
 
   /**
    * Create or update container groups with specified configurations.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param containerGroup The properties of the container group to be created or updated.
    * @param options The options parameters.
@@ -316,20 +317,20 @@ export class ContainerGroupsImpl implements ContainerGroups {
     resourceGroupName: string,
     containerGroupName: string,
     containerGroup: ContainerGroup,
-    options?: ContainerGroupsCreateOrUpdateOptionalParams,
+    options?: ContainerGroupsCreateOrUpdateOptionalParams
   ): Promise<ContainerGroupsCreateOrUpdateResponse> {
     const poller = await this.beginCreateOrUpdate(
       resourceGroupName,
       containerGroupName,
       containerGroup,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
 
   /**
    * Updates container group tags with specified values.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param resource The container group resource with just the tags to be updated.
    * @param options The options parameters.
@@ -338,25 +339,25 @@ export class ContainerGroupsImpl implements ContainerGroups {
     resourceGroupName: string,
     containerGroupName: string,
     resource: Resource,
-    options?: ContainerGroupsUpdateOptionalParams,
+    options?: ContainerGroupsUpdateOptionalParams
   ): Promise<ContainerGroupsUpdateResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, containerGroupName, resource, options },
-      updateOperationSpec,
+      updateOperationSpec
     );
   }
 
   /**
    * Delete the specified container group in the specified subscription and resource group. The operation
    * does not delete other resources provided by the user, such as volumes.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   async beginDelete(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsDeleteOptionalParams,
+    options?: ContainerGroupsDeleteOptionalParams
   ): Promise<
     SimplePollerLike<
       OperationState<ContainerGroupsDeleteResponse>,
@@ -365,20 +366,21 @@ export class ContainerGroupsImpl implements ContainerGroups {
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<ContainerGroupsDeleteResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -387,8 +389,8 @@ export class ContainerGroupsImpl implements ContainerGroups {
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -396,22 +398,22 @@ export class ContainerGroupsImpl implements ContainerGroups {
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
     const lro = createLroSpec({
       sendOperationFn,
       args: { resourceGroupName, containerGroupName, options },
-      spec: deleteOperationSpec,
+      spec: deleteOperationSpec
     });
     const poller = await createHttpPoller<
       ContainerGroupsDeleteResponse,
       OperationState<ContainerGroupsDeleteResponse>
     >(lro, {
       restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
+      intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
     return poller;
@@ -420,19 +422,19 @@ export class ContainerGroupsImpl implements ContainerGroups {
   /**
    * Delete the specified container group in the specified subscription and resource group. The operation
    * does not delete other resources provided by the user, such as volumes.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   async beginDeleteAndWait(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsDeleteOptionalParams,
+    options?: ContainerGroupsDeleteOptionalParams
   ): Promise<ContainerGroupsDeleteResponse> {
     const poller = await this.beginDelete(
       resourceGroupName,
       containerGroupName,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -440,31 +442,32 @@ export class ContainerGroupsImpl implements ContainerGroups {
   /**
    * Restarts all containers in a container group in place. If container image has updates, new image
    * will be downloaded.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   async beginRestart(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsRestartOptionalParams,
+    options?: ContainerGroupsRestartOptionalParams
   ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -473,8 +476,8 @@ export class ContainerGroupsImpl implements ContainerGroups {
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -482,19 +485,19 @@ export class ContainerGroupsImpl implements ContainerGroups {
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
     const lro = createLroSpec({
       sendOperationFn,
       args: { resourceGroupName, containerGroupName, options },
-      spec: restartOperationSpec,
+      spec: restartOperationSpec
     });
     const poller = await createHttpPoller<void, OperationState<void>>(lro, {
       restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
+      intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
     return poller;
@@ -503,19 +506,19 @@ export class ContainerGroupsImpl implements ContainerGroups {
   /**
    * Restarts all containers in a container group in place. If container image has updates, new image
    * will be downloaded.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   async beginRestartAndWait(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsRestartOptionalParams,
+    options?: ContainerGroupsRestartOptionalParams
   ): Promise<void> {
     const poller = await this.beginRestart(
       resourceGroupName,
       containerGroupName,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -523,49 +526,50 @@ export class ContainerGroupsImpl implements ContainerGroups {
   /**
    * Stops all containers in a container group. Compute resources will be deallocated and billing will
    * stop.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   stop(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsStopOptionalParams,
+    options?: ContainerGroupsStopOptionalParams
   ): Promise<void> {
     return this.client.sendOperationRequest(
       { resourceGroupName, containerGroupName, options },
-      stopOperationSpec,
+      stopOperationSpec
     );
   }
 
   /**
    * Starts all containers in a container group. Compute resources will be allocated and billing will
    * start.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   async beginStart(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsStartOptionalParams,
+    options?: ContainerGroupsStartOptionalParams
   ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -574,8 +578,8 @@ export class ContainerGroupsImpl implements ContainerGroups {
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -583,19 +587,19 @@ export class ContainerGroupsImpl implements ContainerGroups {
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
     const lro = createLroSpec({
       sendOperationFn,
       args: { resourceGroupName, containerGroupName, options },
-      spec: startOperationSpec,
+      spec: startOperationSpec
     });
     const poller = await createHttpPoller<void, OperationState<void>>(lro, {
       restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
+      intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
     return poller;
@@ -604,19 +608,19 @@ export class ContainerGroupsImpl implements ContainerGroups {
   /**
    * Starts all containers in a container group. Compute resources will be allocated and billing will
    * start.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   async beginStartAndWait(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsStartOptionalParams,
+    options?: ContainerGroupsStartOptionalParams
   ): Promise<void> {
     const poller = await this.beginStart(
       resourceGroupName,
       containerGroupName,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -624,18 +628,18 @@ export class ContainerGroupsImpl implements ContainerGroups {
   /**
    * Gets all the network dependencies for this container group to allow complete control of network
    * setting and configuration. For container groups, this will always be an empty list.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param containerGroupName The name of the container group.
    * @param options The options parameters.
    */
   getOutboundNetworkDependenciesEndpoints(
     resourceGroupName: string,
     containerGroupName: string,
-    options?: ContainerGroupsGetOutboundNetworkDependenciesEndpointsOptionalParams,
+    options?: ContainerGroupsGetOutboundNetworkDependenciesEndpointsOptionalParams
   ): Promise<ContainerGroupsGetOutboundNetworkDependenciesEndpointsResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, containerGroupName, options },
-      getOutboundNetworkDependenciesEndpointsOperationSpec,
+      getOutboundNetworkDependenciesEndpointsOperationSpec
     );
   }
 
@@ -646,28 +650,28 @@ export class ContainerGroupsImpl implements ContainerGroups {
    */
   private _listNext(
     nextLink: string,
-    options?: ContainerGroupsListNextOptionalParams,
+    options?: ContainerGroupsListNextOptionalParams
   ): Promise<ContainerGroupsListNextResponse> {
     return this.client.sendOperationRequest(
       { nextLink, options },
-      listNextOperationSpec,
+      listNextOperationSpec
     );
   }
 
   /**
    * ListByResourceGroupNext
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
+   * @param resourceGroupName The name of the resource group.
    * @param nextLink The nextLink from the previous successful call to the ListByResourceGroup method.
    * @param options The options parameters.
    */
   private _listByResourceGroupNext(
     resourceGroupName: string,
     nextLink: string,
-    options?: ContainerGroupsListByResourceGroupNextOptionalParams,
+    options?: ContainerGroupsListByResourceGroupNextOptionalParams
   ): Promise<ContainerGroupsListByResourceGroupNextResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, nextLink, options },
-      listByResourceGroupNextOperationSpec,
+      listByResourceGroupNextOperationSpec
     );
   }
 }
@@ -675,81 +679,85 @@ export class ContainerGroupsImpl implements ContainerGroups {
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const listOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups",
+  path:
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroupListResult,
+      bodyMapper: Mappers.ContainerGroupListResult
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [Parameters.$host, Parameters.subscriptionId],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroupListResult,
+      bodyMapper: Mappers.ContainerGroupListResult
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const getOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.containerGroupName,
+    Parameters.containerGroupName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
   httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     201: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     202: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     204: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   requestBody: Parameters.containerGroup,
   queryParameters: [Parameters.apiVersion],
@@ -757,22 +765,23 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.containerGroupName,
+    Parameters.containerGroupName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
-  serializer,
+  serializer
 };
 const updateOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
   httpMethod: "PATCH",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   requestBody: Parameters.resource,
   queryParameters: [Parameters.apiVersion],
@@ -780,44 +789,46 @@ const updateOperationSpec: coreClient.OperationSpec = {
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.containerGroupName,
+    Parameters.containerGroupName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
-  serializer,
+  serializer
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}",
   httpMethod: "DELETE",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     201: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     202: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     204: {
-      bodyMapper: Mappers.ContainerGroup,
+      bodyMapper: Mappers.ContainerGroup
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.containerGroupName,
+    Parameters.containerGroupName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const restartOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart",
   httpMethod: "POST",
   responses: {
     200: {},
@@ -825,40 +836,42 @@ const restartOperationSpec: coreClient.OperationSpec = {
     202: {},
     204: {},
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.containerGroupName,
+    Parameters.containerGroupName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const stopOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/stop",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/stop",
   httpMethod: "POST",
   responses: {
     204: {},
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.containerGroupName,
+    Parameters.containerGroupName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const startOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start",
   httpMethod: "POST",
   responses: {
     200: {},
@@ -866,79 +879,79 @@ const startOperationSpec: coreClient.OperationSpec = {
     202: {},
     204: {},
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.containerGroupName,
+    Parameters.containerGroupName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
-const getOutboundNetworkDependenciesEndpointsOperationSpec: coreClient.OperationSpec =
-  {
-    path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/outboundNetworkDependenciesEndpoints",
-    httpMethod: "GET",
-    responses: {
-      200: {
-        bodyMapper: {
-          type: { name: "Sequence", element: { type: { name: "String" } } },
-        },
-      },
-      default: {
-        bodyMapper: Mappers.CloudError,
-      },
+const getOutboundNetworkDependenciesEndpointsOperationSpec: coreClient.OperationSpec = {
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/outboundNetworkDependenciesEndpoints",
+  httpMethod: "GET",
+  responses: {
+    200: {
+      bodyMapper: {
+        type: { name: "Sequence", element: { type: { name: "String" } } }
+      }
     },
-    queryParameters: [Parameters.apiVersion],
-    urlParameters: [
-      Parameters.$host,
-      Parameters.subscriptionId,
-      Parameters.resourceGroupName,
-      Parameters.containerGroupName,
-    ],
-    headerParameters: [Parameters.accept],
-    serializer,
-  };
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  queryParameters: [Parameters.apiVersion],
+  urlParameters: [
+    Parameters.$host,
+    Parameters.subscriptionId,
+    Parameters.resourceGroupName,
+    Parameters.containerGroupName
+  ],
+  headerParameters: [Parameters.accept],
+  serializer
+};
 const listNextOperationSpec: coreClient.OperationSpec = {
   path: "{nextLink}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroupListResult,
+      bodyMapper: Mappers.ContainerGroupListResult
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
-    Parameters.nextLink,
+    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const listByResourceGroupNextOperationSpec: coreClient.OperationSpec = {
   path: "{nextLink}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ContainerGroupListResult,
+      bodyMapper: Mappers.ContainerGroupListResult
     },
     default: {
-      bodyMapper: Mappers.CloudError,
-    },
+      bodyMapper: Mappers.CloudError
+    }
   },
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.nextLink,
+    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };

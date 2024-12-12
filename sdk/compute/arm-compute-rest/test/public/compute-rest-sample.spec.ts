@@ -9,12 +9,11 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import type { RecorderStartOptions } from "@azure-tools/test-recorder";
-import { Recorder, env, isPlaybackMode } from "@azure-tools/test-recorder";
+import { Recorder, RecorderStartOptions, env, isPlaybackMode } from "@azure-tools/test-recorder";
 import { createTestCredential } from "@azure-tools/test-credential";
 import { assert } from "chai";
-import type { Context } from "mocha";
-import type {
+import { Context } from "mocha";
+import {
   AvailabilitySetsCreateOrUpdateParameters,
   AvailabilitySetsDeleteParameters,
   AvailabilitySetsGetParameters,
@@ -26,10 +25,16 @@ import type {
   VirtualMachinesGetParameters,
   VirtualMachinesListParameters,
   VirtualMachinesUpdateParameters,
+  getLongRunningPoller,
+  isUnexpected,
+  paginate,
 } from "../../src";
-import { getLongRunningPoller, isUnexpected, paginate } from "../../src";
-import type { NetworkInterface, Subnet, VirtualNetwork } from "@azure/arm-network";
-import { NetworkManagementClient } from "@azure/arm-network";
+import {
+  NetworkInterface,
+  NetworkManagementClient,
+  Subnet,
+  VirtualNetwork,
+} from "@azure/arm-network";
 import { createTestComputeManagementClient } from "./utils/recordedClient";
 const replaceableVariables: Record<string, string> = {
   SUBSCRIPTION_ID: "azure_subscription_id",

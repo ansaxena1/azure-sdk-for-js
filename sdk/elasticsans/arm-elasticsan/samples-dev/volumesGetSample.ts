@@ -18,7 +18,7 @@ dotenv.config();
  * This sample demonstrates how to Get an Volume.
  *
  * @summary Get an Volume.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/Volumes_Get_MaximumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/Volumes_Get_MaximumSet_Gen.json
  */
 async function volumesGetMaximumSetGen() {
   const subscriptionId =
@@ -43,7 +43,7 @@ async function volumesGetMaximumSetGen() {
  * This sample demonstrates how to Get an Volume.
  *
  * @summary Get an Volume.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/Volumes_Get_MinimumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/Volumes_Get_MinimumSet_Gen.json
  */
 async function volumesGetMinimumSetGen() {
   const subscriptionId =

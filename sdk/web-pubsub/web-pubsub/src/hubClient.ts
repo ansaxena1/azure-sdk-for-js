@@ -1,29 +1,23 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
-  CommonClientOptions,
-  FullOperationResponse,
-  OperationOptions,
-} from "@azure/core-client";
-import type { RequestBodyType } from "@azure/core-rest-pipeline";
-import { RestError } from "@azure/core-rest-pipeline";
+import { CommonClientOptions, FullOperationResponse, OperationOptions } from "@azure/core-client";
+import { RestError, RequestBodyType } from "@azure/core-rest-pipeline";
 import { GeneratedClient } from "./generated/generatedClient";
-import type {
+import {
   WebPubSubGroup,
+  WebPubSubGroupImpl,
   GroupAddConnectionOptions,
   GroupRemoveConnectionOptions,
 } from "./groupClient";
-import { WebPubSubGroupImpl } from "./groupClient";
-import type { AzureKeyCredential, TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
+import { AzureKeyCredential, TokenCredential, isTokenCredential } from "@azure/core-auth";
 import { webPubSubKeyCredentialPolicy } from "./webPubSubCredentialPolicy";
 import { tracingClient } from "./tracing";
 import { logger } from "./logger";
 import { parseConnectionString } from "./parseConnectionString";
 import jwt from "jsonwebtoken";
 import { getPayloadForMessage } from "./utils";
-import type {
+import {
   GeneratedClientOptionalParams,
   AddToGroupsRequest,
   RemoveFromGroupsRequest,
@@ -244,7 +238,7 @@ export interface HubHasPermissionOptions extends OperationOptions {
 /**
  * The type of client endpoint that is being requested.
  */
-export type WebPubSubClientProtocol = "default" | "mqtt" | "socketio";
+export type WebPubSubClientProtocol = "default" | "mqtt";
 
 /**
  * Options for generating a token to connect a client to the Azure Web Pubsub service.
@@ -964,14 +958,10 @@ export class WebPubSubServiceClient {
         const endpoint = this.endpoint.endsWith("/") ? this.endpoint : this.endpoint + "/";
         const clientEndpoint = endpoint.replace(/(http)(s?:\/\/)/gi, "ws$2");
         const clientProtocol = updatedOptions.clientProtocol;
-        let clientPath = `client/hubs/${this.hubName}`;
-        switch (clientProtocol) {
-          case "mqtt":
-            clientPath = `clients/mqtt/hubs/${this.hubName}`;
-            break;
-          case "socketio":
-            clientPath = `clients/socketio/hubs/${this.hubName}`;
-        }
+        const clientPath =
+          clientProtocol && clientProtocol === "mqtt"
+            ? `clients/mqtt/hubs/${this.hubName}`
+            : `client/hubs/${this.hubName}`;
         const baseUrl = clientEndpoint + clientPath;
 
         let token: string;

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CheckpointStore, SubscriptionEventHandlers, EventPosition } from "../../src/index.js";
 import {
   EventHubConsumerClient,
   type EventHubConsumerClientOptions,
@@ -10,21 +9,24 @@ import {
   type TokenCredential,
   EventHubBufferedProducerClient,
   type EventHubBufferedProducerClientOptions,
+  CheckpointStore,
+  SubscriptionEventHandlers,
+  EventPosition,
   earliestEventPosition,
 } from "../../src/index.js";
 import { createTestCredential } from "@azure-tools/test-credential";
 import type { NamedKeyCredential, SASCredential } from "@azure/core-auth";
 import { assert } from "./chai.js";
-import type { ConnectionContext } from "../../src/connectionContext.js";
-import { createConnectionContext } from "../../src/connectionContext.js";
-import type { FullEventProcessorOptions } from "../../src/eventProcessor.js";
-import { EventProcessor } from "../../src/eventProcessor.js";
+import { ConnectionContext, createConnectionContext } from "../../src/connectionContext.js";
+import { EventProcessor, FullEventProcessorOptions } from "../../src/eventProcessor.js";
 import { InMemoryCheckpointStore } from "../../src/inMemoryCheckpointStore.js";
 import { UnbalancedLoadBalancingStrategy } from "../../src/loadBalancerStrategies/unbalancedStrategy.js";
-import type { PartitionReceiver } from "../../src/partitionReceiver.js";
-import { createReceiver as _createReceiver } from "../../src/partitionReceiver.js";
+import {
+  createReceiver as _createReceiver,
+  PartitionReceiver,
+} from "../../src/partitionReceiver.js";
 import { randomUUID } from "@azure/core-util";
-import type { PartitionReceiverOptions } from "../../src/models/private.js";
+import { PartitionReceiverOptions } from "../../src/models/private.js";
 import { getConsumerGroupName, getEventhubName, getFullyQualifiedNamespace } from "./vars.js";
 
 let clientId = 0;

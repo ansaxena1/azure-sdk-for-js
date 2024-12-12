@@ -11,7 +11,7 @@ import {
   TokenScope,
 } from "@azure/communication-identity";
 
-import { GetTokenOptions } from "../src/index.js";
+import { GetTokenOptions } from "../src";
 
 // Load the .env file if it exists
 import * as dotenv from "dotenv";

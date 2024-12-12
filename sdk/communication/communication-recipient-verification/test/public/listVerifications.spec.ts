@@ -1,29 +1,30 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import type { RecipientVerificationClient } from "../../src/index.js";
-import { createRecordedClient } from "./utils/recordedClient.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+import { Context } from "mocha";
+import { Recorder } from "@azure-tools/test-recorder";
+import { RecipientVerificationClient } from "../../src";
+import { assert } from "chai";
+import { createRecordedClient } from "./utils/recordedClient";
 
-describe(`RecipientVerificationClient - List all verifications`, () => {
+describe(`RecipientVerificationClient - List all verifications`, function () {
   let recorder: Recorder;
   let client: RecipientVerificationClient;
 
-  beforeEach(async (ctx) => {
-    ({ client, recorder } = await createRecordedClient(ctx));
+  beforeEach(async function (this: Context) {
+    ({ client, recorder } = await createRecordedClient(this));
   });
 
-  afterEach(async (ctx) => {
-    if (!ctx.task.pending) {
+  afterEach(async function (this: Context) {
+    if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("get list of all verifications", { timeout: 30000 }, async () => {
+  it("get list of all verifications", async function () {
     // print all verifications
     for (const verification of await client.getVerifications()) {
       assert.isNotNull(verification.immutableId);
     }
-  });
+  }).timeout(30000);
 });

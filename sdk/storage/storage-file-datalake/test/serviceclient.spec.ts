@@ -4,14 +4,14 @@
 import { delay, isLiveMode, Recorder } from "@azure-tools/test-recorder";
 import { getYieldedValue } from "@azure-tools/test-utils";
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 import { isNodeLike } from "@azure/core-util";
-import type {
+import {
+  DataLakeServiceClient,
   DataLakeServiceProperties,
   FileSystemItem,
   ServiceListFileSystemsSegmentResponse,
 } from "../src";
-import { DataLakeServiceClient } from "../src";
 import {
   getDataLakeServiceClient,
   getSASConnectionStringFromEnvironment,

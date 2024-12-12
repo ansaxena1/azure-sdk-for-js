@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Aggregator } from "./Aggregator";
+import { Aggregator } from "./Aggregator";
 
 /** @hidden */
 export class SumAggregator implements Aggregator {

@@ -1,6 +1,6 @@
 # Release History
 
-## 4.3.4 (Unreleased)
+## 4.3.3 (Unreleased)
 
 ### Features Added
 
@@ -10,12 +10,7 @@
 
 ### Other Changes
 
-## 4.3.3 (2024-11-07)
-
-### Other Changes
-
 - Move the constant for the geographic replication feature to Event Hubs.
-- Remove request from `RequestResponseLink` logging.
 
 ## 4.3.2 (2024-08-01)
 

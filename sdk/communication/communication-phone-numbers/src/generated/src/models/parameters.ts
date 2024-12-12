@@ -16,7 +16,7 @@ import {
   PhoneNumberPurchaseRequest as PhoneNumberPurchaseRequestMapper,
   PhoneNumberCapabilitiesRequest as PhoneNumberCapabilitiesRequestMapper,
   OperatorInformationRequest as OperatorInformationRequestMapper,
-} from "../models/mappers.js";
+} from "../models/mappers";
 
 export const accept: OperationParameter = {
   parameterPath: "accept",

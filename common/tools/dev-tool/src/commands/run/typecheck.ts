@@ -28,10 +28,6 @@ export default leafCommand(commandInfo, async (options) => {
 
   const project = new Project({
     tsConfigFilePath: path.join(projPath, "tsconfig.json"),
-    compilerOptions: {
-      noUnusedLocals: false,
-      noUnusedParameters: false,
-    },
   });
 
   if (options.paths) {
@@ -43,17 +39,7 @@ export default leafCommand(commandInfo, async (options) => {
     }
   }
 
-  const diagnostics = project.getPreEmitDiagnostics().filter((d) =>
-    {
-      const filepath = d.getSourceFile()?.getFilePath();
-      return !(
-        filepath?.includes("node_modules") &&
-        (filepath?.includes("@vitest") ||
-          filepath?.includes("vite-node") ||
-          filepath?.includes("chai"))
-      );
-    },
-  );
+  const diagnostics = project.getPreEmitDiagnostics();
   const hasError = diagnostics.some((d) => d.getCategory() === DiagnosticCategory.Error);
   if (hasError) {
     log.error(

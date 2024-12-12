@@ -1,16 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ICachePlugin, INativeBrokerPlugin } from "@azure/msal-node";
-import type { PluginConfiguration } from "../../../src/msal/nodeFlows/msalPlugins.js";
+import { ICachePlugin, INativeBrokerPlugin } from "@azure/msal-node";
 import {
+  PluginConfiguration,
   msalNodeFlowCacheControl,
   msalNodeFlowNativeBrokerControl,
   msalPlugins,
-} from "../../../src/msal/nodeFlows/msalPlugins.js";
+} from "../../../src/msal/nodeFlows/msalPlugins";
 
-import type { MsalClientOptions } from "../../../src/msal/nodeFlows/msalClient.js";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { MsalClientOptions } from "../../../src/msal/nodeFlows/msalClient";
+import Sinon from "sinon";
+import { assert } from "@azure-tools/test-utils";
 
 describe("#generatePluginConfiguration", function () {
   let options: MsalClientOptions;
@@ -49,8 +50,8 @@ describe("#generatePluginConfiguration", function () {
       options.tokenCachePersistenceOptions = { enabled: true };
 
       const cachePlugin = {
-        afterCacheAccess: vi.fn(),
-        beforeCacheAccess: vi.fn(),
+        afterCacheAccess: Sinon.stub(),
+        beforeCacheAccess: Sinon.stub(),
       };
       const pluginProvider: () => Promise<ICachePlugin> = () => Promise.resolve(cachePlugin);
       msalNodeFlowCacheControl.setPersistence(pluginProvider);
@@ -64,8 +65,8 @@ describe("#generatePluginConfiguration", function () {
       options.tokenCachePersistenceOptions = { enabled: true };
 
       const cachePluginCae = {
-        afterCacheAccess: vi.fn(),
-        beforeCacheAccess: vi.fn(),
+        afterCacheAccess: Sinon.stub(),
+        beforeCacheAccess: Sinon.stub(),
       };
       const pluginProvider: () => Promise<ICachePlugin> = () => Promise.resolve(cachePluginCae);
       msalNodeFlowCacheControl.setPersistence(pluginProvider);

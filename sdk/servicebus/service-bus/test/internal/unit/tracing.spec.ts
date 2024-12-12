@@ -1,16 +1,19 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { MockTracingSpan } from "@azure-tools/test-utils-vitest";
-import { MockInstrumenter, createMockTracingContext } from "@azure-tools/test-utils-vitest";
+import {
+  MockInstrumenter,
+  MockTracingSpan,
+  createMockTracingContext,
+} from "@azure-tools/test-utils-vitest";
 import {
   TRACEPARENT_PROPERTY,
   instrumentMessage,
   toProcessingSpanOptions,
 } from "../../../src/diagnostics/instrumentServiceBusMessage.js";
 import { toSpanOptions, tracingClient } from "../../../src/diagnostics/tracing.js";
-import type { TracingContext } from "@azure/core-tracing";
+import { TracingContext } from "@azure/core-tracing";
 import Long from "long";
-import type { ServiceBusReceivedMessage } from "../../../src/serviceBusMessage.js";
+import { ServiceBusReceivedMessage } from "../../../src/serviceBusMessage.js";
 import { describe, it, vi, afterEach } from "vitest";
 import { assert, expect } from "../../public/utils/chai.js";
 

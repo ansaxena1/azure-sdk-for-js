@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AssetConversion } from "./assetConversion";
-import { assetConversionFromConversion } from "./assetConversion";
-import type { RenderingSession } from "./renderingSession";
-import { renderingSessionFromSessionProperties } from "./renderingSession";
-import type { OperationOptions } from "@azure/core-client";
-import type { RemoteRendering } from "../generated/operationsInterfaces";
+import { AssetConversion, assetConversionFromConversion } from "./assetConversion";
+import { RenderingSession, renderingSessionFromSessionProperties } from "./renderingSession";
+import { OperationOptions } from "@azure/core-client";
+import { RemoteRendering } from "../generated/operationsInterfaces";
 import { tracingClient } from "../generated/tracing";
 
 /**

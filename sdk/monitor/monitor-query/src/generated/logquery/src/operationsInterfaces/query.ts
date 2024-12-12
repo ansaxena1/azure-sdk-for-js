@@ -23,7 +23,7 @@ import {
   QueryResourceGetXmsResponse,
   QueryResourceExecuteXmsOptionalParams,
   QueryResourceExecuteXmsResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a Query. */
 export interface Query {

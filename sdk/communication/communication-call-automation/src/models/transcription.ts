@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CommunicationIdentifier } from "@azure/communication-common";
+import { CommunicationIdentifier } from "@azure/communication-common";
 
 /**
  * The status of the result of transcription.

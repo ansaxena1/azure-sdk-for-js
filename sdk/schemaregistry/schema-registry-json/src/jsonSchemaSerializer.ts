@@ -1,14 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   DeserializeOptions,
   JsonSchemaSerializerOptions,
   MessageAdapter,
   MessageContent,
 } from "./models";
-import type { SchemaDescription, SchemaRegistry } from "@azure/schema-registry";
-import { KnownSchemaFormats } from "@azure/schema-registry";
+import { KnownSchemaFormats, SchemaDescription, SchemaRegistry } from "@azure/schema-registry";
 import { isMessageContent } from "./utility";
 import { errorWithCause, wrapError } from "./errors";
 import { LRUCache } from "lru-cache";

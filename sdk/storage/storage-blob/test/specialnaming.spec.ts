@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { BlobServiceClient } from "../src";
-import { BlockBlobClient } from "../src";
+import { BlockBlobClient, BlobServiceClient } from "../src";
 import {
   getBSU,
   getRecorderUniqueVariable,
@@ -13,8 +12,8 @@ import {
 import { assert } from "chai";
 import { appendToURLPath, EscapePath } from "../src/utils/utils.common";
 import { Recorder } from "@azure-tools/test-recorder";
-import type { ContainerClient } from "../src";
-import type { Context } from "mocha";
+import { ContainerClient } from "../src";
+import { Context } from "mocha";
 
 describe("Special Naming Tests", () => {
   let containerName: string;

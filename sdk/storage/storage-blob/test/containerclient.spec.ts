@@ -15,16 +15,17 @@ import {
 } from "./utils";
 import { delay, Recorder } from "@azure-tools/test-recorder";
 import { getYieldedValue, assert } from "@azure-tools/test-utils";
-import type {
+import {
+  ContainerClient,
+  BlockBlobTier,
   ContainerListBlobHierarchySegmentResponse,
   BlobServiceClient,
   BlockBlobClient,
   BlobHTTPHeaders,
 } from "../src";
-import { ContainerClient, BlockBlobTier } from "../src";
 import { Test_CPK_INFO } from "./utils/fakeTestSecrets";
-import type { Context } from "mocha";
-import type { Tags } from "../src/models";
+import { Context } from "mocha";
+import { Tags } from "../src/models";
 
 describe("ContainerClient", () => {
   let blobServiceClient: BlobServiceClient;

@@ -1,22 +1,19 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   EventData,
+  EventHubBufferedProducerClient,
+  EventHubConsumerClient,
   MessagingError,
   OnSendEventsErrorContext,
   Subscription,
-  EventHubConsumerClientOptions,
-} from "@azure/event-hubs";
-import {
-  EventHubBufferedProducerClient,
-  EventHubConsumerClient,
   earliestEventPosition,
   latestEventPosition,
+  EventHubConsumerClientOptions,
 } from "@azure/event-hubs";
-import type { MessagingTestClient } from "./models.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { delay } from "@azure-tools/test-recorder";
+import { MessagingTestClient } from "./models.js";
+import { delay, Recorder } from "@azure-tools/test-recorder";
 import { createTestCredential } from "@azure-tools/test-credential";
 
 export function createEventHubsClient(settings: {

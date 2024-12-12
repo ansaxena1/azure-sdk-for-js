@@ -3,7 +3,6 @@
 ## 1.1.4 (Unreleased)
 
 ### Features Added
-- Added support to generate client access URL and token for `socketio` client protocol.
 
 ### Breaking Changes
 

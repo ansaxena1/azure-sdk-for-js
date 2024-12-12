@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   EntityLinkingResult,
   TextDocumentBatchStatistics,
   TextDocumentInput,
 } from "./generated/models";
-import type { RecognizeLinkedEntitiesResult } from "./recognizeLinkedEntitiesResult";
 import {
+  RecognizeLinkedEntitiesResult,
   makeRecognizeLinkedEntitiesErrorResult,
   makeRecognizeLinkedEntitiesResult,
 } from "./recognizeLinkedEntitiesResult";

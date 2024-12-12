@@ -310,11 +310,7 @@ const checkFilePathAvailabilityOperationSpec: coreClient.OperationSpec = {
     },
   },
   requestBody: {
-    parameterPath: {
-      name: ["name"],
-      subnetId: ["subnetId"],
-      availabilityZone: ["options", "availabilityZone"],
-    },
+    parameterPath: { name: ["name"], subnetId: ["subnetId"] },
     mapper: { ...Mappers.FilePathAvailabilityRequest, required: true },
   },
   queryParameters: [Parameters.apiVersion],

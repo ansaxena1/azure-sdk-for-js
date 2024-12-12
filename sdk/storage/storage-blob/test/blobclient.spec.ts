@@ -18,17 +18,19 @@ import {
   uriSanitizers,
 } from "./utils";
 import { delay, isLiveMode, Recorder } from "@azure-tools/test-recorder";
-import type {
+import {
+  BlobClient,
   BlockBlobClient,
   ContainerClient,
+  BlockBlobTier,
+  BlobServiceClient,
   RehydratePriority,
   ObjectReplicationPolicy,
   BlobImmutabilityPolicyMode,
 } from "../src";
-import { BlobClient, BlockBlobTier, BlobServiceClient } from "../src";
 import { Test_CPK_INFO } from "./utils/fakeTestSecrets";
 import { base64encode } from "../src/utils/utils.common";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 import { isRestError } from "@azure/core-rest-pipeline";
 
 describe("BlobClient", () => {

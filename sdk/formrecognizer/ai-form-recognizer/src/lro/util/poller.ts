@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PollOperationState, PollerLike } from "@azure/core-lro";
+import { PollOperationState, PollerLike } from "@azure/core-lro";
 import { delayMs } from "./delayMs";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import { AbortError } from "@azure/abort-controller";
+import { AbortError, AbortSignalLike } from "@azure/abort-controller";
 
 const DEFAULT_POLLING_INTERVAL = 5000;
 

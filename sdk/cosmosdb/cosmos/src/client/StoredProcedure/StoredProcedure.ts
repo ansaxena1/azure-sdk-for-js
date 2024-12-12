@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ClientContext } from "../../ClientContext";
-import type { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
+import { ClientContext } from "../../ClientContext";
+import { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
 import {
   createStoredProcedureUri,
   getIdFromLink,
@@ -9,13 +9,12 @@ import {
   isResourceValid,
   ResourceType,
 } from "../../common";
-import type { PartitionKey } from "../../documents/PartitionKey";
+import { PartitionKey } from "../../documents/PartitionKey";
 import { undefinedPartitionKey } from "../../extractPartitionKey";
-import type { RequestOptions } from "../../request";
-import { ResourceResponse } from "../../request";
+import { RequestOptions, ResourceResponse } from "../../request";
 import { readPartitionKeyDefinition } from "../ClientUtils";
-import type { Container } from "../Container";
-import type { StoredProcedureDefinition } from "./StoredProcedureDefinition";
+import { Container } from "../Container";
+import { StoredProcedureDefinition } from "./StoredProcedureDefinition";
 import { StoredProcedureResponse } from "./StoredProcedureResponse";
 import { getEmptyCosmosDiagnostics, withDiagnostics } from "../../utils/diagnostics";
 

@@ -1,5 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
+
+import { assert, use as chaiUse, expect } from "chai";
+import { Context } from "mocha";
+import chaiAsPromised from "chai-as-promised";
+chaiUse(chaiAsPromised);
 /* eslint-disable @typescript-eslint/no-invalid-this */
 
 import { Recorder, isLiveMode } from "@azure-tools/test-recorder";
@@ -8,21 +13,20 @@ import {
   createRecordedAdminClient,
   getIsolatedSigningKey,
   recorderOptions,
-} from "../utils/recordedClient.js";
-import { createRSAKey, createX509Certificate, generateSha1Hash } from "../utils/cryptoUtils.js";
-import { KnownCertificateModification } from "../../src/generated/index.js";
+} from "../utils/recordedClient";
+import { createRSAKey, createX509Certificate, generateSha1Hash } from "../utils/cryptoUtils";
+import { KnownCertificateModification } from "../../src/generated";
 
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../jsrsasign.d.ts"/>
 import * as jsrsasign from "jsrsasign";
-import { byteArrayToHex } from "../../src/utils/base64.js";
-import { describe, it, assert, expect, beforeEach, afterEach } from "vitest";
+import { byteArrayToHex } from "../../src/utils/base64";
 
 describe("PolicyManagementTests ", function () {
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    recorder = new Recorder(ctx);
+  beforeEach(async function (this: Context) {
+    recorder = new Recorder(this.currentTest);
     await recorder.start(recorderOptions);
   });
 
@@ -67,11 +71,11 @@ describe("PolicyManagementTests ", function () {
 
     await expect(
       adminClient.addPolicyManagementCertificate(rsaCertificate, "Foo", "Bar"),
-    ).rejects.toThrow("can't find PEM header");
+    ).to.be.rejectedWith("can't find PEM header");
 
     await expect(
       adminClient.addPolicyManagementCertificate(rsaCertificate, rsaKey2, rsaCertificate),
-    ).rejects.toThrow("Key does not match Certificate");
+    ).to.be.rejectedWith("Key does not match Certificate");
   });
 
   it("Remove Policy failure conditions", async function () {
@@ -83,15 +87,15 @@ describe("PolicyManagementTests ", function () {
 
     await expect(
       adminClient.removePolicyManagementCertificate(rsaCertificate, "Foo", "Bar"),
-    ).rejects.toThrow("can't find PEM header");
+    ).to.be.rejectedWith("can't find PEM header");
 
     await expect(
       adminClient.removePolicyManagementCertificate(rsaCertificate, rsaKey2, rsaCertificate),
-    ).rejects.toThrow("Key does not match Certificate");
+    ).to.be.rejectedWith("Key does not match Certificate");
   });
 
-  it("setPolicyCertificates", async function (ctx) {
-    if (!isLiveMode()) ctx.skip(); // "setPolicyCertificate APIs require keys and certificates from the environment, which are not available in playback"
+  it("setPolicyCertificates", async function () {
+    if (!isLiveMode()) this.skip(); // "setPolicyCertificate APIs require keys and certificates from the environment, which are not available in playback"
 
     const client = createRecordedAdminClient(recorder, "Isolated");
 

@@ -1,19 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { GetTokenOptions } from "@azure/core-auth";
-import type {
+import { GetTokenOptions } from "@azure/core-auth";
+import {
   AuthorizeRequestOnChallengeOptions,
   ChallengeCallbacks,
   AuthorizeRequestOptions,
 } from "@azure/core-rest-pipeline";
 import { parseWWWAuthenticate } from "./utils/wwwAuthenticateParser";
-import type {
+import {
   ContainerRegistryGetTokenOptions,
   ContainerRegistryRefreshTokenCredential,
 } from "./containerRegistryTokenCredential";
-import type { AccessTokenRefresher } from "./utils/tokenCycler";
-import { createTokenCycler } from "./utils/tokenCycler";
+import { AccessTokenRefresher, createTokenCycler } from "./utils/tokenCycler";
 
 const fiveMinutesInMs = 5 * 60 * 1000;
 

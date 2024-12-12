@@ -3,8 +3,7 @@
 
 import { AzureAuthorityHosts } from "@azure/identity";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { Recorder, RecorderStartOptions } from "@azure-tools/test-recorder";
-import { isLiveMode } from "@azure-tools/test-recorder";
+import { Recorder, RecorderStartOptions, isLiveMode } from "@azure-tools/test-recorder";
 import {
   ContainerRegistryContentClient,
   ContainerRegistryClient,

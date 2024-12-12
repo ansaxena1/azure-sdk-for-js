@@ -13,9 +13,9 @@ import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { AzureHSMResourceProvider } from "../azureHSMResourceProvider";
 import {
-  Operation,
+  DedicatedHsmOperation,
   OperationsListOptionalParams,
-  OperationsListResponse,
+  OperationsListResponse
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
@@ -32,12 +32,12 @@ export class OperationsImpl implements Operations {
   }
 
   /**
-   * Get a list of Hardware Security Modules operations.
+   * Get a list of Dedicated HSM operations.
    * @param options The options parameters.
    */
   public list(
-    options?: OperationsListOptionalParams,
-  ): PagedAsyncIterableIterator<Operation> {
+    options?: OperationsListOptionalParams
+  ): PagedAsyncIterableIterator<DedicatedHsmOperation> {
     const iter = this.listPagingAll(options);
     return {
       next() {
@@ -51,33 +51,33 @@ export class OperationsImpl implements Operations {
           throw new Error("maxPageSize is not supported by this operation.");
         }
         return this.listPagingPage(options, settings);
-      },
+      }
     };
   }
 
   private async *listPagingPage(
     options?: OperationsListOptionalParams,
-    _settings?: PageSettings,
-  ): AsyncIterableIterator<Operation[]> {
+    _settings?: PageSettings
+  ): AsyncIterableIterator<DedicatedHsmOperation[]> {
     let result: OperationsListResponse;
     result = await this._list(options);
     yield result.value || [];
   }
 
   private async *listPagingAll(
-    options?: OperationsListOptionalParams,
-  ): AsyncIterableIterator<Operation> {
+    options?: OperationsListOptionalParams
+  ): AsyncIterableIterator<DedicatedHsmOperation> {
     for await (const page of this.listPagingPage(options)) {
       yield* page;
     }
   }
 
   /**
-   * Get a list of Hardware Security Modules operations.
+   * Get a list of Dedicated HSM operations.
    * @param options The options parameters.
    */
   private _list(
-    options?: OperationsListOptionalParams,
+    options?: OperationsListOptionalParams
   ): Promise<OperationsListResponse> {
     return this.client.sendOperationRequest({ options }, listOperationSpec);
   }
@@ -90,14 +90,14 @@ const listOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.OperationListResult,
+      bodyMapper: Mappers.DedicatedHsmOperationListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.DedicatedHsmError
+    }
   },
-  queryParameters: [Parameters.apiVersion],
+  queryParameters: [Parameters.apiVersion1],
   urlParameters: [Parameters.$host],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };

@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { TableClient, TableEntityResult, TransactionAction } from "../../src";
-import { odata } from "../../src";
+import { TableClient, TableEntityResult, TransactionAction, odata } from "../../src";
 
-import type { Context } from "mocha";
+import { Context } from "mocha";
 import { assert } from "chai";
 import { createTableClient } from "./utils/recordedClient";
 import { isLiveMode } from "@azure-tools/test-recorder";

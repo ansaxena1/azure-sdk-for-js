@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 /* eslint-disable no-unused-expressions */
-import type { CosmosClientOptions } from "../../../src";
-import { CosmosClient } from "../../../src";
-import type { RequestContext } from "../../../src";
-import type { Plugin, Next, PluginConfig } from "../../../src";
+import { CosmosClient, CosmosClientOptions } from "../../../src";
+import { RequestContext } from "../../../src";
+import { Plugin, Next, PluginConfig } from "../../../src";
 
 import * as assert from "assert";
-import type { DiagnosticNodeInternal } from "../../../src/diagnostics/DiagnosticNodeInternal";
+import { DiagnosticNodeInternal } from "../../../src/diagnostics/DiagnosticNodeInternal";
 import { expect } from "chai";
 import { getEmptyCosmosDiagnostics } from "../../../src/utils/diagnostics";
 

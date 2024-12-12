@@ -3,7 +3,7 @@
 
 import { assert, expect } from "chai";
 import sinon from "sinon";
-import type {
+import {
   JoinGroupMessage,
   JoinGroupOptions,
   LeaveGroupMessage,

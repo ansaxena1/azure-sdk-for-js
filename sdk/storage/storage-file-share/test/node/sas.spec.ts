@@ -14,7 +14,7 @@ import {
   ShareServiceClient,
 } from "../../src";
 import { AnonymousCredential } from "../../../storage-blob/src/credentials/AnonymousCredential";
-import type { StorageSharedKeyCredential } from "../../../storage-blob/src/credentials/StorageSharedKeyCredential";
+import { StorageSharedKeyCredential } from "../../../storage-blob/src/credentials/StorageSharedKeyCredential";
 import { FileSASPermissions } from "../../src/FileSASPermissions";
 import { generateFileSASQueryParameters } from "../../src/FileSASSignatureValues";
 import { newPipeline } from "../../src/Pipeline";
@@ -27,7 +27,7 @@ import {
   uriSanitizers,
 } from "../utils";
 import { delay, Recorder } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("Shared Access Signature (SAS) generation Node.js only", () => {
   let recorder: Recorder;

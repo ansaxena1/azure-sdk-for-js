@@ -4,7 +4,7 @@
 
 ```ts
 
-import type { WebPubSubClientProtocol } from '@azure/web-pubsub-client';
+import { WebPubSubClientProtocol } from '@azure/web-pubsub-client';
 
 // @public
 export const WebPubSubProtobufProtocol: () => WebPubSubClientProtocol;

@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as path from "node:path";
+import * as path from "path";
 
-import type { MsalTestCleanup } from "../../node/msalNodeTestSetup.js";
-import { msalNodeTestSetup } from "../../node/msalNodeTestSetup.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { MsalTestCleanup, msalNodeTestSetup } from "../../node/msalNodeTestSetup";
+import { Recorder, env } from "@azure-tools/test-recorder";
 
-import { ClientCertificateCredential } from "../../../src/index.js";
-import { parseCertificate } from "../../../src/credentials/clientCertificateCredential.js";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { ClientCertificateCredential } from "../../../src";
+import { Context } from "mocha";
+import { assert } from "chai";
+import { parseCertificate } from "../../../src/credentials/clientCertificateCredential";
 
 const ASSET_PATH = "assets";
 
@@ -18,8 +17,8 @@ describe("ClientCertificateCredential (internal)", function () {
   let cleanup: MsalTestCleanup;
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    const setup = await msalNodeTestSetup(ctx);
+  beforeEach(async function (this: Context) {
+    const setup = await msalNodeTestSetup(this.currentTest);
     cleanup = setup.cleanup;
     recorder = setup.recorder;
 
@@ -100,7 +99,7 @@ describe("ClientCertificateCredential (internal)", function () {
     );
   });
 
-  it("throws when given a file that doesn't contain a PEM-formatted certificate", async function (ctx) {
+  it("throws when given a file that doesn't contain a PEM-formatted certificate", async function (this: Context) {
     const fullPath = path.resolve("./clientCertificateCredential.spec.ts");
     const credential = new ClientCertificateCredential("tenant", "client", {
       certificatePath: fullPath,
@@ -117,7 +116,7 @@ describe("ClientCertificateCredential (internal)", function () {
     assert.deepEqual(error?.message, `ENOENT: no such file or directory, open '${fullPath}'`);
   });
 
-  it("throws when given a certificate that isn't PEM-formatted", async function (ctx) {
+  it("throws when given a certificate that isn't PEM-formatted", async function (this: Context) {
     const credential = new ClientCertificateCredential("tenant", "client", {
       certificate: "not-pem-formatted",
     });

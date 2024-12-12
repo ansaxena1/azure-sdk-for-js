@@ -18,7 +18,7 @@ dotenv.config();
  * This sample demonstrates how to Gets the private link resources that need to be created for a elastic San.
  *
  * @summary Gets the private link resources that need to be created for a elastic San.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/PrivateLinkResources_ListByElasticSan_MaximumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/PrivateLinkResources_ListByElasticSan_MaximumSet_Gen.json
  */
 async function privateLinkResourcesListByElasticSanMaximumSetGen() {
   const subscriptionId =
@@ -39,7 +39,7 @@ async function privateLinkResourcesListByElasticSanMaximumSetGen() {
  * This sample demonstrates how to Gets the private link resources that need to be created for a elastic San.
  *
  * @summary Gets the private link resources that need to be created for a elastic San.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/PrivateLinkResources_ListByElasticSan_MinimumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/PrivateLinkResources_ListByElasticSan_MinimumSet_Gen.json
  */
 async function privateLinkResourcesListByElasticSanMinimumSetGen() {
   const subscriptionId =

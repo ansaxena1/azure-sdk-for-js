@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { JSONTypes } from "../webPubSubClient";
+import { JSONTypes } from "../webPubSubClient";
 
 /**
  * The web pubsub message

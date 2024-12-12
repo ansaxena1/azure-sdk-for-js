@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ReadableSpan, TimedEvent } from "@opentelemetry/sdk-trace-base";
+import { ReadableSpan, TimedEvent } from "@opentelemetry/sdk-trace-base";
 import { hrTimeToMilliseconds } from "@opentelemetry/core";
-import type { Link, Attributes, SpanContext } from "@opentelemetry/api";
-import { diag, SpanKind, SpanStatusCode, isValidTraceId, isValidSpanId } from "@opentelemetry/api";
+import { diag, SpanKind, SpanStatusCode, Link, Attributes } from "@opentelemetry/api";
 import {
   DBSYSTEMVALUES_MONGODB,
   DBSYSTEMVALUES_MYSQL,
@@ -40,26 +39,21 @@ import {
   hrTimeToDate,
   isSqlDB,
   serializeAttribute,
-} from "./common.js";
-import type { Tags, Properties, MSLink, Measurements } from "../types.js";
-import { MaxPropertyLengths } from "../types.js";
-import { parseEventHubSpan } from "./eventhub.js";
+} from "./common";
+import { Tags, Properties, MSLink, Measurements, MaxPropertyLengths } from "../types";
+import { parseEventHubSpan } from "./eventhub";
+import { AzureMonitorSampleRate, DependencyTypes, MS_LINKS } from "./constants/applicationinsights";
+import { AzNamespace, MicrosoftEventHub } from "./constants/span/azAttributes";
 import {
-  AzureMonitorSampleRate,
-  DependencyTypes,
-  MS_LINKS,
-} from "./constants/applicationinsights.js";
-import { AzNamespace, MicrosoftEventHub } from "./constants/span/azAttributes.js";
-import type {
   TelemetryExceptionData,
   MessageData,
   RemoteDependencyData,
   RequestData,
   TelemetryItem as Envelope,
+  KnownContextTagKeys,
   TelemetryExceptionDetails,
-} from "../generated/index.js";
-import { KnownContextTagKeys } from "../generated/index.js";
-import { msToTimeSpan } from "./breezeUtils.js";
+} from "../generated";
+import { msToTimeSpan } from "./breezeUtils";
 
 function createTagsFromSpan(span: ReadableSpan): Tags {
   const tags: Tags = createTagsFromResource(span.resource);
@@ -420,19 +414,7 @@ export function spanEventsToEnvelopes(span: ReadableSpan, ikey: string): Envelop
 
       // Only generate exception telemetry for incoming requests
       if (event.name === "exception") {
-        let isValidParent = false;
-        const parentSpanContext: SpanContext | undefined = span.parentSpanId
-          ? span.spanContext()
-          : undefined;
-        if (parentSpanContext) {
-          isValidParent =
-            isValidTraceId(parentSpanContext.traceId) && isValidSpanId(parentSpanContext.spanId);
-        }
-        /*
-         * Only generate exception telemetry for children of a remote span,
-         * internal spans, and top level spans. This is to avoid unresolvable exceptions from outgoing calls.
-         */
-        if (!isValidParent || parentSpanContext?.isRemote || span.kind === SpanKind.INTERNAL) {
+        if (span.kind === SpanKind.SERVER) {
           name = "Microsoft.ApplicationInsights.Exception";
           baseType = "ExceptionData";
           let typeName = "";

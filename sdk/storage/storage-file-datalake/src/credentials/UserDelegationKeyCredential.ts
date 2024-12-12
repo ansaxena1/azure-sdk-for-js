@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { UserDelegationKey } from "../models";
+import { UserDelegationKey } from "../models";
 import { createHmac } from "crypto";
 
 /**

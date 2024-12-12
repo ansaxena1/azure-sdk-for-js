@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   MessageAdapter as EHMessageAdapter,
   EventData,
   EventDataAdapterParameters,
+  createEventDataAdapter,
 } from "@azure/event-hubs";
-import { createEventDataAdapter } from "@azure/event-hubs";
-import type { AssertEqualKeys } from "../utils/utils.js";
-import type { MessageAdapter } from "../../src/models.js";
+import { AssertEqualKeys } from "../utils/utils.js";
+import { MessageAdapter } from "../../src/models.js";
 import { matrix } from "@azure-tools/test-utils-vitest";
 import { describe, it, assert } from "vitest";
 

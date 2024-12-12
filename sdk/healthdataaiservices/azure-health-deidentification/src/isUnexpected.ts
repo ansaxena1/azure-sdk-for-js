@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   GetJob200Response,
   GetJobDefaultResponse,
   CreateJob200Response,

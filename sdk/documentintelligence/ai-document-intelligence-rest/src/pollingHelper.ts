@@ -1,17 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Client, HttpResponse } from "@azure-rest/core-client";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type {
+import { Client, HttpResponse } from "@azure-rest/core-client";
+import { AbortSignalLike } from "@azure/abort-controller";
+import {
   CancelOnProgress,
   CreateHttpPollerOptions,
   RunningOperation,
   OperationResponse,
   OperationState,
+  createHttpPoller,
 } from "@azure/core-lro";
-import { createHttpPoller } from "@azure/core-lro";
-import type {
+import {
   AnalyzeDocumentFromStream202Response,
   AnalyzeDocumentFromStreamDefaultResponse,
   AnalyzeDocumentFromStreamLogicalResponse,
@@ -37,7 +37,7 @@ import type {
   CopyClassifierToDefaultResponse,
   CopyClassifierToLogicalResponse,
 } from "./responses.js";
-import type { AnalyzeBatchResultOperationOutput } from "./outputModels.js";
+import { AnalyzeBatchResultOperationOutput } from "./outputModels.js";
 
 /**
  * A simple poller that can be used to poll a long running operation.

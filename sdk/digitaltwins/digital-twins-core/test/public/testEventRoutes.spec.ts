@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { DigitalTwinsClient } from "../../src";
+import { DigitalTwinsClient } from "../../src";
 import { authenticate } from "../utils/testAuthentication";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Recorder } from "@azure-tools/test-recorder";
 import chai from "chai";
 
 const assert: typeof chai.assert = chai.assert;

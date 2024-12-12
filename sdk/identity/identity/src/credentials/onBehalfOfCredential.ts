@@ -1,30 +1,29 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
-import type { MsalClient } from "../msal/nodeFlows/msalClient.js";
-import { createMsalClient } from "../msal/nodeFlows/msalClient.js";
-import type {
+import { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { MsalClient, createMsalClient } from "../msal/nodeFlows/msalClient";
+import {
   OnBehalfOfCredentialAssertionOptions,
   OnBehalfOfCredentialCertificateOptions,
   OnBehalfOfCredentialOptions,
   OnBehalfOfCredentialSecretOptions,
-} from "./onBehalfOfCredentialOptions.js";
-import { credentialLogger, formatError } from "../util/logging.js";
+} from "./onBehalfOfCredentialOptions";
+import { credentialLogger, formatError } from "../util/logging";
 import {
   processMultiTenantRequest,
   resolveAdditionallyAllowedTenantIds,
-} from "../util/tenantIdUtils.js";
+} from "../util/tenantIdUtils";
 
-import type { CertificateParts } from "../msal/types.js";
-import type { ClientCertificatePEMCertificatePath } from "./clientCertificateCredential.js";
-import type { CredentialPersistenceOptions } from "./credentialPersistenceOptions.js";
-import { CredentialUnavailableError } from "../errors.js";
-import type { MultiTenantTokenCredentialOptions } from "./multiTenantTokenCredentialOptions.js";
+import { CertificateParts } from "../msal/types";
+import { ClientCertificatePEMCertificatePath } from "./clientCertificateCredential";
+import { CredentialPersistenceOptions } from "./credentialPersistenceOptions";
+import { CredentialUnavailableError } from "../errors";
+import { MultiTenantTokenCredentialOptions } from "./multiTenantTokenCredentialOptions";
 import { createHash } from "node:crypto";
-import { ensureScopes } from "../util/scopeUtils.js";
+import { ensureScopes } from "../util/scopeUtils";
 import { readFile } from "node:fs/promises";
-import { tracingClient } from "../util/tracing.js";
+import { tracingClient } from "../util/tracing";
 
 const credentialName = "OnBehalfOfCredential";
 const logger = credentialLogger(credentialName);

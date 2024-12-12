@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Response } from "../../request";
-import type { ExecutionContext } from "../ExecutionContext";
+import { Response } from "../../request";
+import { ExecutionContext } from "../ExecutionContext";
 import { hashObject } from "../../utils/hashObject";
-import type { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
+import { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
 
 /** @hidden */
 export class OrderedDistinctEndpointComponent implements ExecutionContext {

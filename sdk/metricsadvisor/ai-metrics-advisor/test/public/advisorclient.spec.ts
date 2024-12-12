@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
-import type {
+import {
   MetricAnomalyFeedback,
   MetricChangePointFeedback,
   MetricCommentFeedback,
@@ -12,8 +12,7 @@ import type {
   MetricsAdvisorClient,
 } from "../../src";
 import { createRecordedAdvisorClient, makeCredential } from "./util/recordedClients";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
+import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 import { getYieldedValue, matrix } from "@azure-tools/test-utils";
 
 matrix([[true, false]] as const, async (useAad) => {

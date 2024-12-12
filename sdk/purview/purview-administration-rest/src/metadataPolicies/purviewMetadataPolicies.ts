@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
-import type { TokenCredential } from "@azure/core-auth";
-import type { PurviewMetadataPoliciesRestClient } from "./clientDefinitions";
+import { getClient, ClientOptions } from "@azure-rest/core-client";
+import { TokenCredential } from "@azure/core-auth";
+import { PurviewMetadataPoliciesRestClient } from "./clientDefinitions";
 
 export function PurviewMetadataPoliciesClient(
   Endpoint: string,

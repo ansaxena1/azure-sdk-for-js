@@ -3,16 +3,16 @@
 
 import {
   AutoRefreshTokenCredential,
-  type CommunicationTokenRefreshOptions,
-} from "./autoRefreshTokenCredential.js";
-import type {
+  CommunicationTokenRefreshOptions,
+} from "./autoRefreshTokenCredential";
+import {
   CommunicationGetTokenOptions,
   CommunicationTokenCredential,
   TokenCredential,
-} from "./communicationTokenCredential.js";
-import type { AccessToken } from "@azure/core-auth";
-import { StaticTokenCredential } from "./staticTokenCredential.js";
-import { parseToken } from "./tokenParser.js";
+} from "./communicationTokenCredential";
+import { AccessToken } from "@azure/core-auth";
+import { StaticTokenCredential } from "./staticTokenCredential";
+import { parseToken } from "./tokenParser";
 
 /**
  * The CommunicationTokenCredential implementation with support for proactive token refresh.

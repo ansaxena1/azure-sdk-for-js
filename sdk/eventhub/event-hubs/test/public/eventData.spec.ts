@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { getStartingPositionsForTests } from "../utils/testUtils.js";
-import type {
+import {
   EventData,
   EventHubConsumerClient,
   EventHubProducerClient,

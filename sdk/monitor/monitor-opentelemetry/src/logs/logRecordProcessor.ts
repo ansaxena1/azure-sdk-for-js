@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { MetricHandler } from "../metrics/handler";
-import type { LogRecord, LogRecordProcessor } from "@opentelemetry/sdk-logs";
+import { MetricHandler } from "../metrics/handler";
+import { LogRecord, LogRecordProcessor } from "@opentelemetry/sdk-logs";
 
 /**
  * Azure Monitor LogRecord Processor.

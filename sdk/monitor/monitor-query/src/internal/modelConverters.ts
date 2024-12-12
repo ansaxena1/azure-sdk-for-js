@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   BatchQueryRequest as GeneratedBatchQueryRequest,
   BatchQueryResponse as GeneratedBatchQueryResponse,
   BatchQueryResults as GeneratedBatchQueryResults,
@@ -10,56 +10,57 @@ import type {
   QueryBatchResponse as GeneratedQueryBatchResponse,
   Table as GeneratedTable,
   QueryBody,
-} from "../generated/logquery/src/index.js";
+} from "../generated/logquery/src";
 
-import type {
+import {
   Metric as GeneratedMetric,
   MetricsListOptionalParams as GeneratedMetricsListOptionalParams,
   MetricsListResponse as GeneratedMetricsListResponse,
   TimeSeriesElement as GeneratedTimeSeriesElement,
-} from "../generated/metrics/src/index.js";
+} from "../generated/metrics/src";
 
-import type {
+import {
   MetricDefinition as GeneratedMetricDefinition,
   MetricDefinitionsListOptionalParams as GeneratedMetricDefinitionsListOptionalParams,
-} from "../generated/metricsdefinitions/src/index.js";
+} from "../generated/metricsdefinitions/src";
 
-import type { MetricNamespace as GeneratedMetricNamespace } from "../generated/metricsnamespaces/src/index.js";
-import { formatPreferHeader } from "./util.js";
+import { MetricNamespace as GeneratedMetricNamespace } from "../generated/metricsnamespaces/src";
+import { formatPreferHeader } from "./util";
 
-import type {
+import {
   ListMetricDefinitionsOptions,
   LogsQueryBatchResult,
   LogsTable,
   MetricsQueryOptions,
   MetricsQueryResult,
   QueryBatch,
-} from "../../src/index.js";
-import type {
+} from "../../src";
+import {
   Metric,
   MetricAvailability,
   MetricDefinition,
   MetricNamespace,
   TimeSeriesElement,
-} from "../models/publicMetricsModels.js";
-import { createMetricsQueryResult, getMetricByName } from "../models/publicMetricsModels.js";
-import type { FullOperationResponse } from "@azure/core-client";
+  createMetricsQueryResult,
+  getMetricByName,
+} from "../models/publicMetricsModels";
+import { FullOperationResponse } from "@azure/core-client";
 import {
   convertIntervalToTimeIntervalObject,
   convertTimespanToInterval,
-} from "../timespanConversion.js";
-import type {
+} from "../timespanConversion";
+import {
   LogsErrorInfo,
   LogsQueryError,
   LogsQueryPartialResult,
+  LogsQueryResultStatus,
   LogsQuerySuccessfulResult,
-} from "../models/publicLogsModels.js";
-import { LogsQueryResultStatus } from "../models/publicLogsModels.js";
-import type {
+} from "../models/publicLogsModels";
+import {
   MetricsBatchBatchResponse as GeneratedMetricsBatchResponse,
   MetricsBatchBatchOptionalParams as GeneratedMetricsBatchOptionalParams,
-} from "../generated/metricBatch/src/index.js";
-import type { MetricsQueryResourcesOptions } from "../models/publicBatchModels.js";
+} from "../generated/metricBatch/src";
+import { MetricsQueryResourcesOptions } from "../models/publicBatchModels";
 
 /**
  * @internal

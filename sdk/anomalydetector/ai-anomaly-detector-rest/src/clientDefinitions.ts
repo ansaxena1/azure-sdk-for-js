@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   DetectUnivariateEntireSeriesParameters,
   DetectUnivariateLastPointParameters,
   DetectUnivariateChangePointParameters,
@@ -13,7 +13,7 @@ import type {
   DetectMultivariateBatchAnomalyParameters,
   DetectMultivariateLastAnomalyParameters,
 } from "./parameters";
-import type {
+import {
   DetectUnivariateEntireSeries200Response,
   DetectUnivariateEntireSeriesDefaultResponse,
   DetectUnivariateLastPoint200Response,
@@ -35,7 +35,7 @@ import type {
   DetectMultivariateLastAnomaly200Response,
   DetectMultivariateLastAnomalyDefaultResponse,
 } from "./responses";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface DetectUnivariateEntireSeries {
   /**

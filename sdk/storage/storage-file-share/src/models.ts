@@ -3,8 +3,8 @@
 import { FileSystemAttributes } from "./FileSystemAttributes";
 import { truncatedISO8061Date } from "./utils/utils.common";
 import { logger } from "./log";
-import type { FilePermissionFormat, ShareTokenIntent } from "./generatedModels";
-import type { StoragePipelineOptions } from "./Pipeline";
+import { FilePermissionFormat, ShareTokenIntent } from "./generatedModels";
+import { StoragePipelineOptions } from "./Pipeline";
 
 export interface Metadata {
   [propertyName: string]: string;

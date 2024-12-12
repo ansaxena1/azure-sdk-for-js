@@ -2,11 +2,9 @@
 // Licensed under the MIT License.
 
 import "./env";
-import type { RecorderStartOptions } from "@azure-tools/test-recorder";
-import { Recorder, env } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
-import type { MixedRealityStsClientOptions } from "../../src";
-import { AzureKeyCredential, MixedRealityStsClient } from "../../src";
+import { Recorder, RecorderStartOptions, env } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { AzureKeyCredential, MixedRealityStsClient, MixedRealityStsClientOptions } from "../../src";
 
 export function createClient(options?: MixedRealityStsClientOptions): MixedRealityStsClient {
   const accountDomain = env.MIXEDREALITY_ACCOUNT_DOMAIN as string;

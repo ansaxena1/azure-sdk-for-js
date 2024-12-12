@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { TokenCredential } from "@azure/identity";
-import type { ContainerClient, StoragePipelineOptions } from "@azure/storage-blob";
-import { BlobServiceClient } from "@azure/storage-blob";
+import { TokenCredential } from "@azure/identity";
+import { BlobServiceClient, ContainerClient, StoragePipelineOptions } from "@azure/storage-blob";
 import { createTestCredential } from "@azure-tools/test-credential";
 import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
 import { EnvVarKeys } from "./constants.js";

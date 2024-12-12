@@ -4,13 +4,13 @@
 import { describe, it, assert, vi, afterEach } from "vitest";
 import { getCachedDefaultHttpsClient } from "../../src/client/clientHelpers.js";
 import { getClient } from "../../src/client/getClient.js";
-import type {
+import {
   HttpClient,
   PipelineRequest,
   PipelineResponse,
   SendRequest,
 } from "../../src/interfaces.js";
-import type { PipelinePolicy } from "../../src/pipeline.js";
+import { PipelinePolicy } from "../../src/pipeline.js";
 import { createHttpHeaders } from "../../src/httpHeaders.js";
 
 describe("getClient", () => {

@@ -1,20 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { logger } from "./models/logger.js";
-import type {
+import { logger } from "./models/logger";
+import {
   CommunicationIdentifier,
   CommunicationTokenCredential,
+  serializeCommunicationIdentifier,
 } from "@azure/communication-common";
-import { serializeCommunicationIdentifier } from "@azure/communication-common";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
-import type {
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import {
   AddParticipantsRequest,
   SendMessageRequest,
   SendReadReceiptRequest,
-} from "./models/requests.js";
+} from "./models/requests";
 
-import type {
+import {
   AddChatParticipantsResult,
   ChatMessage,
   ChatMessageReadReceipt,
@@ -22,15 +22,15 @@ import type {
   ChatThreadProperties,
   ListPageSettings,
   SendChatMessageResult,
-} from "./models/models.js";
+} from "./models/models";
 import {
   mapToAddChatParticipantsRequestRestModel,
   mapToChatMessageSdkModel,
   mapToChatParticipantSdkModel,
   mapToChatThreadPropertiesSdkModel,
   mapToReadReceiptSdkModel,
-} from "./models/mappers.js";
-import type {
+} from "./models/mappers";
+import {
   AddParticipantsOptions,
   ChatThreadClientOptions,
   DeleteMessageOptions,
@@ -45,11 +45,11 @@ import type {
   SendTypingNotificationOptions,
   UpdateMessageOptions,
   UpdateTopicOptions,
-} from "./models/options.js";
-import { ChatApiClient } from "./generated/src/index.js";
-import type { InternalPipelineOptions } from "@azure/core-rest-pipeline";
-import { createCommunicationTokenCredentialPolicy } from "./credential/communicationTokenCredentialPolicy.js";
-import { tracingClient } from "./generated/src/tracing.js";
+} from "./models/options";
+import { ChatApiClient } from "./generated/src";
+import { InternalPipelineOptions } from "@azure/core-rest-pipeline";
+import { createCommunicationTokenCredentialPolicy } from "./credential/communicationTokenCredentialPolicy";
+import { tracingClient } from "./generated/src/tracing";
 
 const minimumTypingIntervalInMilliSeconds: number = 8000;
 

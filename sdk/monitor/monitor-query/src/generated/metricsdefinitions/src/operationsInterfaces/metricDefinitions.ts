@@ -11,7 +11,7 @@ import {
   MetricDefinitionsListAtSubscriptionScopeResponse,
   MetricDefinitionsListOptionalParams,
   MetricDefinitionsListResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a MetricDefinitions. */
 export interface MetricDefinitions {

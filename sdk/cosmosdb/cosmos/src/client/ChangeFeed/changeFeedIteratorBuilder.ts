@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ClientContext } from "../../ClientContext";
-import type { PartitionKey } from "../../documents";
-import type { PartitionKeyRangeCache } from "../../routing";
-import { QueryRange } from "../../routing";
-import type { ChangeFeedIteratorOptions } from "./ChangeFeedIteratorOptions";
+import { ClientContext } from "../../ClientContext";
+import { PartitionKey } from "../../documents";
+import { QueryRange, PartitionKeyRangeCache } from "../../routing";
+import { ChangeFeedIteratorOptions } from "./ChangeFeedIteratorOptions";
 import { ChangeFeedStartFrom } from "./ChangeFeedStartFrom";
 import { ChangeFeedStartFromBeginning } from "./ChangeFeedStartFromBeginning";
 import { ChangeFeedStartFromContinuation } from "./ChangeFeedStartFromContinuation";
@@ -17,8 +16,8 @@ import { ChangeFeedForEpkRange } from "./ChangeFeedForEpkRange";
 import { getIdFromLink, getPathFromLink, ResourceType, Constants } from "../../common";
 import { buildInternalChangeFeedOptions, fetchStartTime, isEpkRange } from "./changeFeedUtils";
 import { isPartitionKey } from "../../utils/typeChecks";
-import type { Container } from "../Container";
-import type { FeedRangeInternal } from "./FeedRange";
+import { Container } from "../Container";
+import { FeedRangeInternal } from "./FeedRange";
 
 export function changeFeedIteratorBuilder(
   cfOptions: ChangeFeedIteratorOptions,

@@ -1,14 +1,16 @@
 # Release History
 
-## 1.18.0 (2024-11-12)
+## 1.17.1 (Unreleased)
 
 ### Features Added
 
-- `BearerTokenAuthenticationPolicy` will handle CAE claims challenge by default. [PR #31501](https://github.com/Azure/azure-sdk-for-js/pull/31501/)
+### Breaking Changes
 
 ### Bugs Fixed
 
 - Fix an issue in `isStreamComplete` where the method never resolves if the stream is not readable.
+
+### Other Changes
 
 ## 1.17.0 (2024-09-12)
 

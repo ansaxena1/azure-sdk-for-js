@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 import assert from "assert";
 import { validateOffer } from "../../../../src/utils/offers";
-import type { ContainerRequest } from "../../../../src";
+import { ContainerRequest } from "../../../../src";
 
 describe("Offer utils", function () {
   describe("validateOffer", function () {

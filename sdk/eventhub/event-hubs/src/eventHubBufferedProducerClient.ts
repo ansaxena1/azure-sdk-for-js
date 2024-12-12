@@ -1,22 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { EventData } from "./eventData.js";
+import { EventData } from "./eventData.js";
 import { EventHubProducerClient } from "./eventHubProducerClient.js";
-import type { OperationOptions } from "./util/operationOptions.js";
-import type {
+import { OperationOptions } from "./util/operationOptions.js";
+import {
   EventHubClientOptions,
   GetEventHubPropertiesOptions,
   GetPartitionIdsOptions,
   GetPartitionPropertiesOptions,
   SendBatchOptions,
 } from "./models/public.js";
-import type { EventHubProperties, PartitionProperties } from "./managementClient.js";
-import type { NamedKeyCredential, SASCredential, TokenCredential } from "@azure/core-auth";
+import { EventHubProperties, PartitionProperties } from "./managementClient.js";
+import { NamedKeyCredential, SASCredential, TokenCredential } from "@azure/core-auth";
 import { isDefined } from "@azure/core-util";
 import { isCredential } from "./util/typeGuards.js";
-import type { AmqpAnnotatedMessage } from "@azure/core-amqp";
-import { delay } from "@azure/core-amqp";
+import { AmqpAnnotatedMessage, delay } from "@azure/core-amqp";
 import { BatchingPartitionChannel } from "./batchingPartitionChannel.js";
 import { PartitionAssigner } from "./impl/partitionAssigner.js";
 import { logger } from "./logger.js";

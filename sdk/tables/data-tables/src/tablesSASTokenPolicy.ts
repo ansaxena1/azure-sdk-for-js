@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   PipelinePolicy,
   PipelineRequest,
   PipelineResponse,
   SendRequest,
 } from "@azure/core-rest-pipeline";
-import type { SASCredential } from "@azure/core-auth";
+import { SASCredential } from "@azure/core-auth";
 
 /**
  * The programmatic identifier of the tablesSASTokenPolicy.

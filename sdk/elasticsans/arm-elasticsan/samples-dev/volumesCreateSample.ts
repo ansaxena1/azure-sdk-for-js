@@ -18,7 +18,7 @@ dotenv.config();
  * This sample demonstrates how to Create a Volume.
  *
  * @summary Create a Volume.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/Volumes_Create_MaximumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/Volumes_Create_MaximumSet_Gen.json
  */
 async function volumesCreateMaximumSetGen() {
   const subscriptionId =
@@ -51,7 +51,7 @@ async function volumesCreateMaximumSetGen() {
  * This sample demonstrates how to Create a Volume.
  *
  * @summary Create a Volume.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/Volumes_Create_MinimumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/Volumes_Create_MinimumSet_Gen.json
  */
 async function volumesCreateMinimumSetGen() {
   const subscriptionId =

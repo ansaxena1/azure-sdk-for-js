@@ -1,16 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { DerivedMetricInfo, FilterInfo, FilterConjunctionGroupInfo } from "../../../generated";
-import { KnownPredicateType } from "../../../generated";
-import type {
+import {
+  DerivedMetricInfo,
+  FilterInfo,
+  KnownPredicateType,
+  FilterConjunctionGroupInfo,
+} from "../../../generated";
+import {
   RequestData,
   TelemetryData,
   DependencyData,
   ExceptionData,
   TraceData,
+  KnownDependencyColumns,
+  KnownRequestColumns,
 } from "../types";
-import { KnownDependencyColumns, KnownRequestColumns } from "../types";
 import {
   isRequestData,
   isDependencyData,

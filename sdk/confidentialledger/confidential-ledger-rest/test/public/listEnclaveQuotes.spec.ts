@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ConfidentialLedgerClient } from "../../src";
-import { isUnexpected } from "../../src";
+import { ConfidentialLedgerClient, isUnexpected } from "../../src";
 import { createClient, createRecorder } from "./utils/recordedClient";
 
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("List Enclaves", function () {
   let recorder: Recorder;

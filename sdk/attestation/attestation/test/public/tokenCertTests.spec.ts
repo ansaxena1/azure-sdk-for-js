@@ -5,21 +5,20 @@
 /// <reference path="../../src/jsrsasign.d.ts"/>
 import * as jsrsasign from "jsrsasign";
 
+import { assert, use as chaiUse } from "chai";
+import { Context } from "mocha";
+import chaiPromises from "chai-as-promised";
+chaiUse(chaiPromises);
+
 import { Recorder } from "@azure-tools/test-recorder";
 
-import {
-  createRecordedClient,
-  getAttestationUri,
-  recorderOptions,
-} from "../utils/recordedClient.js";
-import type { AttestationClient } from "../../src/index.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
-
+import { createRecordedClient, getAttestationUri, recorderOptions } from "../utils/recordedClient";
+import { AttestationClient } from "../../src";
 describe("TokenCertTests", function () {
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    recorder = new Recorder(ctx);
+  beforeEach(async function (this: Context) {
+    recorder = new Recorder(this.currentTest);
     await recorder.start(recorderOptions);
   });
 

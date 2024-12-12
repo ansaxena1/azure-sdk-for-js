@@ -9,7 +9,7 @@
 import {
   TieringGetByResourceIdOptionalParams,
   TieringGetByResourceIdResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a Tiering. */
 export interface Tiering {

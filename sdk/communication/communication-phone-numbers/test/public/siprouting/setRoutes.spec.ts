@@ -1,10 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { SipRoutingClient } from "../../../src/index.js";
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { isPlaybackMode } from "@azure-tools/test-recorder";
-import type { SipTrunk, SipTrunkRoute } from "../../../src/models.js";
+import { assert } from "chai";
+import { Context } from "mocha";
+
+import { SipRoutingClient } from "../../../src";
+
+import { Recorder, isPlaybackMode } from "@azure-tools/test-recorder";
+import { SipTrunk, SipTrunkRoute } from "../../../src/models";
 import {
   clearSipConfiguration,
   createRecordedClient,
@@ -13,33 +16,34 @@ import {
   listAllRoutes,
   listAllTrunks,
   resetUniqueFqdns,
-} from "./utils/recordedClient.js";
-import { matrix } from "@azure-tools/test-utils-vitest";
-import { describe, it, assert, beforeEach, afterEach, beforeAll } from "vitest";
+} from "./utils/recordedClient";
+import { matrix } from "@azure-tools/test-utils";
 
-matrix([[true, false]], async (useAad) => {
-  describe(`SipRoutingClient - set routes${useAad ? " [AAD]" : ""}`, () => {
+matrix([[true, false]], async function (useAad) {
+  describe(`SipRoutingClient - set routes${useAad ? " [AAD]" : ""}`, function () {
     let client: SipRoutingClient;
     let recorder: Recorder;
     let firstFqdn = "";
     let secondFqdn = "";
 
-    beforeAll(async () => {
+    before(async function (this: Context) {
       if (!isPlaybackMode()) {
         await clearSipConfiguration();
       }
     });
 
-    beforeEach(async (ctx) => {
+    beforeEach(async function (this: Context) {
       ({ client, recorder } = useAad
-        ? await createRecordedClientWithToken(ctx)
-        : await createRecordedClient(ctx));
+        ? await createRecordedClientWithToken(this)
+        : await createRecordedClient(this));
       firstFqdn = getUniqueFqdn(recorder);
       secondFqdn = getUniqueFqdn(recorder);
     });
 
-    afterEach(async () => {
-      await recorder.stop();
+    afterEach(async function (this: Context) {
+      if (!this.currentTest?.isPending()) {
+        await recorder.stop();
+      }
       resetUniqueFqdns();
     });
 

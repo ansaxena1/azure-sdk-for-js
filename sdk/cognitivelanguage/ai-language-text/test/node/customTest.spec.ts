@@ -1,16 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable, isPlaybackMode } from "@azure-tools/test-recorder";
-import type { TextAnalysisClient } from "../../src";
-import { AnalyzeBatchActionNames, AzureKeyCredential } from "../../src";
+import { assertEnvironmentVariable, isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
+import { AnalyzeBatchActionNames, AzureKeyCredential, TextAnalysisClient } from "../../src";
 import { matrix } from "@azure-tools/test-utils";
-import type { Context, Suite } from "mocha";
-import type { AuthMethod } from "../public/utils/recordedClient";
-import { createClient, startRecorder } from "../public/utils/recordedClient";
-import type { TextAuthoringClient } from "@azure/ai-language-textauthoring";
-import createAuthoringClient from "@azure/ai-language-textauthoring";
+import { Context, Suite } from "mocha";
+import { AuthMethod, createClient, startRecorder } from "../public/utils/recordedClient";
+import createAuthoringClient, { TextAuthoringClient } from "@azure/ai-language-textauthoring";
 import { createCustomTestProject } from "../public/utils/customTestHelpter";
 import { assertActionsResults } from "../public/utils/resultHelper";
 import { expectation1, expectation2, expectation4 } from "../public/expectations";

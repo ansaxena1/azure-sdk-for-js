@@ -2,18 +2,19 @@
 // Licensed under the MIT License.
 /// <reference lib="esnext.asynciterable" />
 
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 
 import { logger } from "./log.js";
 
 import { PageSettings, PagedAsyncIterableIterator } from "@azure/core-paging";
 import { PollOperationState, PollerLike } from "@azure/core-lro";
-import type {
+import {
   DeletedSecretBundle,
+  DeletionRecoveryLevel,
   GetSecretsOptionalParams,
+  KnownDeletionRecoveryLevel,
   SecretBundle,
 } from "./generated/models/index.js";
-import { DeletionRecoveryLevel, KnownDeletionRecoveryLevel } from "./generated/models/index.js";
 import { KeyVaultClient } from "./generated/keyVaultClient.js";
 import { keyVaultAuthenticationPolicy } from "@azure/keyvault-common";
 

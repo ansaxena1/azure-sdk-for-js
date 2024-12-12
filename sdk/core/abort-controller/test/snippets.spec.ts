@@ -48,7 +48,7 @@ describe("snippets", () => {
     try {
       doAsyncWork({ abortSignal: controller.signal });
     } catch (e) {
-      if (e instanceof Error && e.name === "AbortError") {
+      if (e.name === "AbortError") {
         // handle abort error here.
       }
     }

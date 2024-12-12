@@ -1,16 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { KeyCredential, SASCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type { OperationOptions, CommonClientOptions } from "@azure/core-client";
+import { isTokenCredential, KeyCredential, SASCredential } from "@azure/core-auth";
+import { OperationOptions, CommonClientOptions } from "@azure/core-client";
 
 import { eventGridCredentialPolicy } from "./eventGridAuthenticationPolicy";
 import { DEFAULT_EVENTGRID_SCOPE } from "./constants";
-import type { SendCloudEventInput, SendEventGridEventInput } from "./models";
-import { cloudEventReservedPropertyNames } from "./models";
+import {
+  SendCloudEventInput,
+  SendEventGridEventInput,
+  cloudEventReservedPropertyNames,
+} from "./models";
 import { GeneratedClient } from "./generated/generatedClient";
-import type {
+import {
   CloudEvent as CloudEventWireModel,
   EventGridEvent as EventGridEventWireModel,
   GeneratedClientPublishCloudEventEventsOptionalParams,
@@ -18,7 +20,7 @@ import type {
 import { cloudEventDistributedTracingEnricherPolicy } from "./cloudEventDistrubtedTracingEnricherPolicy";
 import { tracingClient } from "./tracing";
 import { v4 as uuidv4 } from "uuid";
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 import { bearerTokenAuthenticationPolicy, tracingPolicyName } from "@azure/core-rest-pipeline";
 
 /**

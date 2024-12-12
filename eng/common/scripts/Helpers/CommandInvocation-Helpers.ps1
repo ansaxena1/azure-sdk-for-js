@@ -1,14 +1,5 @@
-function Invoke-LoggedCommand
+function Invoke-LoggedCommand($Command, $ExecutePath, [switch]$GroupOutput)
 {
-    [CmdletBinding()]
-    param
-    (
-        [string] $Command,
-        [string] $ExecutePath,
-        [switch] $GroupOutput,
-        [int[]] $AllowedExitCodes = @(0)
-    )
-
     $pipelineBuild = !!$env:TF_BUILD
     $startTime = Get-Date
 
@@ -31,7 +22,7 @@ function Invoke-LoggedCommand
         Write-Host "##[endgroup]"
       }
 
-      if($LastExitCode -notin $AllowedExitCodes)
+      if($LastExitCode -ne 0)
       {
           if($pipelineBuild) {
               Write-Error "##[error]Command failed to execute ($duration): $Command`n"
@@ -48,17 +39,4 @@ function Invoke-LoggedCommand
         Pop-Location
       }
     }
-}
-
-function Set-ConsoleEncoding
-{
-    [CmdletBinding()]
-    param
-    (
-        [string] $Encoding = 'utf-8'
-    )
-
-    $outputEncoding = [System.Text.Encoding]::GetEncoding($Encoding)
-    [Console]::OutputEncoding = $outputEncoding
-    [Console]::InputEncoding = $outputEncoding
 }

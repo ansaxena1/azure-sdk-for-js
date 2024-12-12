@@ -3,17 +3,12 @@
 
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
-import type { AbortError } from "@azure/abort-controller";
-import type { DeviceCodePromptCallback } from "../../../src/index.js";
-import { DeviceCodeCredential } from "../../../src/index.js";
-import type { MsalTestCleanup } from "../../node/msalNodeTestSetup.js";
-import { msalNodeTestSetup } from "../../node/msalNodeTestSetup.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { delay, env, isLiveMode, isPlaybackMode } from "@azure-tools/test-recorder";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
-import { toSupportTracing } from "@azure-tools/test-utils-vitest";
-
-expect.extend({ toSupportTracing });
+import { AbortError } from "@azure/abort-controller";
+import { DeviceCodeCredential, DeviceCodePromptCallback } from "../../../src";
+import { MsalTestCleanup, msalNodeTestSetup } from "../../node/msalNodeTestSetup";
+import { Recorder, delay, env, isLiveMode, isPlaybackMode } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { assert } from "@azure-tools/test-utils";
 
 // https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/src/Constants.cs#L9
 const DeveloperSignOnClientId = "04b07795-8ddb-461a-bbee-02f9e1bf7b46";
@@ -22,8 +17,8 @@ describe("DeviceCodeCredential", function () {
   let cleanup: MsalTestCleanup;
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    const setup = await msalNodeTestSetup(ctx, DeveloperSignOnClientId);
+  beforeEach(async function (this: Context) {
+    const setup = await msalNodeTestSetup(this.currentTest, DeveloperSignOnClientId);
     cleanup = setup.cleanup;
     recorder = setup.recorder;
   });
@@ -33,10 +28,10 @@ describe("DeviceCodeCredential", function () {
 
   const scope = "https://vault.azure.net/.default";
 
-  it("authenticates with default values", async function (ctx) {
+  it("authenticates with default values", async function (this: Context) {
     // These tests should not run live because this credential requires user interaction.
     if (isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
     const credential = new DeviceCodeCredential(recorder.configureClientOptions({}));
 
@@ -45,10 +40,10 @@ describe("DeviceCodeCredential", function () {
     assert.ok(token?.expiresOnTimestamp! > Date.now());
   });
 
-  it("authenticates with provided values", async function (ctx) {
+  it("authenticates with provided values", async function (this: Context) {
     // These tests should not run live because this credential requires user interaction.
     if (isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
     const credential = new DeviceCodeCredential(
       recorder.configureClientOptions({
@@ -62,10 +57,10 @@ describe("DeviceCodeCredential", function () {
     assert.ok(token?.expiresOnTimestamp! > Date.now());
   });
 
-  it("authenticates with specific permissions", async function (ctx) {
+  it("authenticates with specific permissions", async function (this: Context) {
     // These tests should not run live because this credential requires user interaction.
     if (isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
     const credential = new DeviceCodeCredential(
       recorder.configureClientOptions({
@@ -80,10 +75,10 @@ describe("DeviceCodeCredential", function () {
     assert.ok(token?.expiresOnTimestamp! > Date.now());
   });
 
-  it("authenticates and allows the customization of the prompt callback", async function (ctx) {
+  it("authenticates and allows the customization of the prompt callback", async function (this: Context) {
     // These tests should not run live because this credential requires user interaction.
     if (isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
     const callback: DeviceCodePromptCallback = (info) => {
       console.log("CUSTOMIZED PROMPT CALLBACK", info.message);
@@ -101,15 +96,15 @@ describe("DeviceCodeCredential", function () {
     assert.ok(token?.expiresOnTimestamp! > Date.now());
   });
 
-  it("allows cancelling the authentication", async function (ctx) {
+  it("allows cancelling the authentication", async function (this: Context) {
     // Because of the user interaction, this test works inconsistently in our live test pipelines.
     if (isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
 
     // On playback we can't quite control the time needed to trigger this error.
     if (isPlaybackMode()) {
-      ctx.skip();
+      this.skip();
     }
 
     const credential = new DeviceCodeCredential(
@@ -138,10 +133,10 @@ describe("DeviceCodeCredential", function () {
     assert.ok(error?.message.match("The authentication has been aborted by the caller."));
   });
 
-  it("allows setting disableAutomaticAuthentication", async function (ctx) {
+  it("allows setting disableAutomaticAuthentication", async function (this: Context) {
     // These tests should not run live because this credential requires user interaction.
     if (isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
     const credential = new DeviceCodeCredential(
       recorder.configureClientOptions({
@@ -164,19 +159,23 @@ describe("DeviceCodeCredential", function () {
     assert.ok(account);
   });
 
-  it("supports tracing", async function (ctx) {
+  it("supports tracing", async function (this: Context) {
     // These tests should not run live because this credential requires user interaction.
     if (isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
-    await expect(async (tracingOptions: any) => {
-      const credential = new DeviceCodeCredential(
-        recorder.configureClientOptions({
-          tenantId: env.AZURE_TENANT_ID,
-          clientId: env.AZURE_CLIENT_ID,
-        }),
-      );
-      await credential.getToken(scope, tracingOptions);
-    }).toSupportTracing(["DeviceCodeCredential.getToken"]);
+    await assert.supportsTracing(
+      async (tracingOptions) => {
+        const credential = new DeviceCodeCredential(
+          recorder.configureClientOptions({
+            tenantId: env.AZURE_TENANT_ID,
+            clientId: env.AZURE_CLIENT_ID,
+          }),
+        );
+
+        await credential.getToken(scope, tracingOptions);
+      },
+      ["DeviceCodeCredential.getToken"],
+    );
   });
 });

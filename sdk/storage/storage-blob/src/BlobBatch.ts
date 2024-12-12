@@ -2,24 +2,20 @@
 // Licensed under the MIT License.
 
 import { randomUUID } from "@azure/core-util";
-import type { TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type {
+import { TokenCredential, isTokenCredential } from "@azure/core-auth";
+import {
+  bearerTokenAuthenticationPolicy,
+  createEmptyPipeline,
+  createHttpHeaders,
   PipelinePolicy,
   PipelineRequest,
   PipelineResponse,
   SendRequest,
 } from "@azure/core-rest-pipeline";
-import {
-  bearerTokenAuthenticationPolicy,
-  createEmptyPipeline,
-  createHttpHeaders,
-} from "@azure/core-rest-pipeline";
 import { isNode } from "@azure/core-util";
 import { AnonymousCredential } from "./credentials/AnonymousCredential";
-import type { BlobDeleteOptions, BlobSetTierOptions } from "./Clients";
-import { BlobClient } from "./Clients";
-import type { AccessTier } from "./generatedModels";
+import { BlobClient, BlobDeleteOptions, BlobSetTierOptions } from "./Clients";
+import { AccessTier } from "./generatedModels";
 import { Mutex } from "./utils/Mutex";
 import { Pipeline } from "./Pipeline";
 import { getURLPath, getURLPathAndQuery, iEqual } from "./utils/utils.common";

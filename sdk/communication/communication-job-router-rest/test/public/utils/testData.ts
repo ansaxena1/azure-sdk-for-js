@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   ClassificationPolicy,
   ConditionalQueueSelectorAttachment,
   DistributionPolicy,
@@ -14,7 +14,7 @@ import type {
   RouterWorker,
   StaticQueueSelectorAttachment,
   RouterJob,
-} from "../../../src/index.js";
+} from "../../../src";
 
 const queueId = "test-a-queue";
 const exceptionPolicyId = "test-e-policy";

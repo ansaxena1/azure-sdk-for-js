@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { JsonWebKey } from "../generated/models/index.js";
-import { pemFromBase64 } from "../utils/helpers.js";
+import { JsonWebKey } from "../generated/models";
+import { pemFromBase64 } from "../utils/helpers";
 
 /**
  * An AttestationSigner represents a signing certificate chain/Key ID combination

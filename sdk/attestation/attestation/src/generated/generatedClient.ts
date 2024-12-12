@@ -18,15 +18,15 @@ import {
   AttestationImpl,
   SigningCertificatesImpl,
   MetadataConfigurationImpl
-} from "./operations/index.js";
+} from "./operations";
 import {
   Policy,
   PolicyCertificates,
   Attestation,
   SigningCertificates,
   MetadataConfiguration
-} from "./operationsInterfaces/index.js";
-import { GeneratedClientOptionalParams } from "./models/index.js";
+} from "./operationsInterfaces";
+import { GeneratedClientOptionalParams } from "./models";
 
 export class GeneratedClient extends coreClient.ServiceClient {
   instanceUrl: string;

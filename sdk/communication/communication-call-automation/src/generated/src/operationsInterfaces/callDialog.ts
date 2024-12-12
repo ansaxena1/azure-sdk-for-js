@@ -13,7 +13,7 @@ import {
   CallDialogStopDialogOptionalParams,
   UpdateDialogRequest,
   CallDialogUpdateDialogOptionalParams,
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a CallDialog. */
 export interface CallDialog {
@@ -31,8 +31,9 @@ export interface CallDialog {
     options?: CallDialogStartDialogOptionalParams,
   ): Promise<CallDialogStartDialogResponse>;
   /**
-   * @param callConnectionId
-   * @param dialogId
+   * Stop a dialog.
+   * @param callConnectionId The call connection id
+   * @param dialogId The dialog id
    * @param options The options parameters.
    */
   stopDialog(

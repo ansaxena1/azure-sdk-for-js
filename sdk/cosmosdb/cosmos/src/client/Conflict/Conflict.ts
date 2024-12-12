@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ClientContext } from "../../ClientContext";
+import { ClientContext } from "../../ClientContext";
 import { Constants, getIdFromLink, getPathFromLink, ResourceType } from "../../common";
-import type { RequestOptions } from "../../request";
-import type { Container } from "../Container";
-import type { ConflictDefinition } from "./ConflictDefinition";
+import { RequestOptions } from "../../request";
+import { Container } from "../Container";
+import { ConflictDefinition } from "./ConflictDefinition";
 import { ConflictResponse } from "./ConflictResponse";
 import { undefinedPartitionKey } from "../../extractPartitionKey";
-import type { PartitionKey } from "../../documents";
-import type { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
+import { PartitionKey } from "../../documents";
+import { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
 import { readPartitionKeyDefinition } from "../ClientUtils";
 import { getEmptyCosmosDiagnostics, withDiagnostics } from "../../utils/diagnostics";
 

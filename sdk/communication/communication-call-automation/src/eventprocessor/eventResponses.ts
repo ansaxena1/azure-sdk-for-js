@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AddParticipantSucceeded,
   AddParticipantFailed,
   CallConnected,
@@ -21,7 +21,7 @@ import type {
   CancelAddParticipantFailed,
   CreateCallFailed,
   AnswerFailed,
-} from "../models/events.js";
+} from "../models/events";
 
 /**
  * AddParticipant event result

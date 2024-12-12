@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 import Constants from "./Constants";
-import type { CompositeIndexUtilizationEntity } from "./CompositeIndexUtilizationEntity";
-import type { IndexUtilizationInfo } from "./IndexUtilizationInfo";
-import type { SingleIndexUtilizationEntity } from "./SingleIndexUtilizationEntity";
+import { CompositeIndexUtilizationEntity } from "./CompositeIndexUtilizationEntity";
+import { IndexUtilizationInfo } from "./IndexUtilizationInfo";
+import { SingleIndexUtilizationEntity } from "./SingleIndexUtilizationEntity";
 
 export class IndexMetricWriter {
   public writeIndexMetrics(indexUtilizationInfo: IndexUtilizationInfo): string {

@@ -2,23 +2,25 @@
 // Licensed under the MIT License.
 
 import Long from "long";
-import type {
+import {
   ServiceBusReceivedMessage,
+  delay,
   ProcessErrorArgs,
+  isServiceBusError,
   ServiceBusError,
 } from "../../src/index.js";
-import { delay, isServiceBusError } from "../../src/index.js";
 
 import { TestClientType, TestMessage, checkWithTimeout } from "./utils/testUtils.js";
-import type { ServiceBusSender } from "../../src/index.js";
-import type { ServiceBusSessionReceiver } from "../../src/index.js";
-import type { EntityName, ServiceBusClientForTests } from "./utils/testutils2.js";
+import { ServiceBusSender } from "../../src/index.js";
+import { ServiceBusSessionReceiver } from "../../src/index.js";
 import {
+  EntityName,
+  ServiceBusClientForTests,
   createServiceBusClientForTests,
   testPeekMsgsLength,
   getRandomTestClientTypeWithSessions,
 } from "./utils/testutils2.js";
-import type { ServiceBusSessionReceiverImpl } from "../../src/receivers/sessionReceiver.js";
+import { ServiceBusSessionReceiverImpl } from "../../src/receivers/sessionReceiver.js";
 import { describe, it, afterEach, afterAll, vi } from "vitest";
 import { expect, should } from "./utils/chai.js";
 

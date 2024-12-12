@@ -1,8 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { RegionalAuthority, calculateRegionalAuthority } from "../../../src/regionalAuthority.js";
-import { describe, it, assert, afterEach, beforeEach } from "vitest";
+import { RegionalAuthority, calculateRegionalAuthority } from "../../../src/regionalAuthority";
+
+import { assert } from "chai";
 
 describe("#calculateRegionalAuthority", function () {
   beforeEach(function () {

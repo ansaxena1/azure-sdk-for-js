@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AuthMethod } from "./utils/recordedClient";
-import { createClient, startRecorder } from "./utils/recordedClient";
-import type { Context, Suite } from "mocha";
+import { AuthMethod, createClient, startRecorder } from "./utils/recordedClient";
+import { Context, Suite } from "mocha";
 import { assert, matrix } from "@azure-tools/test-utils";
-import type { ConversationAnalysisClient } from "../../src";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
+import { ConversationAnalysisClient } from "../../src";
+import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 
 matrix([["APIKey"]] as const, async (authMethod: AuthMethod) => {
   describe(`[${authMethod}] ConversationAnalysisClient`, function (this: Suite) {

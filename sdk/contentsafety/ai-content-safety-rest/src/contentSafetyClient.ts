@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
+import { getClient, ClientOptions } from "@azure-rest/core-client";
 import { logger } from "./logger";
-import type { TokenCredential, KeyCredential } from "@azure/core-auth";
-import type { ContentSafetyClient } from "./clientDefinitions";
+import { TokenCredential, KeyCredential } from "@azure/core-auth";
+import { ContentSafetyClient } from "./clientDefinitions";
 
 /**
  * Initialize a new instance of `ContentSafetyClient`

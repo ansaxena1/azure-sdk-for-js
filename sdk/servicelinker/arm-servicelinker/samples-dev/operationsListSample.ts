@@ -18,7 +18,7 @@ dotenv.config();
  * This sample demonstrates how to Lists the available ServiceLinker REST API operations.
  *
  * @summary Lists the available ServiceLinker REST API operations.
- * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/examples/OperationsList.json
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/OperationsList.json
  */
 async function getConfiguration() {
   const credential = new DefaultAzureCredential();

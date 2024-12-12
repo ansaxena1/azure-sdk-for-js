@@ -1,14 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { StoragePipelineOptions } from "../../src";
-import { AnonymousCredential } from "../../src";
+import { AnonymousCredential, StoragePipelineOptions } from "../../src";
 import { BlobServiceClient } from "../../src";
 import { newPipeline } from "../../src";
 import { SimpleTokenCredential, configureBlobStorageClient } from "./testutils.common";
-import type { TokenCredential } from "@azure/core-auth";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { TokenCredential } from "@azure/core-auth";
+import { env, Recorder } from "@azure-tools/test-recorder";
 
 export * from "./testutils.common";
 

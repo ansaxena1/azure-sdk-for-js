@@ -1,24 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions } from "@azure/core-auth";
-import type { MSIConfiguration } from "./models.js";
-import { WorkloadIdentityCredential } from "../workloadIdentityCredential.js";
-import { credentialLogger } from "../../util/logging.js";
-import type { WorkloadIdentityCredentialOptions } from "../workloadIdentityCredentialOptions.js";
+import { AccessToken, GetTokenOptions } from "@azure/core-auth";
+import { MSI, MSIConfiguration } from "./models";
+import { WorkloadIdentityCredential } from "../workloadIdentityCredential";
+import { credentialLogger } from "../../util/logging";
+import { WorkloadIdentityCredentialOptions } from "../workloadIdentityCredentialOptions";
 
 const msiName = "ManagedIdentityCredential - Token Exchange";
 const logger = credentialLogger(msiName);
 
 /**
  * Defines how to determine whether the token exchange MSI is available, and also how to retrieve a token from the token exchange MSI.
- *
- * Token exchange MSI (used by AKS) is the only MSI implementation handled entirely by Azure Identity.
- * The rest have been migrated to MSAL.
  */
-export const tokenExchangeMsi = {
+export const tokenExchangeMsi: MSI = {
   name: "tokenExchangeMsi",
-  async isAvailable(clientId?: string): Promise<boolean> {
+  async isAvailable({ clientId }): Promise<boolean> {
     const env = process.env;
     const result = Boolean(
       (clientId || env.AZURE_CLIENT_ID) &&

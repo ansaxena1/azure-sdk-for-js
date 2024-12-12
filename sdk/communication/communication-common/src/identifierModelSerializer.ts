@@ -2,11 +2,11 @@
 // Licensed under the MIT License.
 
 import {
-  type CommunicationIdentifier,
-  type CommunicationIdentifierKind,
+  CommunicationIdentifier,
+  CommunicationIdentifierKind,
   getIdentifierKind,
   getIdentifierRawId,
-} from "./identifierModels.js";
+} from "./identifierModels";
 
 /**
  * @hidden

@@ -16,7 +16,7 @@ require("dotenv").config();
  * This sample demonstrates how to Create or Update a Cloud HSM Cluster in the specified subscription.
  *
  * @summary Create or Update a Cloud HSM Cluster in the specified subscription.
- * x-ms-original-file: specification/hardwaresecuritymodules/resource-manager/Microsoft.HardwareSecurityModules/preview/2024-06-30-preview/examples/CloudHsmCluster_CreateOrUpdate_MaximumSet_Gen.json
+ * x-ms-original-file: specification/hardwaresecuritymodules/resource-manager/Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/examples/CloudHsmCluster_CreateOrUpdate_MaximumSet_Gen.json
  */
 async function cloudHsmClusterCreateOrUpdateMaximumSetGen() {
   const subscriptionId =
@@ -26,6 +26,7 @@ async function cloudHsmClusterCreateOrUpdateMaximumSetGen() {
   const cloudHsmClusterName = "chsm1";
   const tags = { dept: "hsm", environment: "dogfood" };
   const location = "eastus2";
+  const sku = { name: "Standard_B1", family: "B" };
   const identity = {
     type: "UserAssigned",
     userAssignedIdentities: {
@@ -33,11 +34,10 @@ async function cloudHsmClusterCreateOrUpdateMaximumSetGen() {
         {},
     },
   };
-  const sku = { name: "Standard_B1", family: "B" };
   const options = {
     tags,
-    identity,
     sku,
+    identity,
   };
   const credential = new DefaultAzureCredential();
   const client = new AzureHSMResourceProvider(credential, subscriptionId);

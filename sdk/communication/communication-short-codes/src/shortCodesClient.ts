@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 /// <reference lib="esnext.asynciterable" />
 
-import type {
+import {
   AttachmentType,
   DeleteUSProgramBriefOptions,
   FileType,
@@ -15,24 +15,23 @@ import type {
   ShortCodesGetUSProgramBriefAttachmentOptionalParams,
   ShortCodesGetUSProgramBriefAttachmentsOptionalParams,
   SubmitUSProgramBriefOptions,
-} from "./models.js";
-import type { CommonClientOptions, InternalClientPipelineOptions } from "@azure/core-client";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type {
+} from "./models";
+import { CommonClientOptions, InternalClientPipelineOptions } from "@azure/core-client";
+import { KeyCredential, TokenCredential, isTokenCredential } from "@azure/core-auth";
+import {
   ProgramBriefAttachment,
   ShortCode,
   ShortCodeCost,
   ShortCodesUpsertUSProgramBriefOptionalParams,
   USProgramBrief,
-} from "./generated/src/models/index.js";
+} from "./generated/src/models/";
 import { isKeyCredential, parseClientArguments } from "@azure/communication-common";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
-import { ShortCodesClient as ShortCodesGeneratedClient } from "./generated/src/index.js";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { ShortCodesClient as ShortCodesGeneratedClient } from "./generated/src";
 import { createCommunicationAuthPolicy } from "@azure/communication-common";
-import { logger } from "./utils/index.js";
-import { tracingClient } from "./generated/src/tracing.js";
-import { createShortCodesPagingPolicy } from "./utils/customPipelinePolicies.js";
+import { logger } from "./utils";
+import { tracingClient } from "./generated/src/tracing";
+import { createShortCodesPagingPolicy } from "./utils/customPipelinePolicies";
 
 /**
  * Client options used to configure the ShortCodesClient API requests.

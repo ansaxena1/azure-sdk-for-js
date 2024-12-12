@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import assert from "assert";
-import type { ExecutionContext } from "../../../../src/queryExecutionContext";
+import { ExecutionContext } from "../../../../src/queryExecutionContext";
 import { NonStreamingOrderByDistinctEndpointComponent } from "../../../../src/queryExecutionContext/EndpointComponent/NonStreamingOrderByDistinctEndpointComponent";
-import type { QueryInfo } from "../../../../src/request/ErrorResponse";
+import { QueryInfo } from "../../../../src/request/ErrorResponse";
 
 describe("NonStreamingOrderByDistinctEndpointComponent", () => {
   it("should initialize correctly with sort orders and priority queue buffer size", () => {

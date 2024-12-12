@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Paged } from "@azure/core-paging";
+import { Paged } from "@azure/core-paging";
 
 /** The items in the current page of results. */
 export interface AssetResourceOutputParent {

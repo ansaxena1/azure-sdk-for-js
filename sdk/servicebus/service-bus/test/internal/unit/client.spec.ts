@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { TokenCredential } from "../../../src/index.js";
-import { ServiceBusClient } from "../../../src/index.js";
+import { ServiceBusClient, TokenCredential } from "../../../src/index.js";
 import { describe, it } from "vitest";
 import { expect } from "../../public/utils/chai.js";
 

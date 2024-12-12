@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   HttpClient,
   HttpMethods,
   PipelineOptions,
@@ -10,8 +10,8 @@ import type {
   PipelineResponse,
   TransferProgressEvent,
 } from "@azure/core-rest-pipeline";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { OperationTracingOptions } from "@azure/core-tracing";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { OperationTracingOptions } from "@azure/core-tracing";
 
 /**
  * Default key used to access the XML attributes.

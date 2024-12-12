@@ -1,18 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   ServiceBusReceivedMessage,
   ServiceBusReceiver,
   ServiceBusMessage,
+  delay,
   ProcessErrorArgs,
   ServiceBusSender,
 } from "../../src/index.js";
-import { delay } from "../../src/index.js";
 import { TestClientType } from "../public/utils/testUtils.js";
 import { getEntityNameFromConnectionString } from "../../src/constructorHelpers.js";
-import type { ServiceBusClientForTests } from "../public/utils/testutils2.js";
-import { createServiceBusClientForTests } from "../public/utils/testutils2.js";
+import {
+  ServiceBusClientForTests,
+  createServiceBusClientForTests,
+} from "../public/utils/testutils2.js";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from "vitest";
 import { assert } from "../public/utils/chai.js";
 

@@ -3,7 +3,8 @@
 
 import { positionToTileXY } from "@azure-rest/maps-render";
 import { DefaultAzureCredential } from "@azure/identity";
-import MapsRender, { isUnexpected } from "@azure-rest/maps-render";
+import { isUnexpected } from "../src/generated";
+import MapsRender from "../src/mapsRender";
 
 /**
  * @summary How to get the copyright of a certain tile.

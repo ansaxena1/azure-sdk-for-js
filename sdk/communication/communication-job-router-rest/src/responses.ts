@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { RawHttpHeaders } from "@azure/core-rest-pipeline";
-import type { HttpResponse, ErrorResponse } from "@azure-rest/core-client";
-import type {
+import { RawHttpHeaders } from "@azure/core-rest-pipeline";
+import { HttpResponse, ErrorResponse } from "@azure-rest/core-client";
+import {
   ClassificationPolicyOutput,
   PagedClassificationPolicyOutput,
   DistributionPolicyOutput,
@@ -25,7 +25,7 @@ import type {
   RouterQueueStatisticsOutput,
   RouterWorkerOutput,
   PagedRouterWorkerOutput,
-} from "./outputModels.js";
+} from "./outputModels";
 
 export interface UpsertClassificationPolicy200Headers {
   /** The entity tag for the response. */

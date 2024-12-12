@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   EventData,
   EventHubBufferedProducerClient,
   OnSendEventsErrorContext,
   OnSendEventsSuccessContext,
 } from "../../src/index.js";
-import type { AmqpAnnotatedMessage } from "@azure/core-amqp";
+import { AmqpAnnotatedMessage } from "@azure/core-amqp";
 import { assert } from "../utils/chai.js";
 import { createBufferedProducer } from "../utils/clients.js";
 import { describe, it, afterEach } from "vitest";

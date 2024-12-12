@@ -22,4 +22,3 @@ export * from "./UserDefinedFunctionType";
 export * from "./GeospatialType";
 export * from "./ComputedProperty";
 export * from "./VectorEmbeddingPolicy";
-export * from "./FullTextPolicy";

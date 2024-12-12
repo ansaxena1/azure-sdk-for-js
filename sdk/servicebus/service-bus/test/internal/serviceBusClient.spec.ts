@@ -5,29 +5,30 @@ import { createTestCredential } from "@azure-tools/test-credential";
 import { Constants as CoreAmqpConstants } from "@azure/core-amqp";
 import { isObjectWithProperties } from "@azure/core-util";
 import Long from "long";
-import type {
+import {
+  isServiceBusError,
   ProcessErrorArgs,
+  ServiceBusClient,
   ServiceBusError,
   ServiceBusSessionReceiver,
   ServiceBusSender,
   ServiceBusReceiverOptions,
 } from "../../src/index.js";
-import { isServiceBusError, ServiceBusClient } from "../../src/index.js";
-import type { ServiceBusReceivedMessage } from "../../src/serviceBusMessage.js";
-import { DispositionType } from "../../src/serviceBusMessage.js";
+import { DispositionType, ServiceBusReceivedMessage } from "../../src/serviceBusMessage.js";
 import { getReceiverClosedErrorMsg, getSenderClosedErrorMsg } from "../../src/util/errors.js";
 import { getEnvVars } from "../public/utils/envVarUtils.js";
 import { isNode } from "@azure/core-util";
 import { checkWithTimeout, TestClientType, TestMessage } from "../public/utils/testUtils.js";
-import type { EntityName, ServiceBusClientForTests } from "../public/utils/testutils2.js";
 import {
   createServiceBusClientForTests,
+  EntityName,
+  ServiceBusClientForTests,
   testPeekMsgsLength,
   getRandomTestClientTypeWithSessions,
   getRandomTestClientTypeWithNoSessions,
   getFullyQualifiedNamespace,
 } from "../public/utils/testutils2.js";
-import type { ServiceBusReceiver, ServiceBusReceiverImpl } from "../../src/receivers/receiver.js";
+import { ServiceBusReceiver, ServiceBusReceiverImpl } from "../../src/receivers/receiver.js";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from "vitest";
 import { should } from "../public/utils/chai.js";
 

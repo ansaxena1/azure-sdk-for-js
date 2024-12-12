@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ChatParticipant } from "./models.js";
+import { ChatParticipant } from "./models";
 
-export { SendReadReceiptRequest } from "../generated/src/models/index.js";
+export { SendReadReceiptRequest } from "../generated/src/models";
 
 /** Participants to be added to the thread. */
 export interface AddParticipantsRequest {

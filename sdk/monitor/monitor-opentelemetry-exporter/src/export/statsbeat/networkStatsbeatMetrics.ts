@@ -1,26 +1,31 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
+  diag,
   BatchObservableResult,
   Meter,
   ObservableGauge,
   ObservableResult,
 } from "@opentelemetry/api";
-import { diag } from "@opentelemetry/api";
-import type { PeriodicExportingMetricReaderOptions } from "@opentelemetry/sdk-metrics";
-import { MeterProvider, PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
-import type { AzureMonitorExporterOptions } from "../../index.js";
-import * as ai from "../../utils/constants/applicationinsights.js";
-import { StatsbeatMetrics } from "./statsbeatMetrics.js";
-import type {
+import {
+  MeterProvider,
+  PeriodicExportingMetricReader,
+  PeriodicExportingMetricReaderOptions,
+} from "@opentelemetry/sdk-metrics";
+import { AzureMonitorExporterOptions } from "../../index";
+import * as ai from "../../utils/constants/applicationinsights";
+import { StatsbeatMetrics } from "./statsbeatMetrics";
+import {
+  StatsbeatCounter,
+  STATSBEAT_LANGUAGE,
+  NetworkStatsbeat,
   CommonStatsbeatProperties,
   NetworkStatsbeatProperties,
   StatsbeatOptions,
-} from "./types.js";
-import { StatsbeatCounter, STATSBEAT_LANGUAGE, NetworkStatsbeat } from "./types.js";
-import { AzureMonitorStatsbeatExporter } from "./statsbeatExporter.js";
-import { ENV_DISABLE_STATSBEAT } from "../../Declarations/Constants.js";
+} from "./types";
+import { AzureMonitorStatsbeatExporter } from "./statsbeatExporter";
+import { ENV_DISABLE_STATSBEAT } from "../../Declarations/Constants";
 
 export class NetworkStatsbeatMetrics extends StatsbeatMetrics {
   private disableNonEssentialStatsbeat: boolean = !!process.env[ENV_DISABLE_STATSBEAT];

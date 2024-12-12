@@ -14,10 +14,9 @@
  *    to read from corresponding event hubs
  */
 
-import type { AvroSerializer, MessageAdapter } from "../../src/index.js";
-import type { EventData } from "@azure/event-hubs";
-import { createEventDataAdapter } from "@azure/event-hubs";
-import type { MessagingTestClient } from "./clients/models.js";
+import { AvroSerializer, MessageAdapter } from "../../src/index.js";
+import { EventData, createEventDataAdapter } from "@azure/event-hubs";
+import { MessagingTestClient } from "./clients/models.js";
 import { assertError } from "./utils/assertError.js";
 import { createEventHubsClient } from "./clients/eventHubs.js";
 import { createMockedMessagingClient } from "./clients/mocked.js";
@@ -26,8 +25,7 @@ import { matrix } from "@azure-tools/test-utils-vitest";
 import { testGroup } from "./utils/dummies.js";
 import { Recorder, env } from "@azure-tools/test-recorder";
 import { createPipelineWithCredential, removeSchemas } from "./utils/mockedRegistryClient.js";
-import type { HttpClient, Pipeline } from "@azure/core-rest-pipeline";
-import { createDefaultHttpClient } from "@azure/core-rest-pipeline";
+import { HttpClient, Pipeline, createDefaultHttpClient } from "@azure/core-rest-pipeline";
 import { describe, it, assert, beforeEach, afterEach } from "vitest";
 
 /**

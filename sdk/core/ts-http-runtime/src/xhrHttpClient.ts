@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { AbortError } from "./abort-controller/AbortError.js";
-import type {
+import {
   HttpClient,
   HttpHeaders,
   PipelineRequest,

@@ -40,7 +40,7 @@ import {
   JobRouterAdministrationGetQueueOptionalParams,
   JobRouterAdministrationGetQueueResponse,
   JobRouterAdministrationDeleteQueueOptionalParams
-} from "../models/index.js";
+} from "../models";
 
 /// <reference lib="esnext.asynciterable" />
 /** Interface representing a JobRouterAdministration. */

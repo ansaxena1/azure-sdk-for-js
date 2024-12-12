@@ -3,7 +3,7 @@
 
 import * as fs from "fs";
 import { promisify } from "util";
-import type { SynonymMap } from "./serviceModels";
+import { SynonymMap } from "./serviceModels";
 const readFileAsync = promisify(fs.readFile);
 
 /**

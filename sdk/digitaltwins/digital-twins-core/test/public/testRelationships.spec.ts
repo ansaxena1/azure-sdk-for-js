@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { DigitalTwinsClient, DigitalTwinsAddRelationshipOptionalParams } from "../../src";
+import { DigitalTwinsClient, DigitalTwinsAddRelationshipOptionalParams } from "../../src";
 import { authenticate } from "../utils/testAuthentication";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Recorder } from "@azure-tools/test-recorder";
 import chai from "chai";
 import { isRestError } from "@azure/core-rest-pipeline";
 

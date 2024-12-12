@@ -16,7 +16,7 @@ import { AppConfigurationManagementClient } from "../appConfigurationManagementC
 import {
   SimplePollerLike,
   OperationState,
-  createHttpPoller,
+  createHttpPoller
 } from "@azure/core-lro";
 import { createLroSpec } from "../lroImpl";
 import {
@@ -29,14 +29,13 @@ import {
   PrivateEndpointConnectionsCreateOrUpdateOptionalParams,
   PrivateEndpointConnectionsCreateOrUpdateResponse,
   PrivateEndpointConnectionsDeleteOptionalParams,
-  PrivateEndpointConnectionsListByConfigurationStoreNextResponse,
+  PrivateEndpointConnectionsListByConfigurationStoreNextResponse
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
 /** Class containing PrivateEndpointConnections operations. */
 export class PrivateEndpointConnectionsImpl
-  implements PrivateEndpointConnections
-{
+  implements PrivateEndpointConnections {
   private readonly client: AppConfigurationManagementClient;
 
   /**
@@ -56,12 +55,12 @@ export class PrivateEndpointConnectionsImpl
   public listByConfigurationStore(
     resourceGroupName: string,
     configStoreName: string,
-    options?: PrivateEndpointConnectionsListByConfigurationStoreOptionalParams,
+    options?: PrivateEndpointConnectionsListByConfigurationStoreOptionalParams
   ): PagedAsyncIterableIterator<PrivateEndpointConnection> {
     const iter = this.listByConfigurationStorePagingAll(
       resourceGroupName,
       configStoreName,
-      options,
+      options
     );
     return {
       next() {
@@ -78,9 +77,9 @@ export class PrivateEndpointConnectionsImpl
           resourceGroupName,
           configStoreName,
           options,
-          settings,
+          settings
         );
-      },
+      }
     };
   }
 
@@ -88,7 +87,7 @@ export class PrivateEndpointConnectionsImpl
     resourceGroupName: string,
     configStoreName: string,
     options?: PrivateEndpointConnectionsListByConfigurationStoreOptionalParams,
-    settings?: PageSettings,
+    settings?: PageSettings
   ): AsyncIterableIterator<PrivateEndpointConnection[]> {
     let result: PrivateEndpointConnectionsListByConfigurationStoreResponse;
     let continuationToken = settings?.continuationToken;
@@ -96,7 +95,7 @@ export class PrivateEndpointConnectionsImpl
       result = await this._listByConfigurationStore(
         resourceGroupName,
         configStoreName,
-        options,
+        options
       );
       let page = result.value || [];
       continuationToken = result.nextLink;
@@ -108,7 +107,7 @@ export class PrivateEndpointConnectionsImpl
         resourceGroupName,
         configStoreName,
         continuationToken,
-        options,
+        options
       );
       continuationToken = result.nextLink;
       let page = result.value || [];
@@ -120,12 +119,12 @@ export class PrivateEndpointConnectionsImpl
   private async *listByConfigurationStorePagingAll(
     resourceGroupName: string,
     configStoreName: string,
-    options?: PrivateEndpointConnectionsListByConfigurationStoreOptionalParams,
+    options?: PrivateEndpointConnectionsListByConfigurationStoreOptionalParams
   ): AsyncIterableIterator<PrivateEndpointConnection> {
     for await (const page of this.listByConfigurationStorePagingPage(
       resourceGroupName,
       configStoreName,
-      options,
+      options
     )) {
       yield* page;
     }
@@ -140,11 +139,11 @@ export class PrivateEndpointConnectionsImpl
   private _listByConfigurationStore(
     resourceGroupName: string,
     configStoreName: string,
-    options?: PrivateEndpointConnectionsListByConfigurationStoreOptionalParams,
+    options?: PrivateEndpointConnectionsListByConfigurationStoreOptionalParams
   ): Promise<PrivateEndpointConnectionsListByConfigurationStoreResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, configStoreName, options },
-      listByConfigurationStoreOperationSpec,
+      listByConfigurationStoreOperationSpec
     );
   }
 
@@ -159,16 +158,16 @@ export class PrivateEndpointConnectionsImpl
     resourceGroupName: string,
     configStoreName: string,
     privateEndpointConnectionName: string,
-    options?: PrivateEndpointConnectionsGetOptionalParams,
+    options?: PrivateEndpointConnectionsGetOptionalParams
   ): Promise<PrivateEndpointConnectionsGetResponse> {
     return this.client.sendOperationRequest(
       {
         resourceGroupName,
         configStoreName,
         privateEndpointConnectionName,
-        options,
+        options
       },
-      getOperationSpec,
+      getOperationSpec
     );
   }
 
@@ -187,7 +186,7 @@ export class PrivateEndpointConnectionsImpl
     configStoreName: string,
     privateEndpointConnectionName: string,
     privateEndpointConnection: PrivateEndpointConnection,
-    options?: PrivateEndpointConnectionsCreateOrUpdateOptionalParams,
+    options?: PrivateEndpointConnectionsCreateOrUpdateOptionalParams
   ): Promise<
     SimplePollerLike<
       OperationState<PrivateEndpointConnectionsCreateOrUpdateResponse>,
@@ -196,20 +195,21 @@ export class PrivateEndpointConnectionsImpl
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<PrivateEndpointConnectionsCreateOrUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -218,8 +218,8 @@ export class PrivateEndpointConnectionsImpl
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -227,8 +227,8 @@ export class PrivateEndpointConnectionsImpl
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
@@ -239,16 +239,16 @@ export class PrivateEndpointConnectionsImpl
         configStoreName,
         privateEndpointConnectionName,
         privateEndpointConnection,
-        options,
+        options
       },
-      spec: createOrUpdateOperationSpec,
+      spec: createOrUpdateOperationSpec
     });
     const poller = await createHttpPoller<
       PrivateEndpointConnectionsCreateOrUpdateResponse,
       OperationState<PrivateEndpointConnectionsCreateOrUpdateResponse>
     >(lro, {
       restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
+      intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
     return poller;
@@ -269,14 +269,14 @@ export class PrivateEndpointConnectionsImpl
     configStoreName: string,
     privateEndpointConnectionName: string,
     privateEndpointConnection: PrivateEndpointConnection,
-    options?: PrivateEndpointConnectionsCreateOrUpdateOptionalParams,
+    options?: PrivateEndpointConnectionsCreateOrUpdateOptionalParams
   ): Promise<PrivateEndpointConnectionsCreateOrUpdateResponse> {
     const poller = await this.beginCreateOrUpdate(
       resourceGroupName,
       configStoreName,
       privateEndpointConnectionName,
       privateEndpointConnection,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -292,24 +292,25 @@ export class PrivateEndpointConnectionsImpl
     resourceGroupName: string,
     configStoreName: string,
     privateEndpointConnectionName: string,
-    options?: PrivateEndpointConnectionsDeleteOptionalParams,
+    options?: PrivateEndpointConnectionsDeleteOptionalParams
   ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -318,8 +319,8 @@ export class PrivateEndpointConnectionsImpl
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -327,8 +328,8 @@ export class PrivateEndpointConnectionsImpl
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
@@ -338,13 +339,13 @@ export class PrivateEndpointConnectionsImpl
         resourceGroupName,
         configStoreName,
         privateEndpointConnectionName,
-        options,
+        options
       },
-      spec: deleteOperationSpec,
+      spec: deleteOperationSpec
     });
     const poller = await createHttpPoller<void, OperationState<void>>(lro, {
       restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
+      intervalInMs: options?.updateIntervalInMs
     });
     await poller.poll();
     return poller;
@@ -361,13 +362,13 @@ export class PrivateEndpointConnectionsImpl
     resourceGroupName: string,
     configStoreName: string,
     privateEndpointConnectionName: string,
-    options?: PrivateEndpointConnectionsDeleteOptionalParams,
+    options?: PrivateEndpointConnectionsDeleteOptionalParams
   ): Promise<void> {
     const poller = await this.beginDelete(
       resourceGroupName,
       configStoreName,
       privateEndpointConnectionName,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -384,11 +385,11 @@ export class PrivateEndpointConnectionsImpl
     resourceGroupName: string,
     configStoreName: string,
     nextLink: string,
-    options?: PrivateEndpointConnectionsListByConfigurationStoreNextOptionalParams,
+    options?: PrivateEndpointConnectionsListByConfigurationStoreNextOptionalParams
   ): Promise<PrivateEndpointConnectionsListByConfigurationStoreNextResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, configStoreName, nextLink, options },
-      listByConfigurationStoreNextOperationSpec,
+      listByConfigurationStoreNextOperationSpec
     );
   }
 }
@@ -396,36 +397,38 @@ export class PrivateEndpointConnectionsImpl
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const listByConfigurationStoreOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.PrivateEndpointConnectionListResult,
+      bodyMapper: Mappers.PrivateEndpointConnectionListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.ErrorResponse
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.configStoreName,
+    Parameters.configStoreName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const getOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections/{privateEndpointConnectionName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections/{privateEndpointConnectionName}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.PrivateEndpointConnection,
+      bodyMapper: Mappers.PrivateEndpointConnection
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.ErrorResponse
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
@@ -433,30 +436,31 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.configStoreName,
-    Parameters.privateEndpointConnectionName,
+    Parameters.privateEndpointConnectionName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections/{privateEndpointConnectionName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections/{privateEndpointConnectionName}",
   httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.PrivateEndpointConnection,
+      bodyMapper: Mappers.PrivateEndpointConnection
     },
     201: {
-      bodyMapper: Mappers.PrivateEndpointConnection,
+      bodyMapper: Mappers.PrivateEndpointConnection
     },
     202: {
-      bodyMapper: Mappers.PrivateEndpointConnection,
+      bodyMapper: Mappers.PrivateEndpointConnection
     },
     204: {
-      bodyMapper: Mappers.PrivateEndpointConnection,
+      bodyMapper: Mappers.PrivateEndpointConnection
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.ErrorResponse
+    }
   },
   requestBody: Parameters.privateEndpointConnection,
   queryParameters: [Parameters.apiVersion],
@@ -465,14 +469,15 @@ const createOrUpdateOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.configStoreName,
-    Parameters.privateEndpointConnectionName,
+    Parameters.privateEndpointConnectionName
   ],
   headerParameters: [Parameters.accept, Parameters.contentType],
   mediaType: "json",
-  serializer,
+  serializer
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections/{privateEndpointConnectionName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/privateEndpointConnections/{privateEndpointConnectionName}",
   httpMethod: "DELETE",
   responses: {
     200: {},
@@ -480,8 +485,8 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     202: {},
     204: {},
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.ErrorResponse
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
@@ -489,29 +494,29 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.configStoreName,
-    Parameters.privateEndpointConnectionName,
+    Parameters.privateEndpointConnectionName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const listByConfigurationStoreNextOperationSpec: coreClient.OperationSpec = {
   path: "{nextLink}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.PrivateEndpointConnectionListResult,
+      bodyMapper: Mappers.PrivateEndpointConnectionListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.ErrorResponse
+    }
   },
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.configStoreName,
-    Parameters.nextLink,
+    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };

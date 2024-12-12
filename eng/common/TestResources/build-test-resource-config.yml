@@ -1,7 +1,7 @@
 parameters:
   - name: SubscriptionConfiguration
     type: string
-    default: '{}'
+    default: $(sub-config-azure-cloud-test-resources)
   - name: SubscriptionConfigurations
     type: object
     default: null

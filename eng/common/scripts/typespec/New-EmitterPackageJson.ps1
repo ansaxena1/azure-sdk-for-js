@@ -1,4 +1,3 @@
-#Requires -Version 7.0
 [CmdletBinding()]
 param (
     [parameter(Mandatory = $true)]
@@ -36,12 +35,9 @@ if ($OverridesPath) {
 
 $devDependencies = [ordered]@{}
 
-$possiblyPinnedPackages = $packageJson['azure-sdk/emitter-package-json-pinning'] ?? $packageJson.peerDependencies.Keys;
-
-foreach ($package in $possiblyPinnedPackages | Sort-Object) {
+foreach ($package in $packageJson.peerDependencies.Keys | Sort-Object) {
     $pinnedVersion = $packageJson.devDependencies[$package]
     if ($pinnedVersion -and -not $overrides[$package]) {
-        #We have a dev pinned version that isn't overridden by the overrides.json file
         Write-Host "Pinning $package to $pinnedVersion"
         $devDependencies[$package] = $pinnedVersion
     }

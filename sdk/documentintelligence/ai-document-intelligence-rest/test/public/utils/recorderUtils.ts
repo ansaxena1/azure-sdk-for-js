@@ -1,8 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { RecorderStartOptions, TestInfo } from "@azure-tools/test-recorder";
-import { Recorder, env, isPlaybackMode } from "@azure-tools/test-recorder";
+import {
+  Recorder,
+  RecorderStartOptions,
+  TestInfo,
+  env,
+  isPlaybackMode,
+} from "@azure-tools/test-recorder";
 
 const envSetupForPlayback: { [k: string]: string } = {
   AZURE_CLIENT_ID: "azure_client_id",

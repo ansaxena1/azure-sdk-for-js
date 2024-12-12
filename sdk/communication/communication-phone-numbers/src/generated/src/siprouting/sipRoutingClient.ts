@@ -6,10 +6,10 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { SipRoutingImpl } from "./operations/index.js";
-import { SipRouting } from "./operationsInterfaces/index.js";
-import { SipRoutingClientContext } from "./sipRoutingClientContext.js";
-import { SipRoutingClientOptionalParams } from "./models/index.js";
+import { SipRoutingImpl } from "./operations";
+import { SipRouting } from "./operationsInterfaces";
+import { SipRoutingClientContext } from "./sipRoutingClientContext";
+import { SipRoutingClientOptionalParams } from "./models";
 
 export class SipRoutingClient extends SipRoutingClientContext {
   /**

@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken } from "@azure/core-auth";
-import type { TokenCredential } from "./communicationTokenCredential.js";
+import { AccessToken } from "@azure/core-auth";
+import { TokenCredential } from "./communicationTokenCredential";
 
 /**
  * StaticTokenCredential

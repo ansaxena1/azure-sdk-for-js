@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
+import { AbortSignalLike } from "@azure/abort-controller";
 import EventEmitter from "events";
-import type { WebPubSubClient } from "../src/webPubSubClient";
-import type {
+import { WebPubSubClient } from "../src/webPubSubClient";
+import {
   WebSocketClientFactoryLike,
   WebSocketClientLike,
 } from "../src/websocket/websocketClientLike";

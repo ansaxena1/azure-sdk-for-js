@@ -1,8 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
+  getLongRunningPoller,
   InPlaceSentShareOutput,
+  isUnexpected,
   OperationResponseOutput,
   PurviewSharingClient,
   SentShareInvitationListOutput,
@@ -10,12 +12,10 @@ import type {
   ServiceInvitationOutput,
   UserInvitationOutput,
 } from "../../src";
-import { getLongRunningPoller, isUnexpected } from "../../src";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env, isPlaybackMode } from "@azure-tools/test-recorder";
+import { env, isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
 import { createClient, createRecorder } from "./utils/recordedClient";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("Sent Shares Operations", () => {
   let recorder: Recorder;

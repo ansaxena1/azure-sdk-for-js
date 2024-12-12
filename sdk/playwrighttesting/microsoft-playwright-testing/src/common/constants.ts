@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ApiErrorMessage } from "./types";
+import { ApiErrorMessage } from "./types";
 
 export const EntraIdAccessTokenConstants = {
   LIFETIME_LEFT_THRESHOLD_IN_MINUTES_FOR_ROTATION: 15,
@@ -32,6 +32,7 @@ export const ServiceAuth = {
  */
 export const ServiceEnvironmentVariable = {
   PLAYWRIGHT_SERVICE_OS: "PLAYWRIGHT_SERVICE_OS",
+  PLAYWRIGHT_SERVICE_RUN_ID: "PLAYWRIGHT_SERVICE_RUN_ID",
   PLAYWRIGHT_SERVICE_EXPOSE_NETWORK_ENVIRONMENT_VARIABLE: "PLAYWRIGHT_SERVICE_EXPOSE_NETWORK",
   PLAYWRIGHT_SERVICE_ACCESS_TOKEN: "PLAYWRIGHT_SERVICE_ACCESS_TOKEN",
   PLAYWRIGHT_SERVICE_URL: "PLAYWRIGHT_SERVICE_URL",
@@ -57,6 +58,7 @@ export class Constants {
   public static readonly TEST_TYPE = "WebTest";
   public static readonly TEST_SDK_LANGUAGE = "JAVASCRIPT";
   // Placeholder version
+  public static readonly REPORTER_PACKAGE_VERSION = "1.0.0-beta.3";
   public static readonly DEFAULT_DASHBOARD_ENDPOINT = "https://playwright.microsoft.com";
   public static readonly DEFAULT_SERVICE_ENDPOINT =
     "https://{region}.reporting.api.playwright-test.io";
@@ -237,8 +239,6 @@ export const TestResultErrorConstants = [
 export const InternalEnvironmentVariables = {
   MPT_PLAYWRIGHT_VERSION: "_MPT_PLAYWRIGHT_VERSION",
   MPT_SETUP_FATAL_ERROR: "_MPT_SETUP_FATAL_ERROR",
-  MPT_SERVICE_RUN_NAME: "_MPT_SERVICE_RUN_NAME",
-  MPT_SERVICE_RUN_ID: "_MPT_SERVICE_RUN_ID",
   MPT_CLOUD_HOSTED_BROWSER_USED: "_MPT_CLOUD_HOSTED_BROWSER_USED",
 };
 

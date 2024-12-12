@@ -1,28 +1,27 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as path from "node:path";
+import * as path from "path";
 
-import type { MsalTestCleanup } from "../../node/msalNodeTestSetup.js";
-import { msalNodeTestSetup } from "../../node/msalNodeTestSetup.js";
+import { MsalTestCleanup, msalNodeTestSetup } from "../../node/msalNodeTestSetup";
 
-import { ClientAssertionCredential } from "../../../src/index.js";
+import { ClientAssertionCredential } from "../../../src";
 import { ConfidentialClientApplication } from "@azure/msal-node";
-import { createJWTTokenFromCertificate } from "../../public/node/utils/utils.js";
+import { Context } from "mocha";
+import type Sinon from "sinon";
+import { assert } from "chai";
+import { createJWTTokenFromCertificate } from "../../public/node/utils/utils";
 import { env } from "@azure-tools/test-recorder";
-import { describe, it, assert, expect, vi, beforeEach, afterEach, MockInstance } from "vitest";
 
 describe("ClientAssertionCredential (internal)", function () {
   let cleanup: MsalTestCleanup;
-  let doGetTokenSpy: MockInstance<
-    typeof ConfidentialClientApplication.prototype.acquireTokenByClientCredential
-  >;
+  let doGetTokenSpy: Sinon.SinonSpy;
 
-  beforeEach(async function (ctx) {
-    const setup = await msalNodeTestSetup(ctx);
+  beforeEach(async function (this: Context) {
+    const setup = await msalNodeTestSetup(this.currentTest);
     cleanup = setup.cleanup;
 
-    doGetTokenSpy = vi.spyOn(
+    doGetTokenSpy = setup.sandbox.spy(
       ConfidentialClientApplication.prototype,
       "acquireTokenByClientCredential",
     );
@@ -76,8 +75,7 @@ describe("ClientAssertionCredential (internal)", function () {
       // We're ignoring errors since our main goal here is to ensure that we send the correct parameters to MSAL.
     }
 
-    expect(doGetTokenSpy).toHaveBeenCalledWith(
-      expect.objectContaining({ clientAssertion: getAssertion }),
-    );
+    assert.equal(doGetTokenSpy.callCount, 1);
+    assert.equal(doGetTokenSpy.lastCall.firstArg.clientAssertion, getAssertion);
   });
 });

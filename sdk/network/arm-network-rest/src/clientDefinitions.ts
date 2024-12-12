@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AdminRuleCollectionsCreateOrUpdateParameters,
   AdminRuleCollectionsDeleteParameters,
   AdminRuleCollectionsGetParameters,
@@ -616,7 +616,7 @@ import type {
   WebCategoriesGetParameters,
   WebCategoriesListBySubscriptionParameters,
 } from "./parameters";
-import type {
+import {
   AdminRuleCollectionsCreateOrUpdate200Response,
   AdminRuleCollectionsCreateOrUpdate201Response,
   AdminRuleCollectionsCreateOrUpdateDefaultResponse,
@@ -2183,7 +2183,7 @@ import type {
   WebCategoriesListBySubscription200Response,
   WebCategoriesListBySubscriptionDefaultResponse,
 } from "./responses";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface ApplicationGatewaysDelete {
   /** Deletes the specified application gateway. */

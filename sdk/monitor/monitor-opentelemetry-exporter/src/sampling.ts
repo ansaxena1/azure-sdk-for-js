@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Link, Attributes, SpanKind, Context } from "@opentelemetry/api";
-import type { Sampler, SamplingResult } from "@opentelemetry/sdk-trace-base";
-import { SamplingDecision } from "@opentelemetry/sdk-trace-base";
-import { AzureMonitorSampleRate } from "./utils/constants/applicationinsights.js";
+import { Link, Attributes, SpanKind, Context } from "@opentelemetry/api";
+import { Sampler, SamplingDecision, SamplingResult } from "@opentelemetry/sdk-trace-base";
+import { AzureMonitorSampleRate } from "./utils/constants/applicationinsights";
 
 /**
  * ApplicationInsightsSampler is responsible for the following:

@@ -1,10 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { MockTracingSpan } from "@azure-tools/test-utils-vitest";
-import { createMockTracingContext, MockInstrumenter } from "@azure-tools/test-utils-vitest";
+import {
+  createMockTracingContext,
+  MockInstrumenter,
+  MockTracingSpan,
+} from "@azure-tools/test-utils-vitest";
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
-import type { EventData, EventHubConsumerClient, EventHubProducerClient } from "../../src/index.js";
+import { EventData, EventHubConsumerClient, EventHubProducerClient } from "../../src/index.js";
 import { createBufferedProducer, createConsumer, createProducer } from "../utils/clients.js";
 import { toSpanOptions, tracingClient } from "../../src/diagnostics/tracing.js";
 import {

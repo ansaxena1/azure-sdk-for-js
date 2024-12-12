@@ -1,22 +1,28 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { MessagingError, RetryOptions } from "@azure/core-amqp";
-import { Constants, ErrorNameConditionMapper } from "@azure/core-amqp";
-import type { AmqpError, EventContext, OnAmqpEvent, Receiver, ReceiverOptions } from "rhea-promise";
+import {
+  Constants,
+  ErrorNameConditionMapper,
+  MessagingError,
+  RetryOptions,
+} from "@azure/core-amqp";
+import { AmqpError, EventContext, OnAmqpEvent, Receiver, ReceiverOptions } from "rhea-promise";
 import { receiverLogger as logger } from "../log.js";
-import type { ReceiverType } from "./linkEntity.js";
-import { LinkEntity } from "./linkEntity.js";
-import type { ConnectionContext } from "../connectionContext.js";
-import type { ServiceBusMessageImpl } from "../serviceBusMessage.js";
-import { DispositionType } from "../serviceBusMessage.js";
+import { LinkEntity, ReceiverType } from "./linkEntity.js";
+import { ConnectionContext } from "../connectionContext.js";
+import { DispositionType, ServiceBusMessageImpl } from "../serviceBusMessage.js";
 import { getUniqueName } from "../util/utils.js";
-import type { ProcessErrorArgs, ReceiveMode, SubscribeOptions } from "../models.js";
-import type { DispositionStatusOptions } from "./managementClient.js";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { DeferredPromiseAndTimer, ReceiverHandlers } from "./shared.js";
-import { onMessageSettled, createReceiverOptions } from "./shared.js";
-import type { LockRenewer } from "./autoLockRenewer.js";
+import { ProcessErrorArgs, ReceiveMode, SubscribeOptions } from "../models.js";
+import { DispositionStatusOptions } from "./managementClient.js";
+import { AbortSignalLike } from "@azure/abort-controller";
+import {
+  onMessageSettled,
+  DeferredPromiseAndTimer,
+  ReceiverHandlers,
+  createReceiverOptions,
+} from "./shared.js";
+import { LockRenewer } from "./autoLockRenewer.js";
 import { translateServiceBusError } from "../serviceBusError.js";
 
 /**

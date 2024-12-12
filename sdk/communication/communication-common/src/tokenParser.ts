@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken } from "@azure/core-auth";
+import { AccessToken } from "@azure/core-auth";
 import { jwtDecode } from "jwt-decode";
 
 interface JwtToken {

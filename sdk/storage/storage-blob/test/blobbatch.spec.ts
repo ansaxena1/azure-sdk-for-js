@@ -14,14 +14,15 @@ import {
 } from "./utils";
 import { isLiveMode, Recorder } from "@azure-tools/test-recorder";
 import { BlobBatch } from "../src";
-import type {
+import {
   ContainerClient,
   BlockBlobClient,
+  BlobServiceClient,
+  newPipeline,
   BlobBatchClient,
   StorageSharedKeyCredential,
 } from "../src";
-import { BlobServiceClient, newPipeline } from "../src";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("BlobBatch", () => {
   let blobServiceClient: BlobServiceClient;

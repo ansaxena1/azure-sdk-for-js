@@ -10,7 +10,7 @@ import {
   ResourceIdList,
   MetricsBatchBatchOptionalParams,
   MetricsBatchBatchResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a MetricsBatch. */
 export interface MetricsBatch {

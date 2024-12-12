@@ -3,14 +3,12 @@
 
 /// <reference lib="esnext.asynciterable" />
 
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type { InternalClientPipelineOptions } from "@azure/core-client";
-import type { ExtendedCommonClientOptions } from "@azure/core-http-compat";
-import type { Pipeline } from "@azure/core-rest-pipeline";
-import { bearerTokenAuthenticationPolicy } from "@azure/core-rest-pipeline";
+import { isTokenCredential, KeyCredential, TokenCredential } from "@azure/core-auth";
+import { InternalClientPipelineOptions } from "@azure/core-client";
+import { ExtendedCommonClientOptions } from "@azure/core-http-compat";
+import { bearerTokenAuthenticationPolicy, Pipeline } from "@azure/core-rest-pipeline";
 import { decode, encode } from "./base64";
-import type {
+import {
   AutocompleteRequest,
   AutocompleteResult,
   IndexDocumentsResult,
@@ -22,7 +20,7 @@ import type {
 } from "./generated/data/models";
 import { SearchClient as GeneratedClient } from "./generated/data/searchClient";
 import { IndexDocumentsBatch } from "./indexDocumentsBatch";
-import type {
+import {
   AutocompleteOptions,
   CountDocumentsOptions,
   DeleteDocumentsOptions,
@@ -53,7 +51,7 @@ import { logger } from "./logger";
 import { createOdataMetadataPolicy } from "./odataMetadataPolicy";
 import { createSearchApiKeyCredentialPolicy } from "./searchApiKeyCredentialPolicy";
 import { KnownSearchAudience } from "./searchAudience";
-import type { IndexDocumentsClient } from "./searchIndexingBufferedSender";
+import { IndexDocumentsClient } from "./searchIndexingBufferedSender";
 import { deserialize, serialize } from "./serialization";
 import * as utils from "./serviceUtils";
 import { createSpan } from "./tracing";

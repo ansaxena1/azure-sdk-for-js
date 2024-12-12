@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 import {
   MetricsAdvisorAdministrationClient,
   MetricsAdvisorClient,

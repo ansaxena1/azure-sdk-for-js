@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { randomUUID } from "@azure/core-util";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * Generated Universally Unique Identifier
@@ -10,5 +10,5 @@ import { randomUUID } from "@azure/core-util";
  * @internal
  */
 export function generateUuid(): string {
-  return randomUUID();
+  return uuidv4();
 }

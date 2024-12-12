@@ -6,14 +6,14 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { tracingClient } from "../tracing.js";
+import { tracingClient } from "../tracing";
 import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
-import { setContinuationToken } from "../pagingHelper.js";
-import { JobRouterAdministration } from "../operationsInterfaces/index.js";
+import { setContinuationToken } from "../pagingHelper";
+import { JobRouterAdministration } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
-import * as Mappers from "../models/mappers.js";
-import * as Parameters from "../models/parameters.js";
-import { JobRouterApiClient } from "../jobRouterApiClient.js";
+import * as Mappers from "../models/mappers";
+import * as Parameters from "../models/parameters";
+import { JobRouterApiClient } from "../jobRouterApiClient";
 import {
   ClassificationPolicyItem,
   JobRouterAdministrationListClassificationPoliciesNextOptionalParams,
@@ -59,7 +59,7 @@ import {
   JobRouterAdministrationListDistributionPoliciesNextResponse,
   JobRouterAdministrationListExceptionPoliciesNextResponse,
   JobRouterAdministrationListQueuesNextResponse
-} from "../models/index.js";
+} from "../models";
 
 /// <reference lib="esnext.asynciterable" />
 /** Class containing JobRouterAdministration operations. */

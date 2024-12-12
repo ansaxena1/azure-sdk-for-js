@@ -7,13 +7,11 @@ import {
   RepeatabilityResultOutput,
   SendMessageResultOutput,
   PagedMessageTemplateItemOutput,
-} from "./outputModels.js";
+} from "./outputModels";
 
 export interface GetMedia200Headers {
   /** An opaque, globally-unique, client-generated string identifier for the request. */
   "x-ms-client-request-id"?: string;
-  /** The stream content type. */
-  "content-type": "application/octet-stream";
 }
 
 /** The request has succeeded. */

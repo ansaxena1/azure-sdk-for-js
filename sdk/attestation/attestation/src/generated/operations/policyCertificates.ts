@@ -6,12 +6,12 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { tracingClient } from "../tracing.js";
-import { PolicyCertificates } from "../operationsInterfaces/index.js";
+import { tracingClient } from "../tracing";
+import { PolicyCertificates } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
-import * as Mappers from "../models/mappers.js";
-import * as Parameters from "../models/parameters.js";
-import { GeneratedClient } from "../generatedClient.js";
+import * as Mappers from "../models/mappers";
+import * as Parameters from "../models/parameters";
+import { GeneratedClient } from "../generatedClient";
 import {
   PolicyCertificatesGetOptionalParams,
   PolicyCertificatesGetResponse,
@@ -19,7 +19,7 @@ import {
   PolicyCertificatesAddResponse,
   PolicyCertificatesRemoveOptionalParams,
   PolicyCertificatesRemoveResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Class containing PolicyCertificates operations. */
 export class PolicyCertificatesImpl implements PolicyCertificates {

@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
+import { getClient, ClientOptions } from "@azure-rest/core-client";
 import { logger } from "./logger.js";
-import type { TokenCredential } from "@azure/core-auth";
-import type { DeidentificationClient } from "./clientDefinitions.js";
+import { TokenCredential } from "@azure/core-auth";
+import { DeidentificationClient } from "./clientDefinitions.js";
 
 /** The optional parameters for the client */
 export interface DeidentificationClientOptions extends ClientOptions {

@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AzureKeyCredential, TokenCredential } from "@azure/core-auth";
-import type {
+import { AzureKeyCredential, TokenCredential } from "@azure/core-auth";
+import {
   AcknowledgeResult,
   ReleaseResult,
   RejectResult,
   RenewLocksResult,
 } from "./cadl-generated/models";
 import { EventGridClient as EventGridClientGenerated } from "./cadl-generated/EventGridClient";
-import type {
+import {
   CloudEvent,
   ReceiveResult,
   AcknowledgeEventsOptions,

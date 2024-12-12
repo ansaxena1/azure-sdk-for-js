@@ -1,26 +1,26 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   DefaultAzureCredentialClientIdOptions,
   DefaultAzureCredentialOptions,
   DefaultAzureCredentialResourceIdOptions,
-} from "./defaultAzureCredentialOptions.js";
-import type {
+} from "./defaultAzureCredentialOptions";
+import {
+  ManagedIdentityCredential,
   ManagedIdentityCredentialClientIdOptions,
   ManagedIdentityCredentialResourceIdOptions,
-} from "./managedIdentityCredential/index.js";
-import { ManagedIdentityCredential } from "./managedIdentityCredential/index.js";
+} from "./managedIdentityCredential";
 
-import { AzureCliCredential } from "./azureCliCredential.js";
-import { AzureDeveloperCliCredential } from "./azureDeveloperCliCredential.js";
-import { AzurePowerShellCredential } from "./azurePowerShellCredential.js";
-import { ChainedTokenCredential } from "./chainedTokenCredential.js";
-import { EnvironmentCredential } from "./environmentCredential.js";
-import type { TokenCredential } from "@azure/core-auth";
-import { WorkloadIdentityCredential } from "./workloadIdentityCredential.js";
-import type { WorkloadIdentityCredentialOptions } from "./workloadIdentityCredentialOptions.js";
-import { credentialLogger } from "../util/logging.js";
+import { AzureCliCredential } from "./azureCliCredential";
+import { AzureDeveloperCliCredential } from "./azureDeveloperCliCredential";
+import { AzurePowerShellCredential } from "./azurePowerShellCredential";
+import { ChainedTokenCredential } from "./chainedTokenCredential";
+import { EnvironmentCredential } from "./environmentCredential";
+import { TokenCredential } from "@azure/core-auth";
+import { WorkloadIdentityCredential } from "./workloadIdentityCredential";
+import { WorkloadIdentityCredentialOptions } from "./workloadIdentityCredentialOptions";
+import { credentialLogger } from "../util/logging";
 
 const logger = credentialLogger("DefaultAzureCredential");
 
@@ -194,39 +194,71 @@ export class UnavailableDefaultCredential implements TokenCredential {
 }
 
 /**
- * Provides a default {@link ChainedTokenCredential} configuration that works for most
- * applications that use Azure SDK client libraries. For more information, see
- * [DefaultAzureCredential overview](https://aka.ms/azsdk/js/identity/credential-chains#use-defaultazurecredential-for-flexibility).
- *
- * The following credential types will be tried, in order:
- *
- * - {@link EnvironmentCredential}
- * - {@link WorkloadIdentityCredential}
- * - {@link ManagedIdentityCredential}
- * - {@link AzureCliCredential}
- * - {@link AzurePowerShellCredential}
- * - {@link AzureDeveloperCliCredential}
- *
- * Consult the documentation of these credential types for more information
- * on how they attempt authentication.
+ * Provides a default {@link ChainedTokenCredential} configuration that should
+ * work for most applications that use the Azure SDK.
  */
 export class DefaultAzureCredential extends ChainedTokenCredential {
   /**
-   * Creates an instance of the DefaultAzureCredential class with {@link DefaultAzureCredentialClientIdOptions}.
+   * Creates an instance of the DefaultAzureCredential class with {@link DefaultAzureCredentialClientIdOptions}
+   *
+   * This credential provides a default {@link ChainedTokenCredential} configuration that should
+   * work for most applications that use the Azure SDK.
+   *
+   * The following credential types will be tried, in order:
+   *
+   * - {@link EnvironmentCredential}
+   * - {@link WorkloadIdentityCredential}
+   * - {@link ManagedIdentityCredential}
+   * - {@link AzureCliCredential}
+   * - {@link AzurePowerShellCredential}
+   * - {@link AzureDeveloperCliCredential}
+   *
+   * Consult the documentation of these credential types for more information
+   * on how they attempt authentication.
    *
    * @param options - Optional parameters. See {@link DefaultAzureCredentialClientIdOptions}.
    */
   constructor(options?: DefaultAzureCredentialClientIdOptions);
 
   /**
-   * Creates an instance of the DefaultAzureCredential class with {@link DefaultAzureCredentialResourceIdOptions}.
+   *  Creates an instance of the DefaultAzureCredential class with {@link DefaultAzureCredentialResourceIdOptions}
+   *
+   * This credential provides a default {@link ChainedTokenCredential} configuration that should
+   * work for most applications that use the Azure SDK.
+   *
+   * The following credential types will be tried, in order:
+   *
+   * - {@link EnvironmentCredential}
+   * - {@link WorkloadIdentityCredential}
+   * - {@link ManagedIdentityCredential}
+   * - {@link AzureCliCredential}
+   * - {@link AzurePowerShellCredential}
+   * - {@link AzureDeveloperCliCredential}
+   *
+   * Consult the documentation of these credential types for more information
+   * on how they attempt authentication.
    *
    * @param options - Optional parameters. See {@link DefaultAzureCredentialResourceIdOptions}.
    */
   constructor(options?: DefaultAzureCredentialResourceIdOptions);
 
   /**
-   * Creates an instance of the DefaultAzureCredential class with {@link DefaultAzureCredentialOptions}.
+   * Creates an instance of the DefaultAzureCredential class with {@link DefaultAzureCredentialOptions}
+   *
+   * This credential provides a default {@link ChainedTokenCredential} configuration that should
+   * work for most applications that use the Azure SDK.
+   *
+   * The following credential types will be tried, in order:
+   *
+   * - {@link EnvironmentCredential}
+   * - {@link WorkloadIdentityCredential}
+   * - {@link ManagedIdentityCredential}
+   * - {@link AzureCliCredential}
+   * - {@link AzurePowerShellCredential}
+   * - {@link AzureDeveloperCliCredential}
+   *
+   * Consult the documentation of these credential types for more information
+   * on how they attempt authentication.
    *
    * @param options - Optional parameters. See {@link DefaultAzureCredentialOptions}.
    */

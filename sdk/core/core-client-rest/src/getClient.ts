@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import { isKeyCredential, isTokenCredential } from "@azure/core-auth";
-import type { HttpClient, HttpMethods, Pipeline, PipelineOptions } from "@azure/core-rest-pipeline";
+import { KeyCredential, TokenCredential, isTokenCredential } from "@azure/core-auth";
+import { HttpClient, HttpMethods, Pipeline, PipelineOptions } from "@azure/core-rest-pipeline";
 import { createDefaultPipeline } from "./clientHelpers.js";
-import type {
+import {
   Client,
   ClientOptions,
   HttpBrowserStreamResponse,
@@ -199,5 +198,9 @@ function buildOperation(
 function isCredential(
   param: (TokenCredential | KeyCredential) | PipelineOptions,
 ): param is TokenCredential | KeyCredential {
-  return isKeyCredential(param) || isTokenCredential(param);
+  if ((param as KeyCredential).key !== undefined || isTokenCredential(param)) {
+    return true;
+  }
+
+  return false;
 }

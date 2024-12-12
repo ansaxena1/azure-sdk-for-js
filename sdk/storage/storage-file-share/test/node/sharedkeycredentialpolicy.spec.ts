@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 import { Recorder } from "@azure-tools/test-recorder";
 
-import type { ShareClient } from "../../src";
+import { ShareClient } from "../../src";
 import { getBSU, getUniqueName, recorderEnvSetup, uriSanitizers } from "../utils";
 
 describe("StorageSharedKeyCredentialPolicy Node.js only", () => {

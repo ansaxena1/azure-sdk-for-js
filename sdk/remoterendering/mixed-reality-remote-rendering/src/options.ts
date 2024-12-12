@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CommonClientOptions } from "@azure/core-client";
+import { CommonClientOptions } from "@azure/core-client";
 
 /**
  * Options to create the RemoteRenderingClient.

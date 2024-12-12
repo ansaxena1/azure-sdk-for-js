@@ -1,13 +1,16 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import { context, diag } from "@opentelemetry/api";
-import type { PushMetricExporter, ResourceMetrics } from "@opentelemetry/sdk-metrics";
-import { AggregationTemporality, InstrumentType } from "@opentelemetry/sdk-metrics";
-import type { ExportResult } from "@opentelemetry/core";
-import { ExportResultCode, suppressTracing } from "@opentelemetry/core";
-import type { QuickpulseExporterOptions } from "../types";
+import {
+  AggregationTemporality,
+  InstrumentType,
+  PushMetricExporter,
+  ResourceMetrics,
+} from "@opentelemetry/sdk-metrics";
+import { ExportResult, ExportResultCode, suppressTracing } from "@opentelemetry/core";
+import { QuickpulseExporterOptions } from "../types";
 import { QuickpulseSender } from "./sender";
-import type {
+import {
   DocumentIngress,
   MonitoringDataPoint,
   PublishOptionalParams,

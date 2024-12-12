@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { TriggerOperation, TriggerType } from "../../documents";
+import { TriggerOperation, TriggerType } from "../../documents";
 
 export interface TriggerDefinition {
   /** The id of the trigger. */

@@ -2,11 +2,16 @@
 // Licensed under the MIT License.
 
 import assert from "assert";
-import type { Container, OperationResponse } from "../../../../src";
-import { CosmosClient, OperationType, PatchOperationType, ResourceType } from "../../../../src";
+import {
+  Container,
+  CosmosClient,
+  OperationResponse,
+  OperationType,
+  PatchOperationType,
+  ResourceType,
+} from "../../../../src";
 import { addEntropy, testForDiagnostics } from "../../common/TestHelpers";
-import type { OperationInput } from "../../../../src";
-import { BulkOperationType } from "../../../../src";
+import { BulkOperationType, OperationInput } from "../../../../src";
 import { PartitionKeyKind } from "../../../../src/documents";
 import { endpoint } from "../../common/_testConfig";
 import { masterKey } from "../../common/_fakeTestSecrets";

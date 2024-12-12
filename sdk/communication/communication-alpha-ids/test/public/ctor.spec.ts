@@ -2,9 +2,10 @@
 // Licensed under the MIT License.
 
 import { AzureKeyCredential } from "@azure/core-auth";
-import { AlphaIdsClient } from "../../src/index.js";
-import { createMockToken } from "./utils/recordedClient.js";
-import { describe, it, assert } from "vitest";
+import { Context } from "mocha";
+import { AlphaIdsClient } from "../../src";
+import { assert } from "chai";
+import { createMockToken } from "./utils/recordedClient";
 
 describe("AlphaIdsClient - constructor", function () {
   const endpoint = "https://contoso.spool.azure.local";
@@ -26,7 +27,7 @@ describe("AlphaIdsClient - constructor", function () {
     assert.instanceOf(client, AlphaIdsClient);
   });
 
-  it("successfully instantiates with with endpoint and managed identity", function () {
+  it("successfully instantiates with with endpoint and managed identity", function (this: Context) {
     const client = new AlphaIdsClient(endpoint, createMockToken());
     assert.instanceOf(client, AlphaIdsClient);
   });

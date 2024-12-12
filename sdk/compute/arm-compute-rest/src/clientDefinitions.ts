@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AvailabilitySetsCreateOrUpdateParameters,
   AvailabilitySetsDeleteParameters,
   AvailabilitySetsGetParameters,
@@ -282,7 +282,7 @@ import type {
   VirtualMachinesStartParameters,
   VirtualMachinesUpdateParameters,
 } from "./parameters";
-import type {
+import {
   AvailabilitySetsCreateOrUpdate200Response,
   AvailabilitySetsCreateOrUpdateDefaultResponse,
   AvailabilitySetsDelete200Response,
@@ -968,7 +968,7 @@ import type {
   VirtualMachinesUpdate200Response,
   VirtualMachinesUpdateDefaultResponse,
 } from "./responses";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface OperationsList {
   /** Gets a list of compute operations. */

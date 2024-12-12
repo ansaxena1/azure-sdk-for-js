@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
-import type { CreateJobParameters, GetJobParameters } from "./parameters";
-import type {
+import { Client, StreamableMethod } from "@azure-rest/core-client";
+import { CreateJobParameters, GetJobParameters } from "./parameters";
+import {
   CreateJob200Response,
   CreateJob201Response,
   CreateJobDefaultResponse,

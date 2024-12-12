@@ -2,12 +2,14 @@
 // Licensed under the MIT License.
 
 import { configureBlobStorageClient, SimpleTokenCredential } from "./testutils.common";
-import type { StoragePipelineOptions } from "@azure/storage-blob";
-import { StorageSharedKeyCredential, BlobServiceClient } from "@azure/storage-blob";
+import {
+  StorageSharedKeyCredential,
+  BlobServiceClient,
+  StoragePipelineOptions,
+} from "@azure/storage-blob";
 import { BlobChangeFeedClient } from "../../src";
-import type { TokenCredential } from "@azure/core-auth";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { TokenCredential } from "@azure/core-auth";
+import { env, Recorder } from "@azure-tools/test-recorder";
 
 export * from "./testutils.common";
 

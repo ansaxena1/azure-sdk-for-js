@@ -1,18 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
 import {
   processMultiTenantRequest,
   resolveAdditionallyAllowedTenantIds,
-} from "../util/tenantIdUtils.js";
-import type { AuthorizationCodeCredentialOptions } from "./authorizationCodeCredentialOptions.js";
-import { checkTenantId } from "../util/tenantIdUtils.js";
-import { credentialLogger } from "../util/logging.js";
-import { ensureScopes } from "../util/scopeUtils.js";
-import { tracingClient } from "../util/tracing.js";
-import type { MsalClient } from "../msal/nodeFlows/msalClient.js";
-import { createMsalClient } from "../msal/nodeFlows/msalClient.js";
+} from "../util/tenantIdUtils";
+import { AuthorizationCodeCredentialOptions } from "./authorizationCodeCredentialOptions";
+import { checkTenantId } from "../util/tenantIdUtils";
+import { credentialLogger } from "../util/logging";
+import { ensureScopes } from "../util/scopeUtils";
+import { tracingClient } from "../util/tracing";
+import { MsalClient, createMsalClient } from "../msal/nodeFlows/msalClient";
 
 const logger = credentialLogger("AuthorizationCodeCredential");
 

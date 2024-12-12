@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 import { matrix } from "@azure-tools/test-utils";
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
+import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 
 import {
   createRecorder,
@@ -15,7 +14,7 @@ import {
   makeCredential,
   testPollingOptions,
 } from "../../utils/recordedClients";
-import type { DocumentClassifierDetails } from "../../../src/generated";
+import { DocumentClassifierDetails } from "../../../src/generated";
 import { DocumentModelAdministrationClient } from "../../../src/documentModelAdministrationClient";
 import { DocumentAnalysisClient } from "../../../src/documentAnalysisClient";
 import path from "path";

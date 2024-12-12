@@ -4,16 +4,15 @@
 import fs from "node:fs";
 import childProcess from "child_process";
 import { isNodeLike } from "@azure/core-util";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env, isPlaybackMode } from "@azure-tools/test-recorder";
+import { env, isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
 import { SecretClient } from "@azure/keyvault-secrets";
-import type { ClientSecretCredential } from "@azure/identity";
+import { ClientSecretCredential } from "@azure/identity";
 
-import type { CertificateClient } from "../../src/index.js";
+import { CertificateClient } from "../../src/index.js";
 import { base64ToUint8Array, stringToUint8Array } from "../../src/utils.js";
 import { testPollerProperties } from "./utils/recorderUtils.js";
 import { authenticate } from "./utils/testAuthentication.js";
-import type TestClient from "./utils/testClient.js";
+import TestClient from "./utils/testClient.js";
 import { describe, it, beforeEach, afterEach } from "vitest";
 import path from "node:path";
 

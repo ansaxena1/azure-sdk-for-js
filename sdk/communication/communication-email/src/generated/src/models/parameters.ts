@@ -11,7 +11,7 @@ import {
   OperationURLParameter,
   OperationQueryParameter
 } from "@azure/core-client";
-import { EmailMessage as EmailMessageMapper } from "../models/mappers.js";
+import { EmailMessage as EmailMessageMapper } from "../models/mappers";
 
 export const accept: OperationParameter = {
   parameterPath: "accept",

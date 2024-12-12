@@ -1,14 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { AzureLogger } from "@azure/logger";
-import { createClientLogger } from "@azure/logger";
+import { AzureLogger, createClientLogger } from "@azure/logger";
 import { Constants } from "../common";
 import { ClientSideMetrics, QueryMetrics } from "../queryMetrics";
-import type { FeedOptions, Response } from "../request";
+import { FeedOptions, Response } from "../request";
 import { getInitialHeader } from "./headerUtils";
-import type { ExecutionContext } from "./index";
-import type { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
-import { DiagnosticNodeType } from "../diagnostics/DiagnosticNodeInternal";
+import { ExecutionContext } from "./index";
+import { DiagnosticNodeInternal, DiagnosticNodeType } from "../diagnostics/DiagnosticNodeInternal";
 import { addDignosticChild } from "../utils/diagnostics";
 import { CosmosDbDiagnosticLevel } from "../diagnostics/CosmosDbDiagnosticLevel";
 

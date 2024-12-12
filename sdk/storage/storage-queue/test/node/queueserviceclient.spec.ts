@@ -11,9 +11,9 @@ import {
 import { Recorder } from "@azure-tools/test-recorder";
 import { QueueServiceClient } from "../../src/QueueServiceClient";
 import { newPipeline } from "../../src";
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 import { assertClientUsesTokenCredential } from "../utils/assert";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("QueueServiceClient Node.js only", () => {
   let recorder: Recorder;

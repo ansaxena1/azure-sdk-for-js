@@ -1,17 +1,19 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions, ServiceClient } from "@azure/core-client";
-import type {
+import { OperationOptions, ServiceClient } from "@azure/core-client";
+import {
+  createHttpHeaders,
+  createPipelineRequest,
   HttpHeaders,
   HttpMethods,
   PipelineRequest,
   PipelineResponse,
+  RestError,
 } from "@azure/core-rest-pipeline";
-import { createHttpHeaders, createPipelineRequest, RestError } from "@azure/core-rest-pipeline";
 import { logger } from "./logger";
-import type { Fetcher } from "./fetcherAbstract";
-import type { DTDL } from "./psuedoDtdl";
+import { Fetcher } from "./fetcherAbstract";
+import { DTDL } from "./psuedoDtdl";
 
 /**
  * The HTTP Fetcher implements the Fetcher interface to

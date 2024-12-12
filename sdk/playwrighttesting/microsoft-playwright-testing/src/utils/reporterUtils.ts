@@ -13,25 +13,21 @@ import type {
 import { exec } from "child_process";
 import { reporterLogger } from "../common/logger";
 import { createHash, randomUUID } from "crypto";
-import type { IBackOffOptions } from "../common/types";
+import { IBackOffOptions } from "../common/types";
 import fs from "fs";
 import os from "os";
 import path from "path";
 import { Constants } from "../common/constants";
-import type { EnvironmentVariables } from "../common/environmentVariables";
-import type { DedupedStep, RawTestStep } from "../common/types";
+import { EnvironmentVariables } from "../common/environmentVariables";
+import { DedupedStep, RawTestStep } from "../common/types";
 import { TokenType } from "../model/mptTokenDetails";
-import type { UploadMetadata } from "../model/shard";
-import { Shard, TestRunStatus } from "../model/shard";
-import type { RawTestResult } from "../model/testResult";
-import { TestResult as MPTTestResult } from "../model/testResult";
-import type { TestRunConfig } from "../model/testRun";
-import { TestRun } from "../model/testRun";
-import type { CIInfo } from "./cIInfoProvider";
-import { CI_PROVIDERS } from "./cIInfoProvider";
+import { Shard, TestRunStatus, UploadMetadata } from "../model/shard";
+import { TestResult as MPTTestResult, RawTestResult } from "../model/testResult";
+import { TestRun, TestRunConfig } from "../model/testRun";
+import { CIInfo, CI_PROVIDERS } from "./cIInfoProvider";
 import { CIInfoProvider } from "./cIInfoProvider";
-import type { StorageUri } from "../model/storageUri";
-import { getPackageVersion } from "./utils";
+import { StorageUri } from "../model/storageUri";
+
 class ReporterUtils {
   private envVariables: EnvironmentVariables;
 
@@ -58,9 +54,16 @@ class ReporterUtils {
 
   public async getTestRunObject(ciInfo: CIInfo): Promise<TestRun> {
     const testRun = new TestRun();
-    const runName = this.envVariables.runName || (await this.getRunName(ciInfo));
+    const runName = await this.getRunName(ciInfo);
+    if (ReporterUtils.isNullOrEmpty(this.envVariables.runId)) {
+      if (!ReporterUtils.isNullOrEmpty(runName)) {
+        this.envVariables.runId = runName;
+      } else {
+        this.envVariables.runId = randomUUID();
+      }
+    }
     testRun.testRunId = this.envVariables.runId;
-    testRun.displayName = ReporterUtils.isNullOrEmpty(runName) ? this.envVariables.runId : runName;
+    testRun.displayName = ReporterUtils.isNullOrEmpty(runName) ? randomUUID() : runName;
     testRun.creatorName = this.envVariables.userName;
     testRun.creatorId = this.envVariables.userId!;
     testRun.startTime = ReporterUtils.timestampToRFC3339(this.startTime);
@@ -372,12 +375,10 @@ class ReporterUtils {
     const completed = Math.round(width * percent);
     const remaining = width - completed;
 
-    if (current % Math.round(total / 5) === 0 || current === total) {
-      process.stdout.write("\r");
-      process.stdout.write(
-        `[${"=".repeat(completed)}${" ".repeat(remaining)}] ${Math.round(percent * 100)}%`,
-      );
-    }
+    process.stdout.write("\r");
+    process.stdout.write(
+      `[${"=".repeat(completed)}${" ".repeat(remaining)}] ${Math.round(percent * 100)}%`,
+    );
   }
 
   private getTestRunConfig(): TestRunConfig {
@@ -395,7 +396,7 @@ class ReporterUtils {
       },
       testType: Constants.TEST_TYPE,
       testSdkLanguage: Constants.TEST_SDK_LANGUAGE,
-      reporterPackageVersion: getPackageVersion(),
+      reporterPackageVersion: Constants.REPORTER_PACKAGE_VERSION,
     };
     return testRunConfig;
   }

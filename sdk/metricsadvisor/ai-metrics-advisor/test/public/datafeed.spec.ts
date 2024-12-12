@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
-import type {
+import { Context } from "mocha";
+import {
   AzureBlobDataFeedSource,
   AzureDataLakeStorageGen2DataFeedSource,
   AzureEventHubsDataFeedSource,
@@ -27,8 +27,7 @@ import {
   getRecorderUniqueVariable,
   makeCredential,
 } from "./util/recordedClients";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
+import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 import { fakeTestSecretPlaceholder, getYieldedValue, matrix } from "@azure-tools/test-utils";
 
 matrix([[true, false]] as const, async (useAad) => {

@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { CosmosDiagnostics } from "../CosmosDiagnostics";
+import { CosmosDiagnostics } from "../CosmosDiagnostics";
 import { Constants } from "../common";
-import type { CosmosHeaders } from "../queryExecutionContext/CosmosHeaders";
-import type { StatusCode, SubStatusCode } from "./StatusCodes";
+import { CosmosHeaders } from "../queryExecutionContext/CosmosHeaders";
+import { StatusCode, SubStatusCode } from "./StatusCodes";
 
 export class ResourceResponse<TResource> {
   constructor(

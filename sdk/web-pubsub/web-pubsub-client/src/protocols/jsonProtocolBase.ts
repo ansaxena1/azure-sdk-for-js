@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AckMessage,
   ConnectedMessage,
   DisconnectedMessage,
@@ -10,7 +10,7 @@ import type {
   WebPubSubDataType,
   WebPubSubMessage,
 } from "../models/messages";
-import type { JSONTypes } from "../webPubSubClient";
+import { JSONTypes } from "../webPubSubClient";
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 import { Buffer } from "buffer";
 

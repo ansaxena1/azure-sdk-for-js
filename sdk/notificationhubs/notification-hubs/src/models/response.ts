@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { RegistrationDescription } from "./registration.js";
+import { RegistrationDescription } from "./registration.js";
 
 /**
  * Describes a registration query response with registrations and a continuation token.

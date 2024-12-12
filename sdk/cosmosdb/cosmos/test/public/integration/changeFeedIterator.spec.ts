@@ -1,15 +1,16 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import assert from "assert";
-import type { Suite } from "mocha";
-import type { ChangeFeedIteratorOptions, RequestOptions } from "../../../src";
+import { Suite } from "mocha";
 import {
+  ChangeFeedIteratorOptions,
   ChangeFeedStartFrom,
+  RequestOptions,
   ChangeFeedRetentionTimeSpan,
   ChangeFeedPolicy,
   ChangeFeedMode,
 } from "../../../src";
-import type { Container, ContainerDefinition } from "../../../src";
+import { Container, ContainerDefinition } from "../../../src";
 import { PartitionKeyDefinitionVersion, PartitionKeyKind } from "../../../src/documents";
 import {
   getTestContainer,

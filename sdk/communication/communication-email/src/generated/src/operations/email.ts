@@ -6,20 +6,20 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { Email } from "../operationsInterfaces/index.js";
+import { Email } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
-import * as Mappers from "../models/mappers.js";
-import * as Parameters from "../models/parameters.js";
-import { EmailRestApiClient } from "../emailRestApiClient.js";
+import * as Mappers from "../models/mappers";
+import * as Parameters from "../models/parameters";
+import { EmailRestApiClient } from "../emailRestApiClient";
 import { PollerLike, PollOperationState, LroEngine } from "@azure/core-lro";
-import { LroImpl } from "../lroImpl.js";
+import { LroImpl } from "../lroImpl";
 import {
   EmailGetSendResultOptionalParams,
   EmailGetSendResultResponse,
   EmailMessage,
   EmailSendOptionalParams,
   EmailSendResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Class containing Email operations. */
 export class EmailImpl implements Email {

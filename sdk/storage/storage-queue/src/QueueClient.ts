@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
+import { TokenCredential, isTokenCredential } from "@azure/core-auth";
 import { isNode } from "@azure/core-util";
-import type {
+import {
   EnqueuedMessage,
   DequeuedMessageItem,
   MessagesDequeueHeaders,
@@ -30,32 +29,30 @@ import type {
   MessageIdDeleteHeaders,
   MessageIdUpdateHeaders,
 } from "./generatedModels";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { Messages, MessageId, Queue } from "./generated/src/operationsInterfaces";
-import type { StoragePipelineOptions, Pipeline } from "./Pipeline";
-import { newPipeline, isPipelineLike } from "./Pipeline";
-import type { CommonOptions } from "./StorageClient";
-import { StorageClient, getStorageClientContext } from "./StorageClient";
-import type { WithResponse } from "./utils/utils.common";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { Messages, MessageId, Queue } from "./generated/src/operationsInterfaces";
+import { newPipeline, StoragePipelineOptions, Pipeline, isPipelineLike } from "./Pipeline";
+import { StorageClient, CommonOptions, getStorageClientContext } from "./StorageClient";
 import {
   appendToURLPath,
   extractConnectionStringParts,
   isIpEndpointStyle,
   truncatedISO8061Date,
   appendToURLQuery,
+  WithResponse,
   assertResponse,
 } from "./utils/utils.common";
 import { StorageSharedKeyCredential } from "../../storage-blob/src/credentials/StorageSharedKeyCredential";
 import { AnonymousCredential } from "../../storage-blob/src/credentials/AnonymousCredential";
 import { tracingClient } from "./utils/tracing";
-import type { Metadata } from "./models";
+import { Metadata } from "./models";
 import {
   generateQueueSASQueryParameters,
   generateQueueSASQueryParametersInternal,
 } from "./QueueSASSignatureValues";
-import type { SasIPRange } from "./SasIPRange";
-import type { QueueSASPermissions } from "./QueueSASPermissions";
-import type { SASProtocol } from "./SASQueryParameters";
+import { SasIPRange } from "./SasIPRange";
+import { QueueSASPermissions } from "./QueueSASPermissions";
+import { SASProtocol } from "./SASQueryParameters";
 import { getDefaultProxySettings } from "@azure/core-rest-pipeline";
 
 /**

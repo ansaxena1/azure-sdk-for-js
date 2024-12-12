@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type {
+import { AbortSignalLike } from "@azure/abort-controller";
+import {
   FileServiceProperties,
   ListSharesIncludeType,
   ShareCreateResponse,
@@ -15,16 +15,13 @@ import type {
   ServiceSetPropertiesHeaders,
   ServiceGetPropertiesHeaders,
 } from "./generatedModels";
-import type { Service } from "./generated/src/operationsInterfaces";
-import type { Pipeline } from "./Pipeline";
-import { isPipelineLike, newPipeline } from "./Pipeline";
-import type { CommonOptions } from "./StorageClient";
-import { StorageClient } from "./StorageClient";
+import { Service } from "./generated/src/operationsInterfaces";
+import { isPipelineLike, newPipeline, Pipeline } from "./Pipeline";
+import { StorageClient, CommonOptions } from "./StorageClient";
 import { ShareClientInternal } from "./ShareClientInternal";
-import type { ShareCreateOptions, ShareDeleteMethodOptions } from "./Clients";
-import { ShareClient } from "./Clients";
-import type { WithResponse } from "./utils/utils.common";
+import { ShareClient, ShareCreateOptions, ShareDeleteMethodOptions } from "./Clients";
 import {
+  WithResponse,
   appendToURLPath,
   extractConnectionStringParts,
   assertResponse,
@@ -33,22 +30,20 @@ import {
 import { Credential } from "../../storage-blob/src/credentials/Credential";
 import { StorageSharedKeyCredential } from "../../storage-blob/src/credentials/StorageSharedKeyCredential";
 import { AnonymousCredential } from "../../storage-blob/src/credentials/AnonymousCredential";
-import type { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
+import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
 import { isNode } from "@azure/core-util";
 import { tracingClient } from "./utils/tracing";
-import type { ShareClientConfig, ShareClientOptions, ShareProtocols } from "./models";
-import { toShareProtocols } from "./models";
+import { ShareClientConfig, ShareClientOptions, ShareProtocols, toShareProtocols } from "./models";
 import { AccountSASPermissions } from "./AccountSASPermissions";
 import {
   generateAccountSASQueryParameters,
   generateAccountSASQueryParametersInternal,
 } from "./AccountSASSignatureValues";
 import { AccountSASServices } from "./AccountSASServices";
-import type { SASProtocol } from "./SASQueryParameters";
-import type { SasIPRange } from "./SasIPRange";
+import { SASProtocol } from "./SASQueryParameters";
+import { SasIPRange } from "./SasIPRange";
 import { appendToURLQuery } from "./utils/utils.common";
-import type { TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
+import { TokenCredential, isTokenCredential } from "@azure/core-auth";
 
 /**
  * Options to configure Share - List Shares Segment operations.

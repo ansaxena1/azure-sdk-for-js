@@ -2,8 +2,7 @@
 // Licensed under the MIT License.
 
 import { describe, it, assert } from "vitest";
-import type { Mapper } from "../../src/index.js";
-import { createSerializer } from "../../src/index.js";
+import { Mapper, createSerializer } from "../../src/index.js";
 
 describe("Serializer (browser specific)", function () {
   describe("serialize", function () {

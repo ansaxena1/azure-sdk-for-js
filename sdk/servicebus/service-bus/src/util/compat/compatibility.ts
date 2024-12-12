@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type {
+import { AbortSignalLike } from "@azure/abort-controller";
+import {
   HttpHeaders,
   HttpMethods,
   PipelineRequest,
   PipelineResponse,
   ProxySettings,
 } from "@azure/core-rest-pipeline";
-import type { HttpHeadersLike } from "./httpHeaders.js";
-import { HttpHeaders as HttpHeadersV1 } from "./httpHeaders.js";
+import { HttpHeadersLike, HttpHeaders as HttpHeadersV1 } from "./httpHeaders.js";
 
 /**
  * Fired in response to upload or download progress.

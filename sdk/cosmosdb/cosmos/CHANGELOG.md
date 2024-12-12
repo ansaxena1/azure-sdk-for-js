@@ -1,11 +1,14 @@
 # Release History
 
-## 4.2.0 (2024-11-19)
+## 4.1.2 (Unreleased)
 
 ### Features Added
 
-- Full Text Support: This feature adds support for full text search policy and indexing policy. It also enables performing full text search queries. [docs](https://learn.microsoft.com/azure/cosmos-db/gen-ai/full-text-search)
-- Hybrid Search Support: This feature adds support for performing hybrid search queries. [docs](https://learn.microsoft.com/azure/cosmos-db/gen-ai/hybrid-search)
+### Breaking Changes
+
+### Bugs Fixed
+
+### Other Changes
 
 ## 4.1.1 (2024-08-30)
 

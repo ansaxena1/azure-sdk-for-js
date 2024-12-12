@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Delivery, ReceiverOptions, Source } from "rhea-promise";
+import { Delivery, ReceiverOptions, Source } from "rhea-promise";
 import { translateServiceBusError } from "../serviceBusError.js";
 import { receiverLogger } from "../log.js";
-import type { ReceiveMode } from "../models.js";
+import { ReceiveMode } from "../models.js";
 import { Constants } from "@azure/core-amqp";
 
 /**

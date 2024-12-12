@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   KeyVaultCertificateNewVersionCreatedEventData,
   KeyVaultCertificateNearExpiryEventData,
   KeyVaultCertificateExpiredEventData,
@@ -14,7 +14,7 @@ import type {
   KeyVaultSecretExpiredEventData,
 } from "./models";
 
-import type {
+import {
   AcsChatMessageDeletedEventData,
   AcsChatMessageDeletedInThreadEventData,
   AcsChatMessageEditedEventData,
@@ -214,7 +214,7 @@ import type {
   AcsRouterWorkerUpdatedEventData,
 } from "./cadl-generated/models";
 
-import type { CloudEvent, EventGridEvent } from "./models";
+import { CloudEvent, EventGridEvent } from "./models";
 
 /**
  * The Event Types for all System Events. These may be used with `isSystemEvent` to determine if an

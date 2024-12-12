@@ -3,20 +3,23 @@
 
 import * as opentelemetry from "@opentelemetry/api";
 import { BasicTracerProvider } from "@opentelemetry/sdk-trace-base";
-import type { PeriodicExportingMetricReaderOptions } from "@opentelemetry/sdk-metrics";
-import { MeterProvider, PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
+import {
+  MeterProvider,
+  PeriodicExportingMetricReader,
+  PeriodicExportingMetricReaderOptions,
+} from "@opentelemetry/sdk-metrics";
 
-import { AzureMonitorTraceExporter, AzureMonitorMetricExporter } from "../../src/index.js";
-import type { Expectation, Scenario } from "./types.js";
+import { AzureMonitorTraceExporter, AzureMonitorMetricExporter } from "../../src";
+import { Expectation, Scenario } from "./types";
 import { SpanStatusCode } from "@opentelemetry/api";
-import type { TelemetryItem as Envelope } from "../../src/generated/index.js";
-import { FlushSpanProcessor } from "./flushSpanProcessor.js";
+import { TelemetryItem as Envelope } from "../../src/generated";
+import { FlushSpanProcessor } from "./flushSpanProcessor";
 import { Resource } from "@opentelemetry/resources";
 import {
   SemanticResourceAttributes,
   SemanticAttributes,
 } from "@opentelemetry/semantic-conventions";
-import { AzureMonitorLogExporter } from "../../src/export/log.js";
+import { AzureMonitorLogExporter } from "../../src/export/log";
 import { LoggerProvider, SimpleLogRecordProcessor } from "@opentelemetry/sdk-logs";
 import { SeverityNumber } from "@opentelemetry/api-logs";
 

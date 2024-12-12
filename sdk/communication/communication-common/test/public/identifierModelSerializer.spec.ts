@@ -1,16 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   CommunicationIdentifier,
   CommunicationIdentifierKind,
   SerializedCommunicationIdentifier,
-} from "../../src/index.js";
-import {
   deserializeCommunicationIdentifier,
   serializeCommunicationIdentifier,
-} from "../../src/index.js";
-import { describe, it, assert } from "vitest";
+} from "../../src";
+import { assert } from "chai";
 
 const assertSerialize = (
   identifier: CommunicationIdentifier,

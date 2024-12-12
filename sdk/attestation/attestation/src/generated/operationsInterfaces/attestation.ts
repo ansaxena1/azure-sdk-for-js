@@ -16,7 +16,7 @@ import {
   TpmAttestationRequest,
   AttestationAttestTpmOptionalParams,
   AttestationAttestTpmResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a Attestation. */
 export interface Attestation {

@@ -2,16 +2,16 @@
 // Licensed under the MIT License.
 
 import { createRecorder, createModelClient } from "./utils/recordedClient.js";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Recorder } from "@azure-tools/test-recorder";
 import { assert, beforeEach, afterEach, it, describe } from "vitest";
-import type {
+import {
   ChatCompletionsOutput,
   ModelClient,
   ChatCompletionsToolCall,
   ChatMessageContentItem,
   ChatMessageImageContentItem,
+  isUnexpected,
 } from "../../src/index.js";
-import { isUnexpected } from "../../src/index.js";
 
 describe("chat test suite", () => {
   let recorder: Recorder;

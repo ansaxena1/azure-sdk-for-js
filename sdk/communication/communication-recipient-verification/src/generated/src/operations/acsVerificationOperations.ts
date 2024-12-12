@@ -6,12 +6,12 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { tracingClient } from "../tracing.js";
-import { AcsVerificationOperations } from "../operationsInterfaces/index.js";
+import { tracingClient } from "../tracing";
+import { AcsVerificationOperations } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
-import * as Mappers from "../models/mappers.js";
-import * as Parameters from "../models/parameters.js";
-import { RecipientVerificationClient } from "../recipientVerificationClient.js";
+import * as Mappers from "../models/mappers";
+import * as Parameters from "../models/parameters";
+import { RecipientVerificationClient } from "../recipientVerificationClient";
 import {
   AcsVerificationGetVerificationsOptionalParams,
   AcsVerificationGetVerificationsResponse,
@@ -22,7 +22,7 @@ import {
   AcsVerificationDeleteVerificationOptionalParams,
   AcsVerificationGetVerificationConstantsOptionalParams,
   AcsVerificationGetVerificationConstantsResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Class containing AcsVerificationOperations operations. */
 export class AcsVerificationOperationsImpl

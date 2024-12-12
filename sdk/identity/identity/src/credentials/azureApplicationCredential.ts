@@ -4,10 +4,10 @@
 import {
   createDefaultManagedIdentityCredential,
   createEnvironmentCredential,
-} from "./defaultAzureCredential.js";
+} from "./defaultAzureCredential";
 
-import type { AzureApplicationCredentialOptions } from "./azureApplicationCredentialOptions.js";
-import { ChainedTokenCredential } from "./chainedTokenCredential.js";
+import { AzureApplicationCredentialOptions } from "./azureApplicationCredentialOptions";
+import { ChainedTokenCredential } from "./chainedTokenCredential";
 
 /**
  * Provides a default {@link ChainedTokenCredential} configuration that should

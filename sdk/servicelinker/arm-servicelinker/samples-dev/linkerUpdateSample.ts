@@ -10,7 +10,7 @@
 // Licensed under the MIT License.
 import {
   LinkerPatch,
-  ServiceLinkerManagementClient,
+  ServiceLinkerManagementClient
 } from "@azure/arm-servicelinker";
 import { DefaultAzureCredential } from "@azure/identity";
 import * as dotenv from "dotenv";
@@ -18,12 +18,12 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 /**
- * This sample demonstrates how to Operation to update an existing Linker.
+ * This sample demonstrates how to Operation to update an existing link.
  *
- * @summary Operation to update an existing Linker.
- * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/examples/PatchLinker.json
+ * @summary Operation to update an existing link.
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/PatchLink.json
  */
-async function patchLinker() {
+async function patchLink() {
   const resourceUri =
     "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
   const linkerName = "linkName";
@@ -32,25 +32,26 @@ async function patchLinker() {
       authType: "servicePrincipalSecret",
       clientId: "name",
       principalId: "id",
-      secret: "secret",
+      secret: "secret"
     },
     targetService: {
       type: "AzureResource",
-      id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db",
-    },
+      id:
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+    }
   };
   const credential = new DefaultAzureCredential();
   const client = new ServiceLinkerManagementClient(credential);
   const result = await client.linker.beginUpdateAndWait(
     resourceUri,
     linkerName,
-    parameters,
+    parameters
   );
   console.log(result);
 }
 
 async function main() {
-  patchLinker();
+  patchLink();
 }
 
 main().catch(console.error);

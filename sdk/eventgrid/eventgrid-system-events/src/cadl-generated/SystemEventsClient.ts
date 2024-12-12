@@ -1,10 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Pipeline } from "@azure/core-rest-pipeline";
+import { Pipeline } from "@azure/core-rest-pipeline";
 import "./models/options";
-import type { SystemEventsClientOptionalParams, SystemEventsContext } from "./api/index";
-import { createSystemEvents } from "./api/index";
+import {
+  createSystemEvents,
+  SystemEventsClientOptionalParams,
+  SystemEventsContext,
+} from "./api/index";
 
 export { SystemEventsClientOptionalParams } from "./api/systemEventsContext";
 

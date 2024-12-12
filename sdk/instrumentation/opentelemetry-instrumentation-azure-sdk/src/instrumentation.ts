@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   Instrumentation,
+  InstrumentationBase,
   InstrumentationConfig,
   InstrumentationModuleDefinition,
-} from "@opentelemetry/instrumentation";
-import {
-  InstrumentationBase,
   InstrumentationNodeModuleDefinition,
 } from "@opentelemetry/instrumentation";
 

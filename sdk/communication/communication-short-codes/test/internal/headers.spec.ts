@@ -2,16 +2,18 @@
 // Licensed under the MIT License.
 
 import { AzureKeyCredential } from "@azure/core-auth";
-import type { PipelineRequest } from "@azure/core-rest-pipeline";
-import { SDK_VERSION } from "../../src/utils/constants.js";
-import { ShortCodesClient } from "../../src/shortCodesClient.js";
-import type { TokenCredential } from "@azure/identity";
-import { createMockToken } from "../public/utils/recordedClient.js";
-import { getUSProgramBriefHttpClient } from "../public/utils/mockHttpClients.js";
+import { Context } from "mocha";
+import { PipelineRequest } from "@azure/core-rest-pipeline";
+import { SDK_VERSION } from "../../src/utils/constants";
+import { ShortCodesClient } from "../../src/shortCodesClient";
+import { TokenCredential } from "@azure/identity";
+import { assert } from "chai";
+import { createMockToken } from "../public/utils/recordedClient";
+import { getUSProgramBriefHttpClient } from "../public/utils/mockHttpClients";
 import { isNodeLike } from "@azure/core-util";
-import { describe, it, assert, expect, vi, afterEach } from "vitest";
+import sinon from "sinon";
 
-describe("ShortCodesClient - headers", () => {
+describe("ShortCodesClient - headers", function () {
   const endpoint = "https://contoso.spool.azure.local";
   const accessKey = "banana";
   let client = new ShortCodesClient(endpoint, new AzureKeyCredential(accessKey), {
@@ -19,26 +21,26 @@ describe("ShortCodesClient - headers", () => {
   });
   let request: PipelineRequest;
 
-  afterEach(() => {
-    vi.restoreAllMocks();
+  afterEach(function () {
+    sinon.restore();
   });
 
-  it("calls the spy", async () => {
-    const spy = vi.spyOn(getUSProgramBriefHttpClient, "sendRequest");
+  it("calls the spy", async function () {
+    const spy = sinon.spy(getUSProgramBriefHttpClient, "sendRequest");
     await client.getUSProgramBrief("9fb78ef0-5704-4866-bca2-6a040ec83c0b");
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
 
-    request = spy.mock.calls[0][0];
+    request = spy.getCall(0).args[0];
   });
 
-  it("[node] sets correct host", (ctx) => {
+  it("[node] sets correct host", function (this: Context) {
     if (!isNodeLike) {
-      ctx.skip();
+      this.skip();
     }
     assert.equal(request.headers.get("host"), "contoso.spool.azure.local");
   });
 
-  it("sets correct default user-agent", () => {
+  it("sets correct default user-agent", function () {
     const userAgentHeader = isNodeLike ? "user-agent" : "x-ms-useragent";
     assert.match(
       request.headers.get(userAgentHeader) as string,
@@ -46,12 +48,12 @@ describe("ShortCodesClient - headers", () => {
     );
   });
 
-  it("sets date header", () => {
+  it("sets date header", function () {
     const dateHeader = "x-ms-date";
     assert.typeOf(request.headers.get(dateHeader), "string");
   });
 
-  it("sets signed authorization header with KeyCredential", () => {
+  it("sets signed authorization header with KeyCredential", function () {
     assert.isDefined(request.headers.get("authorization"));
     assert.match(
       request.headers.get("authorization") as string,
@@ -59,16 +61,16 @@ describe("ShortCodesClient - headers", () => {
     );
   });
 
-  it("sets signed authorization header with connection string", async () => {
+  it("sets signed authorization header with connection string", async function () {
     client = new ShortCodesClient(`endpoint=${endpoint};accessKey=${accessKey}`, {
       httpClient: getUSProgramBriefHttpClient,
     });
 
-    const spy = vi.spyOn(getUSProgramBriefHttpClient, "sendRequest");
+    const spy = sinon.spy(getUSProgramBriefHttpClient, "sendRequest");
     await client.getUSProgramBrief("9fb78ef0-5704-4866-bca2-6a040ec83c0b");
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
 
-    request = spy.mock.calls[0][0];
+    request = spy.getCall(0).args[0];
     assert.isDefined(request.headers.get("authorization"));
     assert.match(
       request.headers.get("authorization") as string,
@@ -76,23 +78,23 @@ describe("ShortCodesClient - headers", () => {
     );
   });
 
-  it("sets bearer authorization header with TokenCredential", async () => {
+  it("sets bearer authorization header with TokenCredential", async function (this: Context) {
     const credential: TokenCredential = createMockToken();
 
     client = new ShortCodesClient(endpoint, credential, {
       httpClient: getUSProgramBriefHttpClient,
     });
 
-    const spy = vi.spyOn(getUSProgramBriefHttpClient, "sendRequest");
+    const spy = sinon.spy(getUSProgramBriefHttpClient, "sendRequest");
     await client.getUSProgramBrief("9fb78ef0-5704-4866-bca2-6a040ec83c0b");
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
 
-    request = spy.mock.calls[0][0];
+    request = spy.getCall(0).args[0];
     assert.isDefined(request.headers.get("authorization"));
     assert.match(request.headers.get("authorization") as string, /Bearer ./);
   });
 
-  it("can set custom user-agent prefix", async () => {
+  it("can set custom user-agent prefix", async function () {
     client = new ShortCodesClient(`endpoint=${endpoint};accessKey=${accessKey}`, {
       httpClient: getUSProgramBriefHttpClient,
       userAgentOptions: {
@@ -100,11 +102,11 @@ describe("ShortCodesClient - headers", () => {
       },
     });
 
-    const spy = vi.spyOn(getUSProgramBriefHttpClient, "sendRequest");
+    const spy = sinon.spy(getUSProgramBriefHttpClient, "sendRequest");
     await client.getUSProgramBrief("9fb78ef0-5704-4866-bca2-6a040ec83c0b");
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
 
-    request = spy.mock.calls[0][0];
+    request = spy.getCall(0).args[0];
 
     const userAgentHeader = isNodeLike ? "user-agent" : "x-ms-useragent";
     assert.match(

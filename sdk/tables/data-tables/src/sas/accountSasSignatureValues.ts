@@ -1,18 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccountSasPermissions } from "./accountSasPermissions";
-import { accountSasPermissionsToString } from "./accountSasPermissions";
-import type { SasIPRange } from "./sasIPRange";
-import { ipRangeToString } from "./sasIPRange";
-import type { SasProtocol } from "./sasQueryParameters";
-import { SasQueryParameters } from "./sasQueryParameters";
+import { AccountSasPermissions, accountSasPermissionsToString } from "./accountSasPermissions";
+import { SasIPRange, ipRangeToString } from "./sasIPRange";
+import { SasProtocol, SasQueryParameters } from "./sasQueryParameters";
 import {
   accountSasResourceTypesFromString,
   accountSasResourceTypesToString,
 } from "./accountSasResourceTypes";
 import { accountSasServicesFromString, accountSasServicesToString } from "./accountSasServices";
-import type { NamedKeyCredential } from "@azure/core-auth";
+import { NamedKeyCredential } from "@azure/core-auth";
 import { SERVICE_VERSION } from "../utils/constants";
 import { computeHMACSHA256 } from "../utils/computeHMACSHA256";
 import { truncatedISO8061Date } from "../utils/truncateISO8061Date";

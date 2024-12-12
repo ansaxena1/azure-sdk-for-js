@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   ListAssetResourceParameters,
   UpdateAssetsParameters,
   GetAssetResourceParameters,
@@ -29,7 +29,7 @@ import type {
   GetTaskParameters,
   CancelTaskParameters,
 } from "./parameters";
-import type {
+import {
   ListAssetResource200Response,
   ListAssetResourceDefaultResponse,
   UpdateAssets200Response,
@@ -83,7 +83,7 @@ import type {
   CancelTask200Response,
   CancelTaskDefaultResponse,
 } from "./responses";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface ListAssetResource {
   /** Retrieve a list of assets for the provided search parameters. */

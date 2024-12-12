@@ -11,7 +11,7 @@ import {
   OperationURLParameter,
   OperationQueryParameter
 } from "@azure/core-client";
-import { ResourceIdList as ResourceIdListMapper } from "../models/mappers.js";
+import { ResourceIdList as ResourceIdListMapper } from "../models/mappers";
 
 export const contentType: OperationParameter = {
   parameterPath: ["options", "contentType"],

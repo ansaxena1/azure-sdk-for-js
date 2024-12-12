@@ -4,11 +4,11 @@
 
 ```ts
 
-import type { CommonClientOptions } from '@azure/core-client';
+import { CommonClientOptions } from '@azure/core-client';
 import * as coreClient from '@azure/core-client';
-import type { OperationOptions } from '@azure/core-client';
-import type { PagedAsyncIterableIterator } from '@azure/core-paging';
-import type { TokenCredential } from '@azure/core-auth';
+import { OperationOptions } from '@azure/core-client';
+import { PagedAsyncIterableIterator } from '@azure/core-paging';
+import { TokenCredential } from '@azure/core-auth';
 
 // @public
 export type DigitalTwinModelsAddResponse = DigitalTwinsModelData[];

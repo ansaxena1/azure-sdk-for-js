@@ -14,7 +14,7 @@ import { AzureHSMResourceProvider } from "../azureHSMResourceProvider";
 import {
   SimplePollerLike,
   OperationState,
-  createHttpPoller,
+  createHttpPoller
 } from "@azure/core-lro";
 import { createLroSpec } from "../lroImpl";
 import {
@@ -22,15 +22,13 @@ import {
   CloudHsmClusterPrivateEndpointConnectionsCreateOptionalParams,
   CloudHsmClusterPrivateEndpointConnectionsCreateResponse,
   CloudHsmClusterPrivateEndpointConnectionsDeleteOptionalParams,
-  CloudHsmClusterPrivateEndpointConnectionsDeleteResponse,
   CloudHsmClusterPrivateEndpointConnectionsGetOptionalParams,
-  CloudHsmClusterPrivateEndpointConnectionsGetResponse,
+  CloudHsmClusterPrivateEndpointConnectionsGetResponse
 } from "../models";
 
 /** Class containing CloudHsmClusterPrivateEndpointConnections operations. */
 export class CloudHsmClusterPrivateEndpointConnectionsImpl
-  implements CloudHsmClusterPrivateEndpointConnections
-{
+  implements CloudHsmClusterPrivateEndpointConnections {
   private readonly client: AzureHSMResourceProvider;
 
   /**
@@ -45,7 +43,7 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
    * Creates or updates the private endpoint connection for the Cloud Hsm Cluster.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param peConnectionName Name of the private endpoint connection associated with the Cloud HSM
    *                         Cluster.
    * @param properties Parameters of the PrivateEndpointConnection
@@ -56,7 +54,7 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
     cloudHsmClusterName: string,
     peConnectionName: string,
     properties: PrivateEndpointConnection,
-    options?: CloudHsmClusterPrivateEndpointConnectionsCreateOptionalParams,
+    options?: CloudHsmClusterPrivateEndpointConnectionsCreateOptionalParams
   ): Promise<CloudHsmClusterPrivateEndpointConnectionsCreateResponse> {
     return this.client.sendOperationRequest(
       {
@@ -64,9 +62,9 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
         cloudHsmClusterName,
         peConnectionName,
         properties,
-        options,
+        options
       },
-      createOperationSpec,
+      createOperationSpec
     );
   }
 
@@ -74,7 +72,7 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
    * Deletes the private endpoint connection for the Cloud Hsm Cluster.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param peConnectionName Name of the private endpoint connection associated with the Cloud HSM
    *                         Cluster.
    * @param options The options parameters.
@@ -83,29 +81,25 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
     resourceGroupName: string,
     cloudHsmClusterName: string,
     peConnectionName: string,
-    options?: CloudHsmClusterPrivateEndpointConnectionsDeleteOptionalParams,
-  ): Promise<
-    SimplePollerLike<
-      OperationState<CloudHsmClusterPrivateEndpointConnectionsDeleteResponse>,
-      CloudHsmClusterPrivateEndpointConnectionsDeleteResponse
-    >
-  > {
+    options?: CloudHsmClusterPrivateEndpointConnectionsDeleteOptionalParams
+  ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ): Promise<CloudHsmClusterPrivateEndpointConnectionsDeleteResponse> => {
+      spec: coreClient.OperationSpec
+    ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -114,8 +108,8 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -123,8 +117,8 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
@@ -134,17 +128,14 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
         resourceGroupName,
         cloudHsmClusterName,
         peConnectionName,
-        options,
+        options
       },
-      spec: deleteOperationSpec,
+      spec: deleteOperationSpec
     });
-    const poller = await createHttpPoller<
-      CloudHsmClusterPrivateEndpointConnectionsDeleteResponse,
-      OperationState<CloudHsmClusterPrivateEndpointConnectionsDeleteResponse>
-    >(lro, {
+    const poller = await createHttpPoller<void, OperationState<void>>(lro, {
       restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "location",
+      resourceLocationConfig: "location"
     });
     await poller.poll();
     return poller;
@@ -154,7 +145,7 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
    * Deletes the private endpoint connection for the Cloud Hsm Cluster.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param peConnectionName Name of the private endpoint connection associated with the Cloud HSM
    *                         Cluster.
    * @param options The options parameters.
@@ -163,13 +154,13 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
     resourceGroupName: string,
     cloudHsmClusterName: string,
     peConnectionName: string,
-    options?: CloudHsmClusterPrivateEndpointConnectionsDeleteOptionalParams,
-  ): Promise<CloudHsmClusterPrivateEndpointConnectionsDeleteResponse> {
+    options?: CloudHsmClusterPrivateEndpointConnectionsDeleteOptionalParams
+  ): Promise<void> {
     const poller = await this.beginDelete(
       resourceGroupName,
       cloudHsmClusterName,
       peConnectionName,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -178,7 +169,7 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
    * Gets the private endpoint connection for the Cloud Hsm Cluster.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param peConnectionName Name of the private endpoint connection associated with the Cloud HSM
    *                         Cluster.
    * @param options The options parameters.
@@ -187,11 +178,11 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
     resourceGroupName: string,
     cloudHsmClusterName: string,
     peConnectionName: string,
-    options?: CloudHsmClusterPrivateEndpointConnectionsGetOptionalParams,
+    options?: CloudHsmClusterPrivateEndpointConnectionsGetOptionalParams
   ): Promise<CloudHsmClusterPrivateEndpointConnectionsGetResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, cloudHsmClusterName, peConnectionName, options },
-      getOperationSpec,
+      getOperationSpec
     );
   }
 }
@@ -199,15 +190,16 @@ export class CloudHsmClusterPrivateEndpointConnectionsImpl
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const createOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}",
   httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.PrivateEndpointConnection,
+      bodyMapper: Mappers.PrivateEndpointConnection
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   requestBody: Parameters.properties,
   queryParameters: [Parameters.apiVersion],
@@ -216,35 +208,24 @@ const createOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.cloudHsmClusterName,
-    Parameters.peConnectionName,
+    Parameters.peConnectionName
   ],
   headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
-  serializer,
+  serializer
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}",
   httpMethod: "DELETE",
   responses: {
-    200: {
-      headersMapper:
-        Mappers.CloudHsmClusterPrivateEndpointConnectionsDeleteHeaders,
-    },
-    201: {
-      headersMapper:
-        Mappers.CloudHsmClusterPrivateEndpointConnectionsDeleteHeaders,
-    },
-    202: {
-      headersMapper:
-        Mappers.CloudHsmClusterPrivateEndpointConnectionsDeleteHeaders,
-    },
-    204: {
-      headersMapper:
-        Mappers.CloudHsmClusterPrivateEndpointConnectionsDeleteHeaders,
-    },
+    200: {},
+    201: {},
+    202: {},
+    204: {},
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
@@ -252,21 +233,22 @@ const deleteOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.cloudHsmClusterName,
-    Parameters.peConnectionName,
+    Parameters.peConnectionName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const getOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.PrivateEndpointConnection,
+      bodyMapper: Mappers.PrivateEndpointConnection
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
@@ -274,8 +256,8 @@ const getOperationSpec: coreClient.OperationSpec = {
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
     Parameters.cloudHsmClusterName,
-    Parameters.peConnectionName,
+    Parameters.peConnectionName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };

@@ -1,16 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ContainerClient } from "@azure/storage-blob";
-import { ContainerSASPermissions, BlobServiceClient } from "@azure/storage-blob";
-import type { TestDocument } from "../utils/TestDocument";
-import { createTestDocument } from "../utils/TestDocument";
-import type {
+import { ContainerClient, ContainerSASPermissions, BlobServiceClient } from "@azure/storage-blob";
+import { TestDocument, createTestDocument } from "../utils/TestDocument";
+import {
   BatchRequest,
   DocumentTranslationClient,
   StartTranslationDefaultResponse,
+  getLongRunningPoller,
 } from "../../../src";
-import { getLongRunningPoller } from "../../../src";
 
 const connectionString =
   process.env["DOCUMENT_TRANSLATION_CONNECTION_STRING"] || "ConnectionString";

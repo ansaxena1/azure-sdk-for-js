@@ -2,8 +2,7 @@
 // Licensed under the MIT License.
 
 import { createSerializer } from "@azure/core-client";
-import type { CloudEvent } from "./models";
-import { cloudEventReservedPropertyNames } from "./models";
+import { CloudEvent, cloudEventReservedPropertyNames } from "./models";
 import { CloudEvent as CloudEventMapper, parseAndWrap, validateCloudEventEvent } from "./util";
 
 const serializer = createSerializer();

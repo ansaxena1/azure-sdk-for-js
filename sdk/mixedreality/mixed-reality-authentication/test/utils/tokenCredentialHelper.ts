@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AzureKeyCredential } from "@azure/core-auth";
+import { AzureKeyCredential } from "@azure/core-auth";
 import { MixedRealityAccountKeyCredential } from "../../src/models/auth";
 
 export function createTokenCredentialFromMRKeyCredential(

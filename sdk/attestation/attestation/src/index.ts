@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-export * from "./models/index.js";
+export * from "./models";
 export {
   AttestationClient,
   AttestationClientOptions,
@@ -8,7 +8,7 @@ export {
   AttestSgxEnclaveOptions,
   AttestTpmOptions,
   AttestationClientOperationOptions,
-} from "./attestationClient.js";
+} from "./attestationClient";
 
 export {
   AttestationAdministrationClient,
@@ -16,4 +16,4 @@ export {
   AttestationAdministrationClientOperationOptions,
   AttestationAdministrationClientPolicyOperationOptions,
   AttestationAdministrationClientPolicyCertificateOperationOptions,
-} from "./attestationAdministrationClient.js";
+} from "./attestationAdministrationClient";

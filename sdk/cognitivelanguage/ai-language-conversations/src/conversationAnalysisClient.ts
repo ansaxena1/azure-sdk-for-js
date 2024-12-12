@@ -6,7 +6,7 @@
  * Licensed under the MIT License.
  */
 
-import type {
+import {
   AnalyzeConversationJobsInput,
   AnalyzeConversationOptionalParams,
   AnalyzeConversationResponse,
@@ -16,11 +16,9 @@ import type {
   ConversationAnalysisResponse,
 } from "./models";
 import { DEFAULT_COGNITIVE_SCOPE, SDK_VERSION } from "./constants";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type { PollOperationState, PollerLike } from "@azure/core-lro";
-import type { TracingClient } from "@azure/core-tracing";
-import { createTracingClient } from "@azure/core-tracing";
+import { KeyCredential, TokenCredential, isTokenCredential } from "@azure/core-auth";
+import { PollOperationState, PollerLike } from "@azure/core-lro";
+import { TracingClient, createTracingClient } from "@azure/core-tracing";
 import { ConversationAnalysisClient as GeneratedClient } from "./generated";
 import { bearerTokenAuthenticationPolicy } from "@azure/core-rest-pipeline";
 import { conversationAnalysisAzureKeyCredentialPolicy } from "./azureKeyCredentialPolicy";

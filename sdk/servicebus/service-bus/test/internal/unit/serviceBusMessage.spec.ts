@@ -1,20 +1,22 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ServiceBusMessage } from "../../../src/serviceBusMessage.js";
-import { ServiceBusMessageImpl, toRheaMessage } from "../../../src/serviceBusMessage.js";
-import type {
+import {
+  ServiceBusMessage,
+  ServiceBusMessageImpl,
+  toRheaMessage,
+} from "../../../src/serviceBusMessage.js";
+import {
   Delivery,
+  uuid_to_string,
   MessageAnnotations,
   DeliveryAnnotations,
   Message as RheaMessage,
 } from "rhea-promise";
-import { uuid_to_string } from "rhea-promise";
-import type { ConnectionConfig } from "@azure/core-amqp";
-import { Constants } from "@azure/core-amqp";
+import { ConnectionConfig, Constants } from "@azure/core-amqp";
 import { defaultDataTransformer } from "../../../src/dataTransformer.js";
 import { ServiceBusMessageBatchImpl } from "../../../src/serviceBusMessageBatch.js";
-import type { ConnectionContext } from "../../../src/connectionContext.js";
+import { ConnectionContext } from "../../../src/connectionContext.js";
 import { describe, it } from "vitest";
 import { assert } from "../../public/utils/chai.js";
 

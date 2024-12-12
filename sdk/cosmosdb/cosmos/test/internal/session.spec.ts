@@ -2,18 +2,17 @@
 // Licensed under the MIT License.
 /* eslint-disable no-unused-expressions */
 import assert from "assert";
-import type { Suite } from "mocha";
-import type { ClientContext, Container, PluginConfig } from "../../src";
-import { PluginOn } from "../../src";
+import { Suite } from "mocha";
+import { ClientContext, Container, PluginConfig, PluginOn } from "../../src";
 import { OperationType, ResourceType } from "../../src/common";
 import { ConsistencyLevel } from "../../src";
 import { CosmosClient } from "../../src";
-import type { SessionContainer } from "../../src/session/sessionContainer";
+import { SessionContainer } from "../../src/session/sessionContainer";
 import { endpoint } from "../public/common/_testConfig";
 import { masterKey } from "../public/common/_fakeTestSecrets";
 import { addEntropy, getTestDatabase, removeAllDatabases } from "../public/common/TestHelpers";
-import type { RequestContext } from "../../src";
-import type { Response } from "../../src/request/Response";
+import { RequestContext } from "../../src";
+import { Response } from "../../src/request/Response";
 import { expect } from "chai";
 
 describe("New session token", function () {

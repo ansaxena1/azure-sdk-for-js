@@ -3,23 +3,27 @@
 
 /// <reference lib="esnext.asynciterable" />
 
-import type { TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type { InternalPipelineOptions } from "@azure/core-rest-pipeline";
-import { bearerTokenAuthenticationPolicy } from "@azure/core-rest-pipeline";
-import type { CommonClientOptions, OperationOptions } from "@azure/core-client";
+import { isTokenCredential, TokenCredential } from "@azure/core-auth";
+import {
+  InternalPipelineOptions,
+  bearerTokenAuthenticationPolicy,
+} from "@azure/core-rest-pipeline";
+import { CommonClientOptions, OperationOptions } from "@azure/core-client";
 
-import type { PageSettings, PagedAsyncIterableIterator } from "@azure/core-paging";
+import { PageSettings, PagedAsyncIterableIterator } from "@azure/core-paging";
 
 import { logger } from "./logger";
 import { GeneratedClient } from "./generated";
 import { tracingClient } from "./tracing";
-import type { RepositoryPageResponse } from "./models";
+import { RepositoryPageResponse } from "./models";
 import { extractNextLink } from "./utils/helpers";
 import { ChallengeHandler } from "./containerRegistryChallengeHandler";
-import type { ContainerRepository, DeleteRepositoryOptions } from "./containerRepository";
-import { ContainerRepositoryImpl } from "./containerRepository";
-import type { RegistryArtifact } from "./registryArtifact";
+import {
+  ContainerRepository,
+  ContainerRepositoryImpl,
+  DeleteRepositoryOptions,
+} from "./containerRepository";
+import { RegistryArtifact } from "./registryArtifact";
 import { ContainerRegistryRefreshTokenCredential } from "./containerRegistryTokenCredential";
 
 const LATEST_API_VERSION = "2021-07-01";

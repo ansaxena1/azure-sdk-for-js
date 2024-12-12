@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   PipelinePolicy,
   PipelineRequest,
   PipelineResponse,
   SendRequest,
 } from "@azure/core-rest-pipeline";
-import type { KeyCredential } from "@azure/core-auth";
-import { shaHMAC, shaHash } from "./cryptoUtils.js";
+import { KeyCredential } from "@azure/core-auth";
+import { shaHMAC, shaHash } from "./cryptoUtils";
 import { isNode } from "@azure/core-util";
 
 const callAutomationAccessKeyCredentialPolicy = "CallAutomationAccessKeyCredentialPolicy";

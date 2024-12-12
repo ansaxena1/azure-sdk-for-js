@@ -1,4 +1,4 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-export * from "./fileSystemPersist.js";
+export * from "./fileSystemPersist";

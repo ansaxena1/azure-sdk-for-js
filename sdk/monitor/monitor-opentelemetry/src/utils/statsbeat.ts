@@ -1,17 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
-  StatsbeatEnvironmentConfig,
-  StatsbeatFeatures,
-  StatsbeatInstrumentations,
-  StatsbeatOption,
-} from "../types";
 import {
   AZURE_MONITOR_STATSBEAT_FEATURES,
+  StatsbeatEnvironmentConfig,
   StatsbeatFeature,
+  StatsbeatFeatures,
   StatsbeatFeaturesMap,
   StatsbeatInstrumentation,
+  StatsbeatInstrumentations,
+  StatsbeatOption,
 } from "../types";
 import { Logger as InternalLogger } from "../shared/logging";
 

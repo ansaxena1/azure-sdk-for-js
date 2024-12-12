@@ -3,17 +3,18 @@
 /// <reference lib="esnext.asynciterable" />
 
 /* eslint-disable @azure/azure-sdk/ts-naming-options */
-import type { CommunicationTokenCredential } from "@azure/communication-common";
 import {
+  CommunicationTokenCredential,
   createCommunicationAuthPolicy,
   isKeyCredential,
   parseClientArguments,
 } from "@azure/communication-common";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import type { OperationOptions } from "@azure/core-client";
-import type { InternalPipelineOptions } from "@azure/core-rest-pipeline";
-import { SDK_VERSION } from "./constants.js";
-import type {
+import { KeyCredential, TokenCredential } from "@azure/core-auth";
+import { OperationOptions } from "@azure/core-client";
+import { InternalPipelineOptions } from "@azure/core-rest-pipeline";
+import { SDK_VERSION } from "./constants";
+import {
+  JobRouterApiClient,
   JobRouterListJobsOptionalParams,
   JobRouterListWorkersOptionalParams,
   RouterJobPositionDetails,
@@ -21,11 +22,11 @@ import type {
   RouterJob as RouterJobGenerated,
   RouterJobItem as RouterJobItemGenerated,
   RouterWorkerItem as RouterWorkerItemGenerated,
+  KnownJobMatchModeType,
   JobMatchingMode,
-} from "./generated/src/index.js";
-import { JobRouterApiClient, KnownJobMatchModeType } from "./generated/src/index.js";
-import { logger } from "./logger.js";
-import type {
+} from "./generated/src";
+import { logger } from "./logger";
+import {
   RouterJobItem,
   RouterWorkerItem,
   RouterJobNote,
@@ -33,8 +34,8 @@ import type {
   RouterWorkerSelector,
   RouterJobMatchingMode,
   RouterWorkerState,
-} from "./models.js";
-import type {
+} from "./models";
+import {
   JobRouterClientOptions,
   CreateJobOptions,
   UpdateJobOptions,
@@ -48,8 +49,8 @@ import type {
   CreateWorkerOptions,
   UpdateWorkerOptions,
   ListWorkersOptions,
-} from "./options.js";
-import type {
+} from "./options";
+import {
   RouterJobResponse,
   CancelJobResponse,
   CompleteJobResponse,
@@ -59,8 +60,8 @@ import type {
   AcceptJobOfferResponse,
   DeclineJobOfferResponse,
   RouterWorkerResponse,
-} from "./responses.js";
-import { TransformingPagedAsyncIterableIterator } from "./clientUtils.js";
+} from "./responses";
+import { TransformingPagedAsyncIterableIterator } from "./clientUtils";
 
 /**
  * Checks whether a value is of type {@link JobRouterClientOptions}.

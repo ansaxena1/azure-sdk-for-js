@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Receiver } from "rhea-promise";
-import { ReceiverEvents, delay } from "rhea-promise";
+import { Receiver, ReceiverEvents, delay } from "rhea-promise";
 import { ReceiverHelper } from "../../../src/core/receiverHelper.js";
 import { assertThrows } from "../../public/utils/testUtils.js";
 import { createRheaReceiverForTests } from "./unittestUtils.js";

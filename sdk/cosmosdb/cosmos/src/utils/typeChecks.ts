@@ -1,12 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
+  NonePartitionKeyLiteral,
   NonePartitionKeyType,
+  NullPartitionKeyLiteral,
   NullPartitionKeyType,
   PrimitivePartitionKeyValue,
 } from "../documents";
-import { NonePartitionKeyLiteral, NullPartitionKeyLiteral } from "../documents";
 
 /**
  * A type which could be any type but undefined

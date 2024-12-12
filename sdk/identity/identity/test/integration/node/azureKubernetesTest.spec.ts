@@ -1,14 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
+
+import { assert } from "chai";
 import { execSync } from "child_process";
 import { isLiveMode } from "@azure-tools/test-recorder";
-import { describe, it, assert, beforeEach } from "vitest";
 
 describe("Azure Kubernetes Integration test", function () {
   let podOutput: string;
-  beforeEach(async function (ctx) {
+  before(async function () {
     if (!isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
     const resourceGroup = requireEnvVar("IDENTITY_RESOURCE_GROUP");
     const aksClusterName = requireEnvVar("IDENTITY_AKS_CLUSTER_NAME");
@@ -37,9 +38,9 @@ describe("Azure Kubernetes Integration test", function () {
     podOutput = runCommand("kubectl", `exec ${podName} -- node /app/index.js`);
   });
 
-  it("can authenticate using managed identity", async function (ctx) {
+  it("can authenticate using managed identity", async function () {
     if (!isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
 
     assert.include(
@@ -49,9 +50,9 @@ describe("Azure Kubernetes Integration test", function () {
     );
   });
 
-  it("can authenticate using workload identity", async function (ctx) {
+  it("can authenticate using workload identity", async function () {
     if (!isLiveMode()) {
-      ctx.skip();
+      this.skip();
     }
 
     assert.include(

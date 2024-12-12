@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Client } from "@azure-rest/core-client";
-import type {
+import { Client } from "@azure-rest/core-client";
+import {
   MetadataPolicyGetParameters,
   MetadataPolicyListAllParameters,
   MetadataPolicyUpdateParameters,
   MetadataRolesListParameters,
 } from "./parameters";
-import type {
+import {
   MetadataPolicyGet200Response,
   MetadataPolicyGetdefaultResponse,
   MetadataPolicyListAll200Response,

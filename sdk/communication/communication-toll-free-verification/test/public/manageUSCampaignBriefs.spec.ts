@@ -1,35 +1,36 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   TollFreeVerificationClient,
   TollFreeVerificationUpsertCampaignBriefOptionalParams,
-} from "../../src/index.js";
+} from "../../src";
 import {
   assertEditableFieldsAreEqual,
   assertCampaignBriefSummaryEditableFieldsAreEqual,
   doesCampaignBriefExist,
   getTestUSCampaignBrief,
-} from "./utils/testUSCampaignBrief.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { createRecordedClient } from "./utils/recordedClient.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+} from "./utils/testUSCampaignBrief";
+import { Context } from "mocha";
+import { Recorder } from "@azure-tools/test-recorder";
+import { assert } from "chai";
+import { createRecordedClient } from "./utils/recordedClient";
 
 describe(`TollFreeVerificationClient - Campaign Brief`, function () {
   let recorder: Recorder;
   let client: TollFreeVerificationClient;
 
-  beforeEach(async function (ctx) {
-    ({ client, recorder } = await createRecordedClient(ctx));
+  beforeEach(async function (this: Context) {
+    ({ client, recorder } = await createRecordedClient(this));
   });
 
-  afterEach(async function (ctx) {
-    if (!ctx.task.pending) {
+  afterEach(async function (this: Context) {
+    if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("can manage a Brief", { timeout: 35000 }, async function () {
+  it("can manage a Brief", async function () {
     const testBrief = getTestUSCampaignBrief();
     const uscb = testBrief.campaignBrief;
     const uscbsumm = testBrief.campaignBriefSummary;
@@ -92,5 +93,5 @@ describe(`TollFreeVerificationClient - Campaign Brief`, function () {
       await doesCampaignBriefExist(client, uscb.id),
       "Delete campaign brief was unsuccessful, campaign brief is still returned",
     );
-  });
+  }).timeout(35000);
 });

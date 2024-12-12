@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 import { ChangeFeedIterator } from "../../ChangeFeedIterator";
-import type { ChangeFeedOptions } from "../../ChangeFeedOptions";
-import type { ClientContext } from "../../ClientContext";
+import { ChangeFeedOptions } from "../../ChangeFeedOptions";
+import { ClientContext } from "../../ClientContext";
 import {
   getIdFromLink,
   getPathFromLink,
@@ -13,38 +13,38 @@ import {
   SubStatusCodes,
 } from "../../common";
 import { extractPartitionKeys, setPartitionKeyIfUndefined } from "../../extractPartitionKey";
-import type { FetchFunctionCallback, SqlQuerySpec } from "../../queryExecutionContext";
+import { FetchFunctionCallback, SqlQuerySpec } from "../../queryExecutionContext";
 import { QueryIterator } from "../../queryIterator";
-import type { FeedOptions, RequestOptions, Response } from "../../request";
-import type { Container, PartitionKeyRange } from "../Container";
+import { FeedOptions, RequestOptions, Response } from "../../request";
+import { Container, PartitionKeyRange } from "../Container";
 import { Item } from "./Item";
-import type { ItemDefinition } from "./ItemDefinition";
+import { ItemDefinition } from "./ItemDefinition";
 import { ItemResponse } from "./ItemResponse";
-import type {
+import {
   Batch,
+  isKeyInRange,
+  prepareOperations,
   OperationResponse,
   OperationInput,
   BulkOptions,
-  BulkOperationResponse,
-} from "../../utils/batch";
-import {
-  isKeyInRange,
-  prepareOperations,
   decorateBatchOperation,
   splitBatchBasedOnBodySize,
+  BulkOperationResponse,
 } from "../../utils/batch";
 import { assertNotUndefined, isPrimitivePartitionKeyValue } from "../../utils/typeChecks";
 import { hashPartitionKey } from "../../utils/hashing/hash";
-import type { PartitionKey, PartitionKeyDefinition } from "../../documents";
+import { PartitionKey, PartitionKeyDefinition } from "../../documents";
 import { PartitionKeyRangeCache, QueryRange } from "../../routing";
-import type {
+import {
   ChangeFeedPullModelIterator,
   ChangeFeedIteratorOptions,
+  changeFeedIteratorBuilder,
 } from "../../client/ChangeFeed";
-import { changeFeedIteratorBuilder } from "../../client/ChangeFeed";
 import { validateChangeFeedIteratorOptions } from "../../client/ChangeFeed/changeFeedUtils";
-import type { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
-import { DiagnosticNodeType } from "../../diagnostics/DiagnosticNodeInternal";
+import {
+  DiagnosticNodeInternal,
+  DiagnosticNodeType,
+} from "../../diagnostics/DiagnosticNodeInternal";
 import {
   getEmptyCosmosDiagnostics,
   withDiagnostics,

@@ -8,20 +8,21 @@ import {
   getJobRequest,
   getQueueRequest,
   getWorkerRequest,
-} from "../utils/testData.js";
-import type {
+} from "../utils/testData";
+import { assert } from "chai";
+import {
   RouterJobAssignment,
   RouterJobOffer,
   JobRouterAdministrationClient,
   JobRouterClient,
-} from "../../../src/index.js";
-import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient.js";
-import { timeoutMs } from "../utils/constants.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { pollForJobAssignment, pollForJobOffer } from "../utils/polling.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+} from "../../../src";
+import { Context } from "mocha";
+import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient";
+import { timeoutMs } from "../utils/constants";
+import { Recorder } from "@azure-tools/test-recorder";
+import { pollForJobAssignment, pollForJobOffer } from "../utils/polling";
 
-describe("JobRouterClient", () => {
+describe("JobRouterClient", function () {
   let client: JobRouterClient;
   let administrationClient: JobRouterAdministrationClient;
   let recorder: Recorder;
@@ -37,10 +38,10 @@ describe("JobRouterClient", () => {
   const { jobId, jobRequest } = getJobRequest(testRunId);
   const { workerId, workerRequest } = getWorkerRequest(testRunId);
 
-  describe("Assignment Scenario", () => {
-    beforeEach(async (ctx) => {
+  describe("Assignment Scenario", function () {
+    this.beforeEach(async function (this: Context) {
       ({ client, administrationClient, recorder } =
-        await createRecordedRouterClientWithConnectionString(ctx));
+        await createRecordedRouterClientWithConnectionString(this));
 
       await administrationClient.createExceptionPolicy(exceptionPolicyId, exceptionPolicyRequest);
       await administrationClient.createDistributionPolicy(
@@ -55,7 +56,7 @@ describe("JobRouterClient", () => {
       await client.createWorker(workerId, { ...workerRequest, availableForOffers: true });
     });
 
-    afterEach(async (ctx) => {
+    this.afterEach(async function (this: Context) {
       await client.deleteWorker(workerId);
       await client.deleteJob(jobId);
       await administrationClient.deleteClassificationPolicy(classificationPolicyId);
@@ -63,12 +64,12 @@ describe("JobRouterClient", () => {
       await administrationClient.deleteDistributionPolicy(distributionPolicyId);
       await administrationClient.deleteExceptionPolicy(exceptionPolicyId);
 
-      if (!ctx.task.pending && recorder) {
+      if (!this.currentTest?.isPending() && recorder) {
         await recorder.stop();
       }
     });
 
-    it("should complete assignment scenario", { timeout: timeoutMs }, async () => {
+    it("should complete assignment scenario", async () => {
       await client.createJob(jobId, jobRequest);
 
       const offer: RouterJobOffer = await pollForJobOffer(workerId, client);
@@ -92,6 +93,6 @@ describe("JobRouterClient", () => {
 
       const closeJobResponse = await client.closeJob(jobId, acceptOfferResponse.assignmentId);
       assert.isNotNull(closeJobResponse);
-    });
+    }).timeout(timeoutMs);
   });
 });

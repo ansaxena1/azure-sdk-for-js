@@ -9,7 +9,7 @@
  * If you need to make changes, please do so in the original source file, \{project-root\}/sources/custom
  */
 
-import type {
+import {
   ListWidgets200Response,
   ListWidgetsDefaultResponse,
   CreateWidget201Response,

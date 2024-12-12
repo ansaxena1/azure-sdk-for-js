@@ -10,7 +10,7 @@
 // Licensed under the MIT License.
 import {
   LinkerResource,
-  ServiceLinkerManagementClient,
+  ServiceLinkerManagementClient
 } from "@azure/arm-servicelinker";
 import { DefaultAzureCredential } from "@azure/identity";
 import * as dotenv from "dotenv";
@@ -18,12 +18,12 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 /**
- * This sample demonstrates how to Create or update Linker resource.
+ * This sample demonstrates how to Create or update linker resource.
  *
- * @summary Create or update Linker resource.
- * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/examples/PutLinker.json
+ * @summary Create or update linker resource.
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/PutLink.json
  */
-async function putLinker() {
+async function putLink() {
   const resourceUri =
     "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
   const linkerName = "linkName";
@@ -31,26 +31,97 @@ async function putLinker() {
     authInfo: {
       name: "name",
       authType: "secret",
-      secretInfo: { secretType: "rawValue", value: "secret" },
+      secretInfo: { secretType: "rawValue", value: "secret" }
     },
     targetService: {
       type: "AzureResource",
-      id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db",
-    },
-    vNetSolution: { type: "serviceEndpoint" },
+      id:
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
+    }
   };
   const credential = new DefaultAzureCredential();
   const client = new ServiceLinkerManagementClient(credential);
   const result = await client.linker.beginCreateOrUpdateAndWait(
     resourceUri,
     linkerName,
-    parameters,
+    parameters
+  );
+  console.log(result);
+}
+
+/**
+ * This sample demonstrates how to Create or update linker resource.
+ *
+ * @summary Create or update linker resource.
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/PutLinkWithSecretStore.json
+ */
+async function putLinkWithSecretStore() {
+  const resourceUri =
+    "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
+  const linkerName = "linkName";
+  const parameters: LinkerResource = {
+    authInfo: { authType: "secret" },
+    secretStore: {
+      keyVaultId:
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/test-kv"
+    },
+    targetService: {
+      type: "AzureResource",
+      id:
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"
+    }
+  };
+  const credential = new DefaultAzureCredential();
+  const client = new ServiceLinkerManagementClient(credential);
+  const result = await client.linker.beginCreateOrUpdateAndWait(
+    resourceUri,
+    linkerName,
+    parameters
+  );
+  console.log(result);
+}
+
+/**
+ * This sample demonstrates how to Create or update linker resource.
+ *
+ * @summary Create or update linker resource.
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/PutLinkWithServiceEndpoint.json
+ */
+async function putLinkWithServiceEndpoint() {
+  const resourceUri =
+    "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
+  const linkerName = "linkName";
+  const parameters: LinkerResource = {
+    authInfo: {
+      name: "name",
+      authType: "secret",
+      secretInfo: {
+        secretType: "keyVaultSecretUri",
+        value:
+          "https://vault-name.vault.azure.net/secrets/secret-name/00000000000000000000000000000000"
+      }
+    },
+    targetService: {
+      type: "AzureResource",
+      id:
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
+    },
+    vNetSolution: { type: "serviceEndpoint" }
+  };
+  const credential = new DefaultAzureCredential();
+  const client = new ServiceLinkerManagementClient(credential);
+  const result = await client.linker.beginCreateOrUpdateAndWait(
+    resourceUri,
+    linkerName,
+    parameters
   );
   console.log(result);
 }
 
 async function main() {
-  putLinker();
+  putLink();
+  putLinkWithSecretStore();
+  putLinkWithServiceEndpoint();
 }
 
 main().catch(console.error);

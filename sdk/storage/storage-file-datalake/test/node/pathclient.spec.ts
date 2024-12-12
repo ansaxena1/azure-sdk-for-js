@@ -3,24 +3,22 @@
 
 import { Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 import { join } from "path";
 
 import * as fs from "fs";
 
-import type {
+import {
   AccessControlChangeCounters,
   AccessControlChanges,
-  DataLakeFileSystemClient,
-  DataLakeServiceClient,
-  PathAccessControlItem,
-  PathPermissions,
-} from "../../src";
-import {
   DataLakeFileClient,
+  DataLakeFileSystemClient,
   DataLakePathClient,
   DataLakeSASPermissions,
+  DataLakeServiceClient,
   getDataLakeServiceAccountAudience,
+  PathAccessControlItem,
+  PathPermissions,
 } from "../../src";
 import { toAcl, toRemoveAcl } from "../../src/transforms";
 import {

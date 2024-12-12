@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
+import { AbortSignalLike } from "@azure/abort-controller";
 import { delay } from "@azure/core-util";
 import EventEmitter from "events";
-import type { SendMessageErrorOptions } from "./errors";
-import { SendMessageError } from "./errors";
+import { SendMessageError, SendMessageErrorOptions } from "./errors";
 import { logger } from "./logger";
-import type {
+import {
   WebPubSubResult,
   JoinGroupOptions,
   LeaveGroupOptions,
@@ -24,7 +23,7 @@ import type {
   StartOptions,
   GetClientAccessUrlOptions,
 } from "./models";
-import type {
+import {
   ConnectedMessage,
   DisconnectedMessage,
   GroupDataMessage,
@@ -38,14 +37,10 @@ import type {
   AckMessage,
   SequenceAckMessage,
 } from "./models/messages";
-import type { WebPubSubClientProtocol } from "./protocols";
-import { WebPubSubJsonReliableProtocol } from "./protocols";
-import type { WebPubSubClientCredential } from "./webPubSubClientCredential";
+import { WebPubSubClientProtocol, WebPubSubJsonReliableProtocol } from "./protocols";
+import { WebPubSubClientCredential } from "./webPubSubClientCredential";
 import { WebSocketClientFactory } from "./websocket/websocketClient";
-import type {
-  WebSocketClientFactoryLike,
-  WebSocketClientLike,
-} from "./websocket/websocketClientLike";
+import { WebSocketClientFactoryLike, WebSocketClientLike } from "./websocket/websocketClientLike";
 import { abortablePromise } from "./utils/abortablePromise";
 
 enum WebPubSubClientState {

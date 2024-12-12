@@ -1,14 +1,16 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AssetConversionOutput,
   AssetConversionSettings,
   Conversion,
+  KnownAssetConversionStatus,
 } from "../generated/models/index";
-import { KnownAssetConversionStatus } from "../generated/models/index";
-import type { RemoteRenderingServiceError } from "../remoteRenderingServiceError";
-import { createRemoteRenderingServiceError } from "../remoteRenderingServiceError";
+import {
+  RemoteRenderingServiceError,
+  createRemoteRenderingServiceError,
+} from "../remoteRenderingServiceError";
 
 /** Properties available for an AssetConversion in any state. */
 export interface AssetConversionBase {

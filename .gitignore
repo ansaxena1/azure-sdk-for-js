@@ -192,6 +192,3 @@ sdk/template/template-dpg/src/src
 # sshkey
 sdk/**/sshKey
 sdk/**/sshKey.pub
-
-# vitest results
-.vite/vitest/results.json

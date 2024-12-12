@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Recorder } from "@azure-tools/test-recorder";
-import { isPlaybackMode, testPollingOptions } from "@azure-tools/test-recorder";
-import type { AppConfigurationClient } from "../../src/appConfigurationClient.js";
-import type {
+import { Recorder, isPlaybackMode, testPollingOptions } from "@azure-tools/test-recorder";
+import { AppConfigurationClient } from "../../src/appConfigurationClient.js";
+import {
   ConfigurationSnapshot,
   ConfigurationSettingsFilter,
   CreateSnapshotResponse,

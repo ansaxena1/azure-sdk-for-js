@@ -1,18 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env, isPlaybackMode } from "@azure-tools/test-recorder";
+import { Recorder, env, isPlaybackMode } from "@azure-tools/test-recorder";
 import { assert } from "chai";
 import { createRecorder } from "./utils/recordedClient";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type {
+import ContainerServiceManagementClient, {
   ContainerServiceClient,
   ManagedClusterOutput,
   ManagedClusterUpgradeProfileOutput,
+  getLongRunningPoller,
+  paginate,
 } from "../../src";
-import ContainerServiceManagementClient, { getLongRunningPoller, paginate } from "../../src";
 
 export const testPollingOptions = {
   intervalInMs: isPlaybackMode() ? 0 : undefined,

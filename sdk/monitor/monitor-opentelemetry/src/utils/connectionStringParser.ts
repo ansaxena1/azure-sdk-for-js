@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { diag } from "@opentelemetry/api";
-import type { ConnectionString, ConnectionStringKey } from "./types";
+import { ConnectionString, ConnectionStringKey } from "./types";
 import { DEFAULT_BREEZE_ENDPOINT, DEFAULT_LIVEMETRICS_ENDPOINT } from "../types";
 
 /**

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Paged } from "@azure/core-paging";
+import { Paged } from "@azure/core-paging";
 
 /** Operation info. */
 export interface OperationDetailsOutputParent {

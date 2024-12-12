@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { FullOperationResponse } from "@azure/core-client";
-import type {
+import { FullOperationResponse } from "@azure/core-client";
+import {
   PipelinePolicy,
   PipelineRequest,
   PipelineResponse,

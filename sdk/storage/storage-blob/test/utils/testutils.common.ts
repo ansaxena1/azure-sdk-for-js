@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 
 import { padStart } from "../../src/utils/utils.common";
-import type { TokenCredential, GetTokenOptions, AccessToken } from "@azure/core-auth";
-import type { RecorderStartOptions } from "@azure-tools/test-recorder";
-import { isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
-import type { StorageClient } from "../../src/StorageClient";
-import type { Pipeline } from "@azure/core-rest-pipeline";
-import type {
+import { TokenCredential, GetTokenOptions, AccessToken } from "@azure/core-auth";
+import { isPlaybackMode, Recorder, RecorderStartOptions } from "@azure-tools/test-recorder";
+import { StorageClient } from "../../src/StorageClient";
+import { Pipeline } from "@azure/core-rest-pipeline";
+import {
   FindReplaceSanitizer,
   RegexSanitizer,
 } from "@azure-tools/test-recorder/types/src/utils/utils";

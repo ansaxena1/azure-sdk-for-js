@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
-import type {
+import { Context } from "mocha";
+import {
   DataSourceDataLakeGen2SharedKey,
   DataSourceDataLakeGen2SharedKeyPatch,
   DataSourceServicePrincipal,
@@ -19,7 +19,7 @@ import {
   getRecorderUniqueVariable,
   makeCredential,
 } from "./util/recordedClients";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Recorder } from "@azure-tools/test-recorder";
 import { getYieldedValue } from "@azure-tools/test-utils";
 
 describe("DataSourceCredential", () => {

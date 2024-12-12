@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import atob from "../utils/atob";
-import type { ResourceType } from "../common";
-import { Constants, getContainerLink, OperationType, trimSlashes } from "../common";
-import type { CosmosHeaders } from "../queryExecutionContext";
-import type { SessionContext } from "./SessionContext";
+import { Constants, getContainerLink, OperationType, ResourceType, trimSlashes } from "../common";
+import { CosmosHeaders } from "../queryExecutionContext";
+import { SessionContext } from "./SessionContext";
 import { VectorSessionToken } from "./VectorSessionToken";
 
 /** @hidden */

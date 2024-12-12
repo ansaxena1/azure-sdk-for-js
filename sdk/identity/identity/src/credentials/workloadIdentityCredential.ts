@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
-import { credentialLogger, processEnvVars } from "../util/logging.js";
+import { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { credentialLogger, processEnvVars } from "../util/logging";
 
-import { ClientAssertionCredential } from "./clientAssertionCredential.js";
-import { CredentialUnavailableError } from "../errors.js";
-import type { WorkloadIdentityCredentialOptions } from "./workloadIdentityCredentialOptions.js";
-import { checkTenantId } from "../util/tenantIdUtils.js";
-import { readFile } from "node:fs/promises";
+import { ClientAssertionCredential } from "./clientAssertionCredential";
+import { CredentialUnavailableError } from "../errors";
+import { WorkloadIdentityCredentialOptions } from "./workloadIdentityCredentialOptions";
+import { checkTenantId } from "../util/tenantIdUtils";
+import { readFile } from "fs/promises";
 
 const credentialName = "WorkloadIdentityCredential";
 /**

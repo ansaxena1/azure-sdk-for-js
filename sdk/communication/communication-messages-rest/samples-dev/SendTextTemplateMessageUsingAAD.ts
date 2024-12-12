@@ -1,5 +1,5 @@
 // Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
+// Licensed under the MIT Licence.
 
 /**
  * @summary Use AAD token credentials when sending a whatsapp template message.
@@ -12,14 +12,13 @@ import NotificationClient, {
     MessageTemplate,
     MessageTemplateValue,
     MessageTemplateBindings,
-    isUnexpected,
 } from "@azure-rest/communication-messages";
 
 // Load the .env file if it exists
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export async function main(): Promise<void> {
+export async function main() {
     // You will need to set this environment variable or edit the following values
     const endpoint = process.env.ACS_URL || "";
 
@@ -77,17 +76,17 @@ export async function main(): Promise<void> {
 
     console.log("Response: " + JSON.stringify(result, null, 2));
 
-    if(isUnexpected(result)) {
+    if (result.status === "202") {
+        const response:Send202Response = result as Send202Response;
+        response.body.receipts.forEach((receipt) => {
+            console.log("Message sent to:"+receipt.to+" with message id:"+receipt.messageId);
+        });
+    } else {
         throw new Error("Failed to send message");
     }
-
-    const response:Send202Response = result as Send202Response;
-    response.body.receipts.forEach((receipt) => {
-        console.log("Message sent to:" + receipt.to + " with message id:" + receipt.messageId);
-    });
 }
 
 main().catch((error) => {
     console.error("Encountered an error while sending message: ", error);
-    throw error;
+    process.exit(1);
 });

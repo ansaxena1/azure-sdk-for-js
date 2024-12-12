@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
-import type { Context } from "mocha";
-import type { MapsRenderClient } from "../../src";
-import { isUnexpected, positionToTileXY } from "../../src";
+import { Context } from "mocha";
+import { isUnexpected, MapsRenderClient, positionToTileXY } from "../../src";
 import { createClient, createRecorder } from "./utils/recordedClient";
 
 describe("position to tile index helper", function () {

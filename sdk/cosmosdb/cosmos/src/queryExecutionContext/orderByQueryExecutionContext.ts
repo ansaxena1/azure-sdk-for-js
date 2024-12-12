@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ClientContext } from "../ClientContext";
-import type { PartitionedQueryExecutionInfo } from "../request/ErrorResponse";
-import type { FeedOptions } from "../request/FeedOptions";
-import type { DocumentProducer } from "./documentProducer";
-import type { ExecutionContext } from "./ExecutionContext";
+import { ClientContext } from "../ClientContext";
+import { PartitionedQueryExecutionInfo } from "../request/ErrorResponse";
+import { FeedOptions } from "../request/FeedOptions";
+import { DocumentProducer } from "./documentProducer";
+import { ExecutionContext } from "./ExecutionContext";
 import { OrderByDocumentProducerComparator } from "./orderByDocumentProducerComparator";
 import { ParallelQueryExecutionContextBase } from "./parallelQueryExecutionContextBase";
-import type { SqlQuerySpec } from "./SqlQuerySpec";
+import { SqlQuerySpec } from "./SqlQuerySpec";
 
 /** @hidden */
 export class OrderByQueryExecutionContext

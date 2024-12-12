@@ -1,24 +1,28 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+import { assert, use as chaiUse, expect } from "chai";
+import { Context } from "mocha";
+import chaiPromises from "chai-as-promised";
+chaiUse(chaiPromises);
+
 import { Recorder } from "@azure-tools/test-recorder";
 
-import type { EndpointType } from "../utils/recordedClient.js";
 import {
+  EndpointType,
   createRecordedAdminClient,
   createRecordedClient,
   recorderOptions,
-} from "../utils/recordedClient.js";
-import * as base64url from "../utils/base64url.js";
+} from "../utils/recordedClient";
+import * as base64url from "../utils/base64url";
 
-import { KnownAttestationType } from "../../src/index.js";
-import { describe, it, assert, expect, beforeEach, afterEach } from "vitest";
+import { KnownAttestationType } from "../../src";
 
 describe("AttestationClient in Browser", function () {
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    recorder = new Recorder(ctx);
+  beforeEach(async function (this: Context) {
+    recorder = new Recorder(this.currentTest);
     await recorder.start(recorderOptions);
   });
 
@@ -200,7 +204,7 @@ describe("AttestationClient in Browser", function () {
           runTimeData: binaryRuntimeData,
           runTimeJson: binaryRuntimeData,
         }),
-      ).rejects.toThrow("Cannot provide both runTimeData and runTimeJson");
+      ).to.eventually.be.rejectedWith("Cannot provide both runTimeData and runTimeJson");
     }
 
     {
@@ -259,7 +263,7 @@ describe("AttestationClient in Browser", function () {
             runTimeJson: binaryRuntimeData,
           },
         ),
-      ).rejects.toThrow("Cannot provide both runTimeData and runTimeJson");
+      ).to.eventually.be.rejectedWith("Cannot provide both runTimeData and runTimeJson");
     }
 
     {

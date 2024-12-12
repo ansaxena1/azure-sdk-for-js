@@ -1,7 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
+  CloseReason,
   EventData,
   EventHubConsumerClient,
   EventHubProducerClient,
@@ -9,9 +10,6 @@ import type {
   ReceivedEventData,
   Subscription,
   SubscriptionEventHandlers,
-} from "../../src/index.js";
-import {
-  CloseReason,
   earliestEventPosition,
   latestEventPosition,
   logger,

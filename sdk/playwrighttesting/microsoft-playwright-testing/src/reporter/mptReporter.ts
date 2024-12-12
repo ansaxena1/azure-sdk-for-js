@@ -17,19 +17,17 @@ import {
 } from "../common/constants";
 import { EnvironmentVariables } from "../common/environmentVariables";
 import { MultiMap } from "../common/multimap";
-import type { EntraTokenDetails } from "../model/entraTokenDetails";
-import type { MPTTokenDetails } from "../model/mptTokenDetails";
-import { TokenType } from "../model/mptTokenDetails";
-import type { Shard, UploadMetadata } from "../model/shard";
-import type { StorageUri } from "../model/storageUri";
-import type { TestResult as MPTTestResult, RawTestResult } from "../model/testResult";
-import type { TestRun } from "../model/testRun";
-import type { CIInfo } from "../utils/cIInfoProvider";
-import { CIInfoProvider } from "../utils/cIInfoProvider";
+import { EntraTokenDetails } from "../model/entraTokenDetails";
+import { MPTTokenDetails, TokenType } from "../model/mptTokenDetails";
+import { Shard, UploadMetadata } from "../model/shard";
+import { StorageUri } from "../model/storageUri";
+import { TestResult as MPTTestResult, RawTestResult } from "../model/testResult";
+import { TestRun } from "../model/testRun";
+import { CIInfo, CIInfoProvider } from "../utils/cIInfoProvider";
 import ReporterUtils from "../utils/reporterUtils";
 import { ServiceClient } from "../utils/serviceClient";
 import { StorageClient } from "../utils/storageClient";
-import type { MPTReporterConfig } from "../common/types";
+import { MPTReporterConfig } from "../common/types";
 import { ServiceErrorMessageConstants } from "../common/messages";
 import { validateMptPAT, populateValuesFromServiceUrl } from "../utils/utils";
 
@@ -233,7 +231,7 @@ class MPTReporter implements Reporter {
         `\nTest run report successfully initialized: ${testRunResponse?.displayName}.`,
       );
       process.stdout.write(
-        `Initializing reporting for this test run. You can view the results at: https://playwright.microsoft.com/workspaces/${encodeURIComponent(this.envVariables.accountId!)}/runs/${encodeURIComponent(this.envVariables.runId!)}\n`,
+        `Initializing reporting for this test run. You can view the results at: https://playwright.microsoft.com/workspaces/${this.envVariables.accountId}/runs/${this.envVariables.runId}\n`,
       );
       const shardResponse = await this.serviceClient.postTestRunShardStart();
       this.shard = shardResponse;
@@ -243,9 +241,9 @@ class MPTReporter implements Reporter {
         this.envVariables.accountId &&
         this.envVariables.runId
       ) {
-        this.testRunUrl = `${Constants.DEFAULT_DASHBOARD_ENDPOINT}/workspaces/${encodeURIComponent(
+        this.testRunUrl = `${Constants.DEFAULT_DASHBOARD_ENDPOINT}/workspaces/${encodeURI(
           this.envVariables.accountId,
-        )}/runs/${encodeURIComponent(this.envVariables.runId)}`;
+        )}/runs/${encodeURI(this.envVariables.runId)}`;
       }
       return true;
     } catch (err: any) {
@@ -334,7 +332,7 @@ class MPTReporter implements Reporter {
             `\nFetched SAS URI with validity: ${this.sasUri.expiresAt} and access: ${this.sasUri.accessLevel}.`,
           );
         }
-        await this.storageClient.uploadFile(this.sasUri.uri, attachmentPath, fileRelativePath);
+        this.storageClient.uploadFile(this.sasUri.uri, attachmentPath, fileRelativePath);
       }
       const rawTestResult = this.testRawResults.get(testExecutionId);
       if (
@@ -344,7 +342,7 @@ class MPTReporter implements Reporter {
         // Renew the sas uri
         this.sasUri = await this.serviceClient.createStorageUri();
       }
-      await this.storageClient.uploadBuffer(
+      this.storageClient.uploadBuffer(
         this.sasUri.uri,
         rawTestResult[0]!,
         `${testExecutionId}/rawTestResult.json`,

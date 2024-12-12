@@ -4,7 +4,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import type {
+import {
   DocumentTranslate200Response,
   DocumentTranslateDefaultResponse,
   StartTranslation202Response,

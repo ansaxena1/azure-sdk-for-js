@@ -1,14 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PollOperationState, PollOperation, CancelOnProgress } from "@azure/core-lro";
-import { Poller } from "@azure/core-lro";
+import { PollOperationState, Poller, PollOperation, CancelOnProgress } from "@azure/core-lro";
 import { KnownRenderingSessionStatus, KnownRenderingServerSize } from "../generated/models/index";
 import { getSessionInternal, endSessionInternal } from "../internal/commonQueries";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { RemoteRendering } from "../generated/operationsInterfaces";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { RemoteRendering } from "../generated/operationsInterfaces";
 import { delay } from "@azure/core-util";
-import type { RenderingSession } from "../internal/renderingSession";
+import { RenderingSession } from "../internal/renderingSession";
 
 /**
  * Abstract representation of a poller, intended to expose just the minimal API that the user needs to work with.

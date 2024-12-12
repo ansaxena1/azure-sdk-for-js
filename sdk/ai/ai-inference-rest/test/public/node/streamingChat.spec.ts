@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 
 import { createRecorder, createModelClient } from "../utils/recordedClient.js";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Recorder } from "@azure-tools/test-recorder";
 import { createSseStream } from "@azure/core-sse";
 import { assert, beforeEach, afterEach, it, describe } from "vitest";
-import type { ModelClient } from "../../../src/index.js";
+import { ModelClient } from "../../../src/index.js";
 
 describe("chat test suite", () => {
   let recorder: Recorder;

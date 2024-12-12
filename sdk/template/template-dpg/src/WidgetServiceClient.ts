@@ -9,11 +9,9 @@
  * If you need to make changes, please do so in the original source file, \{project-root\}/sources/custom
  */
 
-import type { TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type { WidgetServiceClientOptions } from "./api/WidgetServiceContext.js";
-import { createWidgetService } from "./api/WidgetServiceContext.js";
-import type {
+import { TokenCredential, isTokenCredential } from "@azure/core-auth";
+import { WidgetServiceClientOptions, createWidgetService } from "./api/WidgetServiceContext.js";
+import {
   AnalyzeResult,
   AnalyzeWidgetOptions,
   ColorType,
@@ -23,8 +21,6 @@ import type {
   ListWidgetsOptions,
   UpdateWidgetOptions,
   Widget,
-} from "./api/index.js";
-import {
   analyzeWidget,
   createWidget,
   deleteWidget,
@@ -32,7 +28,7 @@ import {
   listWidgets,
   updateWidget,
 } from "./api/index.js";
-import type { WidgetServiceContext } from "./rest/clientDefinitions.js";
+import { WidgetServiceContext } from "./rest/clientDefinitions.js";
 
 export { WidgetServiceClientOptions } from "./api/WidgetServiceContext.js";
 

@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken } from "@azure/core-auth";
+import { AccessToken, GetTokenOptions } from "@azure/core-auth";
 
-import type { IdentityClient } from "../../client/identityClient.js";
+import { IdentityClient } from "../../client/identityClient";
 
 /**
  * @internal
@@ -26,3 +26,21 @@ export interface MSIConfiguration {
  * with an expiration time and the time in which token should refresh.
  */
 export declare interface MSIToken extends AccessToken {}
+
+/**
+ * @internal
+ */
+export interface MSI {
+  name: string;
+  isAvailable(options: {
+    scopes: string | string[];
+    identityClient?: IdentityClient;
+    clientId?: string;
+    resourceId?: string;
+    getTokenOptions?: GetTokenOptions;
+  }): Promise<boolean>;
+  getToken(
+    configuration: MSIConfiguration,
+    getTokenOptions?: GetTokenOptions,
+  ): Promise<MSIToken | null>;
+}

@@ -1,38 +1,34 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
-import { createRecorderWithConnectionString } from "./utils/recordedClient.js";
-import type {
+import { Recorder, env } from "@azure-tools/test-recorder";
+import { assert } from "chai";
+import { createRecorderWithConnectionString } from "./utils/recordedClient";
+import { Context } from "mocha";
+import {
   MessagesServiceClient,
   Send202Response,
   MessageTemplate,
   MessageTemplateValue,
   MessageTemplateBindings,
   PagedMessageTemplateItemOutput,
-  ImageNotificationContent,
-  AudioNotificationContent,
-  VideoNotificationContent,
-  DocumentNotificationContent,
-} from "../../src/generated/src/index.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+} from "../../src/generated/src";
 
 describe("Notification Messages Test", () => {
   let recorder: Recorder;
   let client: MessagesServiceClient;
 
-  beforeEach(async (ctx) => {
-    ({ client, recorder } = await createRecorderWithConnectionString(ctx));
+  beforeEach(async function (this: Context) {
+    ({ client, recorder } = await createRecorderWithConnectionString(this));
   });
 
-  afterEach(async (ctx) => {
-    if (!ctx.task.pending) {
+  afterEach(async function () {
+    if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("send simple text message test", async () => {
+  it("send simple text message test", async function () {
     const result = await client.path("/messages/notifications:send").post({
       contentType: "application/json",
       body: {
@@ -48,17 +44,15 @@ describe("Notification Messages Test", () => {
     assert.isDefined(response.body.receipts[0].messageId);
   });
 
-  it("send document message test", async () => {
-    const documentMessage: DocumentNotificationContent = {
-      kind: "document",
-      mediaUri: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-      channelRegistrationId: env.CHANNEL_ID || "",
-      to: [env.RECIPIENT_PHONE_NUMBER || ""],
-    };
-
+  it("send image message test", async function () {
     const result = await client.path("/messages/notifications:send").post({
       contentType: "application/json",
-      body: documentMessage,
+      body: {
+        channelRegistrationId: env.CHANNEL_ID || "",
+        to: [env.RECIPIENT_PHONE_NUMBER || ""],
+        kind: "image",
+        mediaUri: "https://www.w3schools.com/w3css/img_lights.jpg",
+      },
     });
     assert.equal(result.status, "202");
     const response: Send202Response = result as Send202Response;
@@ -66,62 +60,7 @@ describe("Notification Messages Test", () => {
     assert.isDefined(response.body.receipts[0].messageId);
   });
 
-  it("send video message test", async () => {
-    const videoMessage: VideoNotificationContent = {
-      kind: "video",
-      mediaUri: "https://sample-videos.com/video321/mp4/480/big_buck_bunny_480p_1mb.mp4",
-      channelRegistrationId: env.CHANNEL_ID || "",
-      to: [env.RECIPIENT_PHONE_NUMBER || ""],
-    };
-
-    const result = await client.path("/messages/notifications:send").post({
-      contentType: "application/json",
-      body: videoMessage,
-    });
-    assert.equal(result.status, "202");
-    const response: Send202Response = result as Send202Response;
-    assert.equal(response.body.receipts.length, 1);
-    assert.isDefined(response.body.receipts[0].messageId);
-  });
-
-  it("send audio message test", async () => {
-    const audioMessage: AudioNotificationContent = {
-      kind: "audio",
-      mediaUri: "https://sample-videos.com/audio/mp3/wave.mp3",
-      channelRegistrationId: env.CHANNEL_ID || "",
-      to: [env.RECIPIENT_PHONE_NUMBER || ""],
-    };
-
-    const result = await client.path("/messages/notifications:send").post({
-      contentType: "application/json",
-      body: audioMessage,
-    });
-    assert.equal(result.status, "202");
-    const response: Send202Response = result as Send202Response;
-    assert.equal(response.body.receipts.length, 1);
-    assert.isDefined(response.body.receipts[0].messageId);
-  });
-
-  it("send image message test", async () => {
-    const imageMessage: ImageNotificationContent = {
-      kind: "image",
-      mediaUri: "https://www.w3schools.com/w3css/img_lights.jpg",
-      channelRegistrationId: env.CHANNEL_ID || "",
-      to: [env.RECIPIENT_PHONE_NUMBER || ""],
-      caption: "awesome",
-    };
-
-    const result = await client.path("/messages/notifications:send").post({
-      contentType: "application/json",
-      body: imageMessage,
-    });
-    assert.equal(result.status, "202");
-    const response: Send202Response = result as Send202Response;
-    assert.equal(response.body.receipts.length, 1);
-    assert.isDefined(response.body.receipts[0].messageId);
-  });
-
-  it("send simple text template message test", async () => {
+  it("send simple text template message test", async function () {
     const DaysTemplateValue: MessageTemplateValue = {
       kind: "text",
       name: "Days",
@@ -159,7 +98,7 @@ describe("Notification Messages Test", () => {
     assert.isDefined(response.body.receipts[0].messageId);
   });
 
-  it("send template message with video test", async () => {
+  it("send template message with video test", async function () {
     const HeaderVideo: MessageTemplateValue = {
       kind: "video",
       name: "HappyHourVideo",
@@ -217,7 +156,7 @@ describe("Notification Messages Test", () => {
     assert.isDefined(response.body.receipts[0].messageId);
   });
 
-  it("send template message with image test", async () => {
+  it("send template message with image test", async function () {
     const HeaderImage: MessageTemplateValue = {
       kind: "image",
       name: "CompanyPhoto",
@@ -266,7 +205,7 @@ describe("Notification Messages Test", () => {
     assert.isDefined(response.body.receipts[0].messageId);
   });
 
-  it("send template message with document test", async () => {
+  it("send template message with document test", async function () {
     const HeaderDoc: MessageTemplateValue = {
       kind: "document",
       name: "BoardingPass",
@@ -333,7 +272,7 @@ describe("Notification Messages Test", () => {
     assert.isDefined(response.body.receipts[0].messageId);
   });
 
-  it("send template message with quick reply buttons test", async () => {
+  it("send template message with quick reply buttons test", async function () {
     const NameTemplateValue: MessageTemplateValue = {
       kind: "text",
       name: "NameValue",
@@ -398,17 +337,17 @@ describe("Message Template Read Test", () => {
   let recorder: Recorder;
   let client: MessagesServiceClient;
 
-  beforeEach(async (ctx) => {
-    ({ client, recorder } = await createRecorderWithConnectionString(ctx));
+  beforeEach(async function (this: Context) {
+    ({ client, recorder } = await createRecorderWithConnectionString(this));
   });
 
-  afterEach(async (ctx) => {
-    if (!ctx.task.pending) {
+  afterEach(async function () {
+    if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("get template test", async () => {
+  it("get template test", async function () {
     const result = await client
       .path("/messages/channels/{channelId}/templates", env.CHANNEL_ID || "")
       .get();

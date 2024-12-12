@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import { Constants } from "../common";
-import type { CosmosHeaders } from "../queryExecutionContext";
+import { CosmosHeaders } from "../queryExecutionContext";
 import { ConsistencyLevel } from "./ConsistencyLevel";
 
 /**

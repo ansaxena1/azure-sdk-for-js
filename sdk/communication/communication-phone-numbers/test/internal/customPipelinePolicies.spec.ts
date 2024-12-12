@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { FullOperationResponse } from "@azure/core-client";
-import type { PipelineRequest, PipelineResponse } from "@azure/core-rest-pipeline";
-import { createHttpHeaders } from "@azure/core-rest-pipeline";
-import { createPhoneNumbersPagingPolicy } from "../../src/utils/customPipelinePolicies.js";
-import { describe, it, assert } from "vitest";
+import { FullOperationResponse } from "@azure/core-client";
+import { PipelineRequest, PipelineResponse, createHttpHeaders } from "@azure/core-rest-pipeline";
+import { assert } from "chai";
+import { createPhoneNumbersPagingPolicy } from "../../src/utils/customPipelinePolicies";
 
 describe("phoneNumbersPagingPolicy", function () {
   const endpoint = "https://contoso.spool.azure.local";
@@ -18,7 +17,7 @@ describe("phoneNumbersPagingPolicy", function () {
     requestId: "any-id",
   };
 
-  async function createMockResponse(parsedBody: any): Promise<PipelineResponse> {
+  async function createMockResponse(parsedBody: any) {
     return Promise.resolve({ parsedBody }) as unknown as PipelineResponse;
   }
 

@@ -70,13 +70,14 @@ async function main(): Promise<void> {
     body: request,
   });
 
-  const initialPoller = await getLongRunningPoller(client, initialResponse);
+  const initialPoller = getLongRunningPoller(client, initialResponse);
   /* We can get a partial of the results first */
+  await initialPoller.poll();
   /** Serialized the current operation for future poller */
-  const serializedState = await initialPoller.serialize();
+  const serializedState = initialPoller.toString();
   /** Use the `resumeFrom` option to rehydrate the previous operation */
-  const rehydratedPoller = await getLongRunningPoller(client, initialResponse, {
-    restoreFrom: serializedState,
+  const rehydratedPoller = getLongRunningPoller(client, initialResponse, {
+    resumeFrom: serializedState,
   });
   const {
     body: { summary, batchItems },

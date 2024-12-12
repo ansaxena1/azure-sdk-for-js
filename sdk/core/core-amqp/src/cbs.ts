@@ -1,21 +1,22 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import { AbortError } from "@azure/abort-controller";
-import type {
+import { AbortError, AbortSignalLike } from "@azure/abort-controller";
+import {
   Connection,
   EventContext,
+  ReceiverEvents,
   ReceiverOptions,
   Message as RheaMessage,
+  SenderEvents,
   SenderOptions,
+  generate_uuid,
 } from "rhea-promise";
-import { ReceiverEvents, SenderEvents, generate_uuid } from "rhea-promise";
 import { logErrorStackTrace, logger } from "./log.js";
 import { Constants } from "./util/constants.js";
 import { RequestResponseLink } from "./requestResponseLink.js";
 import { StandardAbortMessage } from "./util/constants.js";
-import type { TokenType } from "./auth/token.js";
+import { TokenType } from "./auth/token.js";
 import { defaultCancellableLock } from "./util/utils.js";
 import { isError } from "@azure/core-util";
 import { translate } from "./errors.js";

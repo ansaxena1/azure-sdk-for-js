@@ -1,31 +1,31 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { matrix } from "@azure-tools/test-utils-vitest";
-import type { Recorder } from "@azure-tools/test-recorder";
-import type {
-  PhoneNumbersListAreaCodesOptionalParams,
-  PhoneNumbersClient,
-} from "../../src/index.js";
-import { createRecordedClient, createRecordedClientWithToken } from "./utils/recordedClient.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+import { matrix } from "@azure-tools/test-utils";
+import { Recorder } from "@azure-tools/test-recorder";
+import { assert } from "chai";
+import { Context } from "mocha";
+import { PhoneNumbersListAreaCodesOptionalParams, PhoneNumbersClient } from "../../src";
+import { createRecordedClient, createRecordedClientWithToken } from "./utils/recordedClient";
 
-matrix([[true, false]], async (useAad) => {
-  describe(`PhoneNumbersClient - area codes lists${useAad ? " [AAD]" : ""}`, () => {
+matrix([[true, false]], async function (useAad) {
+  describe(`PhoneNumbersClient - area codes lists${useAad ? " [AAD]" : ""}`, function () {
     let recorder: Recorder;
     let client: PhoneNumbersClient;
 
-    beforeEach(async (ctx) => {
+    beforeEach(async function (this: Context) {
       ({ client, recorder } = useAad
-        ? await createRecordedClientWithToken(ctx)!
-        : await createRecordedClient(ctx));
+        ? await createRecordedClientWithToken(this)!
+        : await createRecordedClient(this));
     });
 
-    afterEach(async () => {
-      await recorder.stop();
+    afterEach(async function (this: Context) {
+      if (!this.currentTest?.isPending()) {
+        await recorder.stop();
+      }
     });
 
-    it("can list all geographic area codes", { timeout: 60000 }, async () => {
+    it("can list all geographic area codes", async function () {
       const availableLocalities = await client.listAvailableLocalities("US");
       const locality = await availableLocalities.next();
       const request: PhoneNumbersListAreaCodesOptionalParams = {
@@ -36,9 +36,9 @@ matrix([[true, false]], async (useAad) => {
       for await (const areaCode of areaCodes) {
         assert.isNotNull(areaCode);
       }
-    });
+    }).timeout(60000);
 
-    it("can list all toll free area codes", { timeout: 60000 }, async () => {
+    it("can list all toll free area codes", async function () {
       const tollFreeAreaCodesList = [
         {
           areaCode: "888",
@@ -69,6 +69,6 @@ matrix([[true, false]], async (useAad) => {
       for await (const areaCode of areaCodes) {
         assert.deepInclude(tollFreeAreaCodesList, areaCode);
       }
-    });
+    }).timeout(60000);
   });
 });

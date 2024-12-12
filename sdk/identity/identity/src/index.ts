@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-export * from "./plugins/consumer.js";
+export * from "./plugins/consumer";
 
-export { IdentityPlugin } from "./plugins/provider.js";
+export { IdentityPlugin } from "./plugins/provider";
 
-import type { TokenCredential } from "@azure/core-auth";
-import { DefaultAzureCredential } from "./credentials/defaultAzureCredential.js";
+import { TokenCredential } from "@azure/core-auth";
+import { DefaultAzureCredential } from "./credentials/defaultAzureCredential";
 
 export {
   AuthenticationError,
@@ -18,97 +18,97 @@ export {
   CredentialUnavailableErrorName,
   AuthenticationRequiredError,
   AuthenticationRequiredErrorOptions,
-} from "./errors.js";
+} from "./errors";
 
-export { AuthenticationRecord } from "./msal/types.js";
-export { serializeAuthenticationRecord, deserializeAuthenticationRecord } from "./msal/utils.js";
-export { TokenCredentialOptions } from "./tokenCredentialOptions.js";
-export { MultiTenantTokenCredentialOptions } from "./credentials/multiTenantTokenCredentialOptions.js";
-export { AuthorityValidationOptions } from "./credentials/authorityValidationOptions.js";
+export { AuthenticationRecord } from "./msal/types";
+export { serializeAuthenticationRecord, deserializeAuthenticationRecord } from "./msal/utils";
+export { TokenCredentialOptions } from "./tokenCredentialOptions";
+export { MultiTenantTokenCredentialOptions } from "./credentials/multiTenantTokenCredentialOptions";
+export { AuthorityValidationOptions } from "./credentials/authorityValidationOptions";
 // TODO: Export again once we're ready to release this feature.
 // export { RegionalAuthority } from "./regionalAuthority";
 
-export { BrokerAuthOptions } from "./credentials/brokerAuthOptions.js";
+export { BrokerAuthOptions } from "./credentials/brokerAuthOptions";
 export {
   BrokerOptions,
   BrokerEnabledOptions,
   BrokerDisabledOptions,
-} from "./msal/nodeFlows/brokerOptions.js";
-export { InteractiveCredentialOptions } from "./credentials/interactiveCredentialOptions.js";
+} from "./msal/nodeFlows/brokerOptions";
+export { InteractiveCredentialOptions } from "./credentials/interactiveCredentialOptions";
 
-export { ChainedTokenCredential } from "./credentials/chainedTokenCredential.js";
+export { ChainedTokenCredential } from "./credentials/chainedTokenCredential";
 
-export { ClientSecretCredential } from "./credentials/clientSecretCredential.js";
-export { ClientSecretCredentialOptions } from "./credentials/clientSecretCredentialOptions.js";
+export { ClientSecretCredential } from "./credentials/clientSecretCredential";
+export { ClientSecretCredentialOptions } from "./credentials/clientSecretCredentialOptions";
 
-export { DefaultAzureCredential } from "./credentials/defaultAzureCredential.js";
+export { DefaultAzureCredential } from "./credentials/defaultAzureCredential";
 export {
   DefaultAzureCredentialOptions,
   DefaultAzureCredentialClientIdOptions,
   DefaultAzureCredentialResourceIdOptions,
-} from "./credentials/defaultAzureCredentialOptions.js";
+} from "./credentials/defaultAzureCredentialOptions";
 
-export { EnvironmentCredential } from "./credentials/environmentCredential.js";
-export { EnvironmentCredentialOptions } from "./credentials/environmentCredentialOptions.js";
+export { EnvironmentCredential } from "./credentials/environmentCredential";
+export { EnvironmentCredentialOptions } from "./credentials/environmentCredentialOptions";
 
 export {
   ClientCertificateCredential,
   ClientCertificateCredentialPEMConfiguration,
   ClientCertificatePEMCertificatePath,
   ClientCertificatePEMCertificate,
-} from "./credentials/clientCertificateCredential.js";
-export { ClientCertificateCredentialOptions } from "./credentials/clientCertificateCredentialOptions.js";
-export { ClientAssertionCredential } from "./credentials/clientAssertionCredential.js";
-export { ClientAssertionCredentialOptions } from "./credentials/clientAssertionCredentialOptions.js";
-export { CredentialPersistenceOptions } from "./credentials/credentialPersistenceOptions.js";
-export { AzureCliCredential } from "./credentials/azureCliCredential.js";
-export { AzureCliCredentialOptions } from "./credentials/azureCliCredentialOptions.js";
-export { AzureDeveloperCliCredential } from "./credentials/azureDeveloperCliCredential.js";
-export { AzureDeveloperCliCredentialOptions } from "./credentials/azureDeveloperCliCredentialOptions.js";
-export { InteractiveBrowserCredential } from "./credentials/interactiveBrowserCredential.js";
+} from "./credentials/clientCertificateCredential";
+export { ClientCertificateCredentialOptions } from "./credentials/clientCertificateCredentialOptions";
+export { ClientAssertionCredential } from "./credentials/clientAssertionCredential";
+export { ClientAssertionCredentialOptions } from "./credentials/clientAssertionCredentialOptions";
+export { CredentialPersistenceOptions } from "./credentials/credentialPersistenceOptions";
+export { AzureCliCredential } from "./credentials/azureCliCredential";
+export { AzureCliCredentialOptions } from "./credentials/azureCliCredentialOptions";
+export { AzureDeveloperCliCredential } from "./credentials/azureDeveloperCliCredential";
+export { AzureDeveloperCliCredentialOptions } from "./credentials/azureDeveloperCliCredentialOptions";
+export { InteractiveBrowserCredential } from "./credentials/interactiveBrowserCredential";
 export {
   InteractiveBrowserCredentialNodeOptions,
   InteractiveBrowserCredentialInBrowserOptions,
   BrowserLoginStyle,
-} from "./credentials/interactiveBrowserCredentialOptions.js";
+} from "./credentials/interactiveBrowserCredentialOptions";
 export {
   ManagedIdentityCredential,
   ManagedIdentityCredentialClientIdOptions,
   ManagedIdentityCredentialResourceIdOptions,
   ManagedIdentityCredentialObjectIdOptions,
-} from "./credentials/managedIdentityCredential/index.js";
-export { DeviceCodeCredential } from "./credentials/deviceCodeCredential.js";
+} from "./credentials/managedIdentityCredential";
+export { DeviceCodeCredential } from "./credentials/deviceCodeCredential";
 export {
   DeviceCodePromptCallback,
   DeviceCodeInfo,
-} from "./credentials/deviceCodeCredentialOptions.js";
-export { DeviceCodeCredentialOptions } from "./credentials/deviceCodeCredentialOptions.js";
-export { AzurePipelinesCredential as AzurePipelinesCredential } from "./credentials/azurePipelinesCredential.js";
-export { AzurePipelinesCredentialOptions as AzurePipelinesCredentialOptions } from "./credentials/azurePipelinesCredentialOptions.js";
-export { AuthorizationCodeCredential } from "./credentials/authorizationCodeCredential.js";
-export { AuthorizationCodeCredentialOptions } from "./credentials/authorizationCodeCredentialOptions.js";
-export { AzurePowerShellCredential } from "./credentials/azurePowerShellCredential.js";
-export { AzurePowerShellCredentialOptions } from "./credentials/azurePowerShellCredentialOptions.js";
+} from "./credentials/deviceCodeCredentialOptions";
+export { DeviceCodeCredentialOptions } from "./credentials/deviceCodeCredentialOptions";
+export { AzurePipelinesCredential as AzurePipelinesCredential } from "./credentials/azurePipelinesCredential";
+export { AzurePipelinesCredentialOptions as AzurePipelinesCredentialOptions } from "./credentials/azurePipelinesCredentialOptions";
+export { AuthorizationCodeCredential } from "./credentials/authorizationCodeCredential";
+export { AuthorizationCodeCredentialOptions } from "./credentials/authorizationCodeCredentialOptions";
+export { AzurePowerShellCredential } from "./credentials/azurePowerShellCredential";
+export { AzurePowerShellCredentialOptions } from "./credentials/azurePowerShellCredentialOptions";
 export {
   OnBehalfOfCredentialOptions,
   OnBehalfOfCredentialSecretOptions,
   OnBehalfOfCredentialCertificateOptions,
   OnBehalfOfCredentialAssertionOptions,
-} from "./credentials/onBehalfOfCredentialOptions.js";
-export { UsernamePasswordCredential } from "./credentials/usernamePasswordCredential.js";
-export { UsernamePasswordCredentialOptions } from "./credentials/usernamePasswordCredentialOptions.js";
-export { VisualStudioCodeCredential } from "./credentials/visualStudioCodeCredential.js";
-export { VisualStudioCodeCredentialOptions } from "./credentials/visualStudioCodeCredentialOptions.js";
-export { OnBehalfOfCredential } from "./credentials/onBehalfOfCredential.js";
-export { WorkloadIdentityCredential } from "./credentials/workloadIdentityCredential.js";
-export { WorkloadIdentityCredentialOptions } from "./credentials/workloadIdentityCredentialOptions.js";
-export { BrowserCustomizationOptions } from "./credentials/browserCustomizationOptions.js";
-export { TokenCachePersistenceOptions } from "./msal/nodeFlows/tokenCachePersistenceOptions.js";
+} from "./credentials/onBehalfOfCredentialOptions";
+export { UsernamePasswordCredential } from "./credentials/usernamePasswordCredential";
+export { UsernamePasswordCredentialOptions } from "./credentials/usernamePasswordCredentialOptions";
+export { VisualStudioCodeCredential } from "./credentials/visualStudioCodeCredential";
+export { VisualStudioCodeCredentialOptions } from "./credentials/visualStudioCodeCredentialOptions";
+export { OnBehalfOfCredential } from "./credentials/onBehalfOfCredential";
+export { WorkloadIdentityCredential } from "./credentials/workloadIdentityCredential";
+export { WorkloadIdentityCredentialOptions } from "./credentials/workloadIdentityCredentialOptions";
+export { BrowserCustomizationOptions } from "./credentials/browserCustomizationOptions";
+export { TokenCachePersistenceOptions } from "./msal/nodeFlows/tokenCachePersistenceOptions";
 
 export { TokenCredential, GetTokenOptions, AccessToken } from "@azure/core-auth";
-export { logger } from "./util/logging.js";
+export { logger } from "./util/logging";
 
-export { AzureAuthorityHosts } from "./constants.js";
+export { AzureAuthorityHosts } from "./constants";
 
 /**
  * Returns a new instance of the {@link DefaultAzureCredential}.
@@ -117,4 +117,4 @@ export function getDefaultAzureCredential(): TokenCredential {
   return new DefaultAzureCredential();
 }
 
-export { getBearerTokenProvider, GetBearerTokenProviderOptions } from "./tokenProvider.js";
+export { getBearerTokenProvider, GetBearerTokenProviderOptions } from "./tokenProvider";

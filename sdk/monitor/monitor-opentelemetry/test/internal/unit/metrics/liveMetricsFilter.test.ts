@@ -2,22 +2,20 @@
 // Licensed under the MIT License.
 
 import * as assert from "assert";
-import type {
+import {
   DerivedMetricInfo,
   FilterConjunctionGroupInfo,
   FilterInfo,
+  KnownPredicateType,
+  KnownTelemetryType,
   RemoteDependency,
   /* eslint-disable-next-line @typescript-eslint/no-redeclare */
   Request,
   Exception,
   Trace,
-  DocumentFilterConjunctionGroupInfo,
-} from "../../../../src/generated";
-import {
-  KnownPredicateType,
-  KnownTelemetryType,
   KnownDocumentType,
   KnownAggregationType,
+  DocumentFilterConjunctionGroupInfo,
 } from "../../../../src/generated";
 import { Validator } from "../../../../src/metrics/quickpulse/filtering/validator";
 import { Filter } from "../../../../src/metrics/quickpulse/filtering/filter";
@@ -27,13 +25,11 @@ import {
   UnexpectedFilterCreateError,
   MetricFailureToCreateError,
 } from "../../../../src/metrics/quickpulse/filtering/quickpulseErrors";
-import type {
+import {
   RequestData,
   DependencyData,
   ExceptionData,
   TraceData,
-} from "../../../../src/metrics/quickpulse/types";
-import {
   KnownRequestColumns,
   KnownDependencyColumns,
 } from "../../../../src/metrics/quickpulse/types";

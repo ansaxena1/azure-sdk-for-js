@@ -9,122 +9,14 @@
 import {
   OperationParameter,
   OperationURLParameter,
-  OperationQueryParameter,
+  OperationQueryParameter
 } from "@azure/core-client";
 import {
   RecordSet as RecordSetMapper,
   Zone as ZoneMapper,
   ZoneUpdate as ZoneUpdateMapper,
-  DnsResourceReferenceRequest as DnsResourceReferenceRequestMapper,
+  DnsResourceReferenceRequest as DnsResourceReferenceRequestMapper
 } from "../models/mappers";
-
-export const accept: OperationParameter = {
-  parameterPath: "accept",
-  mapper: {
-    defaultValue: "application/json",
-    isConstant: true,
-    serializedName: "Accept",
-    type: {
-      name: "String",
-    },
-  },
-};
-
-export const $host: OperationURLParameter = {
-  parameterPath: "$host",
-  mapper: {
-    serializedName: "$host",
-    required: true,
-    type: {
-      name: "String",
-    },
-  },
-  skipEncoding: true,
-};
-
-export const resourceGroupName: OperationURLParameter = {
-  parameterPath: "resourceGroupName",
-  mapper: {
-    constraints: {
-      MaxLength: 90,
-      MinLength: 1,
-    },
-    serializedName: "resourceGroupName",
-    required: true,
-    type: {
-      name: "String",
-    },
-  },
-};
-
-export const zoneName: OperationURLParameter = {
-  parameterPath: "zoneName",
-  mapper: {
-    serializedName: "zoneName",
-    required: true,
-    type: {
-      name: "String",
-    },
-  },
-};
-
-export const ifMatch: OperationParameter = {
-  parameterPath: ["options", "ifMatch"],
-  mapper: {
-    serializedName: "If-Match",
-    type: {
-      name: "String",
-    },
-  },
-};
-
-export const ifNoneMatch: OperationParameter = {
-  parameterPath: ["options", "ifNoneMatch"],
-  mapper: {
-    serializedName: "If-None-Match",
-    type: {
-      name: "String",
-    },
-  },
-};
-
-export const apiVersion: OperationQueryParameter = {
-  parameterPath: "apiVersion",
-  mapper: {
-    defaultValue: "2023-07-01-preview",
-    isConstant: true,
-    serializedName: "api-version",
-    type: {
-      name: "String",
-    },
-  },
-};
-
-export const subscriptionId: OperationURLParameter = {
-  parameterPath: "subscriptionId",
-  mapper: {
-    constraints: {
-      MinLength: 1,
-    },
-    serializedName: "subscriptionId",
-    required: true,
-    type: {
-      name: "String",
-    },
-  },
-};
-
-export const nextLink: OperationURLParameter = {
-  parameterPath: "nextLink",
-  mapper: {
-    serializedName: "nextLink",
-    required: true,
-    type: {
-      name: "String",
-    },
-  },
-  skipEncoding: true,
-};
 
 export const contentType: OperationParameter = {
   parameterPath: ["options", "contentType"],
@@ -133,14 +25,60 @@ export const contentType: OperationParameter = {
     isConstant: true,
     serializedName: "Content-Type",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const parameters: OperationParameter = {
   parameterPath: "parameters",
-  mapper: RecordSetMapper,
+  mapper: RecordSetMapper
+};
+
+export const accept: OperationParameter = {
+  parameterPath: "accept",
+  mapper: {
+    defaultValue: "application/json",
+    isConstant: true,
+    serializedName: "Accept",
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const $host: OperationURLParameter = {
+  parameterPath: "$host",
+  mapper: {
+    serializedName: "$host",
+    required: true,
+    type: {
+      name: "String"
+    }
+  },
+  skipEncoding: true
+};
+
+export const resourceGroupName: OperationURLParameter = {
+  parameterPath: "resourceGroupName",
+  mapper: {
+    serializedName: "resourceGroupName",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const zoneName: OperationURLParameter = {
+  parameterPath: "zoneName",
+  mapper: {
+    serializedName: "zoneName",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
 };
 
 export const relativeRecordSetName: OperationURLParameter = {
@@ -149,10 +87,10 @@ export const relativeRecordSetName: OperationURLParameter = {
     serializedName: "relativeRecordSetName",
     required: true,
     type: {
-      name: "String",
-    },
+      name: "String"
+    }
   },
-  skipEncoding: true,
+  skipEncoding: true
 };
 
 export const recordType: OperationURLParameter = {
@@ -172,13 +110,53 @@ export const recordType: OperationURLParameter = {
         "PTR",
         "SOA",
         "SRV",
-        "TXT",
-        "TLSA",
-        "DS",
-        "NAPTR",
-      ],
-    },
-  },
+        "TXT"
+      ]
+    }
+  }
+};
+
+export const ifMatch: OperationParameter = {
+  parameterPath: ["options", "ifMatch"],
+  mapper: {
+    serializedName: "If-Match",
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const apiVersion: OperationQueryParameter = {
+  parameterPath: "apiVersion",
+  mapper: {
+    defaultValue: "2018-05-01",
+    isConstant: true,
+    serializedName: "api-version",
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const subscriptionId: OperationURLParameter = {
+  parameterPath: "subscriptionId",
+  mapper: {
+    serializedName: "subscriptionId",
+    required: true,
+    type: {
+      name: "String"
+    }
+  }
+};
+
+export const ifNoneMatch: OperationParameter = {
+  parameterPath: ["options", "ifNoneMatch"],
+  mapper: {
+    serializedName: "If-None-Match",
+    type: {
+      name: "String"
+    }
+  }
 };
 
 export const top: OperationQueryParameter = {
@@ -186,9 +164,9 @@ export const top: OperationQueryParameter = {
   mapper: {
     serializedName: "$top",
     type: {
-      name: "Number",
-    },
-  },
+      name: "Number"
+    }
+  }
 };
 
 export const recordsetnamesuffix: OperationQueryParameter = {
@@ -196,9 +174,9 @@ export const recordsetnamesuffix: OperationQueryParameter = {
   mapper: {
     serializedName: "$recordsetnamesuffix",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const recordSetNameSuffix: OperationQueryParameter = {
@@ -206,22 +184,34 @@ export const recordSetNameSuffix: OperationQueryParameter = {
   mapper: {
     serializedName: "$recordsetnamesuffix",
     type: {
-      name: "String",
-    },
+      name: "String"
+    }
+  }
+};
+
+export const nextLink: OperationURLParameter = {
+  parameterPath: "nextLink",
+  mapper: {
+    serializedName: "nextLink",
+    required: true,
+    type: {
+      name: "String"
+    }
   },
+  skipEncoding: true
 };
 
 export const parameters1: OperationParameter = {
   parameterPath: "parameters",
-  mapper: ZoneMapper,
+  mapper: ZoneMapper
 };
 
 export const parameters2: OperationParameter = {
   parameterPath: "parameters",
-  mapper: ZoneUpdateMapper,
+  mapper: ZoneUpdateMapper
 };
 
 export const parameters3: OperationParameter = {
   parameterPath: "parameters",
-  mapper: DnsResourceReferenceRequestMapper,
+  mapper: DnsResourceReferenceRequestMapper
 };

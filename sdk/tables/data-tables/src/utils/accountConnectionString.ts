@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientParamsFromConnectionString, ConnectionString } from "./internalModels";
+import { ClientParamsFromConnectionString, ConnectionString } from "./internalModels";
 import { AzureNamedKeyCredential } from "@azure/core-auth";
-import type { TableServiceClientOptions } from "..";
+import { TableServiceClientOptions } from "..";
 
 /**
  * Gets client parameters from an Account Connection String

@@ -6,13 +6,13 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { MetricsImpl } from "./operations/index.js";
-import { Metrics } from "./operationsInterfaces/index.js";
-import { MonitorManagementClientContext } from "./monitorManagementClientContext.js";
+import { MetricsImpl } from "./operations";
+import { Metrics } from "./operationsInterfaces";
+import { MonitorManagementClientContext } from "./monitorManagementClientContext";
 import {
   MonitorManagementClientOptionalParams,
   ApiVersion20240201
-} from "./models/index.js";
+} from "./models";
 
 /** @internal */
 export class MonitorManagementClient extends MonitorManagementClientContext {

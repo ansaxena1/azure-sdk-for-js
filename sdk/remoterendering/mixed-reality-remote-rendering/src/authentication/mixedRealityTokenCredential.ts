@@ -1,10 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
 
-import type { MixedRealityStsClientOptions } from "@azure/mixed-reality-authentication";
-import { MixedRealityStsClient } from "@azure/mixed-reality-authentication";
+import {
+  MixedRealityStsClient,
+  MixedRealityStsClientOptions,
+} from "@azure/mixed-reality-authentication";
 
 /**
  * Represents a token credential that can be used to access a Mixed Reality service.

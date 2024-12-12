@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { randomUUID } from "@azure/core-util";
-import type { Checkpoint, CheckpointStore, PartitionOwnership } from "../../src/index.js";
+import { Checkpoint, CheckpointStore, PartitionOwnership } from "../../src/index.js";
 
 /**
  * The `EventProcessor` relies on a `CheckpointStore` to store checkpoints and handle partition

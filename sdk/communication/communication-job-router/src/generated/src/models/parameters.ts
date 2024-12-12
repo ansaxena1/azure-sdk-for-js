@@ -23,7 +23,7 @@ import {
   UnassignJobRequest as UnassignJobRequestMapper,
   DeclineJobOfferRequest as DeclineJobOfferRequestMapper,
   RouterWorker as RouterWorkerMapper
-} from "../models/mappers.js";
+} from "../models/mappers";
 
 export const contentType: OperationParameter = {
   parameterPath: ["options", "contentType"],

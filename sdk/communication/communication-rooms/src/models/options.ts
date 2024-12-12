@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CommonClientOptions, OperationOptions } from "@azure/core-client";
-import type { RoomParticipantPatch } from "./models";
+import { CommonClientOptions, OperationOptions } from "@azure/core-client";
+import { RoomParticipantPatch } from "./models";
 
 /**
  * Options to create rooms client.

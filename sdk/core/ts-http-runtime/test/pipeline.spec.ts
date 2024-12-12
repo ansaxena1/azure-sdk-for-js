@@ -2,8 +2,9 @@
 // Licensed under the MIT License.
 
 import { describe, it, assert } from "vitest";
-import type { HttpClient, PipelinePolicy } from "../src/index.js";
 import {
+  HttpClient,
+  PipelinePolicy,
   createEmptyPipeline,
   createHttpHeaders,
   createPipelineFromOptions,

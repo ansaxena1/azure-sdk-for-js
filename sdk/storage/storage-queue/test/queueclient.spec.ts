@@ -9,12 +9,11 @@ import {
   recorderEnvSetup,
   uriSanitizers,
 } from "./utils";
-import type { QueueServiceClient } from "../src";
-import { QueueClient } from "../src";
+import { QueueClient, QueueServiceClient } from "../src";
 import { assert } from "@azure-tools/test-utils";
-import type { RestError } from "@azure/core-rest-pipeline";
+import { RestError } from "@azure/core-rest-pipeline";
 import { Recorder } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("QueueClient", () => {
   let queueServiceClient: QueueServiceClient;

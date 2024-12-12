@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CallConnection } from "../callConnection.js";
-import type { CallConnectionProperties, CallParticipant } from "./models.js";
-import type { RecordingState } from "../generated/src/index.js";
-import type {
+import { CallConnection } from "../callConnection";
+import { CallConnectionProperties, CallParticipant } from "./models";
+import { RecordingState } from "../generated/src";
+import {
   AddParticipantEventResult,
   AnswerCallEventResult,
   CancelAllMediaOperationsEventResult,
@@ -15,8 +15,8 @@ import type {
   StartRecognizingEventResult,
   TransferCallToParticipantEventResult,
   CancelAddParticipantEventResult,
-} from "../eventprocessor/eventResponses.js";
-import type { AbortSignalLike } from "@azure/abort-controller";
+} from "../eventprocessor/eventResponses";
+import { AbortSignalLike } from "@azure/abort-controller";
 
 /**
  * CreateCall result

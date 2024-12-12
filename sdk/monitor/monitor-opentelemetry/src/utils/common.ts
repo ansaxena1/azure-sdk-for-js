@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type * as http from "http";
-import type { DetectorSync } from "@opentelemetry/resources";
+import * as http from "http";
 import {
+  DetectorSync,
   envDetectorSync,
   hostDetectorSync,
   osDetectorSync,

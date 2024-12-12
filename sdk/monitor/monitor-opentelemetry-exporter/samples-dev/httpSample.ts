@@ -37,7 +37,7 @@ let clientTracer: Tracer;
 setupOpenTelemetry();
 
 // Open Telemetry setup need to happen before http library is loaded
-import http from "node:http";
+import http from "http";
 
 /*********************************************************************
  *  HTTP SERVER SETUP

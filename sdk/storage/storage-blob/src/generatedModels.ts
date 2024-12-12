@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Tags } from ".";
-import type { BlobPropertiesInternal as BlobProperties } from "./generated/src/models";
+import { Tags } from ".";
 import {
   AppendBlobAppendBlockFromUrlHeaders,
   AppendBlobAppendBlockHeaders,
@@ -15,6 +14,7 @@ import {
   BlobDownloadResponse as BlobDownloadResponseInternal,
   BlobDownloadHeaders,
   BlobGetPropertiesHeaders,
+  BlobPropertiesInternal as BlobProperties,
   BlobGetTagsHeaders,
   BlobTags,
   BlobQueryResponse as BlobQueryResponseInternal,

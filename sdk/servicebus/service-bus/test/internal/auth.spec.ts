@@ -3,15 +3,18 @@
 
 import { createSasTokenProvider } from "@azure/core-amqp";
 import { AzureNamedKeyCredential, AzureSASCredential } from "@azure/core-auth";
-import type { ServiceBusReceiver } from "../../src/index.js";
-import { ServiceBusClient, parseServiceBusConnectionString } from "../../src/index.js";
+import {
+  ServiceBusClient,
+  ServiceBusReceiver,
+  parseServiceBusConnectionString,
+} from "../../src/index.js";
 import { getEnvVars } from "../public/utils/envVarUtils.js";
 import { TestClientType } from "../public/utils/testUtils.js";
-import type {
+import {
+  createServiceBusClientForTests,
   ServiceBusClientForTests,
   ServiceBusTestHelpers,
 } from "../public/utils/testutils2.js";
-import { createServiceBusClientForTests } from "../public/utils/testutils2.js";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import { assert } from "../public/utils/chai.js";
 

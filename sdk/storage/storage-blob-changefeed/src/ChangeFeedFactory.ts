@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
+import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 import { ChangeFeed } from "./ChangeFeed";
-import type { ChangeFeedCursor } from "./models/ChangeFeedCursor";
+import { ChangeFeedCursor } from "./models/ChangeFeedCursor";
 import { CHANGE_FEED_CONTAINER_NAME, CHANGE_FEED_META_SEGMENT_PATH } from "./utils/constants";
 import {
   ceilToNearestHour,
@@ -19,8 +19,8 @@ import { SegmentFactory } from "./SegmentFactory";
 import { ShardFactory } from "./ShardFactory";
 import { ChunkFactory } from "./ChunkFactory";
 import { AvroReaderFactory } from "./AvroReaderFactory";
-import type { Segment } from "./Segment";
-import type { BlobChangeFeedListChangesOptions } from "./models/models";
+import { Segment } from "./Segment";
+import { BlobChangeFeedListChangesOptions } from "./models/models";
 import { tracingClient } from "./utils/tracing";
 import { LazyLoadingBlobStreamFactory } from "./LazyLoadingBlobStreamFactory";
 

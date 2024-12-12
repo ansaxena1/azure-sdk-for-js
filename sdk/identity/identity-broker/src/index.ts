@@ -1,22 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { IdentityPlugin } from "@azure/identity";
+import { AzurePluginContext } from "../../identity/src/plugins/provider";
+import { IdentityPlugin } from "@azure/identity";
 import { NativeBrokerPlugin } from "@azure/msal-node-extensions";
-
-/**
- * A subset of the AzurePluginContext provided by \@azure/identity
- *
- * @internal
- */
-interface AzurePluginContext {
-  nativeBrokerPluginControl: NativeBrokerPluginControl;
-}
-
-interface NativeBrokerPluginControl {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-  setNativeBroker(nativeBroker: import("@azure/msal-node").INativeBrokerPlugin): void;
-}
 
 /**
  * A plugin that provides WAM Integration for `@azure/identity`
@@ -39,6 +26,7 @@ interface NativeBrokerPluginControl {
  * });
  * ```
  */
+
 export const nativeBrokerPlugin: IdentityPlugin = (context: unknown) => {
   const { nativeBrokerPluginControl } = context as AzurePluginContext;
   const brokerPlugin = new NativeBrokerPlugin();

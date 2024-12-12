@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   DeleteTableEntityOptions,
   TableEntity,
   TableTransactionEntityResponse,
@@ -10,11 +10,21 @@ import type {
   UpdateMode,
   UpdateTableEntityOptions,
 } from "./models";
-import type { NamedKeyCredential, SASCredential, TokenCredential } from "@azure/core-auth";
-import type { OperationOptions, ServiceClient } from "@azure/core-client";
-import { serializationPolicy, serializationPolicyName } from "@azure/core-client";
-import type { Pipeline, PipelineRequest, PipelineResponse } from "@azure/core-rest-pipeline";
-import { RestError, createHttpHeaders, createPipelineRequest } from "@azure/core-rest-pipeline";
+import { NamedKeyCredential, SASCredential, TokenCredential } from "@azure/core-auth";
+import {
+  OperationOptions,
+  ServiceClient,
+  serializationPolicy,
+  serializationPolicyName,
+} from "@azure/core-client";
+import {
+  Pipeline,
+  PipelineRequest,
+  PipelineResponse,
+  RestError,
+  createHttpHeaders,
+  createPipelineRequest,
+} from "@azure/core-rest-pipeline";
 import {
   getInitialTransactionBody,
   getTransactionHttpRequestBody,
@@ -26,8 +36,8 @@ import {
   transactionRequestAssemblePolicyName,
 } from "./TablePolicies";
 
-import type { TableClientLike } from "./utils/internalModels";
-import type { TableServiceErrorOdataError } from "./generated";
+import { TableClientLike } from "./utils/internalModels";
+import { TableServiceErrorOdataError } from "./generated";
 import { cosmosPatchPolicy } from "./cosmosPathPolicy";
 import { getTransactionHeaders } from "./utils/transactionHeaders";
 import { isCosmosEndpoint } from "./utils/isCosmosEndpoint";

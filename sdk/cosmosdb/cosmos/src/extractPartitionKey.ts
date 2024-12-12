@@ -1,23 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { AzureLogger } from "@azure/logger";
-import { createClientLogger } from "@azure/logger";
+import { AzureLogger, createClientLogger } from "@azure/logger";
 import { parsePath } from "./common";
-import type {
+import {
+  convertToInternalPartitionKey,
+  NonePartitionKeyLiteral,
+  NullPartitionKeyLiteral,
   PartitionKey,
   PartitionKeyDefinition,
   PartitionKeyInternal,
   PrimitivePartitionKeyValue,
 } from "./documents";
-import {
-  convertToInternalPartitionKey,
-  NonePartitionKeyLiteral,
-  NullPartitionKeyLiteral,
-} from "./documents";
 import { DEFAULT_PARTITION_KEY_PATH } from "./common/partitionKeys";
-import type { Container } from "./client";
+import { Container } from "./client";
 import { readPartitionKeyDefinition } from "./client/ClientUtils";
-import type { DiagnosticNodeInternal } from "./diagnostics/DiagnosticNodeInternal";
+import { DiagnosticNodeInternal } from "./diagnostics/DiagnosticNodeInternal";
 
 const logger: AzureLogger = createClientLogger("extractPartitionKey");
 

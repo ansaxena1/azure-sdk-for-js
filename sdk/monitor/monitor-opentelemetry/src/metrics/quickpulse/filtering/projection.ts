@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { DerivedMetricInfo } from "../../../generated";
-import { KnownAggregationType } from "../../../generated";
-import type { TelemetryData } from "../types";
+import { DerivedMetricInfo, KnownAggregationType } from "../../../generated";
+import { TelemetryData } from "../types";
 import { isRequestData, isDependencyData } from "../utils";
 import { MetricFailureToCreateError } from "./quickpulseErrors";
 

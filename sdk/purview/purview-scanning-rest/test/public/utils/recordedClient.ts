@@ -3,12 +3,10 @@
 
 /// <reference lib="esnext.asynciterable" />
 
-import type { PurviewScanningRestClient } from "../../../src";
-import PurviewScanning from "../../../src";
-import type { Recorder, RecorderStartOptions } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import PurviewScanning, { PurviewScanningRestClient } from "../../../src";
+import { Recorder, RecorderStartOptions, env } from "@azure-tools/test-recorder";
 
-import type { ClientOptions } from "@azure-rest/core-client";
+import { ClientOptions } from "@azure-rest/core-client";
 import { createTestCredential } from "@azure-tools/test-credential";
 
 const replaceableVariables: { [k: string]: string } = {

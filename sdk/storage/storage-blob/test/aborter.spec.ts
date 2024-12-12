@@ -3,10 +3,10 @@
 
 import { assert } from "chai";
 
-import type { ContainerClient } from "../src";
+import { ContainerClient } from "../src";
 import { getBSU, getUniqueName, recorderEnvSetup, uriSanitizers } from "./utils";
 import { Recorder } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("Aborter", () => {
   let containerName: string;

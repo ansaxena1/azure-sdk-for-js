@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { SDK_VERSION } from "../constants.js";
+import { SDK_VERSION } from "../constants";
 import { createTracingClient } from "@azure/core-tracing";
 
 /**

@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { WebPubSubClientProtocol } from ".";
-import type { WebPubSubMessage } from "../models/messages";
+import { WebPubSubClientProtocol } from ".";
+import { WebPubSubMessage } from "../models/messages";
 import * as base from "./jsonProtocolBase";
 
 /**

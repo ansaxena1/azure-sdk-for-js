@@ -2,16 +2,15 @@
 // Licensed under the MIT License.
 import { KeyClient } from "../../src/index.js";
 import { LATEST_API_VERSION } from "../../src/keysModels.js";
-import type {
+import {
   HttpClient,
   PipelineRequest,
   PipelineResponse,
   SendRequest,
+  createHttpHeaders,
 } from "@azure/core-rest-pipeline";
-import { createHttpHeaders } from "@azure/core-rest-pipeline";
 import { ClientSecretCredential } from "@azure/identity";
-import type { MockInstance } from "vitest";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, assert, expect, vi, beforeEach, afterEach, MockInstance } from "vitest";
 
 describe("The Keys client should set the serviceVersion", () => {
   const keyVaultUrl = `https://keyvaultname.vault.azure.net`;

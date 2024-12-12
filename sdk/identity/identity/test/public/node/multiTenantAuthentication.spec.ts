@@ -1,21 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { MsalTestCleanup } from "../../node/msalNodeTestSetup.js";
-import { msalNodeTestSetup } from "../../node/msalNodeTestSetup.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { MsalTestCleanup, msalNodeTestSetup } from "../../node/msalNodeTestSetup";
+import { Recorder, env } from "@azure-tools/test-recorder";
 import { createHttpHeaders, createPipelineRequest } from "@azure/core-rest-pipeline";
-import { ClientSecretCredential } from "../../../src/credentials/clientSecretCredential.js";
-import { IdentityClient } from "../../../src/client/identityClient.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+import { ClientSecretCredential } from "../../../src/credentials/clientSecretCredential";
+import { Context } from "mocha";
+import { IdentityClient } from "../../../src/client/identityClient";
+import { assert } from "@azure-tools/test-utils";
 
 describe("MultiTenantAuthentication", function () {
   let cleanup: MsalTestCleanup;
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    const setup = await msalNodeTestSetup(ctx);
+  beforeEach(async function (this: Context) {
+    const setup = await msalNodeTestSetup(this.currentTest);
     cleanup = setup.cleanup;
     recorder = setup.recorder;
   });
@@ -24,7 +23,7 @@ describe("MultiTenantAuthentication", function () {
     await cleanup();
   });
 
-  it("supports calling graph with client secret", async function (ctx) {
+  it("supports calling graph with client secret", async function () {
     const [tenantId, clientId, clientSecret] = [
       env.AZURE_IDENTITY_MULTI_TENANT_TENANT_ID,
       env.AZURE_IDENTITY_MULTI_TENANT_CLIENT_ID,
@@ -34,7 +33,7 @@ describe("MultiTenantAuthentication", function () {
     if (!tenantId || !clientId || !clientSecret) {
       // multi-tenant credentials live in a shared keyvault whose values are mounted in CI, but not in local dev
       console.log("Multi-tenant credentials not provided, skipping test");
-      ctx.skip();
+      this.skip();
     }
 
     const credential = new ClientSecretCredential(

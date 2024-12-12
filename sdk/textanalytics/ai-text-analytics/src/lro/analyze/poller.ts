@@ -1,15 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PollerLike } from "@azure/core-lro";
-import type { PagedAnalyzeActionsResult } from "../../analyzeActionsResult";
-import type { JobManifestTasks as GeneratedActions } from "../../generated/models";
+import { PollerLike } from "@azure/core-lro";
+import { PagedAnalyzeActionsResult } from "../../analyzeActionsResult";
+import { JobManifestTasks as GeneratedActions } from "../../generated/models";
 import { delay } from "../../util";
 
-import type { AnalysisPollerOptions } from "../poller";
-import { AnalysisPoller } from "../poller";
-import type { AnalyzeActionsOperationState, BeginAnalyzeActionsOptions } from "./operation";
-import { BeginAnalyzeActionsPollerOperation } from "./operation";
+import { AnalysisPoller, AnalysisPollerOptions } from "../poller";
+import {
+  AnalyzeActionsOperationState,
+  BeginAnalyzeActionsOptions,
+  BeginAnalyzeActionsPollerOperation,
+} from "./operation";
 
 /**
  * @internal

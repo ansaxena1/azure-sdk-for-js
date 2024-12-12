@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 
 import { assert, expect } from "@azure-tools/test-utils";
-import type { WebPubSubClientOptions } from "../src/models";
+import { WebPubSubClientOptions } from "../src/models";
 import { WebPubSubJsonProtocol } from "../src/protocols";
 import { WebPubSubClient } from "../src/webPubSubClient";
-import type { WebPubSubClientCredential } from "../src/webPubSubClientCredential";
+import { WebPubSubClientCredential } from "../src/webPubSubClientCredential";
 
 describe("WebPubSubClient", function () {
   describe("Construct a new client and options", () => {

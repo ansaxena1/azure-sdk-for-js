@@ -3,10 +3,9 @@
 
 import { Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
-import type { DataLakeFileSystemClient } from "../src";
-import { DataLakeFileClient } from "../src";
+import { DataLakeFileClient, DataLakeFileSystemClient } from "../src";
 import { appendToURLPath } from "../src/utils/utils.common";
 import { getDataLakeServiceClient, getUniqueName, recorderEnvSetup, uriSanitizers } from "./utils";
 

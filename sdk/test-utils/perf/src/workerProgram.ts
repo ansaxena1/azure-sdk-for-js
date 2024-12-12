@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-
 import { enterStage, exitStage } from "./barrier";
 import { multicoreUtils, WorkerData, WorkerMulticoreUtils } from "./multicore";
 import { PerfTestBase, PerfTestConstructor } from "./perfTestBase";

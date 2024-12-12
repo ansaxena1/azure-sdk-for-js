@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { SmsSendResult } from "../../../src/index.js";
-import { assert } from "vitest";
+import { assert } from "chai";
+import { SmsSendResult } from "../../../src";
 
 export const assertIsSuccessResult = (
   actualSmsResult: SmsSendResult,

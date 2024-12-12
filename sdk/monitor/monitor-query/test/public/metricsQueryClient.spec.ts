@@ -1,26 +1,26 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { getYieldedValue } from "@azure-tools/test-utils-vitest";
-import type { MetricsQueryClient } from "../../src/index.js";
-import { Durations } from "../../src/index.js";
 
-import type { RecorderAndMetricsClient } from "./shared/testShared.js";
+import { assert } from "chai";
+import { Context } from "mocha";
+import { getYieldedValue } from "@azure-tools/test-utils";
+import { Durations, MetricsQueryClient } from "../../src";
+
 import {
+  RecorderAndMetricsClient,
   createRecorderAndMetricsClient,
   getMetricsArmResourceId,
   loggerForTest,
-} from "./shared/testShared.js";
+} from "./shared/testShared";
 import { Recorder } from "@azure-tools/test-recorder";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
-
 describe("MetricsClient live tests", function () {
   let resourceId: string;
   let metricsQueryClient: MetricsQueryClient;
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
+  beforeEach(async function (this: Context) {
     loggerForTest.verbose(`Recorder: starting...`);
-    recorder = new Recorder(ctx);
+    recorder = new Recorder(this.currentTest);
     const recordedClient: RecorderAndMetricsClient = await createRecorderAndMetricsClient(recorder);
     resourceId = getMetricsArmResourceId();
     metricsQueryClient = recordedClient.client;

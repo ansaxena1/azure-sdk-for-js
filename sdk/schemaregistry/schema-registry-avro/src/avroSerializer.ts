@@ -2,13 +2,13 @@
 // Licensed under the MIT License.
 
 import * as avro from "avsc";
-import type {
+import {
   AvroSerializerOptions,
   DeserializeOptions,
   MessageAdapter,
   MessageContent,
 } from "./models.js";
-import type { SchemaDescription, SchemaRegistry } from "@azure/schema-registry";
+import { SchemaDescription, SchemaRegistry } from "@azure/schema-registry";
 import { LRUCache } from "lru-cache";
 import LRUCacheOptions = LRUCache.Options;
 import { isMessageContent } from "./utility.js";

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import assert from "assert";
-import type { Suite } from "mocha";
+import { Suite } from "mocha";
 import { IndexingMode } from "../../../src";
 import { getTestDatabase, removeAllDatabases } from "../common/TestHelpers";
 

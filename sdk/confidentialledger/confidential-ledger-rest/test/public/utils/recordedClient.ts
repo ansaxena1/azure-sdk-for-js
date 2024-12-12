@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ConfidentialLedgerClient } from "../../../src";
-import ConfidentialLedger, { getLedgerIdentity } from "../../../src";
+import ConfidentialLedger, { ConfidentialLedgerClient, getLedgerIdentity } from "../../../src";
 import {
   Recorder,
   env,
@@ -10,7 +9,7 @@ import {
   isPlaybackMode,
 } from "@azure-tools/test-recorder";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 const replaceableVariables: { [k: string]: string } = {
   LEDGER_URI: "https://test-ledger.confidential-ledger.azure.com",

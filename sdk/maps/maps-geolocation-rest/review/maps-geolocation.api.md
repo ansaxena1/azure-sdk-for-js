@@ -4,33 +4,33 @@
 
 ```ts
 
-import type { AzureKeyCredential } from '@azure/core-auth';
-import type { AzureSASCredential } from '@azure/core-auth';
+import { AzureKeyCredential } from '@azure/core-auth';
+import { AzureSASCredential } from '@azure/core-auth';
 import { Client } from '@azure-rest/core-client';
 import { ClientOptions } from '@azure-rest/core-client';
 import { HttpResponse } from '@azure-rest/core-client';
 import { RequestParameters } from '@azure-rest/core-client';
 import { StreamableMethod } from '@azure-rest/core-client';
-import type { TokenCredential } from '@azure/core-auth';
+import { TokenCredential } from '@azure/core-auth';
 
 // @public
 export interface CountryRegionOutput {
-    readonly isoCode?: string;
+    isoCode?: string;
 }
 
 // @public
 export interface ErrorAdditionalInfoOutput {
-    readonly info?: Record<string, unknown>;
-    readonly type?: string;
+    info?: Record<string, unknown>;
+    type?: string;
 }
 
 // @public
 export interface ErrorDetailOutput {
-    readonly additionalInfo?: Array<ErrorAdditionalInfoOutput>;
-    readonly code?: string;
-    readonly details?: Array<ErrorDetailOutput>;
-    readonly message?: string;
-    readonly target?: string;
+    additionalInfo?: Array<ErrorAdditionalInfoOutput>;
+    code?: string;
+    details?: Array<ErrorDetailOutput>;
+    message?: string;
+    target?: string;
 }
 
 // @public
@@ -75,8 +75,8 @@ export interface GetLocation {
 
 // @public
 export interface IpAddressToLocationResultOutput {
-    readonly countryRegion?: CountryRegionOutput;
-    readonly ipAddress?: string;
+    countryRegion?: CountryRegionOutput;
+    ipAddress?: string;
 }
 
 // @public (undocumented)
@@ -96,11 +96,6 @@ export default MapsGeolocation;
 export type MapsGeolocationClient = Client & {
     path: Routes;
 };
-
-// @public
-export interface MapsGeolocationClientOptions extends ClientOptions {
-    apiVersion?: string;
-}
 
 // @public (undocumented)
 export interface Routes {

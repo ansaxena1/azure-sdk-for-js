@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   GetSchemaOptions,
   GetSchemaPropertiesOptions,
   RegisterSchemaOptions,
@@ -9,19 +9,20 @@ import type {
   SchemaDescription,
   SchemaProperties,
   SchemaRegistry,
+  SchemaRegistryClient,
 } from "@azure/schema-registry";
-import { SchemaRegistryClient } from "@azure/schema-registry";
 import { createTestCredential } from "@azure-tools/test-credential";
 import { testGroup, testSchemaIds } from "./dummies.js";
 import { v4 as uuid } from "uuid";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable, env, isLiveMode } from "@azure-tools/test-recorder";
-import type { Pipeline, HttpClient, PipelineRequest } from "@azure/core-rest-pipeline";
+import { Recorder, assertEnvironmentVariable, env, isLiveMode } from "@azure-tools/test-recorder";
 import {
   createPipelineRequest,
   createHttpHeaders,
   bearerTokenAuthenticationPolicy,
   createEmptyPipeline,
+  Pipeline,
+  HttpClient,
+  PipelineRequest,
 } from "@azure/core-rest-pipeline";
 type UpdatedSchemaDescription = Required<Omit<SchemaDescription, "version">>;
 

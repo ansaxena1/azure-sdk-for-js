@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   UpsertClassificationPolicy200Response,
   UpsertClassificationPolicy201Response,
   UpsertClassificationPolicyDefaultResponse,
@@ -74,7 +74,7 @@ import type {
   DeleteWorkerDefaultResponse,
   ListWorkers200Response,
   ListWorkersDefaultResponse,
-} from "./responses.js";
+} from "./responses";
 
 const responseMap: Record<string, string[]> = {
   "PATCH /routing/classificationPolicies/{classificationPolicyId}": ["200", "201"],

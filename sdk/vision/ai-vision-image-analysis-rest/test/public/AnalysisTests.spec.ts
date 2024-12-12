@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
-import type {
+import { Context } from "mocha";
+import {
   ImageAnalysisClient,
   CaptionResultOutput,
   ImageAnalysisResultOutput,
@@ -12,8 +12,7 @@ import type {
   TagsResultOutput,
 } from "../../src/index.js";
 import { createRecorder } from "./utils/recordedClient";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
+import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 import { createClient } from "./utils/clientMethods";
 import { AzureKeyCredential } from "@azure/core-auth";
 import { createTestCredential } from "@azure-tools/test-credential";

@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ContainerClient, CommonOptions } from "@azure/storage-blob";
-import type { Segment } from "./Segment";
-import type { SegmentFactory } from "./SegmentFactory";
-import type { BlobChangeFeedEvent } from "./models/BlobChangeFeedEvent";
-import type { ChangeFeedCursor } from "./models/ChangeFeedCursor";
+import { ContainerClient, CommonOptions } from "@azure/storage-blob";
+import { Segment } from "./Segment";
+import { SegmentFactory } from "./SegmentFactory";
+import { BlobChangeFeedEvent } from "./models/BlobChangeFeedEvent";
+import { ChangeFeedCursor } from "./models/ChangeFeedCursor";
 import { getSegmentsInYear, minDate, getHost } from "./utils/utils.common";
-import type { AbortSignalLike } from "@azure/abort-controller";
+import { AbortSignalLike } from "@azure/abort-controller";
 import { tracingClient } from "./utils/tracing";
 
 /**

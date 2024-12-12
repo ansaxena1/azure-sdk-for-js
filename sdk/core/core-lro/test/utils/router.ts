@@ -1,24 +1,25 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   HttpClient,
   HttpMethods,
   PipelineRequest,
   PipelineResponse,
+  RestError,
+  createHttpHeaders,
 } from "@azure/core-rest-pipeline";
-import { RestError, createHttpHeaders } from "@azure/core-rest-pipeline";
-import type {
+import {
   ImplementationName,
   LroResponseSpec,
   Result,
   RouteProcessor,
   State,
+  createProcessor,
+  generate,
 } from "./utils.js";
-import { createProcessor, generate } from "./utils.js";
-import type { PollerLike } from "../../src/index.js";
-import { createHttpPoller } from "../../src/index.js";
-import type {
+import { PollerLike, createHttpPoller } from "../../src/index.js";
+import {
   OperationResponse,
   RawResponse,
   ResourceLocationConfig,

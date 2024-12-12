@@ -2,16 +2,15 @@
 // Licensed under the MIT License.
 import { CertificateClient } from "../../src/index.js";
 import { LATEST_API_VERSION } from "../../src/certificatesModels.js";
-import type {
+import {
   HttpClient,
+  createHttpHeaders,
   PipelineRequest,
   PipelineResponse,
   SendRequest,
 } from "@azure/core-rest-pipeline";
-import { createHttpHeaders } from "@azure/core-rest-pipeline";
 import { ClientSecretCredential } from "@azure/identity";
-import type { MockInstance } from "vitest";
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach, MockInstance } from "vitest";
 
 describe("The Certificates client should set the serviceVersion", () => {
   const keyVaultUrl = `https://keyvaultname.vault.azure.net`;

@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CompatResponse } from "@azure/core-http-compat";
-import type { FeatureFlagValue } from "./featureFlag.js";
-import type { CommonClientOptions, OperationOptions } from "@azure/core-client";
-import type { SecretReferenceValue } from "./secretReference.js";
-import type {
+import { CompatResponse } from "@azure/core-http-compat";
+import { FeatureFlagValue } from "./featureFlag.js";
+import { CommonClientOptions, OperationOptions } from "@azure/core-client";
+import { SecretReferenceValue } from "./secretReference.js";
+import {
   SnapshotComposition,
   ConfigurationSettingsFilter,
   ConfigurationSnapshot,
@@ -16,13 +16,7 @@ import type {
 /**
  * Provides configuration options for AppConfigurationClient.
  */
-export interface AppConfigurationClientOptions extends CommonClientOptions {
-  /**
-   * The API version to use when interacting with the service. The default value is `2023-11-01`.
-   * Note that overriding this default value may result in unsupported behavior.
-   */
-  apiVersion?: string;
-}
+export interface AppConfigurationClientOptions extends CommonClientOptions {}
 
 /**
  * Fields that uniquely identify a configuration setting

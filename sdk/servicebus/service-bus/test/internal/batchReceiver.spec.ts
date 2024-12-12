@@ -1,32 +1,32 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import Long from "long";
-import type {
+import {
   ServiceBusMessage,
+  delay,
   ServiceBusSender,
   ServiceBusReceivedMessage,
 } from "../../src/index.js";
-import { delay } from "../../src/index.js";
 import { InvalidOperationForPeekedMessage } from "../../src/util/errors.js";
 import { TestClientType, TestMessage } from "../public/utils/testUtils.js";
-import type { ServiceBusReceiver, ServiceBusReceiverImpl } from "../../src/receivers/receiver.js";
-import type { ServiceBusClientForTests, EntityName } from "../public/utils/testutils2.js";
+import { ServiceBusReceiver, ServiceBusReceiverImpl } from "../../src/receivers/receiver.js";
 import {
+  ServiceBusClientForTests,
   createServiceBusClientForTests,
   testPeekMsgsLength,
   getRandomTestClientTypeWithNoSessions,
+  EntityName,
   getRandomTestClientType,
   getRandomTestClientTypeWithSessions,
 } from "../public/utils/testutils2.js";
-import type { Receiver } from "rhea-promise";
-import { ReceiverEvents } from "rhea-promise";
-import type {
+import { Receiver, ReceiverEvents } from "rhea-promise";
+import {
   ServiceBusSessionReceiver,
   ServiceBusSessionReceiverImpl,
 } from "../../src/receivers/sessionReceiver.js";
-import type { LinkEntity } from "../../src/core/linkEntity.js";
+import { LinkEntity } from "../../src/core/linkEntity.js";
 import { StandardAbortMessage } from "@azure/core-amqp";
-import type { BatchingReceiver } from "../../src/core/batchingReceiver.js";
+import { BatchingReceiver } from "../../src/core/batchingReceiver.js";
 import { testLogger } from "./utils/misc.js";
 import { afterAll, afterEach, beforeAll, describe, it } from "vitest";
 import { assert, expect, should } from "../public/utils/chai.js";

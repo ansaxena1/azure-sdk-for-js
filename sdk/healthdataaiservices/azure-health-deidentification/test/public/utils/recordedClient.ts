@@ -1,10 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { VitestTestContext } from "@azure-tools/test-recorder";
-import { Recorder, assertEnvironmentVariable, isPlaybackMode } from "@azure-tools/test-recorder";
-import type { TokenCredential } from "@azure/core-auth";
-import type { DeidentificationClient } from "../../../src/clientDefinitions.js";
+import {
+  Recorder,
+  VitestTestContext,
+  assertEnvironmentVariable,
+  isPlaybackMode,
+} from "@azure-tools/test-recorder";
+import { TokenCredential } from "@azure/core-auth";
+import { DeidentificationClient } from "../../../src/clientDefinitions.js";
 import createClient from "../../../src/deidentificationClient.js";
 
 /**

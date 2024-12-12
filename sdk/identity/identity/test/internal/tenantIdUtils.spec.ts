@@ -5,10 +5,10 @@ import {
   checkTenantId,
   resolveAdditionallyAllowedTenantIds,
   resolveTenantId,
-} from "../../src/util/tenantIdUtils.js";
-import { DeveloperSignOnClientId } from "../../src/constants.js";
-import { credentialLogger } from "../../src/util/logging.js";
-import { describe, it, assert } from "vitest";
+} from "../../src/util/tenantIdUtils";
+import { DeveloperSignOnClientId } from "../../src/constants";
+import { assert } from "@azure-tools/test-utils";
+import { credentialLogger } from "../../src/util/logging";
 
 describe("tenantIdUtils", () => {
   describe("resolveAddionallyAllowedTenantIds", () => {

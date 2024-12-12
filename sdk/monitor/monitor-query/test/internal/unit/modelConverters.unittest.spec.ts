@@ -1,40 +1,40 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import { assert } from "chai";
+import {
   BatchQueryRequest,
   BatchRequest as GeneratedBatchRequest,
-} from "../../../src/generated/logquery/src/index.js";
-import type {
+} from "../../../src/generated/logquery/src";
+import {
   MetricsListOptionalParams as GeneratedMetricsListOptionalParams,
   MetricsListResponse as GeneratedMetricsListResponse,
-} from "../../../src/generated/metrics/src/index.js";
-import type { MetricDefinitionsListOptionalParams as GeneratedMetricDefinitionsListOptionalParams } from "../../../src/generated/metricsdefinitions/src/index.js";
+} from "../../../src/generated/metrics/src";
+import { MetricDefinitionsListOptionalParams as GeneratedMetricDefinitionsListOptionalParams } from "../../../src/generated/metricsdefinitions/src";
 import {
   convertRequestForMetrics,
   convertRequestForQueryBatch,
   convertRequestOptionsForMetricsDefinitions,
   convertResponseForMetrics,
   convertResponseForMetricsDefinitions,
-} from "../../../src/internal/modelConverters.js";
-import type {
+} from "../../../src/internal/modelConverters";
+import {
   OperationRequestOptions,
   RawResponseCallback,
   SerializerOptions,
 } from "@azure/core-client";
-import type { OperationTracingOptions } from "@azure/core-tracing";
-import type {
+import { OperationTracingOptions } from "@azure/core-tracing";
+import {
+  Durations,
   ListMetricDefinitionsOptions,
   MetricsQueryOptions,
   MetricsQueryResult,
-} from "../../../src/index.js";
-import { Durations } from "../../../src/index.js";
-import type { AbortSignalLike } from "@azure/abort-controller";
+} from "../../../src";
+import { AbortSignalLike } from "@azure/abort-controller";
 import {
   convertIntervalToTimeIntervalObject,
   convertTimespanToInterval,
-} from "../../../src/timespanConversion.js";
-import { describe, it, assert } from "vitest";
+} from "../../../src/timespanConversion";
 
 describe("Model unit tests", () => {
   describe("LogsClient", () => {

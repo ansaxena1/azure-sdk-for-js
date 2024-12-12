@@ -2,19 +2,19 @@
 // Licensed under the MIT License.
 
 import * as dotenv from "dotenv";
-import type { TokenCredential } from "@azure/identity";
-import { ClientSecretCredential, DefaultAzureCredential } from "@azure/identity";
-import type { RecorderStartOptions, TestInfo } from "@azure-tools/test-recorder";
+import { ClientSecretCredential, DefaultAzureCredential, TokenCredential } from "@azure/identity";
 import {
   Recorder,
+  RecorderStartOptions,
   assertEnvironmentVariable,
   env,
   isPlaybackMode,
 } from "@azure-tools/test-recorder";
-import { AlphaIdsClient } from "../../../src/index.js";
+import { AlphaIdsClient } from "../../../src";
+import { Context } from "mocha";
 import { isNodeLike } from "@azure/core-util";
 import { parseConnectionString } from "@azure/communication-common";
-import { createMSUserAgentPolicy } from "./msUserAgentPolicy.js";
+import { createMSUserAgentPolicy } from "./msUserAgentPolicy";
 
 if (isNodeLike) {
   dotenv.config();
@@ -53,9 +53,9 @@ export const recorderOptions: RecorderStartOptions = {
 };
 
 export async function createRecordedClient(
-  context: TestInfo,
+  context: Context,
 ): Promise<RecordedClient<AlphaIdsClient>> {
-  const recorder = new Recorder(context);
+  const recorder = new Recorder(context.currentTest);
   await recorder.start(recorderOptions);
 
   // casting is a workaround to enable min-max testing
@@ -86,9 +86,9 @@ export function createMockToken(): {
 }
 
 export async function createRecordedClientWithToken(
-  context: TestInfo,
+  context: Context,
 ): Promise<RecordedClient<AlphaIdsClient> | undefined> {
-  const recorder = new Recorder(context);
+  const recorder = new Recorder(context.currentTest);
   await recorder.start(recorderOptions);
 
   let credential: TokenCredential;

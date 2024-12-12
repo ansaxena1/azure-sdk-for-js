@@ -3,13 +3,13 @@
 
 import { RestError } from "@azure/core-rest-pipeline";
 import { logger } from "./logger";
-import type {
+import {
   ErrorResponse,
   StringIndexType as GeneratedStringIndexType,
   InnerError,
   TextAnalyticsError,
 } from "./generated";
-import type { TextAnalyticsAction } from "./textAnalyticsAction";
+import { TextAnalyticsAction } from "./textAnalyticsAction";
 
 /**
  * @internal

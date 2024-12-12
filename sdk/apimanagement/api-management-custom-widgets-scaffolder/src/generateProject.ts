@@ -1,10 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ServiceInformation, Options, WidgetConfig } from "./scaffolding.js";
 import {
+  ServiceInformation,
   OVERRIDE_DEFAULT_PORT,
   OVERRIDE_PORT_KEY,
+  Options,
+  WidgetConfig,
   displayNameToName,
   widgetFolderName,
 } from "./scaffolding.js";

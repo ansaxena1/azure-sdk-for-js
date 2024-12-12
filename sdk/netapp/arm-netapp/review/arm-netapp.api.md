@@ -595,11 +595,6 @@ export interface CloudErrorBody {
 }
 
 // @public
-export interface ClusterPeerCommandResponse {
-    peerAcceptCommand?: string;
-}
-
-// @public
 export type CoolAccessRetrievalPolicy = string;
 
 // @public
@@ -681,7 +676,6 @@ export type FileAccessLogs = string;
 
 // @public
 export interface FilePathAvailabilityRequest {
-    availabilityZone?: string;
     name: string;
     subnetId: string;
 }
@@ -1138,7 +1132,6 @@ export interface NetAppResource {
 
 // @public
 export interface NetAppResourceCheckFilePathAvailabilityOptionalParams extends coreClient.OperationOptions {
-    availabilityZone?: string;
 }
 
 // @public
@@ -1290,11 +1283,6 @@ export interface OperationsListOptionalParams extends coreClient.OperationOption
 export type OperationsListResponse = OperationListResult;
 
 // @public
-export interface PeerClusterForVolumeMigrationRequest {
-    peerIpAddresses: string[];
-}
-
-// @public
 export interface PlacementKeyValuePairs {
     key: string;
     value: string;
@@ -1426,13 +1414,6 @@ export interface RelocateVolumeRequest {
 }
 
 // @public
-export interface RemotePath {
-    externalHostName: string;
-    serverName: string;
-    volumeName: string;
-}
-
-// @public
 export interface Replication {
     endpointType?: EndpointType;
     remoteVolumeRegion?: string;
@@ -1444,9 +1425,8 @@ export interface Replication {
 // @public
 export interface ReplicationObject {
     endpointType?: EndpointType;
-    remotePath?: RemotePath;
     remoteVolumeRegion?: string;
-    remoteVolumeResourceId?: string;
+    remoteVolumeResourceId: string;
     readonly replicationId?: string;
     replicationSchedule?: ReplicationSchedule;
 }
@@ -1817,11 +1797,6 @@ export interface SubvolumesUpdateOptionalParams extends coreClient.OperationOpti
 export type SubvolumesUpdateResponse = SubvolumeInfo;
 
 // @public
-export interface SvmPeerCommandResponse {
-    svmPeeringCommand?: string;
-}
-
-// @public
 export interface SystemData {
     createdAt?: Date;
     createdBy?: string;
@@ -1873,7 +1848,6 @@ export interface Volume extends TrackedResource {
     defaultGroupQuotaInKiBs?: number;
     defaultUserQuotaInKiBs?: number;
     deleteBaseSnapshot?: boolean;
-    readonly effectiveNetworkFeatures?: NetworkFeatures;
     enableSubvolumes?: EnableSubvolumes;
     readonly encrypted?: boolean;
     encryptionKeySource?: EncryptionKeySource;
@@ -2023,7 +1997,6 @@ export interface VolumeGroupVolumeProperties {
     defaultGroupQuotaInKiBs?: number;
     defaultUserQuotaInKiBs?: number;
     deleteBaseSnapshot?: boolean;
-    readonly effectiveNetworkFeatures?: NetworkFeatures;
     enableSubvolumes?: EnableSubvolumes;
     readonly encrypted?: boolean;
     encryptionKeySource?: EncryptionKeySource;
@@ -2216,8 +2189,6 @@ export interface VolumeRevert {
 
 // @public
 export interface Volumes {
-    beginAuthorizeExternalReplication(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesAuthorizeExternalReplicationOptionalParams): Promise<SimplePollerLike<OperationState<VolumesAuthorizeExternalReplicationResponse>, VolumesAuthorizeExternalReplicationResponse>>;
-    beginAuthorizeExternalReplicationAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesAuthorizeExternalReplicationOptionalParams): Promise<VolumesAuthorizeExternalReplicationResponse>;
     beginAuthorizeReplication(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: AuthorizeRequest, options?: VolumesAuthorizeReplicationOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
     beginAuthorizeReplicationAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: AuthorizeRequest, options?: VolumesAuthorizeReplicationOptionalParams): Promise<void>;
     beginBreakFileLocks(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesBreakFileLocksOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
@@ -2230,16 +2201,10 @@ export interface Volumes {
     beginDeleteAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesDeleteOptionalParams): Promise<void>;
     beginDeleteReplication(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesDeleteReplicationOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
     beginDeleteReplicationAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesDeleteReplicationOptionalParams): Promise<void>;
-    beginFinalizeExternalReplication(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesFinalizeExternalReplicationOptionalParams): Promise<SimplePollerLike<OperationState<VolumesFinalizeExternalReplicationResponse>, VolumesFinalizeExternalReplicationResponse>>;
-    beginFinalizeExternalReplicationAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesFinalizeExternalReplicationOptionalParams): Promise<VolumesFinalizeExternalReplicationResponse>;
     beginFinalizeRelocation(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesFinalizeRelocationOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
     beginFinalizeRelocationAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesFinalizeRelocationOptionalParams): Promise<void>;
     beginListGetGroupIdListForLdapUser(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: GetGroupIdListForLdapUserRequest, options?: VolumesListGetGroupIdListForLdapUserOptionalParams): Promise<SimplePollerLike<OperationState<VolumesListGetGroupIdListForLdapUserResponse>, VolumesListGetGroupIdListForLdapUserResponse>>;
     beginListGetGroupIdListForLdapUserAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: GetGroupIdListForLdapUserRequest, options?: VolumesListGetGroupIdListForLdapUserOptionalParams): Promise<VolumesListGetGroupIdListForLdapUserResponse>;
-    beginPeerExternalCluster(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: PeerClusterForVolumeMigrationRequest, options?: VolumesPeerExternalClusterOptionalParams): Promise<SimplePollerLike<OperationState<VolumesPeerExternalClusterResponse>, VolumesPeerExternalClusterResponse>>;
-    beginPeerExternalClusterAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: PeerClusterForVolumeMigrationRequest, options?: VolumesPeerExternalClusterOptionalParams): Promise<VolumesPeerExternalClusterResponse>;
-    beginPerformReplicationTransfer(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesPerformReplicationTransferOptionalParams): Promise<SimplePollerLike<OperationState<VolumesPerformReplicationTransferResponse>, VolumesPerformReplicationTransferResponse>>;
-    beginPerformReplicationTransferAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesPerformReplicationTransferOptionalParams): Promise<VolumesPerformReplicationTransferResponse>;
     beginPoolChange(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: PoolChangeRequest, options?: VolumesPoolChangeOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
     beginPoolChangeAndWait(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, body: PoolChangeRequest, options?: VolumesPoolChangeOptionalParams): Promise<void>;
     beginPopulateAvailabilityZone(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesPopulateAvailabilityZoneOptionalParams): Promise<SimplePollerLike<OperationState<VolumesPopulateAvailabilityZoneResponse>, VolumesPopulateAvailabilityZoneResponse>>;
@@ -2265,21 +2230,6 @@ export interface Volumes {
     listReplications(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesListReplicationsOptionalParams): PagedAsyncIterableIterator<Replication>;
     replicationStatus(resourceGroupName: string, accountName: string, poolName: string, volumeName: string, options?: VolumesReplicationStatusOptionalParams): Promise<VolumesReplicationStatusResponse>;
 }
-
-// @public
-export interface VolumesAuthorizeExternalReplicationHeaders {
-    // (undocumented)
-    location?: string;
-}
-
-// @public
-export interface VolumesAuthorizeExternalReplicationOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type VolumesAuthorizeExternalReplicationResponse = SvmPeerCommandResponse;
 
 // @public
 export interface VolumesAuthorizeReplicationOptionalParams extends coreClient.OperationOptions {
@@ -2328,21 +2278,6 @@ export interface VolumesDeleteReplicationOptionalParams extends coreClient.Opera
     resumeFrom?: string;
     updateIntervalInMs?: number;
 }
-
-// @public
-export interface VolumesFinalizeExternalReplicationHeaders {
-    // (undocumented)
-    location?: string;
-}
-
-// @public
-export interface VolumesFinalizeExternalReplicationOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type VolumesFinalizeExternalReplicationResponse = VolumesFinalizeExternalReplicationHeaders;
 
 // @public
 export interface VolumesFinalizeRelocationOptionalParams extends coreClient.OperationOptions {
@@ -2397,36 +2332,6 @@ export type VolumesListResponse = VolumeList;
 export interface VolumeSnapshotProperties {
     snapshotPolicyId?: string;
 }
-
-// @public
-export interface VolumesPeerExternalClusterHeaders {
-    // (undocumented)
-    location?: string;
-}
-
-// @public
-export interface VolumesPeerExternalClusterOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type VolumesPeerExternalClusterResponse = ClusterPeerCommandResponse;
-
-// @public
-export interface VolumesPerformReplicationTransferHeaders {
-    // (undocumented)
-    location?: string;
-}
-
-// @public
-export interface VolumesPerformReplicationTransferOptionalParams extends coreClient.OperationOptions {
-    resumeFrom?: string;
-    updateIntervalInMs?: number;
-}
-
-// @public
-export type VolumesPerformReplicationTransferResponse = VolumesPerformReplicationTransferHeaders;
 
 // @public
 export interface VolumesPoolChangeOptionalParams extends coreClient.OperationOptions {

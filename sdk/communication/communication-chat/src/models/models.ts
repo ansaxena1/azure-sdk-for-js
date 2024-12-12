@@ -1,11 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
-  CommunicationIdentifier,
-  CommunicationIdentifierKind,
-} from "@azure/communication-common";
-import type { ChatError, ChatMessageType } from "../generated/src/index.js";
+import { CommunicationIdentifier, CommunicationIdentifierKind } from "@azure/communication-common";
+import { ChatError, ChatMessageType } from "../generated/src";
 
 export {
   AddChatParticipantsResult,
@@ -13,7 +10,7 @@ export {
   ChatThreadItem,
   ChatError,
   SendChatMessageResult,
-} from "../generated/src/models/index.js";
+} from "../generated/src/models";
 
 /** Chat thread. */
 export interface ChatThreadProperties {

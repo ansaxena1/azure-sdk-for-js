@@ -4,17 +4,18 @@
 import { env, isLiveMode, Recorder } from "@azure-tools/test-recorder";
 import { delay } from "@azure/core-util";
 import { assert } from "chai";
-import type { Context, Suite } from "mocha";
-import type {
+import { Context, Suite } from "mocha";
+import {
+  AzureKeyCredential,
   AzureOpenAIVectorizer,
   SearchIndex,
+  SearchIndexClient,
   SynonymMap,
   VectorSearchAlgorithmConfiguration,
   VectorSearchProfile,
 } from "../../../src";
-import { AzureKeyCredential, SearchIndexClient } from "../../../src";
 import { defaultServiceVersion } from "../../../src/serviceUtils";
-import type { Hotel } from "../utils/interfaces";
+import { Hotel } from "../utils/interfaces";
 import { createClients } from "../utils/recordedClient";
 import {
   createRandomIndexName,

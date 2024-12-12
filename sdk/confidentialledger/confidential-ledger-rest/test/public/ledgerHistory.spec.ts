@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ConfidentialLedgerClient } from "../../src";
-import { isUnexpected } from "../../src";
+import { ConfidentialLedgerClient, isUnexpected } from "../../src";
 import { createClient, createRecorder } from "./utils/recordedClient";
 
-import type { Context } from "mocha";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { isLiveMode } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { Recorder, isLiveMode } from "@azure-tools/test-recorder";
 import { assert } from "chai";
 
 describe("Get ledger history", function () {

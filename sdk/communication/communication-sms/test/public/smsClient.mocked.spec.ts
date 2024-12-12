@@ -2,14 +2,13 @@
 // Licensed under the MIT License.
 
 import { AzureKeyCredential } from "@azure/core-auth";
-import type { HttpClient, SendRequest } from "@azure/core-rest-pipeline";
-import { isNodeLike } from "@azure/core-util";
-import type { TokenCredential } from "@azure/identity";
-import type { SmsClientOptions, SmsSendRequest } from "../../src/index.js";
-import { SmsClient } from "../../src/index.js";
-import { MockHttpClient } from "./utils/mockHttpClient.js";
-import type { MockInstance } from "vitest";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { HttpClient } from "@azure/core-rest-pipeline";
+import { isNode } from "@azure/core-util";
+import { TokenCredential } from "@azure/identity";
+import { assert } from "chai";
+import sinon from "sinon";
+import { SmsClient, SmsClientOptions, SmsSendRequest } from "../../src";
+import { MockHttpClient } from "./utils/mockHttpClient";
 
 const TEST_NUMBER = "+14255550123";
 
@@ -17,7 +16,7 @@ describe("[mocked] SmsClient", async function () {
   const baseUri = "https://contoso.api.fake";
   const connectionString = `endpoint=${baseUri};accesskey=banana`;
   const dateHeader = "x-ms-date";
-  let sendRequestSpy: MockInstance<SendRequest>;
+  let sendRequestSpy: sinon.SinonSpy;
   const mockHttpClient: HttpClient = new MockHttpClient(TEST_NUMBER);
 
   const testSendRequest: SmsSendRequest = {
@@ -48,8 +47,8 @@ describe("[mocked] SmsClient", async function () {
   describe("when sending an SMS", function () {
     let smsClient: SmsClient;
     beforeEach(function () {
-      sendRequestSpy = vi.spyOn(mockHttpClient, "sendRequest");
-      vi.useFakeTimers();
+      sendRequestSpy = sinon.spy(mockHttpClient, "sendRequest");
+      sinon.useFakeTimers();
       // workaround: casting because min testing has issues with httpClient newer versions having extra optional fields
       smsClient = new SmsClient(connectionString, {
         httpClient: mockHttpClient,
@@ -59,8 +58,8 @@ describe("[mocked] SmsClient", async function () {
     it("sends with the correct headers", async function () {
       await smsClient.send(testSendRequest);
 
-      const request = sendRequestSpy.mock.calls[0][0];
-      if (isNodeLike) {
+      const request = sendRequestSpy.getCall(0).args[0];
+      if (isNode) {
         assert.equal(request.headers.get("host"), "contoso.api.fake");
       }
       assert.typeOf(request.headers.get(dateHeader), "string");
@@ -75,14 +74,13 @@ describe("[mocked] SmsClient", async function () {
       const smsTestResults = await smsClient.send(testSendRequest);
 
       const smsTestResult = smsTestResults[0];
-      expect(sendRequestSpy).toHaveBeenCalled();
+      sinon.assert.calledOnce(sendRequestSpy);
       assert.equal(smsTestResult.httpStatusCode, 202);
       assert.equal(smsTestResult.messageId, "id");
     });
 
     afterEach(function () {
-      vi.restoreAllMocks();
-      vi.useRealTimers();
+      sinon.restore();
     });
   });
 });

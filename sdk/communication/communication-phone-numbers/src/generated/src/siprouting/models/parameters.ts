@@ -11,7 +11,7 @@ import {
   OperationURLParameter,
   OperationQueryParameter
 } from "@azure/core-client";
-import { SipConfigurationUpdate as SipConfigurationUpdateMapper } from "../models/mappers.js";
+import { SipConfigurationUpdate as SipConfigurationUpdateMapper } from "../models/mappers";
 
 export const accept: OperationParameter = {
   parameterPath: "accept",

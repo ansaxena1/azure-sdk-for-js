@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "../abort-controller/AbortSignalLike.js";
+import { AbortSignalLike } from "../abort-controller/AbortSignalLike.js";
 
 /**
  * Options related to abort controller.

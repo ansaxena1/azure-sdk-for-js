@@ -10,8 +10,8 @@ import {
   bodyToString,
 } from "../utils";
 import { Recorder } from "@azure-tools/test-recorder";
-import type { ShareClient, ShareDirectoryClient, ShareFileClient } from "../../src";
-import type { Context } from "mocha";
+import { ShareClient, ShareDirectoryClient, ShareFileClient } from "../../src";
+import { Context } from "mocha";
 
 // for file
 describe("LeaseClient Node.js only - OAuth", () => {

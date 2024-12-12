@@ -1,25 +1,25 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { HttpClient, SendRequest } from "@azure/core-rest-pipeline";
+import { HttpClient } from "@azure/core-rest-pipeline";
 
-import { generateSendMessageRequest } from "../../src/utils/smsUtils.js";
-import { Uuid } from "../../src/utils/uuid.js";
-import { apiVersion } from "../../src/generated/src/models/parameters.js";
-import type { SmsSendRequest } from "../../src/smsClient.js";
-import { SmsClient } from "../../src/smsClient.js";
-import { MockHttpClient } from "../public/utils/mockHttpClient.js";
-import type { MockInstance } from "vitest";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { generateSendMessageRequest } from "../../src/utils/smsUtils";
+import { Uuid } from "../../src/utils/uuid";
+
+import { assert } from "chai";
+import sinon from "sinon";
+import { apiVersion } from "../../src/generated/src/models/parameters";
+import { SmsClient, SmsSendRequest } from "../../src/smsClient";
+import { MockHttpClient } from "../public/utils/mockHttpClient";
 
 const API_VERSION = apiVersion.mapper.defaultValue;
 const TEST_NUMBER = "+14255550123";
 
-describe("[mocked] SmsClient Internal", async () => {
+describe("[mocked] SmsClient Internal", async function () {
   const baseUri = "https://contoso.api.fake";
   const connectionString = `endpoint=${baseUri};accesskey=banana`;
-  let sendRequestSpy: MockInstance<SendRequest>;
-  let uuidStub: MockInstance<() => string>;
+  let sendRequestSpy: sinon.SinonSpy;
+  let uuidStub: sinon.SinonStub;
   const mockHttpClient: HttpClient = new MockHttpClient(TEST_NUMBER);
   const mockedGuid = "42bf408f-1931-4314-8971-2b538625a2b0";
 
@@ -29,36 +29,35 @@ describe("[mocked] SmsClient Internal", async () => {
     message: "message",
   };
 
-  describe("when sending an SMS", () => {
+  describe("when sending an SMS", function () {
     let smsClient: SmsClient;
-    beforeEach(() => {
-      uuidStub = vi.spyOn(Uuid, "generateUuid");
-      uuidStub.mockReturnValue(mockedGuid);
-      sendRequestSpy = vi.spyOn(mockHttpClient, "sendRequest");
-      vi.useFakeTimers();
+    beforeEach(function () {
+      uuidStub = sinon.stub(Uuid, "generateUuid");
+      uuidStub.returns(mockedGuid);
+      sendRequestSpy = sinon.spy(mockHttpClient, "sendRequest");
+      sinon.useFakeTimers();
       smsClient = new SmsClient(connectionString, { httpClient: mockHttpClient });
     });
 
-    it("sends with the correct request body", async () => {
+    it("sends with the correct request body", async function () {
       await smsClient.send(testSendRequest);
 
-      const request = sendRequestSpy.mock.calls[0][0];
+      const request = sendRequestSpy.getCall(0).args[0];
       assert.equal(request.url, `${baseUri}/sms?api-version=${API_VERSION}`);
       assert.equal(request.method, "POST");
       const expectedRequestBody = generateSendMessageRequest(testSendRequest);
       assert.deepEqual(JSON.parse(request.body as string), expectedRequestBody);
     });
 
-    it("generates a new repeatability id each time", async () => {
+    it("generates a new repeatability id each time", async function () {
       await smsClient.send(testSendRequest);
-      expect(uuidStub).toHaveBeenCalledOnce();
+      assert.isTrue(uuidStub.calledOnce);
       await smsClient.send(testSendRequest);
-      expect(uuidStub).toHaveBeenCalledTimes(2);
+      assert.isTrue(uuidStub.calledTwice);
     });
 
-    afterEach(() => {
-      vi.restoreAllMocks();
-      vi.useRealTimers();
+    afterEach(function () {
+      sinon.restore();
     });
   });
 });

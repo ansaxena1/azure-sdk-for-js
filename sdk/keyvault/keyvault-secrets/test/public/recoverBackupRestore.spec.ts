@@ -1,14 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env, isPlaybackMode, isRecordMode } from "@azure-tools/test-recorder";
+import { Recorder, env, isPlaybackMode, isRecordMode } from "@azure-tools/test-recorder";
 import { isNode } from "@azure/core-util";
 
 import { afterEach, assert, beforeEach, describe, it } from "vitest";
-import type { SecretClient } from "../../src/index.js";
+import { SecretClient } from "../../src/index.js";
 import { testPollerProperties } from "./utils/recorderUtils.js";
 import { authenticate } from "./utils/testAuthentication.js";
-import type TestClient from "./utils/testClient.js";
+import TestClient from "./utils/testClient.js";
 
 describe("Secret client - restore secrets and recover backups", () => {
   const secretPrefix = `backupRestore${env.SECRET_NAME || "SecretName"}`;

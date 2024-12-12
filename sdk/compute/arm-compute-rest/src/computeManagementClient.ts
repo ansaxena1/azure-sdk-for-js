@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
-import type { TokenCredential } from "@azure/core-auth";
-import type { ComputeManagementClient } from "./clientDefinitions";
+import { ClientOptions, getClient } from "@azure-rest/core-client";
+import { TokenCredential } from "@azure/core-auth";
+import { ComputeManagementClient } from "./clientDefinitions";
 
 /**
  * Initialize a new instance of the class ComputeManagementClient class.

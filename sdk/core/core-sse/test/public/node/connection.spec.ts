@@ -4,9 +4,9 @@
 import { createSseStream } from "../../../src/index.js";
 import { Client, getClient } from "@azure-rest/core-client";
 import { assert, beforeAll, beforeEach, afterEach, describe, it } from "vitest";
-import { port } from "../../server/config.mjs";
+import { port } from "../../server/config.mts";
 import { IncomingMessage } from "http";
-import { matrix } from "@azure-tools/test-utils-vitest";
+import { matrix } from "@azure-tools/test-utils";
 
 const contentType = "text/event-stream";
 function getEndpoint(): string {

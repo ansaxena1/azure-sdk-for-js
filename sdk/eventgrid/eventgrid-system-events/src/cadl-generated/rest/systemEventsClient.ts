@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
+import { getClient, ClientOptions } from "@azure-rest/core-client";
 import { logger } from "../logger";
-import type { SystemEventsContext } from "./clientDefinitions";
+import { SystemEventsContext } from "./clientDefinitions";
 
 /** The optional parameters for the client */
 export interface SystemEventsContextOptions extends ClientOptions {}

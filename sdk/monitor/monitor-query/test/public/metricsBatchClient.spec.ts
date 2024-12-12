@@ -1,14 +1,16 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { MetricsClient, MetricsQueryResult } from "../../src/index.js";
-import type { RecorderAndMetricsBatchQueryClient } from "./shared/testShared.js";
+
+import { assert } from "chai";
+import { Context } from "mocha";
+import { MetricsClient, MetricsQueryResult } from "../../src";
 import {
+  RecorderAndMetricsBatchQueryClient,
   createRecorderAndMetricsBatchQueryClient,
   getMetricsBatchResourceIds,
   getMetricsBatchNamespace,
   getMetricsBatchNames,
-} from "./shared/testShared.js";
-import { describe, it, assert, beforeEach } from "vitest";
+} from "./shared/testShared";
 
 describe.skip("MetricsBatchClient live tests", function () {
   let resourceIds: string[];
@@ -16,7 +18,7 @@ describe.skip("MetricsBatchClient live tests", function () {
   let metricNames: string[];
   let metricsBatchQueryClient: MetricsClient;
 
-  beforeEach(async function () {
+  beforeEach(async function (this: Context) {
     const recordedClient: RecorderAndMetricsBatchQueryClient =
       await createRecorderAndMetricsBatchQueryClient();
     resourceIds = getMetricsBatchResourceIds();
@@ -25,11 +27,16 @@ describe.skip("MetricsBatchClient live tests", function () {
     metricsBatchQueryClient = recordedClient.client;
   });
 
+  // afterEach(async function () {
+  //   loggerForTest.verbose("Recorder: stopping");
+  //   await recorder.stop();
+  // });
+
   it("batch query with no resource ids", async () => {
     try {
       await metricsBatchQueryClient.queryResources([], metricNames, metricsNamespace);
       assert.fail("Code should not reach here.");
-    } catch {
+    } catch (e) {
       assert.equal(1, 1);
     }
   });

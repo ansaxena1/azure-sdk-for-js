@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   FormDataMap,
   HttpHeaders,
   HttpMethods,
@@ -12,9 +12,9 @@ import type {
   TransferProgressEvent,
 } from "./interfaces.js";
 import { createHttpHeaders } from "./httpHeaders.js";
-import type { AbortSignalLike } from "./abort-controller/AbortSignalLike.js";
+import { AbortSignalLike } from "./abort-controller/AbortSignalLike.js";
 import { randomUUID } from "./util/uuidUtils.js";
-import type { OperationTracingOptions } from "./tracing/interfaces.js";
+import { OperationTracingOptions } from "./tracing/interfaces.js";
 
 /**
  * Settings to initialize a request.

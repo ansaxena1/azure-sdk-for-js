@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
-import type {
+import { OperationOptions } from "@azure/core-client";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import {
   AutocompleteMode,
   FacetResult,
   HybridSearch,
@@ -25,7 +25,7 @@ import type {
   Speller,
   VectorsDebugInfo,
 } from "./generated/data/models";
-import type GeographyPoint from "./geographyPoint";
+import GeographyPoint from "./geographyPoint";
 
 /**
  * Options for performing the count operation on the index.

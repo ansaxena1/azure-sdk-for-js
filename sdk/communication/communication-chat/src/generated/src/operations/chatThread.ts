@@ -6,12 +6,12 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { tracingClient } from "../tracing.js";
-import { ChatThread } from "../operationsInterfaces/index.js";
+import { tracingClient } from "../tracing";
+import { ChatThread } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
-import * as Mappers from "../models/mappers.js";
-import * as Parameters from "../models/parameters.js";
-import { ChatApiClient } from "../chatApiClient.js";
+import * as Mappers from "../models/mappers";
+import * as Parameters from "../models/parameters";
+import { ChatApiClient } from "../chatApiClient";
 import {
   ChatThreadListChatReadReceiptsOptionalParams,
   ChatThreadListChatReadReceiptsResponse,
@@ -45,7 +45,7 @@ import {
   ChatThreadListChatMessagesNextResponse,
   ChatThreadListChatParticipantsNextOptionalParams,
   ChatThreadListChatParticipantsNextResponse,
-} from "../models/index.js";
+} from "../models";
 
 /** Class containing ChatThread operations. */
 export class ChatThreadImpl implements ChatThread {

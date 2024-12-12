@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { PartitionKey } from "../../documents";
-import type { FeedRange } from "./FeedRange";
+import { PartitionKey } from "../../documents";
+import { FeedRange } from "./FeedRange";
 
 /**
  * @hidden

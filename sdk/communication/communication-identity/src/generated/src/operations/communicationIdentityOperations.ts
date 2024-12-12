@@ -6,12 +6,12 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { tracingClient } from "../tracing.js";
-import { CommunicationIdentityOperations } from "../operationsInterfaces/index.js";
+import { tracingClient } from "../tracing";
+import { CommunicationIdentityOperations } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
-import * as Mappers from "../models/mappers.js";
-import * as Parameters from "../models/parameters.js";
-import { IdentityRestClient } from "../identityRestClient.js";
+import * as Mappers from "../models/mappers";
+import * as Parameters from "../models/parameters";
+import { IdentityRestClient } from "../identityRestClient";
 import {
   CommunicationIdentityCreateOptionalParams,
   CommunicationIdentityCreateResponse,
@@ -22,7 +22,7 @@ import {
   CommunicationIdentityTokenScope,
   CommunicationIdentityIssueAccessTokenOptionalParams,
   CommunicationIdentityIssueAccessTokenResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Class containing CommunicationIdentityOperations operations. */
 export class CommunicationIdentityOperationsImpl

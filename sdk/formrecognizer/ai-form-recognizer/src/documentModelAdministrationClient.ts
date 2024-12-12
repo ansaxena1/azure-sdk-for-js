@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
-import type { TracingClient } from "@azure/core-tracing";
-import { createTracingClient } from "@azure/core-tracing";
+import { KeyCredential, TokenCredential } from "@azure/core-auth";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { TracingClient, createTracingClient } from "@azure/core-tracing";
 import { SDK_VERSION } from "./constants";
-import type {
+import {
   CopyAuthorization,
   GeneratedClient,
   ResourceDetails,
@@ -17,19 +16,18 @@ import type {
   DocumentClassifierDetails,
 } from "./generated";
 import { accept1 } from "./generated/models/parameters";
-import type {
+import {
   TrainingOperationDefinition,
   DocumentModelOperationState,
   DocumentModelPoller,
+  toTrainingPollOperationState,
   DocumentModelBuildResponse,
   AdministrationOperationState,
   DocumentClassifierPoller,
   DocumentClassifierOperationState,
 } from "./lro/administration";
-import { toTrainingPollOperationState } from "./lro/administration";
-import type { OperationContext } from "./lro/util/poller";
-import { lro } from "./lro/util/poller";
-import type {
+import { OperationContext, lro } from "./lro/util/poller";
+import {
   BeginCopyModelOptions,
   DeleteDocumentModelOptions,
   DocumentModelAdministrationClientOptions,
@@ -41,15 +39,15 @@ import type {
   ListOperationsOptions,
   PollerOptions,
 } from "./options";
-import type { BeginBuildDocumentClassifierOptions } from "./options/BuildDocumentClassifierOptions";
-import type {
+import { BeginBuildDocumentClassifierOptions } from "./options/BuildDocumentClassifierOptions";
+import {
   BeginBuildDocumentModelOptions,
   BeginComposeDocumentModelOptions,
   DocumentModelBuildMode,
 } from "./options/BuildModelOptions";
 import { Mappers, SERIALIZER, makeServiceClient } from "./util";
-import type { FullOperationResponse, OperationOptions } from "@azure/core-client";
-import type {
+import { FullOperationResponse, OperationOptions } from "@azure/core-client";
+import {
   DocumentModelSource,
   DocumentClassifierDocumentTypeSources,
   AzureBlobSource,

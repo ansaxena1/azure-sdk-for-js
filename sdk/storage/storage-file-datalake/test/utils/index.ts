@@ -1,24 +1,22 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { env, Recorder } from "@azure-tools/test-recorder";
 import { randomBytes } from "crypto";
 import * as fs from "fs";
 import * as path from "path";
 
 import { DataLakeServiceClient } from "../../src/DataLakeServiceClient";
-import type { StoragePipelineOptions } from "../../src";
-import { newPipeline, StorageSharedKeyCredential } from "../../src";
+import { newPipeline, StoragePipelineOptions, StorageSharedKeyCredential } from "../../src";
 import { getUniqueName, SimpleTokenCredential, configureStorageClient } from "./testutils.common";
-import type { DataLakeSASSignatureValues } from "../../src";
 import {
   AccountSASPermissions,
   AccountSASResourceTypes,
   AccountSASServices,
   DataLakeFileSystemClient,
+  DataLakeSASSignatureValues,
   generateAccountSASQueryParameters,
   generateDataLakeSASQueryParameters,
 } from "../../src";

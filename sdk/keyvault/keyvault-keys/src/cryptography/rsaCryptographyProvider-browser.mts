@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CryptographyProvider} from "./models.js";
-import { LocalCryptographyUnsupportedError } from "./models.js";
+import { CryptographyProvider, LocalCryptographyUnsupportedError } from "./models.js";
 
 /**
  * The browser replacement of the RsaCryptographyProvider. Since we do not

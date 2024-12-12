@@ -18,12 +18,11 @@ dotenv.config();
  * This sample demonstrates how to Attach to the output stream of a specific container instance in a specified resource group and container group.
  *
  * @summary Attach to the output stream of a specific container instance in a specified resource group and container group.
- * x-ms-original-file: specification/containerinstance/resource-manager/Microsoft.ContainerInstance/preview/2024-05-01-preview/examples/ContainerAttach.json
+ * x-ms-original-file: specification/containerinstance/resource-manager/Microsoft.ContainerInstance/stable/2023-05-01/examples/ContainerAttach.json
  */
 async function containerAttach() {
   const subscriptionId =
-    process.env["CONTAINERINSTANCE_SUBSCRIPTION_ID"] ||
-    "00000000-0000-0000-0000-000000000000";
+    process.env["CONTAINERINSTANCE_SUBSCRIPTION_ID"] || "subid";
   const resourceGroupName =
     process.env["CONTAINERINSTANCE_RESOURCE_GROUP"] || "demo";
   const containerGroupName = "demo1";
@@ -31,12 +30,12 @@ async function containerAttach() {
   const credential = new DefaultAzureCredential();
   const client = new ContainerInstanceManagementClient(
     credential,
-    subscriptionId,
+    subscriptionId
   );
   const result = await client.containers.attach(
     resourceGroupName,
     containerGroupName,
-    containerName,
+    containerName
   );
   console.log(result);
 }

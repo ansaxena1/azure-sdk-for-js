@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 const { DefaultAzureCredential } = require("@azure/identity");
-const MapsRender = require("@azure-rest/maps-render").default,
-  { isUnexpected } = require("@azure-rest/maps-render");
+const { isUnexpected } = require("../src/generated");
+const MapsRender = require("../src/mapsRender").default;
 
 /**
  * @summary How to get the metadata of a certain tileset.

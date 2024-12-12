@@ -3,7 +3,7 @@
 
 import { assert } from "chai";
 import { createSynonymMapFromFile } from "../../../src";
-import type { SynonymMap } from "../../../src/serviceModels";
+import { SynonymMap } from "../../../src/serviceModels";
 
 describe("synonymmap", function () {
   it("create synonymmap from file(node)", async function () {

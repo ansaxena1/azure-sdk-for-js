@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 import { keyVaultAuthenticationPolicy } from "@azure/keyvault-common";
 import { LATEST_API_VERSION } from "./constants.js";
-import type { Setting as GeneratedSetting } from "./generated/index.js";
-import { KeyVaultClient } from "./generated/index.js";
+import { KeyVaultClient, Setting as GeneratedSetting } from "./generated/index.js";
 import { logger } from "./log.js";
-import type {
+import {
   UpdateSettingOptions,
   GetSettingOptions,
   ListSettingsOptions,

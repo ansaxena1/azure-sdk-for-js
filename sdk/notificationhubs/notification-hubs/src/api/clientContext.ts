@@ -2,21 +2,22 @@
 // Licensed under the MIT License.
 
 import * as constants from "../utils/constants.js";
-import type {
+import {
   HttpClient,
   HttpHeaders,
   PipelineRequest,
   PipelineResponse,
+  RestError,
+  createDefaultHttpClient,
+  createHttpHeaders,
 } from "@azure/core-rest-pipeline";
-import { RestError, createDefaultHttpClient, createHttpHeaders } from "@azure/core-rest-pipeline";
 import {
   createTokenCredentialFromConnection,
   parseNotificationHubsConnectionString,
 } from "../auth/connectionStringUtils.js";
-import type { NotificationHubsClientOptions } from "../models/options.js";
-import type { SasTokenCredential } from "../auth/sasTokenCredential.js";
-import type { Client } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
+import { NotificationHubsClientOptions } from "../models/options.js";
+import { SasTokenCredential } from "../auth/sasTokenCredential.js";
+import { Client, getClient } from "@azure-rest/core-client";
 
 const API_VERSION = "2020-06";
 

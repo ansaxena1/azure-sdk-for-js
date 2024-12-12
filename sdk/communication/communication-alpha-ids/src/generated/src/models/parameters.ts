@@ -11,7 +11,7 @@ import {
   OperationURLParameter,
   OperationQueryParameter
 } from "@azure/core-client";
-import { DynamicAlphaIdConfiguration as DynamicAlphaIdConfigurationMapper } from "../models/mappers.js";
+import { DynamicAlphaIdConfiguration as DynamicAlphaIdConfigurationMapper } from "../models/mappers";
 
 export const accept: OperationParameter = {
   parameterPath: "accept",

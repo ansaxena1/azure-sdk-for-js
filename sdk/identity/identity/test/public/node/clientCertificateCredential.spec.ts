@@ -3,20 +3,16 @@
 
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
-import * as path from "node:path";
+import * as path from "path";
 
-import type { MsalTestCleanup } from "../../node/msalNodeTestSetup.js";
-import { msalNodeTestSetup } from "../../node/msalNodeTestSetup.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { delay, env, isLiveMode, isPlaybackMode } from "@azure-tools/test-recorder";
+import { MsalTestCleanup, msalNodeTestSetup } from "../../node/msalNodeTestSetup";
+import { Recorder, delay, env, isLiveMode, isPlaybackMode } from "@azure-tools/test-recorder";
 
-import { ClientCertificateCredential } from "../../../src/index.js";
-import type { PipelineResponse } from "@azure/core-rest-pipeline";
-import fs from "node:fs";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
-import { toSupportTracing } from "@azure-tools/test-utils-vitest";
-
-expect.extend({ toSupportTracing });
+import { ClientCertificateCredential } from "../../../src";
+import { Context } from "mocha";
+import { PipelineResponse } from "@azure/core-rest-pipeline";
+import { assert } from "@azure-tools/test-utils";
+import fs from "fs";
 
 const ASSET_PATH = "assets";
 
@@ -24,14 +20,14 @@ describe("ClientCertificateCredential", function () {
   let cleanup: MsalTestCleanup;
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    const setup = await msalNodeTestSetup(ctx);
+  beforeEach(async function (this: Context) {
+    const setup = await msalNodeTestSetup(this.currentTest);
     cleanup = setup.cleanup;
     recorder = setup.recorder;
     await recorder.setMatcher("BodilessMatcher");
     if (isLiveMode()) {
       // https://github.com/Azure/azure-sdk-for-js/issues/29929
-      ctx.skip();
+      this.skip();
     }
   });
   afterEach(async function () {
@@ -41,7 +37,7 @@ describe("ClientCertificateCredential", function () {
   const certificatePath = env.IDENTITY_SP_CERT_PEM || path.join(ASSET_PATH, "fake-cert.pem");
   const scope = "https://vault.azure.net/.default";
 
-  it("authenticates", async function (ctx) {
+  it("authenticates", async function (this: Context) {
     const credential = new ClientCertificateCredential(
       env.IDENTITY_SP_TENANT_ID || env.AZURE_TENANT_ID!,
       env.IDENTITY_SP_CLIENT_ID || env.AZURE_CLIENT_ID!,
@@ -54,7 +50,7 @@ describe("ClientCertificateCredential", function () {
     assert.ok(token?.expiresOnTimestamp! > Date.now());
   });
 
-  it("authenticates with a PEM certificate string directly", async function (ctx) {
+  it("authenticates with a PEM certificate string directly", async function (this: Context) {
     const credential = new ClientCertificateCredential(
       env.IDENTITY_SP_TENANT_ID || env.AZURE_TENANT_ID!,
       env.IDENTITY_SP_CLIENT_ID || env.AZURE_CLIENT_ID!,
@@ -70,11 +66,11 @@ describe("ClientCertificateCredential", function () {
     assert.ok(token?.expiresOnTimestamp! > Date.now());
   });
 
-  it("allows cancelling the authentication", async function (ctx) {
+  it("allows cancelling the authentication", async function (this: Context) {
     if (!fs.existsSync(certificatePath)) {
       // In min-max tests, the certificate file can't be found.
       console.log("Failed to locate the certificate file. Skipping.");
-      ctx.skip();
+      this.skip();
     }
     const credential = new ClientCertificateCredential(
       env.IDENTITY_SP_TENANT_ID || env.AZURE_TENANT_ID!,
@@ -109,20 +105,24 @@ describe("ClientCertificateCredential", function () {
     assert.ok(error?.message.includes("endpoints_resolution_error"));
   });
 
-  it("supports tracing", async function (ctx) {
+  it("supports tracing", async function (this: Context) {
     if (isPlaybackMode()) {
       // MSAL creates a client assertion based on the certificate that I haven't been able to mock.
       // This assertion could be provided as parameters, but we don't have that in the public API yet,
       // and I'm trying to avoid having to generate one ourselves.
-      ctx.skip();
+      this.skip();
     }
-    await expect(async (tracingOptions) => {
-      const credential = new ClientCertificateCredential(
-        env.IDENTITY_SP_TENANT_ID || env.AZURE_TENANT_ID!,
-        env.IDENTITY_SP_CLIENT_ID || env.AZURE_CLIENT_ID!,
-        recorder.configureClientOptions({ certificatePath }),
-      );
-      await credential.getToken(scope, tracingOptions);
-    }).toSupportTracing(["ClientCertificateCredential.getToken"]);
+    await assert.supportsTracing(
+      async (tracingOptions) => {
+        const credential = new ClientCertificateCredential(
+          env.IDENTITY_SP_TENANT_ID || env.AZURE_TENANT_ID!,
+          env.IDENTITY_SP_CLIENT_ID || env.AZURE_CLIENT_ID!,
+          recorder.configureClientOptions({ certificatePath }),
+        );
+
+        await credential.getToken(scope, tracingOptions);
+      },
+      ["ClientCertificateCredential.getToken"],
+    );
   });
 });

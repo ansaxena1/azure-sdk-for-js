@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AttestationSigner } from "./index.js";
-import type { GeneratedAttestationResult } from "../generated/index.js";
-import { _attestationSignerFromGenerated } from "./attestationSigner.js";
+import { AttestationSigner } from ".";
+import { GeneratedAttestationResult } from "../generated";
+import { _attestationSignerFromGenerated } from "./attestationSigner";
 
 /**
  * Defines the contents of the {@link AttestationResult.sgxCollateral} claim in

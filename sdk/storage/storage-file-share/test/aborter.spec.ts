@@ -5,8 +5,8 @@ import { assert } from "chai";
 
 import { getBSU, recorderEnvSetup, getUniqueName, uriSanitizers } from "./utils";
 import { Recorder } from "@azure-tools/test-recorder";
-import type { ShareClient } from "../src";
-import type { Context } from "mocha";
+import { ShareClient } from "../src";
+import { Context } from "mocha";
 
 describe("Aborter", () => {
   let shareName: string;

@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ServiceClient } from "@azure/core-client";
 import {
-  type FullOperationResponse,
-  type OperationOptions,
-  type OperationSpec,
+  FullOperationResponse,
+  OperationOptions,
+  OperationSpec,
+  ServiceClient,
 } from "@azure/core-client";
-import type { LroResponse } from "@azure/core-lro";
+import { LroResponse } from "@azure/core-lro";
 
 /**
  * Extract several fields of the response to the rawResponse

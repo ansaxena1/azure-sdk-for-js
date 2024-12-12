@@ -1,19 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ClientContext } from "../../ClientContext";
+import { ClientContext } from "../../ClientContext";
 import { Constants, isResourceValid, ResourceType, StatusCodes } from "../../common";
-import type { CosmosClient } from "../../CosmosClient";
-import type { FetchFunctionCallback, SqlQuerySpec } from "../../queryExecutionContext";
-import { mergeHeaders } from "../../queryExecutionContext";
+import { CosmosClient } from "../../CosmosClient";
+import { FetchFunctionCallback, mergeHeaders, SqlQuerySpec } from "../../queryExecutionContext";
 import { QueryIterator } from "../../queryIterator";
-import type { FeedOptions, RequestOptions } from "../../request";
-import type { Resource } from "../Resource";
+import { FeedOptions, RequestOptions } from "../../request";
+import { Resource } from "../Resource";
 import { Database } from "./Database";
-import type { DatabaseDefinition } from "./DatabaseDefinition";
-import type { DatabaseRequest } from "./DatabaseRequest";
+import { DatabaseDefinition } from "./DatabaseDefinition";
+import { DatabaseRequest } from "./DatabaseRequest";
 import { DatabaseResponse } from "./DatabaseResponse";
 import { validateOffer } from "../../utils/offers";
-import type { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
+import { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
 import { getEmptyCosmosDiagnostics, withDiagnostics } from "../../utils/diagnostics";
 
 /**

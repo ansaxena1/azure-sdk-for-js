@@ -11,7 +11,7 @@ import {
 } from "../../src";
 import { getConnectionStringFromEnvironment, bodyToString, getUniqueName } from "../utils";
 import { env } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 // Expected environment variable to run this test-suite
 // STORAGE_CONNECTION_STRING=UseDevelopmentStorage=true

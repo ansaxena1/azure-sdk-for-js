@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { WebSocketClientFactoryLike, WebSocketClientLike } from "./websocketClientLike";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { WebSocketClientFactoryLike, WebSocketClientLike } from "./websocketClientLike";
 
 export class WebSocketClient implements WebSocketClientLike {
   private _socket: WebSocket;

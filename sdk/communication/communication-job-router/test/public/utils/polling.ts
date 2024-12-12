@@ -1,13 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { JobRouterClient } from "../../../src/jobRouterClient.js";
-import type {
-  RouterJob,
-  RouterWorker,
-  RouterJobAssignment,
-  RouterJobOffer,
-} from "../../../src/index.js";
+import { JobRouterClient } from "../../../src/jobRouterClient";
+import { RouterJob, RouterWorker, RouterJobAssignment, RouterJobOffer } from "../../../src";
 
 export async function pollForJobOffer(
   workerId: string,
@@ -67,7 +62,7 @@ export const retry = async <T>(
   fn: () => Promise<T> | T,
   { retries, retryIntervalMs }: { retries: number; retryIntervalMs: number },
 ): Promise<T> => {
-  const sleep = (ms = 0): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+  const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
   try {
     return await fn();
   } catch (error) {

@@ -4,15 +4,15 @@
 
 ```ts
 
-import type { AbortSignalLike } from '@azure/abort-controller';
+import { AbortSignalLike } from '@azure/abort-controller';
 import { AmqpAnnotatedMessage } from '@azure/core-amqp';
-import type { AzureLogger } from '@azure/logger';
+import { AzureLogger } from '@azure/logger';
 import { MessagingError } from '@azure/core-amqp';
-import type { NamedKeyCredential } from '@azure/core-auth';
-import type { OperationTracingOptions } from '@azure/core-tracing';
+import { NamedKeyCredential } from '@azure/core-auth';
+import { OperationTracingOptions } from '@azure/core-tracing';
 import { RetryMode } from '@azure/core-amqp';
 import { RetryOptions } from '@azure/core-amqp';
-import type { SASCredential } from '@azure/core-auth';
+import { SASCredential } from '@azure/core-auth';
 import { TokenCredential } from '@azure/core-auth';
 import { WebSocketImpl } from 'rhea-promise';
 import { WebSocketOptions } from '@azure/core-amqp';

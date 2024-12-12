@@ -173,8 +173,6 @@ export interface FilePathAvailabilityRequest {
   name: string;
   /** The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes */
   subnetId: string;
-  /** The Azure Resource logical availability zone which is used within zone mapping lookup for the subscription and region. The lookup will retrieve the physical zone where volume is placed. */
-  availabilityZone?: string;
 }
 
 /** Quota availability request content. */
@@ -346,7 +344,7 @@ export interface ActiveDirectory {
   backupOperators?: string[];
   /** Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier */
   administrators?: string[];
-  /** kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume. */
+  /** kdc server IP addresses for the active directory machine. This optional parameter is used only while creating kerberos volume. */
   kdcIP?: string;
   /** Name of the active directory machine. This optional parameter is used only while creating kerberos volume */
   adName?: string;
@@ -630,22 +628,10 @@ export interface ReplicationObject {
   endpointType?: EndpointType;
   /** Schedule */
   replicationSchedule?: ReplicationSchedule;
-  /** The resource ID of the remote volume. Required for cross region and cross zone replication */
-  remoteVolumeResourceId?: string;
-  /** The full path to a volume that is to be migrated into ANF. Required for Migration volumes */
-  remotePath?: RemotePath;
+  /** The resource ID of the remote volume. */
+  remoteVolumeResourceId: string;
   /** The remote region for the other end of the Volume Replication. */
   remoteVolumeRegion?: string;
-}
-
-/** The full path to a volume that is to be migrated into ANF. Required for Migration volumes */
-export interface RemotePath {
-  /** The Path to a ONTAP Host */
-  externalHostName: string;
-  /** The name of a server on the ONTAP Host */
-  serverName: string;
-  /** The name of a volume on the server */
-  volumeName: string;
 }
 
 /** Volume Snapshot Properties */
@@ -828,24 +814,6 @@ export interface AuthorizeRequest {
   remoteVolumeResourceId?: string;
 }
 
-/** Source Cluster properties for a cluster peer request */
-export interface PeerClusterForVolumeMigrationRequest {
-  /** A list of IC-LIF IPs that can be used to connect to the On-prem cluster */
-  peerIpAddresses: string[];
-}
-
-/** Information about cluster peering process */
-export interface ClusterPeerCommandResponse {
-  /** A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code> */
-  peerAcceptCommand?: string;
-}
-
-/** Information about svm peering process */
-export interface SvmPeerCommandResponse {
-  /** A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code> */
-  svmPeeringCommand?: string;
-}
-
 /** Pool change request */
 export interface PoolChangeRequest {
   /** Resource id of the pool to move volume to */
@@ -1012,7 +980,7 @@ export interface BackupPolicyPatch {
   /** Resource tags */
   tags?: { [propertyName: string]: string };
   /**
-   * Backup Policy GUID ID
+   * Backup Policy Resource ID
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly backupPolicyId?: string;
@@ -1196,13 +1164,8 @@ export interface VolumeGroupVolumeProperties {
   readonly baremetalTenantId?: string;
   /** The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes */
   subnetId: string;
-  /** The original value of the network features type available to the volume at the time it was created. */
+  /** Network features available to the volume, or current state of update. */
   networkFeatures?: NetworkFeatures;
-  /**
-   * The effective value of the network features type available to the volume, or current effective state of update.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly effectiveNetworkFeatures?: NetworkFeatures;
   /**
    * Network Sibling Set ID for the the group of volumes sharing networking resources.
    * NOTE: This property will not be serialized. It can only be populated by the server.
@@ -1619,7 +1582,7 @@ export interface CloudErrorBody {
 }
 
 /** The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location */
-export interface ProxyResource extends Resource { }
+export interface ProxyResource extends Resource {}
 
 /** The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location' */
 export interface TrackedResource extends Resource {
@@ -1840,13 +1803,8 @@ export interface Volume extends TrackedResource {
   readonly baremetalTenantId?: string;
   /** The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes */
   subnetId: string;
-  /** The original value of the network features type available to the volume at the time it was created. */
+  /** Network features available to the volume, or current state of update. */
   networkFeatures?: NetworkFeatures;
-  /**
-   * The effective value of the network features type available to the volume, or current effective state of update.
-   * NOTE: This property will not be serialized. It can only be populated by the server.
-   */
-  readonly effectiveNetworkFeatures?: NetworkFeatures;
   /**
    * Network Sibling Set ID for the the group of volumes sharing networking resources.
    * NOTE: This property will not be serialized. It can only be populated by the server.
@@ -2007,7 +1965,7 @@ export interface BackupPolicy extends TrackedResource {
    */
   readonly etag?: string;
   /**
-   * Backup Policy GUID ID
+   * Backup Policy Resource ID
    * NOTE: This property will not be serialized. It can only be populated by the server.
    */
   readonly backupPolicyId?: string;
@@ -2082,26 +2040,6 @@ export interface VolumesBreakFileLocksHeaders {
 
 /** Defines headers for Volumes_listGetGroupIdListForLdapUser operation. */
 export interface VolumesListGetGroupIdListForLdapUserHeaders {
-  location?: string;
-}
-
-/** Defines headers for Volumes_peerExternalCluster operation. */
-export interface VolumesPeerExternalClusterHeaders {
-  location?: string;
-}
-
-/** Defines headers for Volumes_authorizeExternalReplication operation. */
-export interface VolumesAuthorizeExternalReplicationHeaders {
-  location?: string;
-}
-
-/** Defines headers for Volumes_finalizeExternalReplication operation. */
-export interface VolumesFinalizeExternalReplicationHeaders {
-  location?: string;
-}
-
-/** Defines headers for Volumes_performReplicationTransfer operation. */
-export interface VolumesPerformReplicationTransferHeaders {
   location?: string;
 }
 
@@ -2829,14 +2767,14 @@ export type ProvisioningState =
 
 /** Optional parameters. */
 export interface OperationsListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type OperationsListResponse = OperationListResult;
 
 /** Optional parameters. */
 export interface NetAppResourceCheckNameAvailabilityOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the checkNameAvailability operation. */
 export type NetAppResourceCheckNameAvailabilityResponse =
@@ -2844,10 +2782,7 @@ export type NetAppResourceCheckNameAvailabilityResponse =
 
 /** Optional parameters. */
 export interface NetAppResourceCheckFilePathAvailabilityOptionalParams
-  extends coreClient.OperationOptions {
-  /** The Azure Resource logical availability zone which is used within zone mapping lookup for the subscription and region. The lookup will retrieve the physical zone where volume is placed. */
-  availabilityZone?: string;
-}
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the checkFilePathAvailability operation. */
 export type NetAppResourceCheckFilePathAvailabilityResponse =
@@ -2855,7 +2790,7 @@ export type NetAppResourceCheckFilePathAvailabilityResponse =
 
 /** Optional parameters. */
 export interface NetAppResourceCheckQuotaAvailabilityOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the checkQuotaAvailability operation. */
 export type NetAppResourceCheckQuotaAvailabilityResponse =
@@ -2863,14 +2798,14 @@ export type NetAppResourceCheckQuotaAvailabilityResponse =
 
 /** Optional parameters. */
 export interface NetAppResourceQueryRegionInfoOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the queryRegionInfo operation. */
 export type NetAppResourceQueryRegionInfoResponse = RegionInfo;
 
 /** Optional parameters. */
 export interface NetAppResourceQueryNetworkSiblingSetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the queryNetworkSiblingSet operation. */
 export type NetAppResourceQueryNetworkSiblingSetResponse = NetworkSiblingSet;
@@ -2889,56 +2824,56 @@ export type NetAppResourceUpdateNetworkSiblingSetResponse = NetworkSiblingSet;
 
 /** Optional parameters. */
 export interface NetAppResourceQuotaLimitsListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type NetAppResourceQuotaLimitsListResponse = SubscriptionQuotaItemList;
 
 /** Optional parameters. */
 export interface NetAppResourceQuotaLimitsGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type NetAppResourceQuotaLimitsGetResponse = SubscriptionQuotaItem;
 
 /** Optional parameters. */
 export interface NetAppResourceRegionInfosListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type NetAppResourceRegionInfosListResponse = RegionInfosList;
 
 /** Optional parameters. */
 export interface NetAppResourceRegionInfosGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type NetAppResourceRegionInfosGetResponse = RegionInfoResource;
 
 /** Optional parameters. */
 export interface NetAppResourceRegionInfosListNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listNext operation. */
 export type NetAppResourceRegionInfosListNextResponse = RegionInfosList;
 
 /** Optional parameters. */
 export interface AccountsListBySubscriptionOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listBySubscription operation. */
 export type AccountsListBySubscriptionResponse = NetAppAccountList;
 
 /** Optional parameters. */
 export interface AccountsListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type AccountsListResponse = NetAppAccountList;
 
 /** Optional parameters. */
 export interface AccountsGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type AccountsGetResponse = NetAppAccount;
@@ -2987,26 +2922,26 @@ export interface AccountsRenewCredentialsOptionalParams
 
 /** Optional parameters. */
 export interface AccountsListBySubscriptionNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listBySubscriptionNext operation. */
 export type AccountsListBySubscriptionNextResponse = NetAppAccountList;
 
 /** Optional parameters. */
 export interface AccountsListNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listNext operation. */
 export type AccountsListNextResponse = NetAppAccountList;
 
 /** Optional parameters. */
-export interface PoolsListOptionalParams extends coreClient.OperationOptions { }
+export interface PoolsListOptionalParams extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type PoolsListResponse = CapacityPoolList;
 
 /** Optional parameters. */
-export interface PoolsGetOptionalParams extends coreClient.OperationOptions { }
+export interface PoolsGetOptionalParams extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type PoolsGetResponse = CapacityPool;
@@ -3044,20 +2979,20 @@ export interface PoolsDeleteOptionalParams extends coreClient.OperationOptions {
 
 /** Optional parameters. */
 export interface PoolsListNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listNext operation. */
 export type PoolsListNextResponse = CapacityPoolList;
 
 /** Optional parameters. */
 export interface VolumesListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type VolumesListResponse = VolumeList;
 
 /** Optional parameters. */
-export interface VolumesGetOptionalParams extends coreClient.OperationOptions { }
+export interface VolumesGetOptionalParams extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type VolumesGetResponse = Volume;
@@ -3176,14 +3111,14 @@ export interface VolumesReestablishReplicationOptionalParams
 
 /** Optional parameters. */
 export interface VolumesReplicationStatusOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the replicationStatus operation. */
 export type VolumesReplicationStatusResponse = ReplicationStatus;
 
 /** Optional parameters. */
 export interface VolumesListReplicationsOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listReplications operation. */
 export type VolumesListReplicationsResponse = ListReplications;
@@ -3225,57 +3160,6 @@ export interface VolumesReInitializeReplicationOptionalParams
 }
 
 /** Optional parameters. */
-export interface VolumesPeerExternalClusterOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
-
-/** Contains response data for the peerExternalCluster operation. */
-export type VolumesPeerExternalClusterResponse = ClusterPeerCommandResponse;
-
-/** Optional parameters. */
-export interface VolumesAuthorizeExternalReplicationOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
-
-/** Contains response data for the authorizeExternalReplication operation. */
-export type VolumesAuthorizeExternalReplicationResponse =
-  SvmPeerCommandResponse;
-
-/** Optional parameters. */
-export interface VolumesFinalizeExternalReplicationOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
-
-/** Contains response data for the finalizeExternalReplication operation. */
-export type VolumesFinalizeExternalReplicationResponse =
-  VolumesFinalizeExternalReplicationHeaders;
-
-/** Optional parameters. */
-export interface VolumesPerformReplicationTransferOptionalParams
-  extends coreClient.OperationOptions {
-  /** Delay to wait until next poll, in milliseconds. */
-  updateIntervalInMs?: number;
-  /** A serialized poller which can be used to resume an existing paused Long-Running-Operation. */
-  resumeFrom?: string;
-}
-
-/** Contains response data for the performReplicationTransfer operation. */
-export type VolumesPerformReplicationTransferResponse =
-  VolumesPerformReplicationTransferHeaders;
-
-/** Optional parameters. */
 export interface VolumesPoolChangeOptionalParams
   extends coreClient.OperationOptions {
   /** Delay to wait until next poll, in milliseconds. */
@@ -3315,21 +3199,21 @@ export interface VolumesRevertRelocationOptionalParams
 
 /** Optional parameters. */
 export interface VolumesListNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listNext operation. */
 export type VolumesListNextResponse = VolumeList;
 
 /** Optional parameters. */
 export interface SnapshotsListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type SnapshotsListResponse = SnapshotsList;
 
 /** Optional parameters. */
 export interface SnapshotsGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type SnapshotsGetResponse = Snapshot;
@@ -3378,21 +3262,21 @@ export interface SnapshotsRestoreFilesOptionalParams
 
 /** Optional parameters. */
 export interface SnapshotPoliciesListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type SnapshotPoliciesListResponse = SnapshotPoliciesList;
 
 /** Optional parameters. */
 export interface SnapshotPoliciesGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type SnapshotPoliciesGetResponse = SnapshotPolicy;
 
 /** Optional parameters. */
 export interface SnapshotPoliciesCreateOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the create operation. */
 export type SnapshotPoliciesCreateResponse = SnapshotPolicy;
@@ -3420,21 +3304,21 @@ export interface SnapshotPoliciesDeleteOptionalParams
 
 /** Optional parameters. */
 export interface SnapshotPoliciesListVolumesOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listVolumes operation. */
 export type SnapshotPoliciesListVolumesResponse = SnapshotPolicyVolumeList;
 
 /** Optional parameters. */
 export interface BackupPoliciesListOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the list operation. */
 export type BackupPoliciesListResponse = BackupPoliciesList;
 
 /** Optional parameters. */
 export interface BackupPoliciesGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type BackupPoliciesGetResponse = BackupPolicy;
@@ -3474,14 +3358,14 @@ export interface BackupPoliciesDeleteOptionalParams
 
 /** Optional parameters. */
 export interface VolumeQuotaRulesListByVolumeOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByVolume operation. */
 export type VolumeQuotaRulesListByVolumeResponse = VolumeQuotaRulesList;
 
 /** Optional parameters. */
 export interface VolumeQuotaRulesGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type VolumeQuotaRulesGetResponse = VolumeQuotaRule;
@@ -3521,14 +3405,14 @@ export interface VolumeQuotaRulesDeleteOptionalParams
 
 /** Optional parameters. */
 export interface VolumeGroupsListByNetAppAccountOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByNetAppAccount operation. */
 export type VolumeGroupsListByNetAppAccountResponse = VolumeGroupList;
 
 /** Optional parameters. */
 export interface VolumeGroupsGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type VolumeGroupsGetResponse = VolumeGroupDetails;
@@ -3556,14 +3440,14 @@ export interface VolumeGroupsDeleteOptionalParams
 
 /** Optional parameters. */
 export interface SubvolumesListByVolumeOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByVolume operation. */
 export type SubvolumesListByVolumeResponse = SubvolumesList;
 
 /** Optional parameters. */
 export interface SubvolumesGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type SubvolumesGetResponse = SubvolumeInfo;
@@ -3615,21 +3499,21 @@ export type SubvolumesGetMetadataResponse = SubvolumeModel;
 
 /** Optional parameters. */
 export interface SubvolumesListByVolumeNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByVolumeNext operation. */
 export type SubvolumesListByVolumeNextResponse = SubvolumesList;
 
 /** Optional parameters. */
 export interface BackupsGetLatestStatusOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the getLatestStatus operation. */
 export type BackupsGetLatestStatusResponse = BackupStatus;
 
 /** Optional parameters. */
 export interface BackupsGetVolumeLatestRestoreStatusOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the getVolumeLatestRestoreStatus operation. */
 export type BackupsGetVolumeLatestRestoreStatusResponse = RestoreStatus;
@@ -3645,7 +3529,7 @@ export interface BackupsListByVaultOptionalParams
 export type BackupsListByVaultResponse = BackupsList;
 
 /** Optional parameters. */
-export interface BackupsGetOptionalParams extends coreClient.OperationOptions { }
+export interface BackupsGetOptionalParams extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type BackupsGetResponse = Backup;
@@ -3690,21 +3574,21 @@ export type BackupsDeleteResponse = BackupsDeleteHeaders;
 
 /** Optional parameters. */
 export interface BackupsListByVaultNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByVaultNext operation. */
 export type BackupsListByVaultNextResponse = BackupsList;
 
 /** Optional parameters. */
 export interface BackupVaultsListByNetAppAccountOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByNetAppAccount operation. */
 export type BackupVaultsListByNetAppAccountResponse = BackupVaultsList;
 
 /** Optional parameters. */
 export interface BackupVaultsGetOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the get operation. */
 export type BackupVaultsGetResponse = BackupVault;
@@ -3747,7 +3631,7 @@ export type BackupVaultsDeleteResponse = BackupVaultsDeleteHeaders;
 
 /** Optional parameters. */
 export interface BackupVaultsListByNetAppAccountNextOptionalParams
-  extends coreClient.OperationOptions { }
+  extends coreClient.OperationOptions {}
 
 /** Contains response data for the listByNetAppAccountNext operation. */
 export type BackupVaultsListByNetAppAccountNextResponse = BackupVaultsList;

@@ -3,7 +3,7 @@
 
 import { assert } from "@azure-tools/test-utils";
 import sinon from "sinon";
-import type {
+import {
   DisconnectedMessage,
   GroupDataMessage,
   JoinGroupMessage,

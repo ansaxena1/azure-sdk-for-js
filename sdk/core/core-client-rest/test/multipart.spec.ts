@@ -2,8 +2,7 @@
 // Licensed under the MIT License.
 
 import { describe, it, assert } from "vitest";
-import type { PartDescriptor } from "../src/multipart.js";
-import { buildBodyPart } from "../src/multipart.js";
+import { PartDescriptor, buildBodyPart } from "../src/multipart.js";
 import { stringToUint8Array } from "@azure/core-util";
 
 describe("multipart buildBodyPart", () => {

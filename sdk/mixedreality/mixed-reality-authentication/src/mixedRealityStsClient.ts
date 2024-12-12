@@ -1,12 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, TokenCredential } from "@azure/core-auth";
-import { AzureKeyCredential } from "@azure/core-auth";
-import type { GetTokenOptionalParams, MixedRealityStsRestClientOptionalParams } from "./generated";
-import { MixedRealityStsRestClient } from "./generated";
-import type { GetTokenOptions, MixedRealityStsClientOptions } from "./models/options";
-import type { InternalClientPipelineOptions } from "@azure/core-client";
+import { AccessToken, AzureKeyCredential, TokenCredential } from "@azure/core-auth";
+import {
+  GetTokenOptionalParams,
+  MixedRealityStsRestClient,
+  MixedRealityStsRestClientOptionalParams,
+} from "./generated";
+import { GetTokenOptions, MixedRealityStsClientOptions } from "./models/options";
+import { InternalClientPipelineOptions } from "@azure/core-client";
 import { MixedRealityAccountKeyCredential } from "./models/auth";
 import { bearerTokenAuthenticationPolicy } from "@azure/core-rest-pipeline";
 import { constructAuthenticationEndpointFromDomain } from "./util/authenticationEndpoint";

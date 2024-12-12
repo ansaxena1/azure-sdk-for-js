@@ -1,8 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { HttpClient, PipelineRequest } from "@azure/core-rest-pipeline";
-import { createEmptyPipeline, createHttpHeaders } from "@azure/core-rest-pipeline";
+import {
+  HttpClient,
+  PipelineRequest,
+  createEmptyPipeline,
+  createHttpHeaders,
+} from "@azure/core-rest-pipeline";
 import { apiVersionPolicy } from "../../src/utils/apiVersionPolicy";
 import { assert } from "chai";
 

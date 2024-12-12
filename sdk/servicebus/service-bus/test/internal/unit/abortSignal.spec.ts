@@ -2,9 +2,8 @@
 // Licensed under the MIT License.
 
 import { MessageSender } from "../../../src/core/messageSender.js";
-import type { OperationOptionsBase } from "../../../src/modelsToBeSharedWithEventHubs.js";
-import type { AwaitableSender, ReceiverOptions } from "rhea-promise";
-import { delay } from "rhea-promise";
+import { OperationOptionsBase } from "../../../src/modelsToBeSharedWithEventHubs.js";
+import { AwaitableSender, delay, ReceiverOptions } from "rhea-promise";
 import { ServiceBusMessageBatchImpl } from "../../../src/serviceBusMessageBatch.js";
 import { StreamingReceiver } from "../../../src/core/streamingReceiver.js";
 import {
@@ -19,8 +18,8 @@ import { StandardAbortMessage } from "@azure/core-amqp";
 import { ServiceBusSessionReceiverImpl } from "../../../src/receivers/sessionReceiver.js";
 import { ServiceBusReceiverImpl } from "../../../src/receivers/receiver.js";
 import { MessageSession } from "../../../src/session/messageSession.js";
-import type { ProcessErrorArgs } from "../../../src/index.js";
-import type { ReceiveMode } from "../../../src/models.js";
+import { ProcessErrorArgs } from "../../../src/index.js";
+import { ReceiveMode } from "../../../src/models.js";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import { assert } from "../../public/utils/chai.js";
 

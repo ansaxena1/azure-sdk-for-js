@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
-import type {
+import { OperationOptions } from "@azure/core-client";
+import {
   AnalyzeResult,
   AnalyzedDocument,
   DocumentAnalysisPollOperationState,
 } from "../lro/analysis";
-import type { PollerOptions } from "./PollerOptions";
+import { PollerOptions } from "./PollerOptions";
 
 /**
  * Add-on capabilities (features) that can be enabled for the request.

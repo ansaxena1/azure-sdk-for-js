@@ -1,8 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { FetchFunctionCallback } from "../../../src/queryExecutionContext";
-import { DefaultQueryExecutionContext } from "../../../src/queryExecutionContext";
-import type { FeedOptions } from "../../../src";
+import {
+  FetchFunctionCallback,
+  DefaultQueryExecutionContext,
+} from "../../../src/queryExecutionContext";
+import { FeedOptions } from "../../../src";
 import assert from "assert";
 import { sleep } from "../../../src/common";
 import { createDummyDiagnosticNode } from "../../public/common/TestHelpers";

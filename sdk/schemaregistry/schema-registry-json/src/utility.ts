@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { MessageContent } from "./models";
+import { MessageContent } from "./models";
 
 export function isMessageContent(message: unknown): message is MessageContent {
   const castMessage = message as MessageContent;

@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import { MetadataLookUpType } from "../CosmosDiagnostics";
-import type { PartitionKeyRange } from "../client/Container/PartitionKeyRange";
-import type { ClientContext } from "../ClientContext";
+import { PartitionKeyRange } from "../client/Container/PartitionKeyRange";
+import { ClientContext } from "../ClientContext";
 import { getIdFromLink } from "../common/helper";
-import type { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
+import { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
 import { withMetadataDiagnostics } from "../utils/diagnostics";
 import { createCompleteRoutingMap } from "./CollectionRoutingMapFactory";
-import type { InMemoryCollectionRoutingMap } from "./inMemoryCollectionRoutingMap";
-import type { QueryRange } from "./QueryRange";
+import { InMemoryCollectionRoutingMap } from "./inMemoryCollectionRoutingMap";
+import { QueryRange } from "./QueryRange";
 
 /** @hidden */
 export class PartitionKeyRangeCache {

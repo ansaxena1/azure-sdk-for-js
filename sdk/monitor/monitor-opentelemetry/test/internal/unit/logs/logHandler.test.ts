@@ -6,8 +6,7 @@
 import * as assert from "assert";
 import sinon from "sinon";
 import { trace, context, isValidTraceId, isValidSpanId } from "@opentelemetry/api";
-import type { LogRecord as APILogRecord } from "@opentelemetry/api-logs";
-import { SeverityNumber, logs } from "@opentelemetry/api-logs";
+import { LogRecord as APILogRecord, SeverityNumber, logs } from "@opentelemetry/api-logs";
 import { ExportResultCode } from "@opentelemetry/core";
 import { LoggerProvider } from "@opentelemetry/sdk-logs";
 import { LogHandler } from "../../../../src/logs";
@@ -15,8 +14,8 @@ import { MetricHandler } from "../../../../src/metrics";
 import { InternalConfig } from "../../../../src/shared";
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
-import type { BunyanInstrumentationConfig } from "@opentelemetry/instrumentation-bunyan";
-import type { WinstonInstrumentationConfig } from "@opentelemetry/instrumentation-winston";
+import { BunyanInstrumentationConfig } from "@opentelemetry/instrumentation-bunyan";
+import { WinstonInstrumentationConfig } from "@opentelemetry/instrumentation-winston";
 
 describe("LogHandler", () => {
   let sandbox: sinon.SinonSandbox;

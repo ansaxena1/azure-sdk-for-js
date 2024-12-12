@@ -2,8 +2,9 @@
 // Licensed under the MIT License.
 
 import { diag } from "@opentelemetry/api";
-import type { ConnectionString, ConnectionStringKey } from "../Declarations/Contracts/index.js";
-import * as Constants from "../Declarations/Constants.js";
+import { ConnectionString, ConnectionStringKey } from "../Declarations/Contracts";
+
+import * as Constants from "../Declarations/Constants";
 
 /**
  * ConnectionString parser.

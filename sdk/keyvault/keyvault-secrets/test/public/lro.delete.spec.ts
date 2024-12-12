@@ -1,14 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { Recorder, env } from "@azure-tools/test-recorder";
 import { PollerStoppedError } from "@azure/core-lro";
 
 import { afterEach, assert, beforeEach, describe, it } from "vitest";
-import type { DeletedSecret, SecretClient } from "../../src/index.js";
+import { DeletedSecret, SecretClient } from "../../src/index.js";
 import { testPollerProperties } from "./utils/recorderUtils.js";
 import { authenticate } from "./utils/testAuthentication.js";
-import type TestClient from "./utils/testClient.js";
+import TestClient from "./utils/testClient.js";
 
 describe("Secrets client - Long Running Operations - delete", () => {
   const secretPrefix = `lroDelete${env.CERTIFICATE_NAME || "SecretName"}`;

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { RawHttpHeaders } from "@azure/core-rest-pipeline";
+import { RawHttpHeaders } from "@azure/core-rest-pipeline";
 
 /**
  * @internal

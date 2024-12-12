@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { EventData } from "./eventData.js";
+import { EventData } from "./eventData.js";
 
 /**
  * A message with payload and content type fields

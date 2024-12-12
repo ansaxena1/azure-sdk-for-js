@@ -4,8 +4,8 @@
 
 ```ts
 
-import type { CommonClientOptions } from '@azure/core-client';
-import type { OperationOptions } from '@azure/core-client';
+import { CommonClientOptions } from '@azure/core-client';
+import { OperationOptions } from '@azure/core-client';
 
 // @public
 export type dependencyResolutionType = "disabled" | "enabled" | "tryFromExpanded";
@@ -38,7 +38,7 @@ export class ModelsRepositoryClient {
         [dtmi: string]: unknown;
     }>;
     get repositoryLocation(): string;
-}
+    }
 
 // @public
 export interface ModelsRepositoryClientOptions extends CommonClientOptions {
@@ -46,5 +46,6 @@ export interface ModelsRepositoryClientOptions extends CommonClientOptions {
     dependencyResolution?: dependencyResolutionType;
     repositoryLocation?: string;
 }
+
 
 ```

@@ -14,9 +14,8 @@ import {
   uriSanitizers,
 } from "./utils";
 import { delay, Recorder } from "@azure-tools/test-recorder";
-import type { ShareItem, ShareRootSquash } from "../src";
-import { ShareServiceClient } from "../src";
-import type { Context } from "mocha";
+import { ShareServiceClient, ShareItem, ShareRootSquash } from "../src";
+import { Context } from "mocha";
 import { getYieldedValue } from "@azure-tools/test-utils";
 
 describe("FileServiceClient", () => {

@@ -1,19 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { TokenCredential } from "@azure/core-auth";
-import type { HttpHeaders } from "@azure/core-rest-pipeline";
-import { createHttpHeaders } from "@azure/core-rest-pipeline";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { TokenCredential } from "@azure/core-auth";
+import { HttpHeaders, createHttpHeaders } from "@azure/core-rest-pipeline";
 import { isNode } from "@azure/core-util";
 
-import type {
+import {
   BlobQueryArrowConfiguration,
   BlobQueryCsvTextConfiguration,
   BlobQueryJsonTextConfiguration,
   BlobQueryParquetConfiguration,
 } from "../Clients";
-import type {
+import {
   QuerySerialization,
   BlobTags,
   BlobName,
@@ -28,14 +27,14 @@ import {
   PathStylePorts,
   URLConstants,
 } from "./constants";
-import type {
+import {
   Tags,
   ObjectReplicationPolicy,
   ObjectReplicationRule,
   ObjectReplicationStatus,
   HttpAuthorization,
 } from "../models";
-import type {
+import {
   ListBlobsFlatSegmentResponseModel,
   BlobItemInternal as BlobItemInternalModel,
   ListBlobsHierarchySegmentResponseModel,
@@ -43,7 +42,7 @@ import type {
   PageBlobGetPageRangesDiffResponseModel,
   PageRangeInfo,
 } from "../generatedModels";
-import type { HttpHeadersLike, WebResourceLike } from "@azure/core-http-compat";
+import { HttpHeadersLike, WebResourceLike } from "@azure/core-http-compat";
 
 /**
  * Reserved URL characters must be properly escaped for Storage services like Blob or File.

@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { InternalClientPipelineOptions } from "@azure/core-client";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import type { CommunicationIdentifier } from "@azure/communication-common";
+import { InternalClientPipelineOptions } from "@azure/core-client";
+import { KeyCredential, TokenCredential } from "@azure/core-auth";
 import {
+  CommunicationIdentifier,
   createCommunicationAuthPolicy,
   isKeyCredential,
   parseClientArguments,
@@ -19,8 +19,8 @@ import {
   mapRoomParticipantToRawId,
   mapToRoomParticipantSDKModel,
 } from "./models/mappers";
-import type { CommunicationRoom, RoomParticipantPatch, RoomParticipant } from "./models/models";
-import type {
+import { CommunicationRoom, RoomParticipantPatch, RoomParticipant } from "./models/models";
+import {
   CreateRoomOptions,
   DeleteRoomOptions,
   GetRoomOptions,
@@ -32,7 +32,7 @@ import type {
   AddOrUpdateParticipantsOptions,
 } from "./models/options";
 import { randomUUID } from "@azure/core-util";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
 
 /**
  * @internal

@@ -10,7 +10,7 @@
 // Licensed under the MIT License.
 import {
   ContainersListLogsOptionalParams,
-  ContainerInstanceManagementClient,
+  ContainerInstanceManagementClient
 } from "@azure/arm-containerinstance";
 import { DefaultAzureCredential } from "@azure/identity";
 import * as dotenv from "dotenv";
@@ -21,12 +21,11 @@ dotenv.config();
  * This sample demonstrates how to Get the logs for a specified container instance in a specified resource group and container group.
  *
  * @summary Get the logs for a specified container instance in a specified resource group and container group.
- * x-ms-original-file: specification/containerinstance/resource-manager/Microsoft.ContainerInstance/preview/2024-05-01-preview/examples/ContainerListLogs.json
+ * x-ms-original-file: specification/containerinstance/resource-manager/Microsoft.ContainerInstance/stable/2023-05-01/examples/ContainerListLogs.json
  */
 async function containerListLogs() {
   const subscriptionId =
-    process.env["CONTAINERINSTANCE_SUBSCRIPTION_ID"] ||
-    "00000000-0000-0000-0000-000000000000";
+    process.env["CONTAINERINSTANCE_SUBSCRIPTION_ID"] || "subid";
   const resourceGroupName =
     process.env["CONTAINERINSTANCE_RESOURCE_GROUP"] || "demo";
   const containerGroupName = "demo1";
@@ -36,13 +35,13 @@ async function containerListLogs() {
   const credential = new DefaultAzureCredential();
   const client = new ContainerInstanceManagementClient(
     credential,
-    subscriptionId,
+    subscriptionId
   );
   const result = await client.containers.listLogs(
     resourceGroupName,
     containerGroupName,
     containerName,
-    options,
+    options
   );
   console.log(result);
 }

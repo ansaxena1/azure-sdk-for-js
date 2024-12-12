@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure-rest/core-client";
-import type { ReleaseDelay } from "./models";
+import { OperationOptions } from "@azure-rest/core-client";
+import { ReleaseDelay } from "./models";
 
 export interface PublishCloudEventOptionalParams extends OperationOptions {
   /** content type */

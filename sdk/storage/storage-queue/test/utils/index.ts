@@ -12,8 +12,7 @@ import {
   AccountSASServices,
 } from "../../src";
 import { extractConnectionStringParts } from "../../src/utils/utils.common";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { env, Recorder } from "@azure-tools/test-recorder";
 import { configureStorageClient } from "./testutils.common";
 export * from "./testutils.common";
 

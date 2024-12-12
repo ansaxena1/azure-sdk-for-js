@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
+import { OperationOptions } from "@azure/core-client";
 
-import type { AbortSignalLike } from "@azure/abort-controller";
+import { AbortSignalLike } from "@azure/abort-controller";
 
-import type {
+import {
   AnalyzeStatusOptionalParams as AnalyzeActionsOperationStatusOptions,
   AnalyzeJobState,
   AnalyzeResponse as BeginAnalyzeResponse,
@@ -13,19 +13,18 @@ import type {
   TextDocumentBatchStatistics,
   TextDocumentInput,
 } from "../../generated/models";
-import type {
+import {
   AnalyzeActionsResult,
   PagedAnalyzeActionsResult,
   PagedAsyncIterableAnalyzeActionsResult,
+  createAnalyzeActionsResult,
 } from "../../analyzeActionsResult";
-import { createAnalyzeActionsResult } from "../../analyzeActionsResult";
-import type { PageSettings } from "@azure/core-paging";
+import { PageSettings } from "@azure/core-paging";
 import { getOperationId, nextLinkToTopAndSkip, throwError } from "../../util";
-import type { AnalysisPollOperationState, OperationMetadata } from "../poller";
-import { AnalysisPollOperation } from "../poller";
-import type { GeneratedClient as Client } from "../../generated";
+import { AnalysisPollOperation, AnalysisPollOperationState, OperationMetadata } from "../poller";
+import { GeneratedClient as Client } from "../../generated";
 import { logger } from "../../logger";
-import type { TracingClient } from "@azure/core-tracing";
+import { TracingClient } from "@azure/core-tracing";
 
 /**
  * @internal

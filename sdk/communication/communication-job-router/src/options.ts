@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   JobRouterAdministrationUpsertClassificationPolicyOptionalParams,
   JobRouterAdministrationUpsertDistributionPolicyOptionalParams,
   JobRouterAdministrationUpsertExceptionPolicyOptionalParams,
@@ -13,9 +13,9 @@ import type {
   JobRouterUpsertWorkerOptionalParams,
   JobRouterUnassignJobActionOptionalParams,
   ChannelConfiguration,
-} from "./generated/src/index.js";
-import type { CommonClientOptions, OperationOptions } from "@azure/core-client";
-import type {
+} from "./generated/src";
+import { CommonClientOptions, OperationOptions } from "@azure/core-client";
+import {
   JSONObject,
   RouterJobMatchingMode,
   RouterJobNote,
@@ -27,7 +27,7 @@ import type {
   ExceptionRule,
   RouterJobStatusSelector,
   RouterWorkerStateSelector,
-} from "./models.js";
+} from "./models";
 
 /**
  * Options to create a job router administration client.
@@ -391,4 +391,4 @@ export {
   JobRouterUpsertWorkerOptionalParams,
   DeclineJobOfferRequest,
   UnassignJobRequest,
-} from "./generated/src/index.js";
+} from "./generated/src";

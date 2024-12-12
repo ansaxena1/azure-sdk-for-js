@@ -2,11 +2,10 @@
 // Licensed under the MIT License.
 
 import { type TaskContext } from "vitest";
-import type { RecorderStartOptions } from "@azure-tools/test-recorder";
-import { isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
+import { isPlaybackMode, Recorder, RecorderStartOptions } from "@azure-tools/test-recorder";
 import "./env";
-import type { AzureDeveloperDevCenterClient } from "../../../src/clientDefinitions.js";
-import type { ClientOptions } from "@azure-rest/core-client";
+import { AzureDeveloperDevCenterClient } from "../../../src/clientDefinitions.js";
+import { ClientOptions } from "@azure-rest/core-client";
 import { AzurePowerShellCredential } from "@azure/identity";
 import createClient from "../../../src/index.js";
 import { createTestCredential } from "@azure-tools/test-credential";

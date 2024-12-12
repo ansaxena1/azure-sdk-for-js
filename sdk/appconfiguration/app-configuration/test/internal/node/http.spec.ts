@@ -8,12 +8,16 @@ import {
   startRecorder,
 } from "../../public/utils/testHelpers.js";
 import { AppConfigurationClient } from "../../../src/index.js";
-import type { InternalAppConfigurationClientOptions } from "../../../src/appConfigurationClient.js";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { InternalAppConfigurationClientOptions } from "../../../src/appConfigurationClient.js";
+import { Recorder } from "@azure-tools/test-recorder";
 import { NoOpCredential } from "@azure-tools/test-credential";
 import { describe, it, assert, beforeEach, afterEach } from "vitest";
-import type { HttpClient, PipelineRequest, SendRequest } from "@azure/core-rest-pipeline";
-import { createHttpHeaders } from "@azure/core-rest-pipeline";
+import {
+  createHttpHeaders,
+  HttpClient,
+  PipelineRequest,
+  SendRequest,
+} from "@azure/core-rest-pipeline";
 
 describe("http request related tests", function () {
   describe("unit tests", () => {

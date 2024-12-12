@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ReadableOptions } from "stream";
-import { Readable } from "stream";
-import type { BlobClient, CommonOptions } from "@azure/storage-blob";
-import type { AbortSignalLike } from "@azure/abort-controller";
+import { Readable, ReadableOptions } from "stream";
+import { BlobClient, CommonOptions } from "@azure/storage-blob";
+import { AbortSignalLike } from "@azure/abort-controller";
 import { tracingClient } from "./utils/tracing";
 
 /**

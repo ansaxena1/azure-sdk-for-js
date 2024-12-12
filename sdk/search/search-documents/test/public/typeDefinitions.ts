@@ -3,14 +3,14 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import type {
+import {
   KnownSemanticErrorMode,
   KnownSemanticErrorReason,
   KnownSemanticSearchResultsType,
   KnownVectorFilterMode,
   KnownVectorQueryKind,
 } from "../../src/generated/data";
-import type {
+import {
   KnownBlobIndexerDataToExtract,
   KnownBlobIndexerImageAction,
   KnownBlobIndexerParsingMode,

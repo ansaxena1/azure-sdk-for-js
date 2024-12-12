@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { GetClientAccessUrlOptions } from "./models";
+import { GetClientAccessUrlOptions } from "./models";
 
 /**
  * The WebPubSubClient credential

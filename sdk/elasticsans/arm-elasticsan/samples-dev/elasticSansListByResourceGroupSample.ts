@@ -18,7 +18,7 @@ dotenv.config();
  * This sample demonstrates how to Gets a list of ElasticSan in a resource group.
  *
  * @summary Gets a list of ElasticSan in a resource group.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/ElasticSans_ListByResourceGroup_MaximumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/ElasticSans_ListByResourceGroup_MaximumSet_Gen.json
  */
 async function elasticSansListByResourceGroupMaximumSetGen() {
   const subscriptionId =
@@ -40,7 +40,7 @@ async function elasticSansListByResourceGroupMaximumSetGen() {
  * This sample demonstrates how to Gets a list of ElasticSan in a resource group.
  *
  * @summary Gets a list of ElasticSan in a resource group.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/ElasticSans_ListByResourceGroup_MinimumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/ElasticSans_ListByResourceGroup_MinimumSet_Gen.json
  */
 async function elasticSansListByResourceGroupMinimumSetGen() {
   const subscriptionId =

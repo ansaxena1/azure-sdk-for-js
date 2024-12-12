@@ -1,20 +1,19 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
 import {
   checkTenantId,
   processMultiTenantRequest,
   resolveAdditionallyAllowedTenantIds,
-} from "../util/tenantIdUtils.js";
-import { credentialLogger, formatError, formatSuccess } from "../util/logging.js";
-import { ensureValidScopeForDevTimeCreds, getScopeResource } from "../util/scopeUtils.js";
+} from "../util/tenantIdUtils";
+import { credentialLogger, formatError, formatSuccess } from "../util/logging";
+import { ensureValidScopeForDevTimeCreds, getScopeResource } from "../util/scopeUtils";
 
-import type { AzureCliCredentialOptions } from "./azureCliCredentialOptions.js";
-import { CredentialUnavailableError } from "../errors.js";
+import { AzureCliCredentialOptions } from "./azureCliCredentialOptions";
+import { CredentialUnavailableError } from "../errors";
 import child_process from "child_process";
-import { tracingClient } from "../util/tracing.js";
-import { checkSubscription } from "../util/subscriptionUtils.js";
+import { tracingClient } from "../util/tracing";
 
 /**
  * Mockable reference to the CLI credential cliCredentialFunctions
@@ -43,17 +42,11 @@ export const cliCredentialInternals = {
   async getAzureCliAccessToken(
     resource: string,
     tenantId?: string,
-    subscription?: string,
     timeout?: number,
   ): Promise<{ stdout: string; stderr: string; error: Error | null }> {
     let tenantSection: string[] = [];
-    let subscriptionSection: string[] = [];
     if (tenantId) {
       tenantSection = ["--tenant", tenantId];
-    }
-    if (subscription) {
-      // Add quotes around the subscription to handle subscriptions with spaces
-      subscriptionSection = ["--subscription", `"${subscription}"`];
     }
     return new Promise((resolve, reject) => {
       try {
@@ -67,7 +60,6 @@ export const cliCredentialInternals = {
             "--resource",
             resource,
             ...tenantSection,
-            ...subscriptionSection,
           ],
           { cwd: cliCredentialInternals.getSafeWorkingDir(), shell: true, timeout },
           (error, stdout, stderr) => {
@@ -93,7 +85,6 @@ export class AzureCliCredential implements TokenCredential {
   private tenantId?: string;
   private additionallyAllowedTenantIds: string[];
   private timeout?: number;
-  private subscription?: string;
 
   /**
    * Creates an instance of the {@link AzureCliCredential}.
@@ -107,10 +98,6 @@ export class AzureCliCredential implements TokenCredential {
     if (options?.tenantId) {
       checkTenantId(logger, options?.tenantId);
       this.tenantId = options?.tenantId;
-    }
-    if (options?.subscription) {
-      checkSubscription(logger, options?.subscription);
-      this.subscription = options?.subscription;
     }
     this.additionallyAllowedTenantIds = resolveAdditionallyAllowedTenantIds(
       options?.additionallyAllowedTenants,
@@ -135,11 +122,9 @@ export class AzureCliCredential implements TokenCredential {
       options,
       this.additionallyAllowedTenantIds,
     );
+
     if (tenantId) {
       checkTenantId(logger, tenantId);
-    }
-    if (this.subscription) {
-      checkSubscription(logger, this.subscription);
     }
     const scope = typeof scopes === "string" ? scopes : scopes[0];
     logger.getToken.info(`Using the scope ${scope}`);
@@ -151,7 +136,6 @@ export class AzureCliCredential implements TokenCredential {
         const obj = await cliCredentialInternals.getAzureCliAccessToken(
           resource,
           tenantId,
-          this.subscription,
           this.timeout,
         );
         const specificScope = obj.stderr?.match("(.*)az login --scope(.*)");
@@ -218,7 +202,6 @@ export class AzureCliCredential implements TokenCredential {
       return {
         token,
         expiresOnTimestamp,
-        tokenType: "Bearer",
       };
     }
 
@@ -235,7 +218,6 @@ export class AzureCliCredential implements TokenCredential {
     return {
       token,
       expiresOnTimestamp,
-      tokenType: "Bearer",
     };
   }
 }

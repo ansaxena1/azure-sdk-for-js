@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   UpsertClassificationPolicyParameters,
   GetClassificationPolicyParameters,
   DeleteClassificationPolicyParameters,
@@ -35,8 +35,8 @@ import type {
   GetWorkerParameters,
   DeleteWorkerParameters,
   ListWorkersParameters,
-} from "./parameters.js";
-import type {
+} from "./parameters";
+import {
   UpsertClassificationPolicy200Response,
   UpsertClassificationPolicy201Response,
   UpsertClassificationPolicyDefaultResponse,
@@ -109,8 +109,8 @@ import type {
   DeleteWorkerDefaultResponse,
   ListWorkers200Response,
   ListWorkersDefaultResponse,
-} from "./responses.js";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+} from "./responses";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface UpsertClassificationPolicy {
   /** Creates or updates a classification policy. */

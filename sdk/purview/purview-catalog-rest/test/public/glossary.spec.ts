@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { PurviewCatalogClient } from "../../src";
-import { getLongRunningPoller } from "../../src";
+import { getLongRunningPoller, PurviewCatalogClient } from "../../src";
 import { Recorder } from "@azure-tools/test-recorder";
 
 import { assert } from "chai";
 import { createClient } from "./utils/recordedClient";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("purview catalog glossary test", () => {
   let recorder: Recorder;

@@ -15,20 +15,20 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 /**
- * This sample demonstrates how to list source configurations for a Linker.
+ * This sample demonstrates how to list source configurations for a linker.
  *
- * @summary list source configurations for a Linker.
- * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/examples/GetConfigurations.json
+ * @summary list source configurations for a linker.
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/GetConfigurations.json
  */
 async function getConfiguration() {
   const resourceUri =
-    "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.App/containerApps/test-app";
+    "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
   const linkerName = "linkName";
   const credential = new DefaultAzureCredential();
   const client = new ServiceLinkerManagementClient(credential);
   const result = await client.linker.listConfigurations(
     resourceUri,
-    linkerName,
+    linkerName
   );
   console.log(result);
 }

@@ -6,5 +6,5 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-export * from "./numberAllotment.js";
-export * from "./tiering.js";
+export * from "./numberAllotment";
+export * from "./tiering";

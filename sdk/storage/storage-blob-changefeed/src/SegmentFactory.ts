@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ShardFactory } from "./ShardFactory";
-import type { ContainerClient, CommonOptions } from "@azure/storage-blob";
+import { ShardFactory } from "./ShardFactory";
+import { ContainerClient, CommonOptions } from "@azure/storage-blob";
 import { CHANGE_FEED_CONTAINER_NAME } from "./utils/constants";
-import type { Shard } from "./Shard";
+import { Shard } from "./Shard";
 import { Segment } from "./Segment";
-import type { SegmentCursor } from "./models/ChangeFeedCursor";
+import { SegmentCursor } from "./models/ChangeFeedCursor";
 import { bodyToString } from "./utils/utils.node";
 import { parseDateFromSegmentPath } from "./utils/utils.common";
-import type { AbortSignalLike } from "@azure/abort-controller";
+import { AbortSignalLike } from "@azure/abort-controller";
 import { tracingClient } from "./utils/tracing";
 
 export interface SegmentManifest {

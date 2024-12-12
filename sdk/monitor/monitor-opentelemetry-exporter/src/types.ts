@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ContextTagKeys } from "./generated/index.js";
+import { ContextTagKeys } from "./generated";
 
 /**
  * Azure Monitor envelope tags.

@@ -12,11 +12,10 @@ import {
   InteractiveBrowserCredential,
   OnBehalfOfCredential,
   useIdentityPlugin,
-} from "../src/index.js";
+} from "@azure/identity";
 import { KeyClient } from "@azure/keyvault-keys";
 import { setLogLevel } from "@azure/logger";
 import dotenv from "dotenv";
-import { describe, it } from "vitest";
 
 describe("snippets", function () {
   it("defaultazurecredential_authenticate", function () {

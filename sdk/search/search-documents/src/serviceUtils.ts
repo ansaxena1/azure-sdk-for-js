@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   SearchResult as GeneratedSearchResult,
   SuggestDocumentsResult as GeneratedSuggestDocumentsResult,
 } from "./generated/data/models";
-import type {
+import {
   AIServicesVisionVectorizer as GeneratedAIServicesVisionVectorizer,
   AMLParameters as GeneratedAMLParameters,
   AMLVectorizer as GeneratedAMLVectorizer,
@@ -49,14 +49,9 @@ import type {
   VectorSearchVectorizerUnion as GeneratedVectorSearchVectorizer,
   WebApiVectorizer as GeneratedWebApiVectorizer,
 } from "./generated/service/models";
-import type {
-  SearchResult,
-  SelectFields,
-  SuggestDocumentsResult,
-  SuggestResult,
-} from "./indexModels";
+import { SearchResult, SelectFields, SuggestDocumentsResult, SuggestResult } from "./indexModels";
 import { logger } from "./logger";
-import type {
+import {
   AIServicesVisionVectorizer,
   AzureMachineLearningVectorizer,
   AzureMachineLearningVectorizerParameters,
@@ -73,6 +68,7 @@ import type {
   IndexerExecutionEnvironment,
   IndexingParameters,
   IndexingParametersConfiguration,
+  isComplexField,
   KeyAuthAzureMachineLearningVectorizerParameters,
   LexicalAnalyzer,
   LexicalNormalizer,
@@ -105,7 +101,6 @@ import type {
   VectorSearchVectorizer,
   WebApiVectorizer,
 } from "./serviceModels";
-import { isComplexField } from "./serviceModels";
 
 export const defaultServiceVersion = "2024-09-01-Preview";
 

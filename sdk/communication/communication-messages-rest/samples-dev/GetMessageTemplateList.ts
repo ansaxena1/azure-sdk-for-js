@@ -5,7 +5,7 @@
  * @summary Get Template list for a channel
  */
 
-import { isUnexpected, paginate } from "@azure-rest/communication-messages";
+import { paginate } from "@azure-rest/communication-messages";
 import MessageTemplateClient from "@azure-rest/communication-messages";
 import { AzureKeyCredential } from "@azure/core-auth";
 
@@ -13,7 +13,7 @@ import { AzureKeyCredential } from "@azure/core-auth";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-async function main(): Promise<void> {
+async function main() {
     const credential = new AzureKeyCredential(process.env.ACS_ACCESS_KEY || "");
     const endpoint = process.env.ACS_URL || "";
     const client = MessageTemplateClient(endpoint, credential);
@@ -23,20 +23,18 @@ async function main(): Promise<void> {
         queryParameters: { maxPageSize: 2 }
     });
 
-    if(isUnexpected(response)) {
-        throw new Error("Failed to get template for the channel.");
-    }
+    if (response.status == "200") {
+        // The paginate helper creates a paged async iterator using metadata from the first page.
+        const items = paginate(client, response);
 
-    // The paginate helper creates a paged async iterator using metadata from the first page.
-    const items = paginate(client, response);
-
-    // We get an PageableAsyncIterator so we need to do `for await`.
-    for await (const item of items) {
-        console.log(JSON.stringify(item, null, 2));
+        // We get an PageableAsyncIterator so we need to do `for await`.
+        for await (const item of items) {
+            console.log(JSON.stringify(item, null, 2));
+        }
     }    
 }
 
 main().catch((error) => {
     console.error("Encountered an error while sending message: ", error);
-    throw error;
+    process.exit(1);
 });

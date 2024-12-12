@@ -6,17 +6,17 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { Metadata } from "../operationsInterfaces/index.js";
+import { Metadata } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
-import * as Mappers from "../models/mappers.js";
-import * as Parameters from "../models/parameters.js";
-import { AzureLogAnalyticsContext } from "../azureLogAnalyticsContext.js";
+import * as Mappers from "../models/mappers";
+import * as Parameters from "../models/parameters";
+import { AzureLogAnalyticsContext } from "../azureLogAnalyticsContext";
 import {
   MetadataGetOptionalParams,
   MetadataGetResponse,
   MetadataPostOptionalParams,
   MetadataPostResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Class containing Metadata operations. */
 export class MetadataImpl implements Metadata {

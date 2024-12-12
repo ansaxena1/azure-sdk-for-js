@@ -1,17 +1,22 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { CommunicationUserIdentifier } from "@azure/communication-common";
-import { AzureCommunicationTokenCredential } from "@azure/communication-common";
-import type {
+
+import sinon from "sinon";
+import { assert } from "chai";
+import {
+  AzureCommunicationTokenCredential,
+  CommunicationUserIdentifier,
+} from "@azure/communication-common";
+import {
   AddParticipantsRequest,
+  ChatThreadClient,
   SendMessageOptions,
   SendMessageRequest,
   UpdateMessageOptions,
-} from "../../src/index.js";
-import { ChatThreadClient } from "../../src/index.js";
-import type * as RestModel from "../../src/generated/src/models/index.js";
-import { apiVersion } from "../../src/generated/src/models/parameters.js";
-import { baseUri, generateToken } from "../public/utils/connectionUtils.js";
+} from "../../src";
+import * as RestModel from "../../src/generated/src/models";
+import { apiVersion } from "../../src/generated/src/models/parameters";
+import { baseUri, generateToken } from "../public/utils/connectionUtils";
 import {
   createChatThreadClient,
   generateHttpClient,
@@ -22,33 +27,32 @@ import {
   mockParticipant,
   mockSdkModelParticipant,
   mockThread,
-} from "./utils/mockClient.js";
-import { describe, it, assert, expect, vi, afterEach } from "vitest";
+} from "./utils/mockClient";
 
 const API_VERSION = apiVersion.mapper.defaultValue;
 
-describe("[Mocked] ChatThreadClient", async () => {
+describe("[Mocked] ChatThreadClient", async function () {
   const threadId: string = "threadId";
   let chatThreadClient: ChatThreadClient;
 
-  afterEach(() => {
-    vi.restoreAllMocks();
+  afterEach(function () {
+    sinon.restore();
   });
 
-  it("can instantiate", async () => {
+  it("can instantiate", async function () {
     new ChatThreadClient(threadId, baseUri, new AzureCommunicationTokenCredential(generateToken()));
   });
 
-  it("makes successful get properties request", async () => {
+  it("makes successful get properties request", async function () {
     const mockHttpClient = generateHttpClient(200, mockThread);
     chatThreadClient = createChatThreadClient(mockThread.id, mockHttpClient);
 
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const { createdBy: responseUser, ...response } = await chatThreadClient.getProperties();
     const { createdByCommunicationIdentifier: expectedIdentifier, ...expected } = mockThread;
 
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
 
     assert.deepEqual(response, expected);
     assert.equal(responseUser?.kind, "communicationUser");
@@ -57,7 +61,7 @@ describe("[Mocked] ChatThreadClient", async () => {
       expectedIdentifier.communicationUser?.id,
     );
 
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -66,29 +70,29 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful update thread topic", async () => {
+  it("makes successful update thread topic", async function () {
     const mockHttpClient = generateHttpClient(204);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
 
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const topic = "mockTopic";
 
     await chatThreadClient.updateTopic(topic);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(request.url, `${baseUri}/chat/threads/${threadId}?api-version=${API_VERSION}`);
     assert.equal(request.method, "PATCH");
     assert.deepEqual(JSON.parse(request.body as string), { topic: topic });
   });
 
-  it("makes successful send message request", async () => {
+  it("makes successful send message request", async function () {
     const mockHttpClient = generateHttpClient(201, {
       id: mockMessage.id,
     });
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const sendRequest: SendMessageRequest = {
       content: mockMessage.content?.message as string,
@@ -101,10 +105,10 @@ describe("[Mocked] ChatThreadClient", async () => {
 
     const response = await chatThreadClient.sendMessage(sendRequest, sendOptions);
 
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.equal(response.id, mockMessage.id);
 
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -117,10 +121,10 @@ describe("[Mocked] ChatThreadClient", async () => {
     });
   });
 
-  it("makes successful get message request", async () => {
+  it("makes successful get message request", async function () {
     const mockHttpClient = generateHttpClient(200, mockMessage);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const {
       sender: responseUser,
@@ -135,7 +139,7 @@ describe("[Mocked] ChatThreadClient", async () => {
     const { participants: expectedParticipants, ...expectedContents } = expectedContent!;
     const { participants: responseParticipants, ...repsonseContents } = responseContent!;
 
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.deepEqual(responseMessage, expectedMessage);
     assert.equal(responseUser?.kind, "communicationUser");
     assert.equal(
@@ -144,7 +148,7 @@ describe("[Mocked] ChatThreadClient", async () => {
     );
     assert.deepEqual(repsonseContents, expectedContents);
 
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -153,10 +157,10 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful get message with image attachments request", async () => {
+  it("makes successful get message with image attachments request", async function () {
     const mockHttpClient = generateHttpClient(200, mockMessageWithImageAttachment);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const {
       sender: responseUser,
@@ -178,20 +182,20 @@ describe("[Mocked] ChatThreadClient", async () => {
       attachments: responseAttachments,
       ...repsonseContents
     } = responseContent!;
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.deepEqual(responseMessage, expectedMessage);
     assert.deepEqual(responseAttachments, expectedAttachments);
     assert.deepEqual(repsonseContents, expectedContents);
     assert.equal(responseAttachments![0].attachmentType, "image");
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful get message with file attachments request", async () => {
+  it("makes successful get message with file attachments request", async function () {
     const mockHttpClient = generateHttpClient(200, mockMessageWithFileAttachment);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const {
       sender: responseUser,
@@ -213,17 +217,17 @@ describe("[Mocked] ChatThreadClient", async () => {
       attachments: responseAttachments,
       ...repsonseContents
     } = responseContent!;
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.deepEqual(responseMessage, expectedMessage);
     assert.deepEqual(responseAttachments, expectedAttachments);
     assert.deepEqual(repsonseContents, expectedContents);
     assert.equal(responseAttachments![0].attachmentType, "file");
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful list messages request", async () => {
+  it("makes successful list messages request", async function () {
     const { senderCommunicationIdentifier, ...rest } = mockMessage;
 
     const mockResponse: RestModel.ChatMessagesCollection = {
@@ -233,7 +237,7 @@ describe("[Mocked] ChatThreadClient", async () => {
     const mockHttpClient = generateHttpClient(200, mockResponse);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
 
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     let count = 0;
     for await (const message of chatThreadClient.listMessages()) {
@@ -261,10 +265,10 @@ describe("[Mocked] ChatThreadClient", async () => {
       ++count;
     }
 
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.equal(count, mockResponse.value?.length);
 
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -273,7 +277,7 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful list messages request by page", async () => {
+  it("makes successful list messages request by page", async function () {
     const { senderCommunicationIdentifier, ...rest } = mockMessage;
 
     const mockResponse: RestModel.ChatMessagesCollection = {
@@ -283,7 +287,7 @@ describe("[Mocked] ChatThreadClient", async () => {
     const mockHttpClient = generateHttpClient(200, mockResponse);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
 
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const iterator = chatThreadClient.listMessages({ maxPageSize: 2 });
 
@@ -296,10 +300,10 @@ describe("[Mocked] ChatThreadClient", async () => {
       }
     }
 
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.equal(count, mockResponse.value?.length);
 
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -308,10 +312,10 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful update message request", async () => {
+  it("makes successful update message request", async function () {
     const mockHttpClient = generateHttpClient(204);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const sendOptions: UpdateMessageOptions = {
       content: mockMessage.content?.message,
@@ -320,8 +324,8 @@ describe("[Mocked] ChatThreadClient", async () => {
 
     await chatThreadClient.updateMessage(mockMessage.id!, sendOptions);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(
       request.url,
       `${baseUri}/chat/threads/${threadId}/messages/${mockMessage.id}?api-version=${API_VERSION}`,
@@ -333,15 +337,15 @@ describe("[Mocked] ChatThreadClient", async () => {
     });
   });
 
-  it("makes successful delete message request", async () => {
+  it("makes successful delete message request", async function () {
     const mockHttpClient = generateHttpClient(204);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     await chatThreadClient.deleteMessage(mockMessage.id!);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(
       request.url,
       `${baseUri}/chat/threads/${threadId}/messages/${mockMessage.id}?api-version=${API_VERSION}`,
@@ -349,10 +353,10 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "DELETE");
   });
 
-  it("makes successful add chat participants request", async () => {
+  it("makes successful add chat participants request", async function () {
     const mockHttpClient = generateHttpClient(201);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const sendRequest: AddParticipantsRequest = {
       participants: [mockSdkModelParticipant],
@@ -360,8 +364,8 @@ describe("[Mocked] ChatThreadClient", async () => {
 
     await chatThreadClient.addParticipants(sendRequest);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -380,12 +384,12 @@ describe("[Mocked] ChatThreadClient", async () => {
     );
   });
 
-  it("makes successful list chat participants request", async () => {
+  it("makes successful list chat participants request", async function () {
     const mockHttpClient = generateHttpClient(200, {
       value: [mockParticipant],
     });
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     let count = 0;
     for await (const participant of chatThreadClient.listParticipants()) {
@@ -400,10 +404,10 @@ describe("[Mocked] ChatThreadClient", async () => {
       assert.deepEqual(requestParticipant, expectedParticipant);
     }
 
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.equal(count, 1);
 
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -412,12 +416,12 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful list chat participants request by page", async () => {
+  it("makes successful list chat participants request by page", async function () {
     const mockHttpClient = generateHttpClient(200, {
       value: [mockParticipant, mockParticipant, mockParticipant],
     });
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const iterator = chatThreadClient.listParticipants({ maxPageSize: 2 });
     let count = 0;
@@ -429,10 +433,10 @@ describe("[Mocked] ChatThreadClient", async () => {
       }
     }
 
-    expect(spy).toHaveBeenCalledOnce();
+    sinon.assert.calledOnce(spy);
     assert.equal(count, 3);
 
-    const request = spy.mock.calls[0][0];
+    const request = spy.getCall(0).args[0];
 
     assert.equal(
       request.url,
@@ -441,15 +445,15 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "GET");
   });
 
-  it("makes successful remove chat participant request", async () => {
+  it("makes successful remove chat participant request", async function () {
     const mockHttpClient = generateHttpClient(204);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     await chatThreadClient.removeParticipant(mockSdkModelParticipant.id);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(
       request.url,
       `${baseUri}/chat/threads/${threadId}/participants/:remove?api-version=${API_VERSION}`,
@@ -459,16 +463,16 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.deepEqual(mockParticipant.communicationIdentifier, requestJson);
   });
 
-  it("makes successful sent typing notification request", async () => {
+  it("makes successful sent typing notification request", async function () {
     const mockHttpClient = generateHttpClient(200);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const result = await chatThreadClient.sendTypingNotification();
     assert.isTrue(result);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(
       request.url,
       `${baseUri}/chat/threads/${threadId}/typing?api-version=${API_VERSION}`,
@@ -476,10 +480,10 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "POST");
   });
 
-  it("makes only one sent typing notification request within 8 secs", async () => {
+  it("makes only one sent typing notification request within 8 secs", async function () {
     const mockHttpClient = generateHttpClient(400);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     try {
       await chatThreadClient.sendTypingNotification();
@@ -490,8 +494,8 @@ describe("[Mocked] ChatThreadClient", async () => {
       const result = await chatThreadClient.sendTypingNotification();
       assert.isFalse(result);
 
-      expect(spy).toHaveBeenCalledOnce();
-      const request = spy.mock.calls[0][0];
+      sinon.assert.calledOnce(spy);
+      const request = spy.getCall(0).args[0];
       assert.equal(
         request.url,
         `${baseUri}/chat/threads/${threadId}/typing?api-version=${API_VERSION}`,
@@ -500,17 +504,17 @@ describe("[Mocked] ChatThreadClient", async () => {
     }
   });
 
-  it("makes successful sent typing notification request with sender display name", async () => {
+  it("makes successful sent typing notification request with sender display name", async function () {
     const mockHttpClient = generateHttpClient(200);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     const options = { senderDisplayName: "Bob Admin" };
     const result = await chatThreadClient.sendTypingNotification(options);
     assert.isTrue(result);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(
       request.url,
       `${baseUri}/chat/threads/${threadId}/typing?api-version=${API_VERSION}`,
@@ -519,15 +523,15 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.deepEqual(JSON.parse(request.body as string), options);
   });
 
-  it("makes successful sent read receipt request", async () => {
+  it("makes successful sent read receipt request", async function () {
     const mockHttpClient = generateHttpClient(200);
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     await chatThreadClient.sendReadReceipt({ chatMessageId: mockMessage.id! });
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(
       request.url,
       `${baseUri}/chat/threads/${threadId}/readReceipts?api-version=${API_VERSION}`,
@@ -535,12 +539,12 @@ describe("[Mocked] ChatThreadClient", async () => {
     assert.equal(request.method, "POST");
   });
 
-  it("makes successful list read receipts request", async () => {
+  it("makes successful list read receipts request", async function () {
     const mockHttpClient = generateHttpClient(200, {
       value: [mockChatMessageReadReceipt, mockChatMessageReadReceipt],
     });
     chatThreadClient = createChatThreadClient(threadId, mockHttpClient);
-    const spy = vi.spyOn(mockHttpClient, "sendRequest");
+    const spy = sinon.spy(mockHttpClient, "sendRequest");
 
     let count = 0;
     for await (const readReceipt of chatThreadClient.listReadReceipts()) {
@@ -558,8 +562,8 @@ describe("[Mocked] ChatThreadClient", async () => {
 
     assert.equal(count, 2);
 
-    expect(spy).toHaveBeenCalledOnce();
-    const request = spy.mock.calls[0][0];
+    sinon.assert.calledOnce(spy);
+    const request = spy.getCall(0).args[0];
     assert.equal(
       request.url,
       `${baseUri}/chat/threads/${threadId}/readReceipts?api-version=${API_VERSION}`,

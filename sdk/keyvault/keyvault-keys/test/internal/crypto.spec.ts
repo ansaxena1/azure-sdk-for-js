@@ -1,19 +1,22 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { TokenCredential } from "@azure/core-auth";
-import type { DecryptParameters, EncryptParameters, KeyVaultKey } from "../../src/index.js";
-import { CryptographyClient, KeyClient } from "../../src/index.js";
+import { TokenCredential } from "@azure/core-auth";
+import {
+  CryptographyClient,
+  DecryptParameters,
+  EncryptParameters,
+  KeyClient,
+  KeyVaultKey,
+} from "../../src/index.js";
 import { RsaCryptographyProvider } from "../../src/cryptography/rsaCryptographyProvider.js";
-import type { JsonWebKey } from "../../src/index.js";
+import { JsonWebKey } from "../../src/index.js";
 import { stringToUint8Array } from "../public/utils/crypto.js";
-import type { CryptographyProvider } from "../../src/cryptography/models.js";
+import { CryptographyProvider } from "../../src/cryptography/models.js";
 import { RemoteCryptographyProvider } from "../../src/cryptography/remoteCryptographyProvider.js";
 import { NoOpCredential } from "@azure-tools/test-credential";
-import type { SendRequest } from "@azure/core-rest-pipeline";
-import { RestError, createHttpHeaders } from "@azure/core-rest-pipeline";
-import type { MockInstance } from "vitest";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { RestError, SendRequest, createHttpHeaders } from "@azure/core-rest-pipeline";
+import { describe, it, assert, expect, vi, beforeEach, afterEach, MockInstance } from "vitest";
 
 describe("internal crypto tests", () => {
   const tokenCredential: TokenCredential = {

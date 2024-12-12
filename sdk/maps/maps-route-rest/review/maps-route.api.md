@@ -4,20 +4,19 @@
 
 ```ts
 
-import { AbortSignalLike } from '@azure/abort-controller';
-import type { AzureKeyCredential } from '@azure/core-auth';
-import type { AzureSASCredential } from '@azure/core-auth';
-import { CancelOnProgress } from '@azure/core-lro';
+import { AzureKeyCredential } from '@azure/core-auth';
+import { AzureSASCredential } from '@azure/core-auth';
 import { Client } from '@azure-rest/core-client';
 import { ClientOptions } from '@azure-rest/core-client';
-import { CreateHttpPollerOptions } from '@azure/core-lro';
 import { HttpResponse } from '@azure-rest/core-client';
-import type { LatLon } from '@azure/maps-common';
-import { OperationState } from '@azure/core-lro';
+import { LatLon } from '@azure/maps-common';
+import { LroEngineOptions } from '@azure/core-lro';
+import { PollerLike } from '@azure/core-lro';
+import { PollOperationState } from '@azure/core-lro';
 import { RawHttpHeaders } from '@azure/core-rest-pipeline';
 import { RequestParameters } from '@azure-rest/core-client';
 import { StreamableMethod } from '@azure-rest/core-client';
-import type { TokenCredential } from '@azure/core-auth';
+import { TokenCredential } from '@azure/core-auth';
 
 // @public
 export interface BatchRequest {
@@ -31,36 +30,33 @@ export interface BatchRequestItem {
 
 // @public
 export interface BatchResultItemOutput {
-    readonly statusCode: number;
+    statusCode: number;
 }
 
 // @public
 export interface BatchResultOutput {
-    readonly summary: BatchResultSummaryOutput;
+    summary: BatchResultSummaryOutput;
 }
 
 // @public
 export interface BatchResultSummaryOutput {
-    readonly successfulRequests: number;
-    readonly totalRequests: number;
+    successfulRequests: number;
+    totalRequests: number;
 }
-
-// @public (undocumented)
-export function buildMultiCollection(items: string[], parameterName: string): string;
 
 // @public
 export function createRouteDirectionsBatchRequest(queryParamProperties: RouteGetRouteDirectionsQueryParamProperties[]): BatchRequest;
 
 // @public
 export interface EffectiveSettingOutput {
-    readonly key: string;
-    readonly value: string;
+    key: string;
+    value: string;
 }
 
 // @public
 export interface ErrorDetailOutput {
-    readonly code?: string;
-    readonly message?: string;
+    code?: string;
+    message?: string;
 }
 
 // @public
@@ -189,7 +185,7 @@ export interface GeoJsonPolygonData {
 }
 
 // @public
-export function getLongRunningPoller<TResult extends HttpResponse>(client: Client, initialResponse: TResult, options?: CreateHttpPollerOptions<TResult, OperationState<TResult>>): Promise<SimplePollerLike<OperationState<TResult>, TResult>>;
+export function getLongRunningPoller<TResult extends HttpResponse>(client: Client, initialResponse: TResult, options?: LroEngineOptions<TResult, PollOperationState<TResult>>): PollerLike<PollOperationState<TResult>, TResult>;
 
 // @public (undocumented)
 export interface GetRouteDirections {
@@ -238,11 +234,6 @@ export type MapsRouteClient = Client & {
     path: Routes;
 };
 
-// @public
-export interface MapsRouteClientOptions extends ClientOptions {
-    apiVersion?: string;
-}
-
 // @public (undocumented)
 export interface RequestRouteDirectionsBatch {
     get(options?: RouteGetRouteDirectionsBatchParameters): StreamableMethod<RouteGetRouteDirectionsBatch200Response | RouteGetRouteDirectionsBatch202Response>;
@@ -275,7 +266,7 @@ export interface RouteDirectionParameters {
 
 // @public
 export interface RouteDirectionsBatchItemOutput extends BatchResultItemOutput {
-    readonly response: RouteDirectionsBatchItemResponseOutput;
+    response: RouteDirectionsBatchItemResponseOutput;
 }
 
 // @public
@@ -284,15 +275,15 @@ export interface RouteDirectionsBatchItemResponseOutput extends RouteDirectionsO
 
 // @public
 export interface RouteDirectionsBatchResultOutput extends BatchResultOutput {
-    readonly batchItems: Array<RouteDirectionsBatchItemOutput>;
+    batchItems: Array<RouteDirectionsBatchItemOutput>;
 }
 
 // @public
 export interface RouteDirectionsOutput {
-    readonly formatVersion?: string;
-    readonly optimizedWaypoints?: Array<RouteOptimizedWaypointOutput>;
+    formatVersion?: string;
+    optimizedWaypoints?: Array<RouteOptimizedWaypointOutput>;
     report?: RouteReportOutput;
-    readonly routes: Array<RouteOutput>;
+    routes: Array<RouteOutput>;
 }
 
 // @public
@@ -318,6 +309,8 @@ export interface RouteGetRouteDirectionsBatch202Headers {
 
 // @public
 export interface RouteGetRouteDirectionsBatch202Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
     // (undocumented)
     headers: RawHttpHeaders & RouteGetRouteDirectionsBatch202Headers;
     // (undocumented)
@@ -373,7 +366,7 @@ export interface RouteGetRouteDirectionsQueryParamProperties {
     report?: "effectiveSettings";
     routeRepresentation?: "polyline" | "summaryOnly" | "none";
     routeType?: "fastest" | "shortest" | "eco" | "thrilling";
-    sectionType?: Array<"carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban">;
+    sectionType?: "carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban";
     traffic?: boolean;
     travelMode?: "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" | "bicycle" | "pedestrian";
     uphillEfficiency?: number;
@@ -454,7 +447,7 @@ export interface RouteGetRouteDirectionsWithAdditionalParametersQueryParamProper
     report?: "effectiveSettings";
     routeRepresentation?: "polyline" | "summaryOnly" | "none";
     routeType?: "fastest" | "shortest" | "eco" | "thrilling";
-    sectionType?: Array<"carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban">;
+    sectionType?: "carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban";
     traffic?: boolean;
     travelMode?: "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" | "bicycle" | "pedestrian";
     uphillEfficiency?: number;
@@ -486,6 +479,8 @@ export interface RouteGetRouteMatrix202Headers {
 
 // @public
 export interface RouteGetRouteMatrix202Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
     // (undocumented)
     headers: RawHttpHeaders & RouteGetRouteMatrix202Headers;
     // (undocumented)
@@ -559,51 +554,51 @@ export interface RouteGetRouteRangeQueryParamProperties {
 
 // @public
 export interface RouteGuidanceOutput {
-    readonly instructionGroups: Array<RouteInstructionGroupOutput>;
-    readonly instructions: Array<RouteInstructionOutput>;
+    instructionGroups: Array<RouteInstructionGroupOutput>;
+    instructions: Array<RouteInstructionOutput>;
 }
 
 // @public
 export interface RouteInstructionGroupOutput {
-    readonly firstInstructionIndex?: number;
-    readonly groupLengthInMeters?: number;
-    readonly groupMessage?: string;
-    readonly lastInstructionIndex?: number;
+    firstInstructionIndex?: number;
+    groupLengthInMeters?: number;
+    groupMessage?: string;
+    lastInstructionIndex?: number;
 }
 
 // @public
 export interface RouteInstructionOutput {
-    readonly combinedMessage?: string;
-    readonly countryCode?: string;
-    readonly drivingSide?: "LEFT" | "RIGHT";
-    readonly exitNumber?: string;
+    combinedMessage?: string;
+    countryCode?: string;
+    drivingSide?: "LEFT" | "RIGHT";
+    exitNumber?: string;
     instructionType?: "TURN" | "ROAD_CHANGE" | "LOCATION_DEPARTURE" | "LOCATION_ARRIVAL" | "DIRECTION_INFO" | "LOCATION_WAYPOINT";
-    readonly junctionType?: "REGULAR" | "ROUNDABOUT" | "BIFURCATION";
-    readonly maneuver?: "ARRIVE" | "ARRIVE_LEFT" | "ARRIVE_RIGHT" | "DEPART" | "STRAIGHT" | "KEEP_RIGHT" | "BEAR_RIGHT" | "TURN_RIGHT" | "SHARP_RIGHT" | "KEEP_LEFT" | "BEAR_LEFT" | "TURN_LEFT" | "SHARP_LEFT" | "MAKE_UTURN" | "ENTER_MOTORWAY" | "ENTER_FREEWAY" | "ENTER_HIGHWAY" | "TAKE_EXIT" | "MOTORWAY_EXIT_LEFT" | "MOTORWAY_EXIT_RIGHT" | "TAKE_FERRY" | "ROUNDABOUT_CROSS" | "ROUNDABOUT_RIGHT" | "ROUNDABOUT_LEFT" | "ROUNDABOUT_BACK" | "TRY_MAKE_UTURN" | "FOLLOW" | "SWITCH_PARALLEL_ROAD" | "SWITCH_MAIN_ROAD" | "ENTRANCE_RAMP" | "WAYPOINT_LEFT" | "WAYPOINT_RIGHT" | "WAYPOINT_REACHED";
-    readonly message?: string;
+    junctionType?: "REGULAR" | "ROUNDABOUT" | "BIFURCATION";
+    maneuver?: "ARRIVE" | "ARRIVE_LEFT" | "ARRIVE_RIGHT" | "DEPART" | "STRAIGHT" | "KEEP_RIGHT" | "BEAR_RIGHT" | "TURN_RIGHT" | "SHARP_RIGHT" | "KEEP_LEFT" | "BEAR_LEFT" | "TURN_LEFT" | "SHARP_LEFT" | "MAKE_UTURN" | "ENTER_MOTORWAY" | "ENTER_FREEWAY" | "ENTER_HIGHWAY" | "TAKE_EXIT" | "MOTORWAY_EXIT_LEFT" | "MOTORWAY_EXIT_RIGHT" | "TAKE_FERRY" | "ROUNDABOUT_CROSS" | "ROUNDABOUT_RIGHT" | "ROUNDABOUT_LEFT" | "ROUNDABOUT_BACK" | "TRY_MAKE_UTURN" | "FOLLOW" | "SWITCH_PARALLEL_ROAD" | "SWITCH_MAIN_ROAD" | "ENTRANCE_RAMP" | "WAYPOINT_LEFT" | "WAYPOINT_RIGHT" | "WAYPOINT_REACHED";
+    message?: string;
     point?: LatLongPairOutput;
-    readonly pointIndex?: number;
-    readonly possibleCombineWithNext?: boolean;
-    readonly roadNumbers?: Array<string>;
-    readonly roundaboutExitNumber?: number;
-    readonly routeOffsetInMeters?: number;
-    readonly signpostText?: string;
-    readonly stateCode?: string;
-    readonly street?: string;
-    readonly travelTimeInSeconds?: number;
-    readonly turnAngleInDecimalDegrees?: number;
+    pointIndex?: number;
+    possibleCombineWithNext?: boolean;
+    roadNumbers?: Array<string>;
+    roundaboutExitNumber?: string;
+    routeOffsetInMeters?: number;
+    signpostText?: string;
+    stateCode?: string;
+    street?: string;
+    travelTimeInSeconds?: number;
+    turnAngleInDecimalDegrees?: number;
 }
 
 // @public
 export interface RouteLegOutput {
-    readonly points: Array<LatLongPairOutput>;
-    readonly summary: RouteSummaryOutput;
+    points: Array<LatLongPairOutput>;
+    summary: RouteSummaryOutput;
 }
 
 // @public
 export interface RouteMatrixOutput {
-    readonly response?: RouteMatrixResultResponseOutput;
-    readonly statusCode: number;
+    response?: RouteMatrixResultResponseOutput;
+    statusCode: number;
 }
 
 // @public
@@ -614,52 +609,52 @@ export interface RouteMatrixQuery {
 
 // @public
 export interface RouteMatrixResultOutput {
-    readonly formatVersion?: string;
-    readonly matrix: Array<Array<RouteMatrixOutput>>;
-    readonly summary: RouteMatrixSummaryOutput;
+    formatVersion?: string;
+    matrix: Array<Array<RouteMatrixOutput>>;
+    summary: RouteMatrixSummaryOutput;
 }
 
 // @public
 export interface RouteMatrixResultResponseOutput {
-    readonly routeSummary?: RouteSummaryOutput;
+    routeSummary?: RouteSummaryOutput;
 }
 
 // @public
 export interface RouteMatrixSummaryOutput {
-    readonly successfulRoutes: number;
-    readonly totalRoutes: number;
+    successfulRoutes: number;
+    totalRoutes: number;
 }
 
 // @public
 export interface RouteOptimizedWaypointOutput {
-    readonly optimizedIndex: number;
-    readonly providedIndex: number;
+    optimizedIndex: number;
+    providedIndex: number;
 }
 
 // @public (undocumented)
 export interface RouteOutput {
-    readonly guidance?: RouteGuidanceOutput;
-    readonly legs: Array<RouteLegOutput>;
-    readonly sections?: Array<RouteSectionOutput>;
-    readonly summary: RouteSummaryOutput;
+    guidance?: RouteGuidanceOutput;
+    legs: Array<RouteLegOutput>;
+    sections?: Array<RouteSectionOutput>;
+    summary: RouteSummaryOutput;
 }
 
 // @public
 export interface RouteRangeOutput {
-    readonly boundary: Array<LatLongPairOutput>;
+    boundary: Array<LatLongPairOutput>;
     center: LatLongPairOutput;
 }
 
 // @public
 export interface RouteRangeResultOutput {
-    readonly formatVersion?: string;
+    formatVersion?: string;
     reachableRange: RouteRangeOutput;
     report?: RouteReportOutput;
 }
 
 // @public
 export interface RouteReportOutput {
-    readonly effectiveSettings: Array<EffectiveSettingOutput>;
+    effectiveSettings: Array<EffectiveSettingOutput>;
 }
 
 // @public
@@ -677,6 +672,8 @@ export interface RouteRequestRouteDirectionsBatch202Headers {
 
 // @public
 export interface RouteRequestRouteDirectionsBatch202Response extends HttpResponse {
+    // (undocumented)
+    body: Record<string, unknown>;
     // (undocumented)
     headers: RawHttpHeaders & RouteRequestRouteDirectionsBatch202Headers;
     // (undocumented)
@@ -749,6 +746,8 @@ export interface RouteRequestRouteMatrix202Headers {
 // @public
 export interface RouteRequestRouteMatrix202Response extends HttpResponse {
     // (undocumented)
+    body: Record<string, unknown>;
+    // (undocumented)
     headers: RawHttpHeaders & RouteRequestRouteMatrix202Headers;
     // (undocumented)
     status: "202";
@@ -781,7 +780,7 @@ export interface RouteRequestRouteMatrixQueryParamProperties {
     departAt?: Date | string;
     hilliness?: "low" | "normal" | "high";
     routeType?: "fastest" | "shortest" | "eco" | "thrilling";
-    sectionType?: Array<"carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban">;
+    sectionType?: "carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban";
     traffic?: boolean;
     travelMode?: "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" | "bicycle" | "pedestrian";
     vehicleAxleWeight?: number;
@@ -846,7 +845,7 @@ export interface RouteRequestRouteMatrixSyncQueryParamProperties {
     departAt?: Date | string;
     hilliness?: "low" | "normal" | "high";
     routeType?: "fastest" | "shortest" | "eco" | "thrilling";
-    sectionType?: Array<"carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban">;
+    sectionType?: "carTrain" | "country" | "ferry" | "motorway" | "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" | "carpool" | "urban";
     traffic?: boolean;
     travelMode?: "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" | "bicycle" | "pedestrian";
     vehicleAxleWeight?: number;
@@ -872,58 +871,36 @@ export interface Routes {
 
 // @public
 export interface RouteSectionOutput {
-    readonly delayInSeconds?: number;
-    readonly effectiveSpeedInKmh?: number;
-    readonly endPointIndex: number;
-    readonly magnitudeOfDelay?: "0" | "1" | "2" | "3" | "4";
-    readonly sectionType: "CAR_TRAIN" | "COUNTRY" | "FERRY" | "MOTORWAY" | "PEDESTRIAN" | "TOLL_ROAD" | "TOLL_VIGNETTE" | "TRAFFIC" | "TRAVEL_MODE" | "TUNNEL" | "CARPOOL" | "URBAN";
-    readonly simpleCategory?: "JAM" | "ROAD_WORK" | "ROAD_CLOSURE" | "OTHER";
-    readonly startPointIndex: number;
+    delayInSeconds?: number;
+    effectiveSpeedInKmh?: number;
+    endPointIndex: number;
+    magnitudeOfDelay?: "0" | "1" | "2" | "3" | "4";
+    sectionType: "CAR_TRAIN" | "COUNTRY" | "FERRY" | "MOTORWAY" | "PEDESTRIAN" | "TOLL_ROAD" | "TOLL_VIGNETTE" | "TRAFFIC" | "TRAVEL_MODE" | "TUNNEL" | "CARPOOL" | "URBAN";
+    simpleCategory?: "JAM" | "ROAD_WORK" | "ROAD_CLOSURE" | "OTHER";
+    startPointIndex: number;
     tec?: RouteSectionTecOutput;
-    readonly travelMode?: "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" | "bicycle" | "pedestrian" | "other";
+    travelMode?: "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" | "bicycle" | "pedestrian" | "other";
 }
 
 // @public
 export interface RouteSectionTecCauseOutput {
-    readonly mainCauseCode?: number;
-    readonly subCauseCode?: number;
+    mainCauseCode?: number;
+    subCauseCode?: number;
 }
 
 // @public
 export interface RouteSectionTecOutput {
     causes?: Array<RouteSectionTecCauseOutput>;
-    readonly effectCode?: number;
+    effectCode?: number;
 }
 
 // @public
 export interface RouteSummaryOutput {
-    readonly arrivalTime: string;
-    readonly departureTime: string;
-    readonly lengthInMeters: number;
-    readonly trafficDelayInSeconds: number;
-    readonly travelTimeInSeconds: number;
-}
-
-// @public
-export interface SimplePollerLike<TState extends OperationState<TResult>, TResult> {
-    getOperationState(): TState;
-    getResult(): TResult | undefined;
-    isDone(): boolean;
-    // @deprecated
-    isStopped(): boolean;
-    onProgress(callback: (state: TState) => void): CancelOnProgress;
-    poll(options?: {
-        abortSignal?: AbortSignalLike;
-    }): Promise<TState>;
-    pollUntilDone(pollOptions?: {
-        abortSignal?: AbortSignalLike;
-    }): Promise<TResult>;
-    serialize(): Promise<string>;
-    // @deprecated
-    stopPolling(): void;
-    submitted(): Promise<void>;
-    // @deprecated
-    toString(): string;
+    arrivalTime: string;
+    departureTime: string;
+    lengthInMeters: number;
+    trafficDelayInSeconds: number;
+    travelTimeInSeconds: number;
 }
 
 // @public

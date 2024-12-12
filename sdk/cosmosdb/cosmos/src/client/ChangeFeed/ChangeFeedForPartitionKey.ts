@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { InternalChangeFeedIteratorOptions } from "./InternalChangeFeedOptions";
+import { InternalChangeFeedIteratorOptions } from "./InternalChangeFeedOptions";
 import { ChangeFeedIteratorResponse } from "./ChangeFeedIteratorResponse";
-import type { Container, Resource } from "../../client";
-import type { ClientContext } from "../../ClientContext";
+import { Container, Resource } from "../../client";
+import { ClientContext } from "../../ClientContext";
 import { Constants, ResourceType, StatusCodes } from "../../common";
-import type { FeedOptions, Response } from "../../request";
-import { ErrorResponse } from "../../request";
+import { FeedOptions, Response, ErrorResponse } from "../../request";
 import { ContinuationTokenForPartitionKey } from "./ContinuationTokenForPartitionKey";
-import type { ChangeFeedPullModelIterator } from "./ChangeFeedPullModelIterator";
-import type { PartitionKey } from "../../documents";
-import type { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
+import { ChangeFeedPullModelIterator } from "./ChangeFeedPullModelIterator";
+import { PartitionKey } from "../../documents";
+import { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
 import { getEmptyCosmosDiagnostics, withDiagnostics } from "../../utils/diagnostics";
 import { ChangeFeedMode } from "./ChangeFeedMode";
 /**

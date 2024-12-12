@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { BaseRequestPolicy } from "./RequestPolicy";
-import type {
+import {
   WebResourceLike as WebResource,
   CompatResponse as HttpOperationResponse,
 } from "@azure/core-http-compat";

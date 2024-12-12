@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ServiceBusSender, ServiceBusReceiver } from "../../src/index.js";
+import { ServiceBusSender, ServiceBusReceiver } from "../../src/index.js";
 import { TestClientType, TestMessage } from "./utils/testUtils.js";
-import type { ServiceBusClientForTests } from "./utils/testutils2.js";
-import { createServiceBusClientForTests } from "./utils/testutils2.js";
+import { ServiceBusClientForTests, createServiceBusClientForTests } from "./utils/testutils2.js";
 import { afterAll, afterEach, beforeAll, describe, it } from "vitest";
 
 describe("ManagementClient - disconnects", function (): void {

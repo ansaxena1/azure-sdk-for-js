@@ -1,34 +1,36 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CommunicationUserIdentifier } from "@azure/communication-common";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { isLiveMode } from "@azure-tools/test-recorder";
-import { matrix } from "@azure-tools/test-utils-vitest";
-import type { CommunicationIdentityClient } from "../../../src/communicationIdentityClient.js";
+import { CommunicationUserIdentifier } from "@azure/communication-common";
+import { Recorder, isLiveMode } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { assert } from "chai";
+import { matrix } from "@azure-tools/test-utils";
+import { CommunicationIdentityClient } from "../../../src/communicationIdentityClient";
 import {
   createRecordedCommunicationIdentityClient,
   createRecordedCommunicationIdentityClientWithToken,
-} from "../utils/recordedClient.js";
-import type { CreateUserAndTokenOptions, GetTokenOptions } from "../../../src/models.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+} from "../utils/recordedClient";
+import { CreateUserAndTokenOptions, GetTokenOptions } from "../../../src/models";
 
-matrix([[true, false]], async (useAad: boolean) => {
-  describe(`Get Token With Custom Expiration [Playback/Live]${useAad ? " [AAD]" : ""}`, () => {
+matrix([[true, false]], async function (useAad: boolean) {
+  describe(`Get Token With Custom Expiration [Playback/Live]${
+    useAad ? " [AAD]" : ""
+  }`, function () {
     const TOKEN_EXPIRATION_ALLOWED_DEVIATION: number = 0.05;
     let recorder: Recorder;
     let client: CommunicationIdentityClient;
 
-    beforeEach(async (ctx) => {
+    beforeEach(async function (this: Context) {
       if (useAad) {
-        ({ client, recorder } = await createRecordedCommunicationIdentityClientWithToken(ctx));
+        ({ client, recorder } = await createRecordedCommunicationIdentityClientWithToken(this));
       } else {
-        ({ client, recorder } = await createRecordedCommunicationIdentityClient(ctx));
+        ({ client, recorder } = await createRecordedCommunicationIdentityClient(this));
       }
     });
 
-    afterEach(async (ctx) => {
-      if (!ctx.task.pending) {
+    afterEach(async function (this: Context) {
+      if (!this.currentTest?.isPending()) {
         await recorder.stop();
       }
     });
@@ -37,10 +39,7 @@ matrix([[true, false]], async (useAad: boolean) => {
       expectedTokenExpiration: number,
       tokenExpiresIn: Date,
       allowedDeviation: number,
-    ): {
-      withinAllowedDeviation: boolean;
-      tokenExpirationInMinutes: number;
-    } {
+    ) {
       const timeNow = Date.now();
       const expiration = tokenExpiresIn.getTime();
       const tokenSeconds = (expiration - timeNow) / 1000;
@@ -57,7 +56,7 @@ matrix([[true, false]], async (useAad: boolean) => {
       { tokenExpiresInMinutes: 60, description: "min valid" },
       { tokenExpiresInMinutes: 1440, description: "max valid" },
     ].forEach((input) =>
-      it(`successfully gets a valid custom expiration token <${input.description}>`, async () => {
+      it(`successfully gets a valid custom expiration token <${input.description}>`, async function () {
         const user: CommunicationUserIdentifier = await client.createUser();
         const tokenOptions: GetTokenOptions = {
           tokenExpiresInMinutes: input.tokenExpiresInMinutes,
@@ -90,7 +89,7 @@ matrix([[true, false]], async (useAad: boolean) => {
       { tokenExpiresInMinutes: 60, description: "min valid" },
       { tokenExpiresInMinutes: 1440, description: "max valid" },
     ].forEach((input) =>
-      it(`successfully gets user and valid custom expiration token <${input.description}>`, async () => {
+      it(`successfully gets user and valid custom expiration token <${input.description}>`, async function () {
         const tokenOptions: CreateUserAndTokenOptions = {
           tokenExpiresInMinutes: input.tokenExpiresInMinutes,
         };
@@ -122,7 +121,7 @@ matrix([[true, false]], async (useAad: boolean) => {
       { tokenExpiresInMinutes: 59, description: "lo inval" },
       { tokenExpiresInMinutes: 1441, description: "hi inval" },
     ].forEach((input) =>
-      it(`throws error when attempting to issue an invalid expiration token <${input.description}>`, async () => {
+      it(`throws error when attempting to issue an invalid expiration token <${input.description}>`, async function () {
         const user: CommunicationUserIdentifier = await client.createUser();
         const tokenOptions: GetTokenOptions = {
           tokenExpiresInMinutes: input.tokenExpiresInMinutes,
@@ -140,7 +139,7 @@ matrix([[true, false]], async (useAad: boolean) => {
       { tokenExpiresInMinutes: 59, description: "lo inval" },
       { tokenExpiresInMinutes: 1441, description: "hi inval" },
     ].forEach((input) =>
-      it(`throws error when attempting to issue user and invalid expiration token <${input.description}>`, async () => {
+      it(`throws error when attempting to issue user and invalid expiration token <${input.description}>`, async function () {
         const tokenOptions: CreateUserAndTokenOptions = {
           tokenExpiresInMinutes: input.tokenExpiresInMinutes,
         };

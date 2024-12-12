@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   CommunicationAccessToken,
   CommunicationIdentityClientOptions,
   CommunicationUserToken,
@@ -9,19 +9,18 @@ import type {
   CreateUserAndTokenOptions,
   GetTokenOptions,
   TokenScope,
-} from "./models.js";
-import type { CommunicationUserIdentifier } from "@azure/communication-common";
+} from "./models";
 import {
+  CommunicationUserIdentifier,
   createCommunicationAuthPolicy,
   isKeyCredential,
   parseClientArguments,
 } from "@azure/communication-common";
-import type { InternalClientPipelineOptions, OperationOptions } from "@azure/core-client";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import { IdentityRestClient } from "./generated/src/identityRestClient.js";
-import { logger } from "./common/logger.js";
-import { tracingClient } from "./generated/src/tracing.js";
+import { InternalClientPipelineOptions, OperationOptions } from "@azure/core-client";
+import { KeyCredential, TokenCredential, isTokenCredential } from "@azure/core-auth";
+import { IdentityRestClient } from "./generated/src/identityRestClient";
+import { logger } from "./common/logger";
+import { tracingClient } from "./generated/src/tracing";
 
 const isCommunicationIdentityClientOptions = (
   options: any,

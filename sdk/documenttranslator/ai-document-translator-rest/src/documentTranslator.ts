@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   CancelTranslation200Response,
   CancelTranslation401Response,
   CancelTranslation404Response,
@@ -52,7 +52,7 @@ import type {
   StartTranslation500Response,
   StartTranslation503Response,
 } from "./responses";
-import type {
+import {
   CancelTranslationParameters,
   GetDocumentStatusParameters,
   GetDocumentsStatusParameters,
@@ -63,9 +63,8 @@ import type {
   GetTranslationsStatusParameters,
   StartTranslationParameters,
 } from "./parameters";
-import type { Client, ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
+import { Client, ClientOptions, getClient } from "@azure-rest/core-client";
+import { KeyCredential, TokenCredential } from "@azure/core-auth";
 
 export interface GetTranslationsStatus {
   /**

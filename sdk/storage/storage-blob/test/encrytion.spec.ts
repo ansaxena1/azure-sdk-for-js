@@ -9,10 +9,10 @@ import {
   getEncryptionScope_2,
   getUniqueName,
 } from "./utils";
-import type { Recorder } from "@azure-tools/test-recorder";
-import type { BlobServiceClient, BlobClient, BlockBlobClient, ContainerClient } from "../src";
+import { Recorder } from "@azure-tools/test-recorder";
+import { BlobServiceClient, BlobClient, BlockBlobClient, ContainerClient } from "../src";
 import { Test_CPK_INFO } from "./utils/fakeTestSecrets";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("Encryption Scope", function () {
   let blobServiceClient: BlobServiceClient;

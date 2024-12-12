@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { GetJobParameters, CreateJobParameters } from "./parameters";
-import type {
+import { GetJobParameters, CreateJobParameters } from "./parameters";
+import {
   GetJob200Response,
   GetJobDefaultResponse,
   CreateJob200Response,
   CreateJob202Response,
   CreateJobDefaultResponse,
 } from "./responses";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface GetJob {
   /** Gets the status and details of the Onco Phenotype job. */

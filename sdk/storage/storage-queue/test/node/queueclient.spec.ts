@@ -11,11 +11,15 @@ import {
   SimpleTokenCredential,
 } from "../utils";
 import { Recorder } from "@azure-tools/test-recorder";
-import type { QueueServiceClient } from "../../src";
-import { getQueueServiceAccountAudience, newPipeline, QueueClient } from "../../src";
-import type { TokenCredential } from "@azure/core-auth";
+import {
+  getQueueServiceAccountAudience,
+  newPipeline,
+  QueueClient,
+  QueueServiceClient,
+} from "../../src";
+import { TokenCredential } from "@azure/core-auth";
 import { assertClientUsesTokenCredential } from "../utils/assert";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 import { createTestCredential } from "@azure-tools/test-credential";
 
 describe("QueueClient Node.js only", () => {

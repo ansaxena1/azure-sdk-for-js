@@ -9,20 +9,19 @@ import {
   DEPENDENCY_MODE_ENABLED,
   DEPENDENCY_MODE_TRY_FROM_EXPANDED,
 } from "./utils/constants";
-import type { InternalClientPipelineOptions } from "@azure/core-client";
-import { createClientPipeline } from "@azure/core-client";
-import type { Fetcher } from "./fetcherAbstract";
+import { createClientPipeline, InternalClientPipelineOptions } from "@azure/core-client";
+import { Fetcher } from "./fetcherAbstract";
 import { isLocalPath, normalize } from "./utils/path";
 import { FilesystemFetcher } from "./fetcherFilesystem";
-import type { dependencyResolutionType } from "./dependencyResolutionType";
+import { dependencyResolutionType } from "./dependencyResolutionType";
 import { DtmiResolver } from "./dtmiResolver";
 import { PseudoParser } from "./psuedoParser";
-import type { ModelsRepositoryClientOptions } from "./interfaces/modelsRepositoryClientOptions";
+import { ModelsRepositoryClientOptions } from "./interfaces/modelsRepositoryClientOptions";
 import { logger } from "./logger";
 import { IoTModelsRepositoryServiceClient } from "./modelsRepositoryServiceClient";
 import { HttpFetcher } from "./fetcherHTTP";
-import type { GetModelsOptions } from "./interfaces/getModelsOptions";
-import type { DTDL } from "./psuedoDtdl";
+import { GetModelsOptions } from "./interfaces/getModelsOptions";
+import { DTDL } from "./psuedoDtdl";
 
 /**
  * Initializes a new instance of the IoT Models Repository Client.

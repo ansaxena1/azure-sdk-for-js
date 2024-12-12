@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Client, HttpResponse } from "@azure-rest/core-client";
-import type {
+import { Client, HttpResponse } from "@azure-rest/core-client";
+import {
   LongRunningOperation,
+  LroEngine,
   LroEngineOptions,
   LroResponse,
   PollOperationState,
   PollerLike,
 } from "@azure/core-lro";
-import { LroEngine } from "@azure/core-lro";
 
 /**
  * Helper function that builds a Poller object to help polling a long running operation.

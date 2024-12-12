@@ -1,5 +1,5 @@
 // Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
+// Licensed under the MIT license.
 
 import { FabricClient } from "@azure/arm-fabric";
 import { DefaultAzureCredential } from "@azure/identity";

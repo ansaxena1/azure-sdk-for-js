@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { isPlaybackMode } from "@azure-tools/test-recorder";
+import { isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
-import type { Context } from "mocha";
-import type {
+import { Context } from "mocha";
+import {
   AnomalyDetectorRestClient,
+  isUnexpected,
   TrainMultivariateModelParameters,
   DetectMultivariateBatchAnomalyParameters,
 } from "../../src";
-import { isUnexpected } from "../../src";
 import { createClient, createRecorder } from "./utils/recordedClient";
 
 describe("AnomalyDetectorClient", () => {

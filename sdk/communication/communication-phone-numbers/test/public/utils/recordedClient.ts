@@ -1,17 +1,24 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
+
+import { Context, Test } from "mocha";
 import * as dotenv from "dotenv";
 
-import type { RecorderStartOptions, SanitizerOptions, TestInfo } from "@azure-tools/test-recorder";
-import { Recorder, env, isPlaybackMode } from "@azure-tools/test-recorder";
-import { PhoneNumbersClient } from "../../../src/index.js";
+import {
+  Recorder,
+  RecorderStartOptions,
+  env,
+  isPlaybackMode,
+  SanitizerOptions,
+} from "@azure-tools/test-recorder";
+import { PhoneNumbersClient } from "../../../src";
 import { parseConnectionString } from "@azure/communication-common";
-import type { TokenCredential } from "@azure/identity";
-import { isNodeLike } from "@azure/core-util";
+import { TokenCredential } from "@azure/identity";
+import { isNode } from "@azure-tools/test-utils";
 import { createTestCredential } from "@azure-tools/test-credential";
-import { createMSUserAgentPolicy } from "./msUserAgentPolicy.js";
+import { createMSUserAgentPolicy } from "./msUserAgentPolicy";
 
-if (isNodeLike) {
+if (isNode) {
   dotenv.config();
 }
 
@@ -66,7 +73,7 @@ const recorderOptions: RecorderStartOptions = {
   ],
 };
 
-export async function createRecorder(context: TestInfo | undefined): Promise<Recorder> {
+export async function createRecorder(context: Test | undefined): Promise<Recorder> {
   const recorder = new Recorder(context);
   await recorder.start(recorderOptions);
   await recorder.setMatcher("CustomDefaultMatcher", {
@@ -79,9 +86,9 @@ export async function createRecorder(context: TestInfo | undefined): Promise<Rec
 }
 
 export async function createRecordedClient(
-  context: TestInfo,
+  context: Context,
 ): Promise<RecordedClient<PhoneNumbersClient>> {
-  const recorder = await createRecorder(context);
+  const recorder = await createRecorder(context.currentTest);
 
   const client = new PhoneNumbersClient(
     env.COMMUNICATION_LIVETEST_STATIC_CONNECTION_STRING ?? "",
@@ -108,9 +115,9 @@ export function createMockToken(): TokenCredential {
 }
 
 export async function createRecordedClientWithToken(
-  context: TestInfo,
+  context: Context,
 ): Promise<RecordedClient<PhoneNumbersClient>> {
-  const recorder = await createRecorder(context);
+  const recorder = await createRecorder(context.currentTest);
 
   let credential: TokenCredential;
   const endpoint = parseConnectionString(

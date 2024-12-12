@@ -7,15 +7,16 @@ import {
   getExceptionPolicyRequest,
   getJobRequest,
   getQueueRequest,
-} from "../utils/testData.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import type { JobRouterAdministrationClient, JobRouterClient } from "../../../src/index.js";
-import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient.js";
-import { pollForJobCancelled, pollForJobQueued } from "../utils/polling.js";
-import { timeoutMs } from "../utils/constants.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+} from "../utils/testData";
+import { assert } from "chai";
+import { Context } from "mocha";
+import { Recorder } from "@azure-tools/test-recorder";
+import { JobRouterAdministrationClient, JobRouterClient } from "../../../src";
+import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient";
+import { pollForJobCancelled, pollForJobQueued } from "../utils/polling";
+import { timeoutMs } from "../utils/constants";
 
-describe("JobRouterClient", () => {
+describe("JobRouterClient", function () {
   let client: JobRouterClient;
   let administrationClient: JobRouterAdministrationClient;
   let recorder: Recorder;
@@ -31,10 +32,10 @@ describe("JobRouterClient", () => {
   const { jobId, jobRequest } = getJobRequest(testRunId);
   const dispositionCode = `disposition-${testRunId}`;
 
-  describe("Cancellation Scenario", () => {
-    beforeEach(async (ctx) => {
+  describe("Cancellation Scenario", function () {
+    this.beforeEach(async function (this: Context) {
       ({ client, administrationClient, recorder } =
-        await createRecordedRouterClientWithConnectionString(ctx));
+        await createRecordedRouterClientWithConnectionString(this));
 
       await administrationClient.createDistributionPolicy(
         distributionPolicyId,
@@ -48,19 +49,19 @@ describe("JobRouterClient", () => {
       );
     });
 
-    afterEach(async (ctx) => {
+    this.afterEach(async function (this: Context) {
       await client.deleteJob(jobId);
       await administrationClient.deleteClassificationPolicy(classificationPolicyId);
       await administrationClient.deleteQueue(queueId);
       await administrationClient.deleteExceptionPolicy(exceptionPolicyId);
       await administrationClient.deleteDistributionPolicy(distributionPolicyId);
 
-      if (!ctx.task.pending && recorder) {
+      if (!this.currentTest?.isPending() && recorder) {
         await recorder.stop();
       }
     });
 
-    it("should complete cancellation scenario", { timeout: timeoutMs }, async () => {
+    it("should complete cancellation scenario", async () => {
       await client.createJob(jobId, jobRequest);
       await pollForJobQueued(jobId, client);
 
@@ -69,6 +70,6 @@ describe("JobRouterClient", () => {
 
       assert.equal(result.status, "cancelled");
       assert.equal(result.dispositionCode, dispositionCode);
-    });
+    }).timeout(timeoutMs);
   });
 });

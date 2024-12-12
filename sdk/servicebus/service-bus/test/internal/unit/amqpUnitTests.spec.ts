@@ -1,19 +1,16 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
-  ServiceBusMessage,
-  ServiceBusReceivedMessage,
-} from "../../../src/serviceBusMessage.js";
 import {
   isAmqpAnnotatedMessage,
   isServiceBusMessage,
+  ServiceBusMessage,
   ServiceBusMessageImpl,
+  ServiceBusReceivedMessage,
   toRheaMessage,
 } from "../../../src/serviceBusMessage.js";
-import type { Delivery, Message } from "rhea-promise";
-import type { AmqpAnnotatedMessage } from "@azure/core-amqp";
-import { Constants } from "@azure/core-amqp";
+import { Delivery, Message } from "rhea-promise";
+import { AmqpAnnotatedMessage, Constants } from "@azure/core-amqp";
 import {
   dataSectionTypeCode,
   defaultDataTransformer,

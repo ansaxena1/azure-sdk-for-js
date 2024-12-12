@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { RetryPolicy } from "./RetryPolicy";
+import { RetryPolicy } from "./RetryPolicy";
 import { StatusCodes } from "../common/statusCodes";
-import type { GlobalEndpointManager } from "../globalEndpointManager";
+import { GlobalEndpointManager } from "../globalEndpointManager";
 import { HTTPMethod, isReadRequest } from "../common";
-import type { OperationType, ResourceType } from "../common/constants";
-import { Constants } from "../common/constants";
-import type { RetryContext } from "./RetryContext";
-import type { CosmosHeaders } from "../queryExecutionContext/CosmosHeaders";
+import { Constants, OperationType, ResourceType } from "../common/constants";
+import { RetryContext } from "./RetryContext";
+import { CosmosHeaders } from "../queryExecutionContext/CosmosHeaders";
 import { TimeoutErrorCode } from "../request/TimeoutError";
-import type { ErrorResponse } from "../request";
-import type { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
+import { ErrorResponse } from "../request";
+import { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
 
 /**
  * This class TimeoutFailoverRetryPolicy handles retries for read operations

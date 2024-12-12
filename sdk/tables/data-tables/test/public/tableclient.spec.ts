@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Edm, TableClient, TableEntity, TableEntityResult } from "../../src";
-import { odata } from "../../src";
+import { Edm, TableClient, TableEntity, TableEntityResult, odata } from "../../src";
 import { Recorder, isPlaybackMode } from "@azure-tools/test-recorder";
 import { isNodeLike } from "@azure/core-util";
-import type { Context } from "mocha";
-import type { FullOperationResponse, OperationOptions } from "@azure/core-client";
+import { Context } from "mocha";
+import { FullOperationResponse, OperationOptions } from "@azure/core-client";
 import { assert } from "@azure-tools/test-utils";
 import { createTableClient } from "./utils/recordedClient";
 

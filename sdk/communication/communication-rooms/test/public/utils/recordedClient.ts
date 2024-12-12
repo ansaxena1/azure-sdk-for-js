@@ -1,21 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { RecorderStartOptions, SanitizerOptions } from "@azure-tools/test-recorder";
 import {
   Recorder,
+  RecorderStartOptions,
+  SanitizerOptions,
   assertEnvironmentVariable,
   env,
   isPlaybackMode,
 } from "@azure-tools/test-recorder";
-import type { TokenCredential } from "@azure/core-auth";
-import type { CommunicationUserIdentifier } from "@azure/communication-common";
-import { parseConnectionString } from "@azure/communication-common";
+import { TokenCredential } from "@azure/core-auth";
+import { CommunicationUserIdentifier, parseConnectionString } from "@azure/communication-common";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { Context, Test } from "mocha";
+import { Context, Test } from "mocha";
 import { RoomsClient } from "../../../src";
-import type { CommunicationUserToken } from "@azure/communication-identity";
-import { CommunicationIdentityClient } from "@azure/communication-identity";
+import { CommunicationIdentityClient, CommunicationUserToken } from "@azure/communication-identity";
 import { generateToken } from "./connectionUtils";
 
 export interface RecordedClient<T> {

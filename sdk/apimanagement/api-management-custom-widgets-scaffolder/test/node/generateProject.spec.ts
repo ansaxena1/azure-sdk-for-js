@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { WidgetConfig } from "../../src/scaffolding.js";
-import { TECHNOLOGIES, displayNameToName } from "../../src/scaffolding.js";
+import { TECHNOLOGIES, WidgetConfig, displayNameToName } from "../../src/scaffolding.js";
 import { describe, it, assert, vi, beforeEach, afterEach } from "vitest";
 
 vi.mock("node:fs/promises", async () => {

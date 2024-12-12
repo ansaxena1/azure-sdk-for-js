@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { HttpResponse } from "@azure-rest/core-client";
-import type {
+import { HttpResponse } from "@azure-rest/core-client";
+import {
   AzureKeyVault,
   ErrorResponseModel,
   AzureKeyVaultList,

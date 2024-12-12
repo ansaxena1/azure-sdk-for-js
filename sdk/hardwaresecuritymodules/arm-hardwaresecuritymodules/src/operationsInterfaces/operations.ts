@@ -7,16 +7,16 @@
  */
 
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
-import { Operation, OperationsListOptionalParams } from "../models";
+import { DedicatedHsmOperation, OperationsListOptionalParams } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
 /** Interface representing a Operations. */
 export interface Operations {
   /**
-   * Get a list of Hardware Security Modules operations.
+   * Get a list of Dedicated HSM operations.
    * @param options The options parameters.
    */
   list(
-    options?: OperationsListOptionalParams,
-  ): PagedAsyncIterableIterator<Operation>;
+    options?: OperationsListOptionalParams
+  ): PagedAsyncIterableIterator<DedicatedHsmOperation>;
 }

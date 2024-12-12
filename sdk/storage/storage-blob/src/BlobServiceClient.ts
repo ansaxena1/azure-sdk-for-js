@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
+import { TokenCredential, isTokenCredential } from "@azure/core-auth";
 import { getDefaultProxySettings } from "@azure/core-rest-pipeline";
 import { isNode } from "@azure/core-util";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type {
+import { AbortSignalLike } from "@azure/abort-controller";
+import {
   ServiceGetUserDelegationKeyHeaders,
   ContainerCreateResponse,
   ContainerDeleteResponse,
@@ -28,35 +27,36 @@ import type {
   ServiceGetStatisticsResponseInternal,
   ServiceListContainersSegmentResponseInternal,
 } from "./generatedModels";
-import type { Service } from "./generated/src/operationsInterfaces";
-import type { StoragePipelineOptions, PipelineLike } from "./Pipeline";
-import { newPipeline, isPipelineLike } from "./Pipeline";
-import type { ContainerCreateOptions, ContainerDeleteMethodOptions } from "./ContainerClient";
-import { ContainerClient } from "./ContainerClient";
-import type { WithResponse } from "./utils/utils.common";
+import { Service } from "./generated/src/operationsInterfaces";
+import { newPipeline, StoragePipelineOptions, PipelineLike, isPipelineLike } from "./Pipeline";
+import {
+  ContainerClient,
+  ContainerCreateOptions,
+  ContainerDeleteMethodOptions,
+} from "./ContainerClient";
 import {
   appendToURLPath,
   appendToURLQuery,
   extractConnectionStringParts,
   toTags,
+  WithResponse,
 } from "./utils/utils.common";
 import { StorageSharedKeyCredential } from "./credentials/StorageSharedKeyCredential";
 import { AnonymousCredential } from "./credentials/AnonymousCredential";
-import type { PageSettings, PagedAsyncIterableIterator } from "@azure/core-paging";
+import { PageSettings, PagedAsyncIterableIterator } from "@azure/core-paging";
 import { truncatedISO8061Date, assertResponse } from "./utils/utils.common";
 import { tracingClient } from "./utils/tracing";
 import { BlobBatchClient } from "./BlobBatchClient";
-import type { CommonOptions } from "./StorageClient";
-import { StorageClient } from "./StorageClient";
+import { CommonOptions, StorageClient } from "./StorageClient";
 import { AccountSASPermissions } from "./sas/AccountSASPermissions";
-import type { SASProtocol } from "./sas/SASQueryParameters";
-import type { SasIPRange } from "./sas/SasIPRange";
+import { SASProtocol } from "./sas/SASQueryParameters";
+import { SasIPRange } from "./sas/SasIPRange";
 import {
   generateAccountSASQueryParameters,
   generateAccountSASQueryParametersInternal,
 } from "./sas/AccountSASSignatureValues";
 import { AccountSASServices } from "./sas/AccountSASServices";
-import type {
+import {
   ContainerRenameHeaders,
   ContainerRestoreHeaders,
   ListContainersIncludeType,

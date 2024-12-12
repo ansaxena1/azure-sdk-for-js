@@ -4,6 +4,7 @@
 import type {
   FormDataMap,
   HttpHeaders,
+  HttpMethods,
   MultipartRequestBody,
   PipelineRequest,
   ProxySettings,
@@ -14,7 +15,6 @@ import { createHttpHeaders } from "./httpHeaders.js";
 import type { AbortSignalLike } from "@azure/abort-controller";
 import { randomUUID } from "@azure/core-util";
 import type { OperationTracingOptions } from "@azure/core-tracing";
-import type { HttpMethods } from "@azure/core-util";
 
 /**
  * Settings to initialize a request.

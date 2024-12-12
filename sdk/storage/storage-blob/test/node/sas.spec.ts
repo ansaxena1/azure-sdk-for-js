@@ -3,12 +3,6 @@
 
 import { assert } from "chai";
 
-import type {
-  StorageSharedKeyCredential,
-  Tags,
-  UserDelegationKey,
-  BlobImmutabilityPolicyMode,
-} from "../../src";
 import {
   AccountSASPermissions,
   AccountSASResourceTypes,
@@ -21,10 +15,14 @@ import {
   generateBlobSASQueryParameters,
   PageBlobClient,
   BlobServiceClient,
+  StorageSharedKeyCredential,
   newPipeline,
   BlobClient,
+  Tags,
   SASProtocol,
+  UserDelegationKey,
   BlobBatch,
+  BlobImmutabilityPolicyMode,
 } from "../../src";
 import {
   configureBlobStorageClient,
@@ -39,7 +37,7 @@ import {
 } from "../utils";
 import { delay, isLiveMode, Recorder, env } from "@azure-tools/test-recorder";
 import { SERVICE_VERSION } from "../../src/utils/constants";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 import { UserDelegationKeyCredential } from "../../src/credentials/UserDelegationKeyCredential";
 
 describe("Shared Access Signature (SAS) generation Node.js only", () => {

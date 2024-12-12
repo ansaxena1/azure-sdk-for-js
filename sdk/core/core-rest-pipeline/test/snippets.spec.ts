@@ -2,23 +2,14 @@
 // Licensed under the MIT License.
 
 import { describe, it } from "vitest";
-import {
-  AddPipelineOptions,
-  HttpClient,
-  PipelinePhase,
-  PipelinePolicy,
-  PipelineRequest,
-  PipelineResponse,
-  SendRequest,
-} from "@azure/core-rest-pipeline";
 
 describe("snippets", () => {
   it("send_request", () => {
-    type SendRequest = (request: PipelineRequest) => Promise<PipelineResponse>;
+    export type SendRequest = (request: PipelineRequest) => Promise<PipelineResponse>;
   });
 
   it("http_request", () => {
-    interface HttpClient {
+    export interface HttpClient {
       /**
        * The method that makes the request and returns a response.
        */
@@ -27,7 +18,7 @@ describe("snippets", () => {
   });
 
   it("pipeline_policy", () => {
-    interface PipelinePolicy {
+    export interface PipelinePolicy {
       /**
        * The policy name. Must be a unique string in the pipeline.
        */
@@ -49,7 +40,7 @@ describe("snippets", () => {
         // Change the outgoing request by adding a new header
         request.headers.set("X-Cool-Header", 42);
         const result = await next(request);
-        if (result.status === 403) {
+        if (response.status === 403) {
           // Do something special if this policy sees Forbidden
         }
         return result;
@@ -58,8 +49,8 @@ describe("snippets", () => {
   });
 
   it("pipeline", () => {
-    interface Pipeline {
-      addPolicy(policy: PipelinePolicy, options?: AddPipelineOptions): void;
+    export interface Pipeline {
+      addPolicy(policy: PipelinePolicy, options?: AddPolicyOptions): void;
       removePolicy(options: { name?: string; phase?: PipelinePhase }): PipelinePolicy[];
       sendRequest(httpClient: HttpClient, request: PipelineRequest): Promise<PipelineResponse>;
       getOrderedPolicies(): PipelinePolicy[];
@@ -68,7 +59,7 @@ describe("snippets", () => {
   });
 
   it("add_policy_options", () => {
-    interface AddPipelineOptions {
+    export interface AddPolicyOptions {
       beforePolicies?: string[];
       afterPolicies?: string[];
       afterPhase?: PipelinePhase;

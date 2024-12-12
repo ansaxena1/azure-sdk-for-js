@@ -3,7 +3,7 @@
 
 import { isLiveMode, Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
-import type { DataLakeFileClient, DataLakeFileSystemClient } from "../../src";
+import { DataLakeFileClient, DataLakeFileSystemClient } from "../../src";
 import { getDataLakeServiceClient, getUniqueName, recorderEnvSetup, uriSanitizers } from "../utils";
 import {
   blobToString,
@@ -13,7 +13,7 @@ import {
   arrayBufferEqual,
 } from "../utils/index.browser";
 import { MB } from "../../src/utils/constants";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("Highlevel browser only", () => {
   let fileSystemName: string;

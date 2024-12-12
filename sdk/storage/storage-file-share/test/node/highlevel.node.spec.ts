@@ -13,11 +13,11 @@ import {
   recorderEnvSetup,
   uriSanitizers,
 } from "../utils";
-import type { RetriableReadableStreamOptions } from "../../src/utils/RetriableReadableStream";
-import type { ShareClient, ShareDirectoryClient, ShareFileClient } from "../../src";
+import { RetriableReadableStreamOptions } from "../../src/utils/RetriableReadableStream";
+import { ShareClient, ShareDirectoryClient, ShareFileClient } from "../../src";
 import { readStreamToLocalFileWithLogs } from "../../test/utils/testutils.node";
 import { Recorder, isLiveMode } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("Highlevel Node.js only", () => {
   let shareName: string;

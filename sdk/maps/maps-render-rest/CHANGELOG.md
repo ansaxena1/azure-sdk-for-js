@@ -1,6 +1,6 @@
 # Release History
 
-## 2.0.0-beta.1 (2024-12-10)
+## 2.0.0-beta.1 (Unreleased)
 
 ### Features Added
 
@@ -10,12 +10,22 @@
 
 - The API endpoint for `GetMapStaticImage` has been updated. The `format` parameter has been removed from the path, changing the usage from `(path: "/map/static/{format}", format: "png")` to `(path: "/map/static")`.
 - Replaced `layer` and `style` parameters with `tilesetId` in `RenderGetMapStaticImageQueryParamProperties`, which now supports more detailed map and traffic visualization.
-- Marked fields in various interfaces as readonly, which may impact code that previously modified these properties.
+
+### Bugs Fixed
+
+### Other Changes
+
+## 1.0.0-beta.4 (Unreleased)
+
+### Features Added
+
+### Breaking Changes
 
 ### Bugs Fixed
 
 - Fix the Microsoft Entra ID authentication when providing `baseUrl`.
 
+### Other Changes
 
 ## 1.0.0-beta.3 (2024-01-09)
 

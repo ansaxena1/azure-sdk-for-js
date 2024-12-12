@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PipelinePolicy } from "@azure/core-rest-pipeline";
-import { retryPolicy } from "@azure/core-rest-pipeline";
+import { PipelinePolicy, retryPolicy } from "@azure/core-rest-pipeline";
 
-import type { MSIConfiguration } from "./models.js";
+import { MSIConfiguration } from "./models";
 import { calculateRetryDelay } from "@azure/core-util";
 
 // Matches the default retry configuration in expontentialRetryStrategy.ts

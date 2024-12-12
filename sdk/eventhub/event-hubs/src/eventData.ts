@@ -2,13 +2,18 @@
 // Licensed under the MIT License.
 
 import { AmqpAnnotatedMessage, Constants } from "@azure/core-amqp";
-import type { BodyTypes } from "./dataTransformer.js";
-import { defaultDataTransformer } from "./dataTransformer.js";
-import type { DeliveryAnnotations, MessageAnnotations, Message as RheaMessage } from "rhea-promise";
-import { types } from "rhea-promise";
+import { BodyTypes, defaultDataTransformer } from "./dataTransformer.js";
+import {
+  DeliveryAnnotations,
+  MessageAnnotations,
+  Message as RheaMessage,
+  types,
+} from "rhea-promise";
 import { isDefined, isObjectWithProperties, objectHasProperty } from "@azure/core-util";
-import type { PENDING_PUBLISH_SEQ_NUM_SYMBOL } from "./util/constants.js";
-import { idempotentProducerAmqpPropertyNames } from "./util/constants.js";
+import {
+  idempotentProducerAmqpPropertyNames,
+  PENDING_PUBLISH_SEQ_NUM_SYMBOL,
+} from "./util/constants.js";
 import isBuffer from "is-buffer";
 
 /**

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AnalyzeActionName,
   AnalyzeActionParameters,
   AnalyzeBatchAction,
@@ -12,17 +12,15 @@ import type {
   TextAnalysisClientOptions,
   TextAnalysisOperationOptions,
 } from "./models";
-import type {
+import {
   AnalyzeBatchActionUnion,
   GeneratedClientOptionalParams,
   LanguageDetectionInput,
   TextDocumentInput,
 } from "./generated/models";
 import { DEFAULT_COGNITIVE_SCOPE, SDK_VERSION } from "./constants";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type { TracingClient } from "@azure/core-tracing";
-import { createTracingClient } from "@azure/core-tracing";
+import { KeyCredential, TokenCredential, isTokenCredential } from "@azure/core-auth";
+import { TracingClient, createTracingClient } from "@azure/core-tracing";
 import {
   convertToLanguageDetectionInput,
   convertToTextDocumentInput,

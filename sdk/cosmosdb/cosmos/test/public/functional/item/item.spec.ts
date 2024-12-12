@@ -1,16 +1,16 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import assert from "assert";
-import type { Suite } from "mocha";
-import type {
+import { Suite } from "mocha";
+import {
   Container,
   ContainerDefinition,
   ContainerRequest,
+  CosmosClient,
   PatchOperation,
   RequestOptions,
 } from "../../../../src";
-import { CosmosClient } from "../../../../src";
-import type { ItemDefinition } from "../../../../src";
+import { ItemDefinition } from "../../../../src";
 import {
   bulkDeleteItems,
   bulkInsertItems,
@@ -27,8 +27,12 @@ import {
 } from "../../common/TestHelpers";
 import { endpoint } from "../../common/_testConfig";
 import { masterKey } from "../../common/_fakeTestSecrets";
-import type { PartitionKey, PartitionKeyDefinition } from "../../../../src/documents";
-import { PartitionKeyDefinitionVersion, PartitionKeyKind } from "../../../../src/documents";
+import {
+  PartitionKey,
+  PartitionKeyDefinition,
+  PartitionKeyDefinitionVersion,
+  PartitionKeyKind,
+} from "../../../../src/documents";
 import { PriorityLevel } from "../../../../src/documents/PriorityLevel";
 import { getCurrentTimestampInMs } from "../../../../src/utils/time";
 

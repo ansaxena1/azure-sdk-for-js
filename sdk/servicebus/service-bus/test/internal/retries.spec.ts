@@ -2,15 +2,19 @@
 // Licensed under the MIT License.
 
 import { TestClientType, TestMessage } from "../public/utils/testUtils.js";
-import type { ServiceBusClientForTests } from "../public/utils/testutils2.js";
-import { createServiceBusClientForTests } from "../public/utils/testutils2.js";
-import type { ServiceBusSender, ServiceBusSenderImpl } from "../../src/sender.js";
+import {
+  ServiceBusClientForTests,
+  createServiceBusClientForTests,
+} from "../public/utils/testutils2.js";
+import { ServiceBusSender, ServiceBusSenderImpl } from "../../src/sender.js";
 import { MessagingError } from "@azure/core-amqp";
 import Long from "long";
 import { BatchingReceiver } from "../../src/core/batchingReceiver.js";
-import type { ServiceBusSessionReceiver } from "../../src/receivers/sessionReceiver.js";
-import { ServiceBusSessionReceiverImpl } from "../../src/receivers/sessionReceiver.js";
-import type { ServiceBusReceiver, ServiceBusReceiverImpl } from "../../src/receivers/receiver.js";
+import {
+  ServiceBusSessionReceiverImpl,
+  ServiceBusSessionReceiver,
+} from "../../src/receivers/sessionReceiver.js";
+import { ServiceBusReceiver, ServiceBusReceiverImpl } from "../../src/receivers/receiver.js";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from "vitest";
 import { should } from "../public/utils/chai.js";
 

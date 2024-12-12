@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Point2D } from "../transforms/polygon";
-import type {
+import { Point2D } from "../transforms/polygon";
+import {
   DocumentSpan,
   DocumentTableCellKind,
   DocumentField as GeneratedDocumentField,

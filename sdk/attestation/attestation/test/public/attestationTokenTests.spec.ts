@@ -5,20 +5,24 @@
 /// <reference path="../../src/jsrsasign.d.ts"/>
 import * as jsrsasign from "jsrsasign";
 
-import { Recorder } from "@azure-tools/test-recorder";
-import { bytesToString, stringToBytes } from "../../src/utils/utf8.js";
+import { assert, use as chaiUse, expect } from "chai";
+import { Context } from "mocha";
+import chaiPromises from "chai-as-promised";
+chaiUse(chaiPromises);
 
-import { createECDSKey, createRSAKey, createX509Certificate } from "../utils/cryptoUtils.js";
-import { verifyAttestationSigningKey } from "../../src/utils/helpers.js";
-import { AttestationTokenImpl } from "../../src/models/attestationToken.js";
-import { recorderOptions } from "../utils/recordedClient.js";
-import { describe, it, assert, expect, beforeEach, afterEach } from "vitest";
+import { Recorder } from "@azure-tools/test-recorder";
+import { bytesToString, stringToBytes } from "../../src/utils/utf8";
+
+import { createECDSKey, createRSAKey, createX509Certificate } from "../utils/cryptoUtils";
+import { verifyAttestationSigningKey } from "../../src/utils/helpers";
+import { AttestationTokenImpl } from "../../src/models/attestationToken";
+import { recorderOptions } from "../utils/recordedClient";
 
 describe("AttestationTokenTests", function () {
   let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    recorder = new Recorder(ctx);
+  beforeEach(async function (this: Context) {
+    recorder = new Recorder(this.currentTest);
     await recorder.start(recorderOptions);
   });
 

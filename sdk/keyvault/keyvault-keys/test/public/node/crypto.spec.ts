@@ -2,15 +2,14 @@
 // Licensed under the MIT License.
 import { createHash } from "node:crypto";
 import { Recorder, env, isLiveMode } from "@azure-tools/test-recorder";
-import type { ClientSecretCredential } from "@azure/identity";
+import { ClientSecretCredential } from "@azure/identity";
 
-import type { KeyClient, KeyVaultKey } from "../../../src/index.js";
-import { CryptographyClient } from "../../../src/index.js";
+import { CryptographyClient, KeyClient, KeyVaultKey } from "../../../src/index.js";
 import { authenticate, envSetupForPlayback } from "../utils/testAuthentication.js";
-import type TestClient from "../utils/testClient.js";
+import TestClient from "../utils/testClient.js";
 import { stringToUint8Array, uint8ArrayToString } from "./../utils/crypto.js";
 import { RsaCryptographyProvider } from "../../../src/cryptography/rsaCryptographyProvider.js";
-import { describe, it, assert, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
 
 import { toSupportTracing } from "@azure-tools/test-utils-vitest";
 
@@ -139,7 +138,7 @@ describe("CryptographyClient (all decrypts happen remotely)", () => {
         assert.equal(text, decryptedText);
       });
 
-      it("wrap and unwrap with rsa1_5", async function (ctx) {
+      it("wrap and unwrap with rsa1_5", async function () {
         if (!isLiveMode()) {
           console.log(
             "Wrapping and unwrapping don't cause a repeatable pattern, so these tests can only run in playback mode",
@@ -308,7 +307,7 @@ describe("CryptographyClient (all decrypts happen remotely)", () => {
       assert.equal(text, unwrappedText);
     });
 
-    it("sign and verify with RS256 through an RSA-HSM key", async function (): Promise<void> {
+    it("sign and verify with RS256 through an RSA-HSM key", async function (ctx): Promise<void> {
       const signatureValue = Buffer.from("My Message");
       const hash = createHash("sha256");
       hash.update(signatureValue);
@@ -325,7 +324,7 @@ describe("CryptographyClient (all decrypts happen remotely)", () => {
       assert.ok(verifyResult.result);
     });
 
-    it("sign and verify with RS384 through an RSA-HSM key", async function (): Promise<void> {
+    it("sign and verify with RS384 through an RSA-HSM key", async function (ctx): Promise<void> {
       const signatureValue = Buffer.from("My Message");
       const hash = createHash("sha384");
       hash.update(signatureValue);
@@ -356,7 +355,7 @@ describe("CryptographyClient (all decrypts happen remotely)", () => {
       ["P-384", "ES384", "SHA384"],
       ["P-521", "ES512", "SHA512"],
     ] as const) {
-      it(`sign / signData and verify / verifyData using ${signatureAlgorithm}`, async function () {
+      it(`sign / signData and verify / verifyData using ${signatureAlgorithm}`, async function (ctx) {
         keyVaultKey = await client.createEcKey(keyName, { curve: keyCurve });
         // Implicitly test the getCryptographyClient method here
         cryptoClient = client.getCryptographyClient(

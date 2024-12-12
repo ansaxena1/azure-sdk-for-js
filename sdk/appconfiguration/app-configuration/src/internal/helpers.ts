@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   ConfigurationSetting,
   ConfigurationSettingParam,
   HttpOnlyIfChangedField,
@@ -16,19 +16,21 @@ import type {
   EtagEntity,
   ListLabelsOptions,
 } from "../models.js";
-import type { FeatureFlagValue } from "../featureFlag.js";
-import { FeatureFlagHelper, featureFlagContentType } from "../featureFlag.js";
-import type {
+import { FeatureFlagHelper, FeatureFlagValue, featureFlagContentType } from "../featureFlag.js";
+import {
   GetKeyValuesOptionalParams,
   GetLabelsOptionalParams,
   GetSnapshotsOptionalParams,
   KeyValue,
 } from "../generated/src/models/index.js";
-import type { SecretReferenceValue } from "../secretReference.js";
-import { SecretReferenceHelper, secretReferenceContentType } from "../secretReference.js";
+import {
+  SecretReferenceHelper,
+  SecretReferenceValue,
+  secretReferenceContentType,
+} from "../secretReference.js";
 import { isDefined } from "@azure/core-util";
 import { logger } from "../logger.js";
-import type { OperationOptions } from "@azure/core-client";
+import { OperationOptions } from "@azure/core-client";
 
 /**
  * Options for listConfigurationSettings that allow for filtering based on keys, labels and other fields.

@@ -4,11 +4,11 @@
 
 ```ts
 
-import type { CommonClientOptions } from '@azure/core-client';
+import { CommonClientOptions } from '@azure/core-client';
 import * as coreClient from '@azure/core-client';
-import type { KeyCredential } from '@azure/core-auth';
-import type { PagedAsyncIterableIterator } from '@azure/core-paging';
-import type { TokenCredential } from '@azure/core-auth';
+import { KeyCredential } from '@azure/core-auth';
+import { PagedAsyncIterableIterator } from '@azure/core-paging';
+import { TokenCredential } from '@azure/core-auth';
 
 // @public (undocumented)
 export interface Address {

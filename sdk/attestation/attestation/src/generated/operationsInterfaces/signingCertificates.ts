@@ -9,7 +9,7 @@
 import {
   SigningCertificatesGetOptionalParams,
   SigningCertificatesGetResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a SigningCertificates. */
 export interface SigningCertificates {

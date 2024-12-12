@@ -1,23 +1,23 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   FullOperationResponse,
   OperationRequest,
   OperationResponseMap,
   OperationSpec,
   RequiredSerializerOptions,
   SerializerOptions,
+  XML_CHARKEY,
   XmlOptions,
 } from "./interfaces.js";
-import { XML_CHARKEY } from "./interfaces.js";
-import type {
+import {
   PipelinePolicy,
   PipelineRequest,
   PipelineResponse,
+  RestError,
   SendRequest,
 } from "@azure/core-rest-pipeline";
-import { RestError } from "@azure/core-rest-pipeline";
 import { MapperTypeNames } from "./serializer.js";
 import { getOperationRequestInfo } from "./operationHelpers.js";
 

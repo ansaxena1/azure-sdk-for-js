@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   CreateTableEntityResponse,
   DeleteTableEntityOptions,
   GetAccessPolicyResponse,
@@ -19,23 +19,28 @@ import type {
   UpdateMode,
   UpdateTableEntityOptions,
 } from "./models";
-import type {
+import {
   DeleteTableEntityResponse,
   SetAccessPolicyResponse,
   UpdateEntityResponse,
   UpsertEntityResponse,
 } from "./generatedModels";
-import type {
+import {
   FullOperationResponse,
   InternalClientPipelineOptions,
   OperationOptions,
   ServiceClient,
   ServiceClientOptions,
 } from "@azure/core-client";
-import type { TableDeleteEntityOptionalParams } from "./generated";
-import { GeneratedClient } from "./generated";
-import type { NamedKeyCredential, SASCredential, TokenCredential } from "@azure/core-auth";
-import { isNamedKeyCredential, isSASCredential, isTokenCredential } from "@azure/core-auth";
+import { GeneratedClient, TableDeleteEntityOptionalParams } from "./generated";
+import {
+  NamedKeyCredential,
+  SASCredential,
+  TokenCredential,
+  isNamedKeyCredential,
+  isSASCredential,
+  isTokenCredential,
+} from "@azure/core-auth";
 import { COSMOS_SCOPE, STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants";
 import { decodeContinuationToken, encodeContinuationToken } from "./utils/continuationToken";
 import {
@@ -49,11 +54,11 @@ import {
 import { parseXML, stringifyXML } from "@azure/core-xml";
 
 import { InternalTableTransaction } from "./TableTransaction";
-import type { ListEntitiesResponse } from "./utils/internalModels";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
-import type { Pipeline } from "@azure/core-rest-pipeline";
-import type { Table } from "./generated/operationsInterfaces";
-import type { TableQueryEntitiesOptionalParams } from "./generated/models";
+import { ListEntitiesResponse } from "./utils/internalModels";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { Pipeline } from "@azure/core-rest-pipeline";
+import { Table } from "./generated/operationsInterfaces";
+import { TableQueryEntitiesOptionalParams } from "./generated/models";
 import { Uuid } from "./utils/uuid";
 import { apiVersionPolicy } from "./utils/apiVersionPolicy";
 import { cosmosPatchPolicy } from "./cosmosPathPolicy";

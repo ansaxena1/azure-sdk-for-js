@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
+import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 import { assert } from "chai";
 import { createRecorder } from "./utils/recordedClient";
-import type { Context } from "mocha";
-import type { DiscoSource, EasmClient } from "../../src";
-import EasmDefender, { isUnexpected } from "../../src";
+import { Context } from "mocha";
+import EasmDefender, { DiscoSource, EasmClient, isUnexpected } from "../../src";
 import { createTestCredential } from "@azure-tools/test-credential";
 
 describe("Discovery Groups Test", () => {

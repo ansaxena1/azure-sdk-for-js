@@ -1,17 +1,16 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   PipelinePolicy,
   PipelineRequest,
   PipelineResponse,
   RequestBodyType,
   SendRequest,
 } from "@azure/core-rest-pipeline";
-import type { WWWAuthenticate } from "./parseWWWAuthenticate.js";
-import { parseWWWAuthenticateHeader } from "./parseWWWAuthenticate.js";
+import { WWWAuthenticate, parseWWWAuthenticateHeader } from "./parseWWWAuthenticate.js";
 
-import type { GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { GetTokenOptions, TokenCredential } from "@azure/core-auth";
 import { createTokenCycler } from "./tokenCycler.js";
 import { logger } from "./logger.js";
 

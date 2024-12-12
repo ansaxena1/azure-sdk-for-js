@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AgentPoolsCreateOrUpdate200Response,
   AgentPoolsCreateOrUpdate201Response,
   AgentPoolsCreateOrUpdatedefaultResponse,

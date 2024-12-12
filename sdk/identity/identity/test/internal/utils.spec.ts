@@ -1,8 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { getAuthority } from "../../src/msal/utils.js";
-import { processMultiTenantRequest } from "../../src/util/tenantIdUtils.js";
-import { describe, it, assert } from "vitest";
+
+import { assert } from "chai";
+import { getAuthority } from "../../src/msal/utils";
+import { processMultiTenantRequest } from "../../src/util/tenantIdUtils";
 
 describe("Identity utilities", function () {
   describe("validateMultiTenantRequest", function () {

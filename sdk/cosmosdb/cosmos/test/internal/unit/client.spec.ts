@@ -1,14 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Container, RequestContext } from "../../../src";
-import { CosmosClient, PatchOperationType, ResourceType } from "../../../src";
+import {
+  Container,
+  CosmosClient,
+  PatchOperationType,
+  RequestContext,
+  ResourceType,
+} from "../../../src";
 import assert from "assert";
-import type { Suite } from "mocha";
-import type { SinonSandbox, SinonSpy } from "sinon";
-import Sinon from "sinon";
+import { Suite } from "mocha";
+import Sinon, { SinonSandbox, SinonSpy } from "sinon";
 import { getTestContainer } from "../../public/common/TestHelpers";
-import type { AccessToken, TokenCredential } from "@azure/identity";
+import { AccessToken, TokenCredential } from "@azure/identity";
 import nock from "nock";
 import { RequestHandler } from "../../../src/request/RequestHandler";
 import { masterKey } from "../../public/common/_fakeTestSecrets";

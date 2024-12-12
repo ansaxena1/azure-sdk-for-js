@@ -1,11 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { RecorderStartOptions, VitestTestContext } from "@azure-tools/test-recorder";
-import { Recorder, env, isPlaybackMode } from "@azure-tools/test-recorder";
-import type { ClientOptions } from "@azure-rest/core-client";
-import type { BatchClient } from "../../src/index.js";
-import BatchServiceClient from "../../src/index.js";
+import {
+  Recorder,
+  RecorderStartOptions,
+  VitestTestContext,
+  env,
+  isPlaybackMode,
+} from "@azure-tools/test-recorder";
+import { ClientOptions } from "@azure-rest/core-client";
+import BatchServiceClient, { BatchClient } from "../../src/index.js";
 import {
   fakeTestPasswordPlaceholder1,
   fakeAzureBatchAccount,
@@ -16,7 +20,7 @@ import {
   // AzureCliCredential,
   InteractiveBrowserCredential,
 } from "@azure/identity";
-import { isNodeLike } from "@azure/core-util";
+import { isNode } from "@azure-tools/test-utils";
 import { NoOpCredential } from "@azure-tools/test-credential";
 import { AzureNamedKeyCredential } from "@azure/core-auth";
 
@@ -69,7 +73,7 @@ export async function createRecorder(ctx: VitestTestContext): Promise<Recorder> 
 export function createBatchClient(recorder?: Recorder, options: ClientOptions = {}): BatchClient {
   const credential = isPlaybackMode()
     ? new NoOpCredential()
-    : isNodeLike
+    : isNode
       ? new AzureNamedKeyCredential(env.AZURE_BATCH_ACCOUNT!, env.AZURE_BATCH_ACCESS_KEY!)
       : // : new AzureCliCredential();
         new InteractiveBrowserCredential({

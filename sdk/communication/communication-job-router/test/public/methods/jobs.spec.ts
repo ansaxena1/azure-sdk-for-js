@@ -1,39 +1,28 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import type {
+import { Recorder } from "@azure-tools/test-recorder";
+import { assert } from "chai";
+import {
   CreateJobOptions,
   JobRouterAdministrationClient,
   JobRouterClient,
   RouterJob,
   UpdateJobOptions,
-} from "../../../src/index.js";
+} from "../../../src";
+import { Context } from "mocha";
 import {
   getClassificationPolicyRequest,
   getDistributionPolicyRequest,
   getExceptionPolicyRequest,
   getJobRequest,
   getQueueRequest,
-} from "../utils/testData.js";
-import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient.js";
-import { sleep, timeoutMs } from "../utils/constants.js";
-import { pollForJobQueued, retry } from "../utils/polling.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
-import type { RunnerTestSuite, TaskContext } from "vitest";
+} from "../utils/testData";
+import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient";
+import { sleep, timeoutMs } from "../utils/constants";
+import { pollForJobQueued, retry } from "../utils/polling";
 
-function getFullTitle(ctx: TaskContext): string {
-  function getTitlePath(suite: RunnerTestSuite | undefined): string[] {
-    if (suite) {
-      return [...getTitlePath(suite.suite), suite.name];
-    }
-    return [];
-  }
-
-  return [...getTitlePath(ctx.task.suite), ctx.task.name].join(" ");
-}
-
-describe("JobRouterClient", () => {
+describe("JobRouterClient", function () {
   let client: JobRouterClient;
   let administrationClient: JobRouterAdministrationClient;
   let recorder: Recorder;
@@ -58,10 +47,10 @@ describe("JobRouterClient", () => {
     };
   }
 
-  describe("Job Operations", () => {
-    beforeEach(async (ctx) => {
+  describe("Job Operations", function () {
+    this.beforeEach(async function (this: Context) {
       ({ client, administrationClient, recorder } =
-        await createRecordedRouterClientWithConnectionString(ctx));
+        await createRecordedRouterClientWithConnectionString(this));
 
       await administrationClient.createDistributionPolicy(
         distributionPolicyId,
@@ -75,10 +64,12 @@ describe("JobRouterClient", () => {
       );
     });
 
-    afterEach(async (ctx) => {
+    this.afterEach(async function (this: Context) {
       await retry(
         async () => {
-          if (getFullTitle(ctx) !== "JobRouterClient Job Operations should delete a job") {
+          if (
+            this.currentTest?.fullTitle() !== "JobRouterClient Job Operations should delete a job"
+          ) {
             const job = await client.getJob(jobId);
             if (job.status !== "cancelled") {
               await client.cancelJob(jobId);
@@ -94,20 +85,20 @@ describe("JobRouterClient", () => {
         { retries: 5, retryIntervalMs: 1500 },
       );
 
-      if (!ctx.task.pending && recorder) {
+      if (!this.currentTest?.isPending() && recorder) {
         await recorder.stop();
       }
     });
 
-    it("should create a job", { timeout: timeoutMs }, async () => {
+    it("should create a job", async function () {
       const result = await client.createJob(jobId, jobRequest);
 
       assert.isDefined(result);
       assert.isDefined(result.id);
       assert.equal(result.id, jobId);
-    });
+    }).timeout(timeoutMs);
 
-    it("should create a scheduled job", { timeout: timeoutMs }, async () => {
+    it("should create a scheduled job", async function () {
       const currentTime: Date = new Date();
       currentTime.setSeconds(currentTime.getSeconds() + 30);
       const scheduledTime: string = recorder.variable("scheduledTime", currentTime.toISOString());
@@ -123,18 +114,18 @@ describe("JobRouterClient", () => {
         result.matchingMode?.scheduleAndSuspendMode?.scheduleAt?.toISOString(),
         scheduledTime,
       );
-    });
+    }).timeout(timeoutMs);
 
-    it("should get a job", { timeout: timeoutMs }, async () => {
+    it("should get a job", async function () {
       await client.createJob(jobId, jobRequest);
       const result = await client.getJob(jobId);
 
       assert.isDefined(result);
       assert.isDefined(result.id);
       assert.equal(result.id, jobId);
-    });
+    }).timeout(timeoutMs);
 
-    it("should update a job", { timeout: timeoutMs }, async () => {
+    it("should update a job", async function () {
       await client.createJob(jobId, jobRequest);
       await sleep(1500); // This test is flaky
 
@@ -153,9 +144,9 @@ describe("JobRouterClient", () => {
       assert.equal(updateResult.priority, updatePatch.priority);
       assert.equal(removeResult.priority, 1);
       assert.isUndefined(removeResult.dispositionCode);
-    });
+    }).timeout(timeoutMs);
 
-    it("should get queue position for a job", { timeout: timeoutMs }, async () => {
+    it("should get queue position for a job", async function () {
       await client.createJob(jobId, jobRequest);
       await pollForJobQueued(jobId, client);
       const result = await client.getJobQueuePosition(jobId);
@@ -163,9 +154,9 @@ describe("JobRouterClient", () => {
       assert.isDefined(result);
       assert.isDefined(result.position);
       assert.equal(jobId, result.jobId);
-    });
+    }).timeout(timeoutMs);
 
-    it("should reclassify a job", { timeout: timeoutMs }, async () => {
+    it("should reclassify a job", async function () {
       await client.createJob(jobId, jobRequest);
       let result;
       await retry(
@@ -176,9 +167,9 @@ describe("JobRouterClient", () => {
       );
 
       assert.isDefined(result);
-    });
+    }).timeout(timeoutMs);
 
-    it("should list jobs", { timeout: timeoutMs }, async () => {
+    it("should list jobs", async function () {
       await client.createJob(jobId, jobRequest);
 
       const result: RouterJob[] = [];
@@ -187,9 +178,9 @@ describe("JobRouterClient", () => {
       }
 
       assert.isNotEmpty(result);
-    });
+    }).timeout(timeoutMs);
 
-    it("should list scheduled jobs", { timeout: timeoutMs }, async () => {
+    it("should list scheduled jobs", async function () {
       const currentTime: Date = new Date();
       currentTime.setSeconds(currentTime.getSeconds() + 30);
       const scheduledTime: string = recorder.variable("scheduledTime", currentTime.toISOString());
@@ -206,9 +197,9 @@ describe("JobRouterClient", () => {
       }
 
       assert.isNotEmpty(result);
-    });
+    }).timeout(timeoutMs);
 
-    it("should cancel a job", { timeout: timeoutMs }, async () => {
+    it("should cancel a job", async function () {
       await client.createJob(jobId, jobRequest);
       let result;
       await retry(
@@ -219,15 +210,15 @@ describe("JobRouterClient", () => {
       );
 
       assert.isDefined(result);
-    });
+    }).timeout(timeoutMs);
 
-    it("should delete a job", { timeout: timeoutMs }, async () => {
+    it("should delete a job", async function () {
       await client.createJob(jobId, jobRequest);
       await sleep(500); // This test is flaky
       await client.cancelJob(jobId, jobRequest);
       const result = await client.deleteJob(jobId);
 
       assert.isDefined(result);
-    });
+    }).timeout(timeoutMs);
   });
 });

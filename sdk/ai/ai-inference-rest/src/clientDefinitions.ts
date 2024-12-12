@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   GetChatCompletionsParameters,
   GetModelInfoParameters,
   GetEmbeddingsParameters,
   GetImageEmbeddingsParameters,
 } from "./parameters.js";
-import type {
+import {
   GetChatCompletions200Response,
   GetChatCompletionsDefaultResponse,
   GetModelInfo200Response,
@@ -17,7 +17,7 @@ import type {
   GetImageEmbeddings200Response,
   GetImageEmbeddingsDefaultResponse,
 } from "./responses.js";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface GetChatCompletions {
   /**

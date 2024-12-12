@@ -3,11 +3,9 @@
 
 import { createRecorder, createClient } from "./utils/recordedClient.js";
 import { assert, beforeEach, afterEach, it, describe } from "vitest";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { isPlaybackMode } from "@azure-tools/test-recorder";
+import { Recorder, isPlaybackMode } from "@azure-tools/test-recorder";
 
-import type { FaceClient, LivenessResponseBodyOutput } from "../../src/index.js";
-import { isUnexpected } from "../../src/index.js";
+import { FaceClient, LivenessResponseBodyOutput, isUnexpected } from "../../src/index.js";
 
 // The crypto module is not available in browser environment, so implement a simple randomUUID function.
 const randomUUID = (): string =>

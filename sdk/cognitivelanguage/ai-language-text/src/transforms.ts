@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AbstractiveSummarizationLROResult,
   AnalyzeResponse,
   AnalyzeTextLROResultUnion,
@@ -44,7 +44,7 @@ import type {
   CustomLabelClassificationResultDocumentsItem,
   HealthcareEntitiesDocumentResult,
 } from "./generated";
-import type {
+import {
   AnalyzeActionName,
   AnalyzeBatchActionName,
   AnalyzeBatchResult,
@@ -66,8 +66,8 @@ import type {
   TextAnalysisErrorResult,
   TextAnalysisSuccessResult,
 } from "./models";
-import type { AssessmentIndex } from "./util";
 import {
+  AssessmentIndex,
   extractErrorPointerIndex,
   parseAssessmentIndex,
   parseHealthcareEntityIndex,

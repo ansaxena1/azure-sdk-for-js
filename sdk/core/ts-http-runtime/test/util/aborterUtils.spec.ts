@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { describe, it, assert, expect, vi, afterEach } from "vitest";
-import type { AbortSignalLike } from "../../src/abort-controller/AbortSignalLike.js";
+import { AbortSignalLike } from "../../src/abort-controller/AbortSignalLike.js";
 import { cancelablePromiseRace, createAbortablePromise } from "../../src/index.js";
 
 describe("createAbortablePromise", function () {

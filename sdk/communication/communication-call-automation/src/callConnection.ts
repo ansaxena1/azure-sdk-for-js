@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CommunicationIdentifier } from "@azure/communication-common";
-import { CallMedia } from "./callMedia.js";
-import type {
+import { CommunicationIdentifier } from "@azure/communication-common";
+import { CallMedia } from "./callMedia";
+import {
   AddParticipantRequest,
   CallAutomationApiClient,
   CallAutomationApiClientOptionalParams,
@@ -11,15 +11,15 @@ import type {
   MuteParticipantsRequest,
   RemoveParticipantRequest,
   TransferToParticipantRequest,
-} from "./generated/src/index.js";
-import { CallConnectionImpl } from "./generated/src/operations/index.js";
-import type {
+} from "./generated/src";
+import { CallConnectionImpl } from "./generated/src/operations";
+import {
   CallConnectionProperties,
   CallInvite,
   CallParticipant,
   CustomCallingContext,
-} from "./models/models.js";
-import type {
+} from "./models/models";
+import {
   AddParticipantOptions,
   CancelAddParticipantOperationOptions,
   GetCallConnectionPropertiesOptions,
@@ -28,15 +28,15 @@ import type {
   MuteParticipantOption,
   RemoveParticipantsOption,
   TransferCallToParticipantOptions,
-} from "./models/options.js";
-import type {
+} from "./models/options";
+import {
   ListParticipantsResult,
   TransferCallResult,
   AddParticipantResult,
   RemoveParticipantResult,
   MuteParticipantResult,
   CancelAddParticipantOperationResult,
-} from "./models/responses.js";
+} from "./models/responses";
 import {
   callParticipantConverter,
   communicationIdentifierConverter,
@@ -44,17 +44,17 @@ import {
   communicationUserIdentifierConverter,
   phoneNumberIdentifierConverter,
   PhoneNumberIdentifierModelConverter,
-} from "./utli/converters.js";
+} from "./utli/converters";
 import { randomUUID } from "@azure/core-util";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import type { CallAutomationEventProcessor } from "./eventprocessor/callAutomationEventProcessor.js";
-import type {
+import { KeyCredential, TokenCredential } from "@azure/core-auth";
+import { CallAutomationEventProcessor } from "./eventprocessor/callAutomationEventProcessor";
+import {
   AddParticipantEventResult,
   CancelAddParticipantEventResult,
   RemoveParticipantEventResult,
   TransferCallToParticipantEventResult,
-} from "./eventprocessor/eventResponses.js";
-import { createCustomCallAutomationApiClient } from "./credential/callAutomationAuthPolicy.js";
+} from "./eventprocessor/eventResponses";
+import { createCustomCallAutomationApiClient } from "./credential/callAutomationAuthPolicy";
 
 /**
  * CallConnection class represents call connection based APIs.

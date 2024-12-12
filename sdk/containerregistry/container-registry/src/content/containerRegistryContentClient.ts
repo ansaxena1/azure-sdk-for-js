@@ -1,29 +1,32 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { InternalPipelineOptions } from "@azure/core-rest-pipeline";
-import { bearerTokenAuthenticationPolicy, RestError } from "@azure/core-rest-pipeline";
-import type { TokenCredential } from "@azure/core-auth";
+import {
+  InternalPipelineOptions,
+  bearerTokenAuthenticationPolicy,
+  RestError,
+} from "@azure/core-rest-pipeline";
+import { TokenCredential } from "@azure/core-auth";
 import { GeneratedClient } from "../generated";
 import { ChallengeHandler } from "../containerRegistryChallengeHandler";
 import { ContainerRegistryRefreshTokenCredential } from "../containerRegistryTokenCredential";
 import { logger } from "../logger";
 import { calculateDigest } from "../utils/digest";
-import type {
+import {
   DeleteBlobOptions,
   DeleteManifestOptions,
   DownloadBlobOptions,
   DownloadBlobResult,
   GetManifestOptions,
   GetManifestResult,
+  KnownManifestMediaType,
   UploadBlobOptions,
   UploadBlobResult,
   SetManifestOptions,
   SetManifestResult,
   OciImageManifest,
 } from "./models";
-import { KnownManifestMediaType } from "./models";
-import type { CommonClientOptions } from "@azure/core-client";
+import { CommonClientOptions } from "@azure/core-client";
 import { isDigest, readChunksFromStream, readStreamToEnd } from "../utils/helpers";
 import { Readable } from "stream";
 import { tracingClient } from "../tracing";

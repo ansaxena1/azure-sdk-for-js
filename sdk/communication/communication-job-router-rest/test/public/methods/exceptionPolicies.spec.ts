@@ -1,18 +1,19 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import type {
+import { Recorder } from "@azure-tools/test-recorder";
+import { assert } from "chai";
+import { Context } from "mocha";
+import {
   AzureCommunicationRoutingServiceClient,
   ExceptionPolicyOutput,
-} from "../../../src/index.js";
-import { paginate } from "../../../src/index.js";
-import { getExceptionPolicyRequest } from "../utils/testData.js";
-import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient.js";
-import { timeoutMs } from "../utils/constants.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+  paginate,
+} from "../../../src";
+import { getExceptionPolicyRequest } from "../utils/testData";
+import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient";
+import { timeoutMs } from "../utils/constants";
 
-describe("JobRouterClient", () => {
+describe("JobRouterClient", function () {
   let routerClient: AzureCommunicationRoutingServiceClient;
   let recorder: Recorder;
 
@@ -21,18 +22,18 @@ describe("JobRouterClient", () => {
   const { exceptionPolicyIdForCreationAndDeletionTest, exceptionPolicyRequest } =
     getExceptionPolicyRequest(testRunId);
 
-  describe("exception Policy Operations", () => {
-    beforeEach(async (ctx) => {
-      ({ routerClient, recorder } = await createRecordedRouterClientWithConnectionString(ctx));
+  describe("exception Policy Operations", function () {
+    this.beforeEach(async function (this: Context) {
+      ({ routerClient, recorder } = await createRecordedRouterClientWithConnectionString(this));
     });
 
-    afterEach(async (ctx) => {
-      if (!ctx.task.pending && recorder) {
+    this.afterEach(async function (this: Context) {
+      if (!this.currentTest?.isPending() && recorder) {
         await recorder.stop();
       }
     });
 
-    it("should create a exception policy", { timeout: timeoutMs }, async () => {
+    it("should create a exception policy", async function () {
       // TODO. we have a transient bug for creating existed exception policy return 400, try rotate the id for Record testing if this fails
       const response = await routerClient
         .path(
@@ -52,9 +53,9 @@ describe("JobRouterClient", () => {
       assert.isDefined(result);
       assert.isDefined(result?.id);
       assert.equal(result.name, exceptionPolicyRequest.name);
-    });
+    }).timeout(timeoutMs);
 
-    it("should get a exception policy", { timeout: timeoutMs }, async () => {
+    it("should get a exception policy", async function () {
       const response = await routerClient
         .path(
           "/routing/exceptionPolicies/{exceptionPolicyId}",
@@ -71,9 +72,9 @@ describe("JobRouterClient", () => {
       assert.equal(result.name, exceptionPolicyRequest.name);
       // TODO. Minor. need to fix "id" in actions in exceptionRules on service repo
       // assert.deepEqual(result.exceptionRules, exceptionPolicyRequest.exceptionRules);
-    });
+    }).timeout(timeoutMs);
 
-    it("should update a exception policy", { timeout: timeoutMs }, async () => {
+    it("should update a exception policy", async function () {
       const updatePatch = { ...exceptionPolicyRequest, name: "new-name" };
       let response = await routerClient
         .path(
@@ -112,9 +113,9 @@ describe("JobRouterClient", () => {
       assert.isDefined(removeResult.id);
       assert.equal(updateResult.name, updatePatch.name);
       assert.isUndefined(removeResult.name);
-    });
+    }).timeout(timeoutMs);
 
-    it("should list exception policies", { timeout: timeoutMs }, async () => {
+    it("should list exception policies", async function () {
       const result: ExceptionPolicyOutput[] = [];
       const response = await routerClient
         .path("/routing/exceptionPolicies")
@@ -131,9 +132,9 @@ describe("JobRouterClient", () => {
       }
 
       assert.isNotEmpty(result);
-    });
+    }).timeout(timeoutMs);
 
-    it("should delete a exception policy", { timeout: timeoutMs }, async () => {
+    it("should delete a exception policy", async function () {
       const response = await routerClient
         .path(
           "/routing/exceptionPolicies/{exceptionPolicyId}",
@@ -146,6 +147,6 @@ describe("JobRouterClient", () => {
       }
 
       assert.isDefined(response);
-    });
+    }).timeout(timeoutMs);
   });
 });

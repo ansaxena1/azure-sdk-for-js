@@ -4,25 +4,10 @@
 
 ```ts
 
-// @public
-export type AcceleratorManufacturer = string;
-
-// @public
-export type AcceleratorType = string;
+import { OperationOptions } from '@azure-rest/core-client';
 
 // @public
 export type ActionType = string;
-
-// @public
-export interface AdditionalCapabilities {
-    hibernationEnabled?: boolean;
-    ultraSSDEnabled?: boolean;
-}
-
-// @public
-export interface AdditionalLocationsProfile {
-    locationProfiles: LocationProfile[];
-}
 
 // @public
 export interface AdditionalUnattendContent {
@@ -59,9 +44,6 @@ export interface ApplicationProfile {
 }
 
 // @public
-export type ArchitectureType = string;
-
-// @public
 export interface BaseVirtualMachineProfile {
     applicationProfile?: ApplicationProfile;
     capacityReservation?: CapacityReservationProfile;
@@ -96,14 +78,15 @@ export interface CapacityReservationProfile {
 
 // @public
 export interface ComputeProfile {
-    additionalVirtualMachineCapabilities?: AdditionalCapabilities;
     baseVirtualMachineProfile: BaseVirtualMachineProfile;
     computeApiVersion?: string;
     platformFaultDomainCount?: number;
 }
 
 // @public
-export type CpuManufacturer = string;
+export type ContinuablePage<TElement, TPage = TElement[]> = TPage & {
+    continuationToken?: string;
+};
 
 // @public
 export type CreatedByType = string;
@@ -151,6 +134,26 @@ export interface EncryptionIdentity {
 }
 
 // @public
+export interface ErrorAdditionalInfo {
+    readonly info?: Record<string, any>;
+    readonly type?: string;
+}
+
+// @public
+export interface ErrorDetail {
+    readonly additionalInfo?: ErrorAdditionalInfo[];
+    readonly code?: string;
+    readonly details?: ErrorDetail[];
+    readonly message?: string;
+    readonly target?: string;
+}
+
+// @public
+export interface ErrorResponse {
+    error?: ErrorDetail;
+}
+
+// @public
 export type EvictionPolicy = string;
 
 // @public
@@ -163,15 +166,44 @@ export interface Fleet extends TrackedResource {
 
 // @public
 export interface FleetProperties {
-    additionalLocationsProfile?: AdditionalLocationsProfile;
     computeProfile: ComputeProfile;
     readonly provisioningState?: ProvisioningState;
     regularPriorityProfile?: RegularPriorityProfile;
     spotPriorityProfile?: SpotPriorityProfile;
     readonly timeCreated?: Date;
     readonly uniqueId?: string;
-    vmAttributes?: VMAttributes;
     vmSizesProfile: VmSizeProfile[];
+}
+
+// @public
+export interface FleetsCreateOrUpdateOptionalParams extends OperationOptions {
+    updateIntervalInMs?: number;
+}
+
+// @public
+export interface FleetsDeleteOptionalParams extends OperationOptions {
+    updateIntervalInMs?: number;
+}
+
+// @public
+export interface FleetsGetOptionalParams extends OperationOptions {
+}
+
+// @public
+export interface FleetsListByResourceGroupOptionalParams extends OperationOptions {
+}
+
+// @public
+export interface FleetsListBySubscriptionOptionalParams extends OperationOptions {
+}
+
+// @public
+export interface FleetsListVirtualMachineScaleSetsOptionalParams extends OperationOptions {
+}
+
+// @public
+export interface FleetsUpdateOptionalParams extends OperationOptions {
+    updateIntervalInMs?: number;
 }
 
 // @public
@@ -210,27 +242,8 @@ export interface KeyVaultSecretReference {
 }
 
 // @public
-export enum KnownAcceleratorManufacturer {
-    AMD = "AMD",
-    Nvidia = "Nvidia",
-    Xilinx = "Xilinx"
-}
-
-// @public
-export enum KnownAcceleratorType {
-    FPGA = "FPGA",
-    GPU = "GPU"
-}
-
-// @public
 export enum KnownActionType {
     Internal = "Internal"
-}
-
-// @public
-export enum KnownArchitectureType {
-    ARM64 = "ARM64",
-    X64 = "X64"
 }
 
 // @public
@@ -238,14 +251,6 @@ export enum KnownCachingTypes {
     None = "None",
     ReadOnly = "ReadOnly",
     ReadWrite = "ReadWrite"
-}
-
-// @public
-export enum KnownCpuManufacturer {
-    AMD = "AMD",
-    Ampere = "Ampere",
-    Intel = "Intel",
-    Microsoft = "Microsoft"
 }
 
 // @public
@@ -336,16 +341,10 @@ export enum KnownLinuxVMGuestPatchMode {
 }
 
 // @public
-export enum KnownLocalStorageDiskType {
-    HDD = "HDD",
-    SSD = "SSD"
-}
-
-// @public
 export enum KnownManagedServiceIdentityType {
+    "SystemAssigned,UserAssigned" = "SystemAssigned,UserAssigned",
     None = "None",
     SystemAssigned = "SystemAssigned",
-    SystemAssignedUserAssigned = "SystemAssigned,UserAssigned",
     UserAssigned = "UserAssigned"
 }
 
@@ -357,7 +356,7 @@ export enum KnownMode {
 
 // @public
 export enum KnownNetworkApiVersion {
-    V20201101 = "2020-11-01"
+    "2020-11-01" = "2020-11-01"
 }
 
 // @public
@@ -384,26 +383,15 @@ export enum KnownOperatingSystemTypes {
 
 // @public
 export enum KnownOrigin {
-    System = "system",
-    User = "user",
-    UserSystem = "user,system"
+    "user,system" = "user,system",
+    system = "system",
+    user = "user"
 }
 
 // @public
 export enum KnownProtocolTypes {
     Http = "Http",
     Https = "Https"
-}
-
-// @public
-export enum KnownProvisioningState {
-    Canceled = "Canceled",
-    Creating = "Creating",
-    Deleting = "Deleting",
-    Failed = "Failed",
-    Migrating = "Migrating",
-    Succeeded = "Succeeded",
-    Updating = "Updating"
 }
 
 // @public
@@ -422,6 +410,13 @@ export enum KnownPublicIPAddressSkuTier {
 export enum KnownRegularPriorityAllocationStrategy {
     LowestPrice = "LowestPrice",
     Prioritized = "Prioritized"
+}
+
+// @public
+export enum KnownResourceProvisioningState {
+    Canceled = "Canceled",
+    Failed = "Failed",
+    Succeeded = "Succeeded"
 }
 
 // @public
@@ -452,31 +447,13 @@ export enum KnownSpotAllocationStrategy {
 
 // @public
 export enum KnownStorageAccountTypes {
-    PremiumLRS = "Premium_LRS",
-    PremiumV2LRS = "PremiumV2_LRS",
-    PremiumZRS = "Premium_ZRS",
-    StandardLRS = "Standard_LRS",
-    StandardSSDLRS = "StandardSSD_LRS",
-    StandardSSDZRS = "StandardSSD_ZRS",
-    UltraSSDLRS = "UltraSSD_LRS"
-}
-
-// @public
-export enum KnownVMAttributeSupport {
-    Excluded = "Excluded",
-    Included = "Included",
-    Required = "Required"
-}
-
-// @public
-export enum KnownVMCategory {
-    ComputeOptimized = "ComputeOptimized",
-    FpgaAccelerated = "FpgaAccelerated",
-    GeneralPurpose = "GeneralPurpose",
-    GpuAccelerated = "GpuAccelerated",
-    HighPerformanceCompute = "HighPerformanceCompute",
-    MemoryOptimized = "MemoryOptimized",
-    StorageOptimized = "StorageOptimized"
+    Premium_LRS = "Premium_LRS",
+    Premium_ZRS = "Premium_ZRS",
+    PremiumV2_LRS = "PremiumV2_LRS",
+    Standard_LRS = "Standard_LRS",
+    StandardSSD_LRS = "StandardSSD_LRS",
+    StandardSSD_ZRS = "StandardSSD_ZRS",
+    UltraSSD_LRS = "UltraSSD_LRS"
 }
 
 // @public
@@ -532,15 +509,6 @@ export interface LinuxVMGuestPatchAutomaticByPlatformSettings {
 export type LinuxVMGuestPatchMode = string;
 
 // @public
-export type LocalStorageDiskType = string;
-
-// @public
-export interface LocationProfile {
-    location: string;
-    virtualMachineProfileOverride?: BaseVirtualMachineProfile;
-}
-
-// @public
 export interface ManagedServiceIdentity {
     readonly principalId?: string;
     readonly tenantId?: string;
@@ -590,12 +558,28 @@ export interface OperationDisplay {
 }
 
 // @public
+export interface OperationsListOptionalParams extends OperationOptions {
+}
+
+// @public
 export type Origin = string;
 
 // @public
 export interface OSImageNotificationProfile {
     enable?: boolean;
     notBeforeTimeout?: string;
+}
+
+// @public
+export interface PagedAsyncIterableIterator<TElement, TPage = TElement[], TPageSettings extends PageSettings = PageSettings> {
+    [Symbol.asyncIterator](): PagedAsyncIterableIterator<TElement, TPage, TPageSettings>;
+    byPage: (settings?: TPageSettings) => AsyncIterableIterator<ContinuablePage<TElement, TPage>>;
+    next(): Promise<IteratorResult<TElement>>;
+}
+
+// @public
+export interface PageSettings {
+    continuationToken?: string;
 }
 
 // @public
@@ -619,7 +603,7 @@ export interface Plan {
 export type ProtocolTypes = string;
 
 // @public
-export type ProvisioningState = string;
+export type ProvisioningState = string | ResourceProvisioningState | "Creating" | "Updating" | "Deleting" | "Migrating";
 
 // @public
 export interface ProxyAgentSettings {
@@ -666,6 +650,9 @@ export interface ResourcePlanUpdate {
     publisher?: string;
     version?: string;
 }
+
+// @public
+export type ResourceProvisioningState = string;
 
 // @public
 export interface ScheduledEventsProfile {
@@ -780,6 +767,9 @@ export interface VaultSecretGroup {
     sourceVault?: SubResource;
     vaultCertificates?: VaultCertificate[];
 }
+
+// @public
+export type Versions = "2023-11-01-preview" | "2024-05-01-preview";
 
 // @public
 export interface VirtualHardDisk {
@@ -965,48 +955,6 @@ export interface VirtualMachineScaleSetStorageProfile {
     imageReference?: ImageReference;
     osDisk?: VirtualMachineScaleSetOSDisk;
 }
-
-// @public
-export interface VMAttributeMinMaxDouble {
-    max?: number;
-    min?: number;
-}
-
-// @public
-export interface VMAttributeMinMaxInteger {
-    max?: number;
-    min?: number;
-}
-
-// @public
-export interface VMAttributes {
-    acceleratorCount?: VMAttributeMinMaxInteger;
-    acceleratorManufacturers?: AcceleratorManufacturer[];
-    acceleratorSupport?: VMAttributeSupport;
-    acceleratorTypes?: AcceleratorType[];
-    architectureTypes?: ArchitectureType[];
-    burstableSupport?: VMAttributeSupport;
-    cpuManufacturers?: CpuManufacturer[];
-    dataDiskCount?: VMAttributeMinMaxInteger;
-    excludedVMSizes?: string[];
-    localStorageDiskTypes?: LocalStorageDiskType[];
-    localStorageInGiB?: VMAttributeMinMaxDouble;
-    localStorageSupport?: VMAttributeSupport;
-    memoryInGiB: VMAttributeMinMaxDouble;
-    memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
-    networkBandwidthInMbps?: VMAttributeMinMaxDouble;
-    networkInterfaceCount?: VMAttributeMinMaxInteger;
-    rdmaNetworkInterfaceCount?: VMAttributeMinMaxInteger;
-    rdmaSupport?: VMAttributeSupport;
-    vCpuCount: VMAttributeMinMaxInteger;
-    vmCategories?: VMCategory[];
-}
-
-// @public
-export type VMAttributeSupport = string;
-
-// @public
-export type VMCategory = string;
 
 // @public
 export interface VMDiskSecurityProfile {

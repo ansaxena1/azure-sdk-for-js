@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
+import { getClient, ClientOptions } from "@azure-rest/core-client";
 import { logger } from "./logger";
-import type { TokenCredential, KeyCredential } from "@azure/core-auth";
-import type { ImageAnalysisClient } from "./clientDefinitions";
+import { TokenCredential, KeyCredential } from "@azure/core-auth";
+import { ImageAnalysisClient } from "./clientDefinitions";
 
 /** The optional parameters for the client */
 export interface ImageAnalysisClientOptions extends ClientOptions {
@@ -26,7 +25,7 @@ export default function createClient(
   { apiVersion = "2023-10-01", ...options }: ImageAnalysisClientOptions = {},
 ): ImageAnalysisClient {
   const endpointUrl = options.endpoint ?? options.baseUrl ?? `${endpointParam}/computervision`;
-  const userAgentInfo = `azsdk-js-ai-vision-image-analysis-rest/1.0.0`;
+  const userAgentInfo = `azsdk-js-ai-vision-image-analysis-rest/1.0.0-beta.4`;
   const userAgentPrefix =
     options.userAgentOptions && options.userAgentOptions.userAgentPrefix
       ? `${options.userAgentOptions.userAgentPrefix} ${userAgentInfo}`

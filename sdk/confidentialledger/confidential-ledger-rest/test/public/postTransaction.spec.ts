@@ -1,11 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ConfidentialLedgerClient, CreateLedgerEntryParameters, LedgerEntry } from "../../src";
-import { isUnexpected } from "../../src";
+import {
+  ConfidentialLedgerClient,
+  CreateLedgerEntryParameters,
+  LedgerEntry,
+  isUnexpected,
+} from "../../src";
 import { createClient, createRecorder, getRecorderUniqueVariable } from "./utils/recordedClient";
 
-import type { Context } from "mocha";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { Recorder } from "@azure-tools/test-recorder";
 import { assert } from "chai";
 
 describe("Post transaction", function () {

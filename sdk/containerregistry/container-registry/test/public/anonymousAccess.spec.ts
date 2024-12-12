@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
-import type { ContainerRegistryClient } from "../../src";
+import { ContainerRegistryClient } from "../../src";
 
 import { versionsToTest } from "@azure-tools/test-utils";
 import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";

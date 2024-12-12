@@ -1,19 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
+  BlobServiceClient,
   StoragePipelineOptions,
   StorageSharedKeyCredential,
   AnonymousCredential,
+  Pipeline,
 } from "@azure/storage-blob";
-import { BlobServiceClient, Pipeline } from "@azure/storage-blob";
-import type { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
-import type { BlobChangeFeedEvent } from "./models/BlobChangeFeedEvent";
+import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
+import { BlobChangeFeedEvent } from "./models/BlobChangeFeedEvent";
 import { ChangeFeedFactory } from "./ChangeFeedFactory";
-import type { ChangeFeed } from "./ChangeFeed";
+import { ChangeFeed } from "./ChangeFeed";
 import { CHANGE_FEED_MAX_PAGE_SIZE, SDK_VERSION } from "./utils/constants";
-import type { BlobChangeFeedListChangesOptions } from "./models/models";
-import type { TokenCredential } from "@azure/core-auth";
+import { BlobChangeFeedListChangesOptions } from "./models/models";
+import { TokenCredential } from "@azure/core-auth";
 
 /**
  * Contains paged response data for the {@link BlobChangeFeedClient.listChanges} operation.

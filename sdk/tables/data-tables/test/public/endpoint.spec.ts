@@ -4,7 +4,7 @@
 import { TableClient } from "../../src/TableClient";
 import { TableServiceClient } from "../../src/TableServiceClient";
 import { assert } from "chai";
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 import { COSMOS_SCOPE } from "../../src/utils/constants";
 
 export class FakeCredential implements TokenCredential {

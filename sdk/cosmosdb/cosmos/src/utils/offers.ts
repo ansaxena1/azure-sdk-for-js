@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ContainerRequest } from "../client/Container/ContainerRequest";
+import { ContainerRequest } from "../client/Container/ContainerRequest";
 
 export function validateOffer(body: ContainerRequest): void {
   if (body.throughput) {

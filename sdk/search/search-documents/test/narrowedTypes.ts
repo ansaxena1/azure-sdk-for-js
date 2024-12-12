@@ -7,9 +7,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import type { SelectFields } from "../src/index";
-import { SearchClient } from "../src/index";
-import type {
+import { SearchClient, SelectFields } from "../src/index";
+import {
   NarrowedModel as GenericNarrowedModel,
   SearchFieldArray,
   SearchPick,

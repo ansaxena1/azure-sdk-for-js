@@ -11,7 +11,7 @@ import {
   OperationURLParameter,
   OperationQueryParameter,
 } from "@azure/core-client";
-import { SendMessageRequest as SendMessageRequestMapper } from "../models/mappers.js";
+import { SendMessageRequest as SendMessageRequestMapper } from "../models/mappers";
 
 export const contentType: OperationParameter = {
   parameterPath: ["options", "contentType"],

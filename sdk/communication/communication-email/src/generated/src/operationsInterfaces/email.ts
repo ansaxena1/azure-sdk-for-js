@@ -13,7 +13,7 @@ import {
   EmailMessage,
   EmailSendOptionalParams,
   EmailSendResponse
-} from "../models/index.js";
+} from "../models";
 
 /** Interface representing a Email. */
 export interface Email {

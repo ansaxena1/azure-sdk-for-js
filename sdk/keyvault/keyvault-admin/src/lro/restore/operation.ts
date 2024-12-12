@@ -1,22 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   FullRestoreOperationOptionalParams,
   FullRestoreOperationResponse,
   RestoreOperation,
   RestoreStatusResponse,
 } from "../../generated/models/index.js";
-import type { KeyVaultAdminPollOperationState } from "../keyVaultAdminPoller.js";
-import { KeyVaultAdminPollOperation } from "../keyVaultAdminPoller.js";
-import type {
-  KeyVaultBeginRestoreOptions,
-  KeyVaultRestoreResult,
-} from "../../backupClientModels.js";
+import {
+  KeyVaultAdminPollOperation,
+  KeyVaultAdminPollOperationState,
+} from "../keyVaultAdminPoller.js";
+import { KeyVaultBeginRestoreOptions, KeyVaultRestoreResult } from "../../backupClientModels.js";
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { KeyVaultClient } from "../../generated/keyVaultClient.js";
-import type { OperationOptions } from "@azure/core-client";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { KeyVaultClient } from "../../generated/keyVaultClient.js";
+import { OperationOptions } from "@azure/core-client";
 import { tracingClient } from "../../tracing.js";
 
 /**

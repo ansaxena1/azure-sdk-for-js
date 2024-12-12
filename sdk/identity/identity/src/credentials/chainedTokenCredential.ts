@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
-import { AggregateAuthenticationError, CredentialUnavailableError } from "../errors.js";
-import { credentialLogger, formatError, formatSuccess } from "../util/logging.js";
-import { tracingClient } from "../util/tracing.js";
+import { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { AggregateAuthenticationError, CredentialUnavailableError } from "../errors";
+import { credentialLogger, formatError, formatSuccess } from "../util/logging";
+import { tracingClient } from "../util/tracing";
 
 /**
  * @internal
@@ -12,9 +12,8 @@ import { tracingClient } from "../util/tracing.js";
 export const logger = credentialLogger("ChainedTokenCredential");
 
 /**
- * Enables multiple `TokenCredential` implementations to be tried in order until
- * one of the getToken methods returns an access token. For more information, see
- * [ChainedTokenCredential overview](https://aka.ms/azsdk/js/identity/credential-chains#use-chainedtokencredential-for-granularity).
+ * Enables multiple `TokenCredential` implementations to be tried in order
+ * until one of the getToken methods returns an access token.
  */
 export class ChainedTokenCredential implements TokenCredential {
   private _sources: TokenCredential[] = [];

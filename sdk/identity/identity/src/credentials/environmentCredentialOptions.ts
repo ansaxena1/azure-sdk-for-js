@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AuthorityValidationOptions } from "./authorityValidationOptions.js";
-import type { MultiTenantTokenCredentialOptions } from "./multiTenantTokenCredentialOptions.js";
+import { AuthorityValidationOptions } from "./authorityValidationOptions";
+import { MultiTenantTokenCredentialOptions } from "./multiTenantTokenCredentialOptions";
 
 /**
  * Enables authentication to Microsoft Entra ID depending on the available environment variables.

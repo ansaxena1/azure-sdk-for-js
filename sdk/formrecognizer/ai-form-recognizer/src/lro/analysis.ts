@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PollOperationState, PollerLike } from "@azure/core-lro";
+import { PollOperationState, PollerLike } from "@azure/core-lro";
 import { FormRecognizerError } from "../error";
-import type {
+import {
   AnalyzeResult as GeneratedAnalyzeResult,
   AnalyzeResultOperation,
   AnalyzeResultOperationStatus as AnalyzeOperationStatus,
@@ -11,17 +11,16 @@ import type {
   DocumentSpan,
   DocumentStyle,
 } from "../generated";
-import type { DocumentField } from "../models/fields";
-import { toAnalyzedDocumentFieldsFromGenerated } from "../models/fields";
-import type { PollerOptions } from "../options";
-import type { AnalyzeDocumentOptions } from "../options/AnalyzeDocumentOptions";
+import { DocumentField, toAnalyzedDocumentFieldsFromGenerated } from "../models/fields";
+import { PollerOptions } from "../options";
+import { AnalyzeDocumentOptions } from "../options/AnalyzeDocumentOptions";
 import {
   toBoundingPolygon,
   toBoundingRegions,
   toDocumentTableFromGenerated,
   toKeyValuePairFromGenerated,
 } from "../transforms/polygon";
-import type {
+import {
   BoundingRegion,
   DocumentTable,
   DocumentKeyValuePair,
@@ -30,7 +29,7 @@ import type {
   DocumentParagraph,
   DocumentFormula,
 } from "../models/documentElements";
-import type {
+import {
   Document as GeneratedDocument,
   DocumentPage as GeneratedDocumentPage,
   DocumentLine as GeneratedDocumentLine,

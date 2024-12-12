@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   PageBlobGetPageRangesHeaders,
   PageBlobGetPageRangesDiffHeaders,
   PageBlobGetPageRangesResponseModel,
   PageBlobGetPageRangesDiffResponseModel,
 } from "./generatedModels";
-import type { Range } from "./Range";
-import type { ResponseWithBody } from "./utils/utils.common";
+import { Range } from "./Range";
+import { ResponseWithBody } from "./utils/utils.common";
 
 /**
  * List of page ranges for a blob.

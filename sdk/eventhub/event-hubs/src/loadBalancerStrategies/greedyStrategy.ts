@@ -1,9 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { LoadBalancingStrategy } from "./loadBalancingStrategy.js";
-import { listAvailablePartitions } from "./loadBalancingStrategy.js";
-import type { PartitionOwnership } from "../eventProcessor.js";
+import { LoadBalancingStrategy, listAvailablePartitions } from "./loadBalancingStrategy.js";
+import { PartitionOwnership } from "../eventProcessor.js";
 
 /**
  * @internal

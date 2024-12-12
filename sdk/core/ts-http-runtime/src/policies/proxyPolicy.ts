@@ -145,7 +145,7 @@ function getUrlFromProxySettings(settings: ProxySettings): URL {
   let parsedProxyUrl: URL;
   try {
     parsedProxyUrl = new URL(settings.host);
-  } catch {
+  } catch (_error) {
     throw new Error(
       `Expecting a valid host string in proxy settings, but found "${settings.host}".`,
     );

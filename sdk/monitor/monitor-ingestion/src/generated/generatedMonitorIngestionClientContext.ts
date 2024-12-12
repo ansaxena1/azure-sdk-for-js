@@ -8,7 +8,7 @@
 
 import * as coreClient from "@azure/core-client";
 import * as coreAuth from "@azure/core-auth";
-import { GeneratedMonitorIngestionClientOptionalParams } from "./models/index.js";
+import { GeneratedMonitorIngestionClientOptionalParams } from "./models";
 
 /** @internal */
 export class GeneratedMonitorIngestionClientContext extends coreClient.ServiceClient {

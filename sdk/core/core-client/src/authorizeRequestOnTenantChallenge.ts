@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AuthorizeRequestOnChallengeOptions,
   PipelineRequest,
   PipelineResponse,
 } from "@azure/core-rest-pipeline";
 
-import type { GetTokenOptions } from "@azure/core-auth";
+import { GetTokenOptions } from "@azure/core-auth";
 
 /**
  * A set of constants used internally when processing requests.
@@ -59,7 +59,7 @@ export const authorizeRequestOnTenantChallenge: (
 
     challengeOptions.request.headers.set(
       Constants.HeaderConstants.AUTHORIZATION,
-      `${accessToken.tokenType ?? "Bearer"} ${accessToken.token}`,
+      `Bearer ${accessToken.token}`,
     );
     return true;
   }

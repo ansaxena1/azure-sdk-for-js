@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 /* eslint-disable no-unused-expressions */
-import type { Container } from "../../../src";
+import { Container } from "../../../src";
 import { bulkInsertItems, getTestContainer, removeAllDatabases } from "../common/TestHelpers";
-import type { CosmosClientOptions, PluginConfig } from "../../../src";
-import { Constants, CosmosClient, PluginOn } from "../../../src";
+import { Constants, CosmosClient, PluginOn, CosmosClientOptions, PluginConfig } from "../../../src";
 import { endpoint } from "../common/_testConfig";
 import { masterKey } from "../common/_fakeTestSecrets";
 import { SubStatusCodes } from "../../../src/common";

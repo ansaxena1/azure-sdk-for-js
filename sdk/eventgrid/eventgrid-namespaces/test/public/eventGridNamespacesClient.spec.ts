@@ -1,18 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Suite, Context } from "mocha";
+import { Suite, Context } from "mocha";
 import { assert } from "@azure-tools/test-utils";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
-import type {
+import { Recorder, env } from "@azure-tools/test-recorder";
+import {
   EventGridSenderClient,
   EventGridReceiverClient,
   CloudEvent,
   ReceiveResult,
   RejectResult,
   RenewLocksResult,
+  EventGridDeserializer,
 } from "../../src";
-import { EventGridDeserializer } from "../../src";
 import { createRecordedClient } from "./utils/recordedClient";
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 import { Buffer } from "buffer";

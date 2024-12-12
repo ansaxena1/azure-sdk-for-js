@@ -3,8 +3,7 @@
 
 import { SecretClient } from "@azure/keyvault-secrets";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { MockServerOptions } from "@azure/mock-hub";
-import { MockEventHub } from "@azure/mock-hub";
+import { MockEventHub, MockServerOptions } from "@azure/mock-hub";
 import { readFileSync } from "fs";
 import { resolve as resolvePath } from "path";
 import type { GlobalSetupContext } from "vitest/node";

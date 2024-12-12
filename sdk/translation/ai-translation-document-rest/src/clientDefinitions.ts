@@ -4,7 +4,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import type {
+import {
   DocumentTranslateParameters,
   StartTranslationParameters,
   GetTranslationsStatusParameters,
@@ -14,7 +14,7 @@ import type {
   GetDocumentsStatusParameters,
   GetSupportedFormatsParameters,
 } from "./parameters.js";
-import type {
+import {
   DocumentTranslate200Response,
   DocumentTranslateDefaultResponse,
   StartTranslation202Response,
@@ -32,7 +32,7 @@ import type {
   GetSupportedFormats200Response,
   GetSupportedFormatsDefaultResponse,
 } from "./responses.js";
-import type { Client, StreamableMethod } from "@azure-rest/core-client";
+import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface DocumentTranslate {
   /** Use this API to submit a single translation request to the Document Translation Service. */

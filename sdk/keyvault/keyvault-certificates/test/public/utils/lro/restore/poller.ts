@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
+import { OperationOptions } from "@azure/core-client";
 import { delay } from "@azure/core-util";
 import { Poller } from "@azure/core-lro";
-import type {
+import {
   RestoreCertificateBackupPollOperationState,
+  makeRestoreCertificateBackupPollOperation,
   TestCertificateClientInterface,
 } from "./operation.js";
-import { makeRestoreCertificateBackupPollOperation } from "./operation.js";
-import type { KeyVaultCertificate } from "../../../../../src/index.js";
+import { KeyVaultCertificate } from "../../../../../src/index.js";
 
 export interface RestoreCertificateBackupPollerOptions {
   client: TestCertificateClientInterface;

@@ -5,7 +5,7 @@ import {
   GetMediaParameters,
   SendParameters,
   ListTemplatesParameters,
-} from "./parameters.js";
+} from "./parameters";
 import {
   GetMedia200Response,
   GetMediaDefaultResponse,
@@ -13,7 +13,7 @@ import {
   SendDefaultResponse,
   ListTemplates200Response,
   ListTemplatesDefaultResponse,
-} from "./responses.js";
+} from "./responses";
 import { Client, StreamableMethod } from "@azure-rest/core-client";
 
 export interface GetMedia {
@@ -26,7 +26,7 @@ export interface GetMedia {
 export interface Send {
   /** Sends a notification message from Business to User. */
   post(
-    options: SendParameters,
+    options?: SendParameters,
   ): StreamableMethod<Send202Response | SendDefaultResponse>;
 }
 

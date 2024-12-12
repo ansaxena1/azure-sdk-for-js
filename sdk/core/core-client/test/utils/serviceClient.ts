@@ -2,15 +2,22 @@
 // Licensed under the MIT License.
 
 import { assert } from "vitest";
-import type {
+import {
   FullOperationResponse,
   OperationRequest,
   OperationResponseMap,
   Serializer,
+  ServiceClient,
+  createSerializer,
+  deserializationPolicy,
 } from "../../src/index.js";
-import { ServiceClient, createSerializer, deserializationPolicy } from "../../src/index.js";
-import type { HttpClient, HttpHeaders, HttpMethods } from "@azure/core-rest-pipeline";
-import { createEmptyPipeline, createHttpHeaders } from "@azure/core-rest-pipeline";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpMethods,
+  createEmptyPipeline,
+  createHttpHeaders,
+} from "@azure/core-rest-pipeline";
 
 /**
  * Representation of a Service Client test case where the response status is 200.

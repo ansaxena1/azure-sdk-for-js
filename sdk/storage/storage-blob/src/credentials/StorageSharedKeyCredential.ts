@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { createHmac } from "crypto";
-import type {
+import {
   RequestPolicy,
   RequestPolicyOptionsLike as RequestPolicyOptions,
 } from "@azure/core-http-compat";

@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { RunningOperation, OperationResponse } from "./models.js";
-import type { OperationState, PollerLike } from "../poller/models.js";
+import { RunningOperation, OperationResponse } from "./models.js";
+import { OperationState, PollerLike } from "../poller/models.js";
 import {
   getErrorFromResponse,
   getOperationLocation,
@@ -13,7 +13,7 @@ import {
   isOperationError,
   parseRetryAfter,
 } from "./operation.js";
-import type { CreateHttpPollerOptions } from "./models.js";
+import { CreateHttpPollerOptions } from "./models.js";
 import { buildCreatePoller } from "../poller/poller.js";
 
 /**

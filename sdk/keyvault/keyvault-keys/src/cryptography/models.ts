@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
-import type {
+import { OperationOptions } from "@azure/core-client";
+import {
   DecryptOptions,
   DecryptParameters,
   DecryptResult,

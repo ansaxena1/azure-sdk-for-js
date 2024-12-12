@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { OperationOptions } from "@azure/core-client";
-import type {
+import { AbortSignalLike } from "@azure/abort-controller";
+import { OperationOptions } from "@azure/core-client";
+import {
   KeyVaultCertificateWithPolicy,
   CreateCertificateOptions,
   CertificatePolicy,
@@ -11,10 +11,12 @@ import type {
   GetPlainCertificateOperationOptions,
   CancelCertificateOperationOptions,
 } from "../../certificatesModels.js";
-import type { CertificateOperation } from "../../generated/models/index.js";
-import type { KeyVaultCertificatePollOperationState } from "../keyVaultCertificatePoller.js";
-import { KeyVaultCertificatePollOperation } from "../keyVaultCertificatePoller.js";
-import type { KeyVaultClient } from "../../generated/keyVaultClient.js";
+import { CertificateOperation } from "../../generated/models/index.js";
+import {
+  KeyVaultCertificatePollOperation,
+  KeyVaultCertificatePollOperationState,
+} from "../keyVaultCertificatePoller.js";
+import { KeyVaultClient } from "../../generated/keyVaultClient.js";
 import {
   getCertificateOperationFromCoreOperation,
   getCertificateWithPolicyFromCertificateBundle,

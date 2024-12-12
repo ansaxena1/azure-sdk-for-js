@@ -1,11 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CreateTestSerializerOptions } from "./utils/mockedSerializer.js";
-import { createTestSerializer, registerTestSchema } from "./utils/mockedSerializer.js";
+import {
+  CreateTestSerializerOptions,
+  createTestSerializer,
+  registerTestSchema,
+} from "./utils/mockedSerializer.js";
 import { testAvroType, testGroup, testSchema, testValue, testSchemaName } from "./utils/dummies.js";
-import type { MessageContent } from "../../src/index.js";
-import { AvroSerializer } from "../../src/index.js";
+import { AvroSerializer, MessageContent } from "../../src/index.js";
 import {
   createPipelineWithCredential,
   createTestRegistry,
@@ -13,9 +15,8 @@ import {
 } from "./utils/mockedRegistryClient.js";
 import { v4 as uuid } from "uuid";
 import { Recorder, isLiveMode } from "@azure-tools/test-recorder";
-import type { SchemaRegistry } from "@azure/schema-registry";
-import type { HttpClient, Pipeline } from "@azure/core-rest-pipeline";
-import { createDefaultHttpClient } from "@azure/core-rest-pipeline";
+import { SchemaRegistry } from "@azure/schema-registry";
+import { HttpClient, Pipeline, createDefaultHttpClient } from "@azure/core-rest-pipeline";
 import { describe, it, assert, beforeEach, afterEach, expect } from "vitest";
 
 describe("AvroSerializer", async function () {

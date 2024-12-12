@@ -1,30 +1,30 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
-import type { TieringClient } from "../../src/index.js";
-import { createRecordedClient } from "./utils/recordedClient.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+import { Context } from "mocha";
+import { Recorder, env } from "@azure-tools/test-recorder";
+import { TieringClient } from "../../src";
+import { assert } from "chai";
+import { createRecordedClient } from "./utils/recordedClient";
 
-describe(`TieringClient - Get Acquired Number Limits`, () => {
+describe(`TieringClient - Get Acquired Number Limits`, function () {
   let recorder: Recorder;
   let client: TieringClient;
 
-  beforeEach(async function (ctx) {
-    ({ client, recorder } = await createRecordedClient(ctx));
+  beforeEach(async function (this: Context) {
+    ({ client, recorder } = await createRecordedClient(this));
   });
 
-  afterEach(async function (ctx) {
-    if (!ctx.task.pending) {
+  afterEach(async function (this: Context) {
+    if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("get acquired number limits", { timeout: 30000 }, async () => {
+  it("get acquired number limits", async function () {
     // print all acquire number limits
     const resourceId = env.RESOURCE_ID!;
     const acquiredNumberLimits = await client.getAcquiredNumberLimits(resourceId);
     assert.isNotNull(acquiredNumberLimits);
-  });
+  }).timeout(30000);
 });

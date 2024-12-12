@@ -5,12 +5,14 @@ import { assert, getYieldedValue } from "@azure-tools/test-utils";
 import { isLiveMode, Recorder } from "@azure-tools/test-recorder";
 import { useFakeTimers } from "sinon";
 
-import type {
+import {
+  DataLakeFileSystemClient,
   FileSystemListPathsResponse,
   DataLakeServiceClient,
   FileSystemListDeletedPathsResponse,
+  DataLakeFileClient,
+  DataLakeDirectoryClient,
 } from "../src";
-import { DataLakeFileSystemClient, DataLakeFileClient, DataLakeDirectoryClient } from "../src";
 import {
   getDataLakeServiceClient,
   getEncryptionScope,
@@ -19,7 +21,7 @@ import {
   recorderEnvSetup,
   uriSanitizers,
 } from "./utils";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("DataLakeFileSystemClient", () => {
   let fileSystemName: string;

@@ -18,9 +18,9 @@ dotenv.config();
  * This sample demonstrates how to Returns Linker resource for a given name.
  *
  * @summary Returns Linker resource for a given name.
- * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/examples/Linker.json
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/Link.json
  */
-async function linker() {
+async function link() {
   const resourceUri =
     "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
   const linkerName = "linkName";
@@ -31,7 +31,7 @@ async function linker() {
 }
 
 async function main() {
-  linker();
+  link();
 }
 
 main().catch(console.error);

@@ -1,19 +1,19 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ClientOptions } from "@azure-rest/core-client";
-import { getClient } from "@azure-rest/core-client";
+import { getClient, ClientOptions } from "@azure-rest/core-client";
 import { logger } from "./generated/logger";
 import * as coreRestPipeline from "@azure/core-rest-pipeline";
-import type { TextTranslationClient } from "./generated/clientDefinitions";
-import type { TranslatorCredential, TranslatorTokenCredential } from "./authentication";
+import { TextTranslationClient } from "./generated/clientDefinitions";
 import {
   DEFAULT_SCOPE,
+  TranslatorCredential,
+  TranslatorTokenCredential,
   TranslatorAuthenticationPolicy,
   TranslatorAzureKeyAuthenticationPolicy,
   TranslatorTokenCredentialAuthenticationPolicy,
 } from "./authentication";
-import type { AzureKeyCredential, KeyCredential, TokenCredential } from "@azure/core-auth";
+import { AzureKeyCredential, KeyCredential, TokenCredential } from "@azure/core-auth";
 
 const DEFAULT_ENPOINT = "https://api.cognitive.microsofttranslator.com";
 const PLATFORM_HOST = "cognitiveservices";

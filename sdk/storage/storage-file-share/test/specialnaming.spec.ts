@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ShareClient } from "../src";
-import { ShareDirectoryClient, ShareFileClient } from "../src";
+import { ShareClient, ShareDirectoryClient, ShareFileClient } from "../src";
 import { getBSU, getUniqueName, recorderEnvSetup, uriSanitizers } from "./utils/index";
 import { assert } from "chai";
 import { appendToURLPath } from "../src/utils/utils.common";
 import { Recorder } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("Special Naming Tests", () => {
   let shareName: string;

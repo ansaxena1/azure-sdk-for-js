@@ -1,19 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env, isPlaybackMode } from "@azure-tools/test-recorder";
+import { env, isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
 import { createRecordedClient, createRecorder } from "./utils/recordedClient.js";
 import { describe, it, beforeEach, afterEach, expect, assert } from "vitest";
-import type {
+import {
   AzureDeveloperDevCenterClient,
   CatalogOutput,
   EnvironmentDefinitionOutput,
   EnvironmentTypeOutput,
   CreateOrReplaceEnvironmentParameters,
+  isUnexpected,
+  paginate,
+  getLongRunningPoller,
   EnvironmentOutput,
 } from "../../src/index.js";
-import { isUnexpected, paginate, getLongRunningPoller } from "../../src/index.js";
 
 const testPollingOptions = {
   intervalInMs: isPlaybackMode() ? 0 : undefined,

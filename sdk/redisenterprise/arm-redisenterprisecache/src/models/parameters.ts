@@ -22,7 +22,6 @@ import {
   ForceUnlinkParameters as ForceUnlinkParametersMapper,
   ForceLinkParameters as ForceLinkParametersMapper,
   FlushParameters as FlushParametersMapper,
-  AccessPolicyAssignment as AccessPolicyAssignmentMapper,
   PrivateEndpointConnection as PrivateEndpointConnectionMapper,
 } from "../models/mappers";
 
@@ -53,7 +52,7 @@ export const $host: OperationURLParameter = {
 export const apiVersion: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2024-09-01-preview",
+    defaultValue: "2024-03-01-preview",
     isConstant: true,
     serializedName: "api-version",
     type: {
@@ -219,25 +218,6 @@ export const parameters8: OperationParameter = {
 export const parameters9: OperationParameter = {
   parameterPath: "parameters",
   mapper: FlushParametersMapper,
-};
-
-export const parameters10: OperationParameter = {
-  parameterPath: "parameters",
-  mapper: AccessPolicyAssignmentMapper,
-};
-
-export const accessPolicyAssignmentName: OperationURLParameter = {
-  parameterPath: "accessPolicyAssignmentName",
-  mapper: {
-    constraints: {
-      Pattern: new RegExp("^[A-Za-z0-9]{1,60}$"),
-    },
-    serializedName: "accessPolicyAssignmentName",
-    required: true,
-    type: {
-      name: "String",
-    },
-  },
 };
 
 export const privateEndpointConnectionName: OperationURLParameter = {

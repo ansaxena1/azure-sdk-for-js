@@ -1,35 +1,32 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   PhoneNumberIdentifier,
   CommunicationUserIdentifier,
   UnknownIdentifier,
+  serializeCommunicationIdentifier,
   SerializedPhoneNumberIdentifier,
   CommunicationIdentifier,
-  SerializedCommunicationIdentifier,
-  MicrosoftTeamsUserIdentifier,
-  MicrosoftTeamsAppIdentifier,
-} from "@azure/communication-common";
-import {
-  serializeCommunicationIdentifier,
   isCommunicationUserIdentifier,
   isPhoneNumberIdentifier,
   isUnknownIdentifier,
+  SerializedCommunicationIdentifier,
   isMicrosoftTeamsUserIdentifier,
+  MicrosoftTeamsUserIdentifier,
   isMicrosoftTeamsAppIdentifier,
+  MicrosoftTeamsAppIdentifier,
 } from "@azure/communication-common";
-import type {
+import {
   CallParticipantInternal,
   CommunicationIdentifierModel,
   CommunicationIdentifierModelKind,
   KnownCommunicationCloudEnvironmentModel,
+  KnownCommunicationIdentifierModelKind,
   PhoneNumberIdentifierModel,
   CommunicationUserIdentifierModel,
-  MicrosoftTeamsAppIdentifierModel,
-} from "../generated/src/index.js";
-import { KnownCommunicationIdentifierModelKind } from "../generated/src/index.js";
-import type { CallParticipant } from "../models/models.js";
+} from "../generated/src";
+import { CallParticipant } from "../models/models";
 
 function extractKind(
   identifierModel: CommunicationIdentifierModel,
@@ -221,26 +218,4 @@ export function communicationUserIdentifierConverter(
   }
 
   return { communicationUserId: identifier.id };
-}
-
-/** Convert MicrosoftTeamsAppIdentifier to MicrosoftTeamsAppIdentifierModel (Internal usage class) */
-export function microsoftTeamsAppIdentifierModelConverter(
-  identifier: MicrosoftTeamsAppIdentifier | undefined,
-): MicrosoftTeamsAppIdentifierModel | undefined {
-  if (!identifier || !identifier.teamsAppId) {
-    return undefined;
-  }
-
-  return { appId: identifier.teamsAppId };
-}
-
-/** Convert MicrosoftTeamsAppIdentifierModel to MicrosoftTeamsAppIdentifier (Public usage class) */
-export function microsoftTeamsAppIdentifierConverter(
-  identifier: MicrosoftTeamsAppIdentifierModel | undefined,
-): MicrosoftTeamsAppIdentifier | undefined {
-  if (!identifier || !identifier.appId) {
-    return undefined;
-  }
-
-  return { teamsAppId: identifier.appId };
 }

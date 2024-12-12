@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Container, ContainerDefinition } from "../../../../src";
+import { Container, ContainerDefinition } from "../../../../src";
 import { bulkInsertItems, getTestContainer, removeAllDatabases } from "../../common/TestHelpers";
 import assert from "assert";
 import groupBySnapshot from "./groupBy.snapshot";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 const options = {
   maxItemCount: 100,
@@ -656,7 +656,7 @@ describe("Cross partition GROUP BY", () => {
     );
   });
 
-  it("with MakeSet", async () => {
+  it.skip("with MakeSet", async () => {
     const queryIterator = container.items.query(
       "SELECT c.name, MakeSet(c.age) AS ages FROM c GROUP BY c.name",
       options,

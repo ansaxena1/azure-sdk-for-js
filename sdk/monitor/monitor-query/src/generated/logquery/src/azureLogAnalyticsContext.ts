@@ -7,7 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
-import { AzureLogAnalyticsOptionalParams } from "./models/index.js";
+import { AzureLogAnalyticsOptionalParams } from "./models";
 
 /** @internal */
 export class AzureLogAnalyticsContext extends coreClient.ServiceClient {

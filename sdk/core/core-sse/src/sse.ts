@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import type { IncomingMessage } from "node:http";
-import type { EventMessage, EventMessageStream, PartialSome } from "./models.js";
+import { EventMessage, EventMessageStream, PartialSome } from "./models.js";
 import { createStream, ensureAsyncIterable } from "./utils.js";
 
 enum ControlChars {

@@ -4,7 +4,7 @@
 
 ```ts
 
-import type { SchemaRegistry } from '@azure/schema-registry';
+import { SchemaRegistry } from '@azure/schema-registry';
 
 // @public
 export interface DeserializeOptions {

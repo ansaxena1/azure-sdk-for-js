@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { createIdentifierFromRawId } from "@azure/communication-common";
-import type { TranscriptionMetadata, TranscriptionData } from "../models/transcription.js";
+import { TranscriptionMetadata, TranscriptionData } from "../models/transcription";
 
 /** Parse the incoming package. */
 export function streamingData(

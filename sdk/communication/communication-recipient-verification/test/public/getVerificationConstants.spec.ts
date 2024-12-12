@@ -1,29 +1,30 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import type { RecipientVerificationClient } from "../../src/index.js";
-import { createRecordedClient } from "./utils/recordedClient.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+import { Context } from "mocha";
+import { Recorder } from "@azure-tools/test-recorder";
+import { RecipientVerificationClient } from "../../src";
+import { assert } from "chai";
+import { createRecordedClient } from "./utils/recordedClient";
 
-describe(`RecipientVerificationClient - Get verification constants`, () => {
+describe(`RecipientVerificationClient - Get verification constants`, function () {
   let recorder: Recorder;
   let client: RecipientVerificationClient;
 
-  beforeEach(async (ctx) => {
-    ({ client, recorder } = await createRecordedClient(ctx));
+  beforeEach(async function (this: Context) {
+    ({ client, recorder } = await createRecordedClient(this));
   });
 
-  afterEach(async (ctx) => {
-    if (!ctx.task.pending) {
+  afterEach(async function (this: Context) {
+    if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("get verification constants", { timeout: 30000 }, async () => {
+  it("get verification constants", async function () {
     const verificationConstants = await client.getVerificationConstants();
     assert.isNotNull(verificationConstants.currentNumberOfVerifications);
     assert.isNotNull(verificationConstants.maxRetriesAllowed);
     assert.isNotNull(verificationConstants.maxVerificationsAllowed);
-  });
+  }).timeout(30000);
 });

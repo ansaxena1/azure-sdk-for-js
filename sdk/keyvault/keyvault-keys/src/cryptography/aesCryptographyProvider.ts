@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
+import { OperationOptions } from "@azure/core-client";
 import * as crypto from "node:crypto";
-import type {
+import {
   AesCbcEncryptParameters,
   DecryptOptions,
   DecryptResult,
@@ -20,9 +20,12 @@ import type {
   WrapKeyOptions,
   WrapResult,
 } from "../index.js";
-import type { AesCbcDecryptParameters } from "../cryptographyClientModels.js";
-import type { CryptographyProvider, CryptographyProviderOperation } from "./models.js";
-import { LocalCryptographyUnsupportedError } from "./models.js";
+import { AesCbcDecryptParameters } from "../cryptographyClientModels.js";
+import {
+  CryptographyProvider,
+  CryptographyProviderOperation,
+  LocalCryptographyUnsupportedError,
+} from "./models.js";
 
 /**
  * An AES cryptography provider supporting AES algorithms.

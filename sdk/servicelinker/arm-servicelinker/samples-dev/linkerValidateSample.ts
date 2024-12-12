@@ -15,12 +15,12 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 /**
- * This sample demonstrates how to Validate a Linker.
+ * This sample demonstrates how to Validate a link.
  *
- * @summary Validate a Linker.
- * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/examples/ValidateLinkerSuccess.json
+ * @summary Validate a link.
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/ValidateLinkSuccess.json
  */
-async function validateLinkerSuccess() {
+async function validateLinkSuccess() {
   const resourceUri =
     "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
   const linkerName = "linkName";
@@ -28,13 +28,13 @@ async function validateLinkerSuccess() {
   const client = new ServiceLinkerManagementClient(credential);
   const result = await client.linker.beginValidateAndWait(
     resourceUri,
-    linkerName,
+    linkerName
   );
   console.log(result);
 }
 
 async function main() {
-  validateLinkerSuccess();
+  validateLinkSuccess();
 }
 
 main().catch(console.error);

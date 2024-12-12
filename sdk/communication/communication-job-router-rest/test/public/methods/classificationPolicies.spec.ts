@@ -1,23 +1,24 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import type {
+import { Recorder } from "@azure-tools/test-recorder";
+import { assert } from "chai";
+import { Context } from "mocha";
+import {
   AzureCommunicationRoutingServiceClient,
   ClassificationPolicyOutput,
-} from "../../../src/index.js";
-import { paginate } from "../../../src/index.js";
+  paginate,
+} from "../../../src";
 import {
   getClassificationPolicyRequest,
   getDistributionPolicyRequest,
   getExceptionPolicyRequest,
   getQueueRequest,
-} from "../utils/testData.js";
-import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient.js";
-import { timeoutMs } from "../utils/constants.js";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+} from "../utils/testData";
+import { createRecordedRouterClientWithConnectionString } from "../../internal/utils/mockClient";
+import { timeoutMs } from "../utils/constants";
 
-describe("JobRouterClient", () => {
+describe("JobRouterClient", function () {
   let routerClient: AzureCommunicationRoutingServiceClient;
   let recorder: Recorder;
 
@@ -33,9 +34,9 @@ describe("JobRouterClient", () => {
 
   const { queueId, queueRequest } = getQueueRequest(testRunId);
 
-  describe("classification Policy Operations", () => {
-    beforeEach(async (ctx) => {
-      ({ routerClient, recorder } = await createRecordedRouterClientWithConnectionString(ctx));
+  describe("classification Policy Operations", function () {
+    this.beforeEach(async function (this: Context) {
+      ({ routerClient, recorder } = await createRecordedRouterClientWithConnectionString(this));
 
       await routerClient
         .path("/routing/distributionPolicies/{distributionPolicyId}", distributionPolicyId)
@@ -55,7 +56,7 @@ describe("JobRouterClient", () => {
       });
     });
 
-    afterEach(async (ctx) => {
+    this.afterEach(async function (this: Context) {
       await routerClient
         .path("/routing/distributionPolicies/{distributionPolicyId}", distributionPolicyId)
         .delete();
@@ -64,12 +65,12 @@ describe("JobRouterClient", () => {
         .delete();
       await routerClient.path("/routing/queues/{queueId}", queueId).delete();
 
-      if (!ctx.task.pending && recorder) {
+      if (!this.currentTest?.isPending() && recorder) {
         await recorder.stop();
       }
     });
 
-    it("should create a classification policy", { timeout: timeoutMs }, async () => {
+    it("should create a classification policy", async function () {
       const response = await routerClient
         .path("/routing/classificationPolicies/{classificationPolicyId}", classificationPolicyId)
         .patch({
@@ -85,9 +86,9 @@ describe("JobRouterClient", () => {
       assert.isDefined(result);
       assert.isDefined(result?.id);
       assert.equal(result.name, classificationPolicyRequest.name);
-    });
+    }).timeout(timeoutMs);
 
-    it("should get a classification policy", { timeout: timeoutMs }, async () => {
+    it("should get a classification policy", async function () {
       const response = await routerClient
         .path("/routing/classificationPolicies/{classificationPolicyId}", classificationPolicyId)
         .get();
@@ -99,9 +100,9 @@ describe("JobRouterClient", () => {
 
       assert.equal(result.id, classificationPolicyId);
       assert.equal(result.name, classificationPolicyRequest.name);
-    });
+    }).timeout(timeoutMs);
 
-    it("should update a classification policy", { timeout: timeoutMs }, async () => {
+    it("should update a classification policy", async function () {
       const updatePatch = { ...classificationPolicyRequest, name: "new-name" };
       let response = await routerClient
         .path("/routing/classificationPolicies/{classificationPolicyId}", classificationPolicyId)
@@ -134,9 +135,9 @@ describe("JobRouterClient", () => {
       assert.isDefined(removeResult.id);
       assert.equal(updateResult.name, updatePatch.name);
       assert.isUndefined(removeResult.name);
-    });
+    }).timeout(timeoutMs);
 
-    it("should list classification policies", { timeout: timeoutMs }, async () => {
+    it("should list classification policies", async function () {
       const result: ClassificationPolicyOutput[] = [];
       const response = await routerClient
         .path("/routing/classificationPolicies")
@@ -153,9 +154,9 @@ describe("JobRouterClient", () => {
       }
 
       assert.isNotEmpty(result);
-    });
+    }).timeout(timeoutMs);
 
-    it("should delete a classification policy", { timeout: timeoutMs }, async () => {
+    it("should delete a classification policy", async function () {
       const response = await routerClient
         .path("/routing/classificationPolicies/{classificationPolicyId}", classificationPolicyId)
         .delete();
@@ -165,6 +166,6 @@ describe("JobRouterClient", () => {
       }
 
       assert.isDefined(response);
-    });
+    }).timeout(timeoutMs);
   });
 });

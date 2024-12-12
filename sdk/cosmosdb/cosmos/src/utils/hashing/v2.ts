@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PrimitivePartitionKeyValue } from "../../documents";
+import { PrimitivePartitionKeyValue } from "../../documents";
 import { doubleToByteArrayJSBI } from "./encoding/number";
 import { BytePrefix } from "./encoding/prefix";
 import MurmurHash from "./murmurHash";

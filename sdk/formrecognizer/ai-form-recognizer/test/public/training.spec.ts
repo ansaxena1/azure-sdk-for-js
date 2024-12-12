@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 import { getYieldedValue, matrix } from "@azure-tools/test-utils";
 
-import type { Recorder } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable } from "@azure-tools/test-recorder";
+import { Recorder, assertEnvironmentVariable } from "@azure-tools/test-recorder";
 
 import {
   createRecorder,
@@ -16,8 +15,11 @@ import {
   testPollingOptions,
 } from "../utils/recordedClients";
 
-import type { DocumentModelDetails } from "../../src";
-import { DocumentAnalysisClient, DocumentModelAdministrationClient } from "../../src";
+import {
+  DocumentAnalysisClient,
+  DocumentModelAdministrationClient,
+  DocumentModelDetails,
+} from "../../src";
 import { DocumentModelBuildMode } from "../../src/options/BuildModelOptions";
 
 const endpoint = (): string => assertEnvironmentVariable("FORM_RECOGNIZER_ENDPOINT");

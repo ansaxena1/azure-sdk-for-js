@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { EdmTypes, SignedIdentifier, TableEntityQueryOptions } from "./models";
-import type {
+import { EdmTypes, SignedIdentifier, TableEntityQueryOptions } from "./models";
+import {
   QueryOptions as GeneratedQueryOptions,
   SignedIdentifier as GeneratedSignedIdentifier,
 } from "./generated/models";

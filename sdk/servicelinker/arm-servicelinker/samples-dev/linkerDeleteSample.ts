@@ -15,12 +15,12 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 /**
- * This sample demonstrates how to Delete a Linker.
+ * This sample demonstrates how to Delete a link.
  *
- * @summary Delete a Linker.
- * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/examples/DeleteLinker.json
+ * @summary Delete a link.
+ * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/DeleteLink.json
  */
-async function deleteLinker() {
+async function deleteLink() {
   const resourceUri =
     "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app";
   const linkerName = "linkName";
@@ -28,13 +28,13 @@ async function deleteLinker() {
   const client = new ServiceLinkerManagementClient(credential);
   const result = await client.linker.beginDeleteAndWait(
     resourceUri,
-    linkerName,
+    linkerName
   );
   console.log(result);
 }
 
 async function main() {
-  deleteLinker();
+  deleteLink();
 }
 
 main().catch(console.error);

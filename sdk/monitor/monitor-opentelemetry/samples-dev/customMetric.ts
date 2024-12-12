@@ -5,7 +5,11 @@
  * @summary Demonstrates how to run generate custom metrics that will be sent to Azure Monitor
  */
 
-import { useAzureMonitor, AzureMonitorOpenTelemetryOptions } from "@azure/monitor-opentelemetry";
+import {
+  useAzureMonitor,
+  AzureMonitorOpenTelemetryOptions,
+  shutdownAzureMonitor,
+} from "@azure/monitor-opentelemetry";
 import { metrics } from "@opentelemetry/api";
 
 // Load the .env file if it exists
@@ -21,11 +25,8 @@ const options: AzureMonitorOpenTelemetryOptions = {
 
 useAzureMonitor(options);
 
-const express = require("express");
-const app = express();
-const PORT = 8080;
-
-async function metricExport(): Promise<void> {
+export async function main() {
+  // Get Meter and create custom metric
   const meter = metrics.getMeter("testMeter");
   const customCounter = meter.createCounter("TestCounter");
   customCounter.add(1);
@@ -33,15 +34,8 @@ async function metricExport(): Promise<void> {
   customCounter.add(3);
 }
 
-async function setupRoutes(): Promise<void> {
-  app.get("/", async (_req: any, res: any) => {
-    await metricExport().then(() => {
-      res.send("Metrics sent to Azure Monitor");
-    });
-  });
-}
-
-setupRoutes().then(() => {
-  app.listen(PORT);
-  console.log(`Listening on http://localhost:${PORT}`);
+main().catch(async (error) => {
+  console.error("An error occurred:", error);
+  await shutdownAzureMonitor();
+  process.exit(1);
 });

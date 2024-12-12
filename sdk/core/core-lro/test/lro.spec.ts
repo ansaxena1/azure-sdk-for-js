@@ -1,8 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { ImplementationName, Result } from "./utils/utils.js";
-import { assertDivergentBehavior, assertError, createDoubleHeaders } from "./utils/utils.js";
+import {
+  ImplementationName,
+  assertDivergentBehavior,
+  assertError,
+  createDoubleHeaders,
+  Result,
+} from "./utils/utils.js";
 import { describe, it, assert, expect } from "vitest";
 import { createRunLroWith, createTestPoller } from "./utils/router.js";
 import { delay } from "@azure/core-util";

@@ -5,7 +5,6 @@
 ### Features Added
 
 - Adds `deleteMessages` which deletes messages from the queue.
-- Add the experimental diagnostic feature `omitMessageBody` via `PeekMessagesOptions` under `./experimental` subpath export.
 
 ### Breaking Changes
 
@@ -425,8 +424,8 @@ If migrating from version 1.1.10 or lower, look at our [migration guide to move 
 
   ```typescript
   // this same method will work with subscriptions as well.
-  serviceBusClient.createReceiver("<queue name>", {
-    subQueue: "deadLetter",
+  serviceBusClient.createReceiver(<queue>, {
+    subQueue: "deadLetter"
   });
   ```
 

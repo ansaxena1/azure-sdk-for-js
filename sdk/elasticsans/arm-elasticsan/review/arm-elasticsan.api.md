@@ -17,14 +17,6 @@ export type Action = string;
 export type ActionType = string;
 
 // @public
-export type AutoScalePolicyEnforcement = string;
-
-// @public
-export interface AutoScaleProperties {
-    scaleUpProperties?: ScaleUpProperties;
-}
-
-// @public
 export type CreatedByType = string;
 
 // @public
@@ -74,7 +66,6 @@ export interface ElasticSanManagementOptionalParams extends coreClient.ServiceCl
 
 // @public
 export interface ElasticSanProperties {
-    autoScaleProperties?: AutoScaleProperties;
     availabilityZones?: string[];
     baseSizeTiB: number;
     extendedCapacitySizeTiB: number;
@@ -183,7 +174,6 @@ export interface ElasticSanUpdate {
 
 // @public
 export interface ElasticSanUpdateProperties {
-    autoScaleProperties?: AutoScaleProperties;
     baseSizeTiB?: number;
     extendedCapacitySizeTiB?: number;
     publicNetworkAccess?: PublicNetworkAccess;
@@ -266,13 +256,6 @@ export enum KnownAction {
 // @public
 export enum KnownActionType {
     Internal = "Internal"
-}
-
-// @public
-export enum KnownAutoScalePolicyEnforcement {
-    Disabled = "Disabled",
-    Enabled = "Enabled",
-    None = "None"
 }
 
 // @public
@@ -555,14 +538,6 @@ export interface Resource {
     readonly name?: string;
     readonly systemData?: SystemData;
     readonly type?: string;
-}
-
-// @public
-export interface ScaleUpProperties {
-    autoScalePolicyEnforcement?: AutoScalePolicyEnforcement;
-    capacityUnitScaleUpLimitTiB?: number;
-    increaseCapacityUnitByTiB?: number;
-    unusedSizeTiB?: number;
 }
 
 // @public

@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
-import type { DTDL } from "./psuedoDtdl";
+import { OperationOptions } from "@azure/core-client";
+import { DTDL } from "./psuedoDtdl";
 import { convertDtmiToPath } from "./dtmiConventions";
 import { ModelError } from "./exceptions";
-import type { Fetcher } from "./fetcherAbstract";
+import { Fetcher } from "./fetcherAbstract";
 import { logger } from "./logger";
 
 /**

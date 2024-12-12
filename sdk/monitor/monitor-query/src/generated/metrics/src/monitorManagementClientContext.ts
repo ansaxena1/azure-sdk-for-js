@@ -10,7 +10,7 @@ import * as coreClient from "@azure/core-client";
 import {
   ApiVersion20240201,
   MonitorManagementClientOptionalParams
-} from "./models/index.js";
+} from "./models";
 
 /** @internal */
 export class MonitorManagementClientContext extends coreClient.ServiceClient {

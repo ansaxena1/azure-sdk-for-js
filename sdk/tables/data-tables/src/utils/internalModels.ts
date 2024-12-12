@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   CreateTableEntityResponse,
   DeleteTableEntityOptions,
   GetTableEntityOptions,
@@ -16,11 +16,11 @@ import type {
   UpdateMode,
   UpdateTableEntityOptions,
 } from "../models";
-import type { DeleteTableEntityResponse, UpdateEntityResponse, UpsertEntityResponse } from "..";
-import type { Pipeline, PipelineRequest } from "@azure/core-rest-pipeline";
-import type { NamedKeyCredential } from "@azure/core-auth";
-import type { OperationOptions } from "@azure/core-client";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { DeleteTableEntityResponse, UpdateEntityResponse, UpsertEntityResponse } from "..";
+import { Pipeline, PipelineRequest } from "@azure/core-rest-pipeline";
+import { NamedKeyCredential } from "@azure/core-auth";
+import { OperationOptions } from "@azure/core-client";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
 
 export interface ConnectionString {
   kind: "AccountConnString" | "SASConnString";

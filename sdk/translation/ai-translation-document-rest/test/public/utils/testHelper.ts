@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { isPlaybackMode } from "@azure-tools/test-recorder";
-import type {
+import {
   BatchRequest,
   DocumentFilter,
   Glossary,
@@ -11,8 +11,7 @@ import type {
   StorageSource,
   TargetInput,
 } from "../../../src";
-import type { TestDocument } from "./TestDocument";
-import { createTestDocument } from "./TestDocument";
+import { TestDocument, createTestDocument } from "./TestDocument";
 
 export function createSourceInput(
   sourceUrl: string,

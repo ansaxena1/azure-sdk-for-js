@@ -9,17 +9,16 @@
 import {
   OperationParameter,
   OperationURLParameter,
-  OperationQueryParameter,
+  OperationQueryParameter
 } from "@azure/core-client";
 import {
   ElasticMonitorResource as ElasticMonitorResourceMapper,
   ElasticMonitorResourceUpdateParameters as ElasticMonitorResourceUpdateParametersMapper,
   ExternalUserInfo as ExternalUserInfoMapper,
-  OpenAIIntegrationRPModel as OpenAIIntegrationRPModelMapper,
   MonitoringTagRules as MonitoringTagRulesMapper,
   VMCollectionUpdate as VMCollectionUpdateMapper,
   ElasticMonitorUpgrade as ElasticMonitorUpgradeMapper,
-  UserEmailId as UserEmailIdMapper,
+  UserEmailId as UserEmailIdMapper
 } from "../models/mappers";
 
 export const accept: OperationParameter = {
@@ -29,9 +28,9 @@ export const accept: OperationParameter = {
     isConstant: true,
     serializedName: "Accept",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const $host: OperationURLParameter = {
@@ -40,22 +39,22 @@ export const $host: OperationURLParameter = {
     serializedName: "$host",
     required: true,
     type: {
-      name: "String",
-    },
+      name: "String"
+    }
   },
-  skipEncoding: true,
+  skipEncoding: true
 };
 
 export const apiVersion: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2024-03-01",
+    defaultValue: "2023-02-01-preview",
     isConstant: true,
     serializedName: "api-version",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const nextLink: OperationURLParameter = {
@@ -64,10 +63,10 @@ export const nextLink: OperationURLParameter = {
     serializedName: "nextLink",
     required: true,
     type: {
-      name: "String",
-    },
+      name: "String"
+    }
   },
-  skipEncoding: true,
+  skipEncoding: true
 };
 
 export const subscriptionId: OperationURLParameter = {
@@ -76,24 +75,20 @@ export const subscriptionId: OperationURLParameter = {
     serializedName: "subscriptionId",
     required: true,
     type: {
-      name: "Uuid",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const resourceGroupName: OperationURLParameter = {
   parameterPath: "resourceGroupName",
   mapper: {
-    constraints: {
-      MaxLength: 90,
-      MinLength: 1,
-    },
     serializedName: "resourceGroupName",
     required: true,
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const monitorName: OperationURLParameter = {
@@ -102,9 +97,9 @@ export const monitorName: OperationURLParameter = {
     serializedName: "monitorName",
     required: true,
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const contentType: OperationParameter = {
@@ -114,19 +109,19 @@ export const contentType: OperationParameter = {
     isConstant: true,
     serializedName: "Content-Type",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const body: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: ElasticMonitorResourceMapper,
+  mapper: ElasticMonitorResourceMapper
 };
 
 export const body1: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: ElasticMonitorResourceUpdateParametersMapper,
+  mapper: ElasticMonitorResourceUpdateParametersMapper
 };
 
 export const region: OperationQueryParameter = {
@@ -135,38 +130,19 @@ export const region: OperationQueryParameter = {
     serializedName: "region",
     required: true,
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const body2: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: ExternalUserInfoMapper,
-};
-
-export const integrationName: OperationURLParameter = {
-  parameterPath: "integrationName",
-  mapper: {
-    constraints: {
-      Pattern: new RegExp("^[a-z][a-z0-9]*$"),
-    },
-    serializedName: "integrationName",
-    required: true,
-    type: {
-      name: "String",
-    },
-  },
+  mapper: ExternalUserInfoMapper
 };
 
 export const body3: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: OpenAIIntegrationRPModelMapper,
-};
-
-export const body4: OperationParameter = {
-  parameterPath: ["options", "body"],
-  mapper: MonitoringTagRulesMapper,
+  mapper: MonitoringTagRulesMapper
 };
 
 export const ruleSetName: OperationURLParameter = {
@@ -175,19 +151,19 @@ export const ruleSetName: OperationURLParameter = {
     serializedName: "ruleSetName",
     required: true,
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
+};
+
+export const body4: OperationParameter = {
+  parameterPath: ["options", "body"],
+  mapper: VMCollectionUpdateMapper
 };
 
 export const body5: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: VMCollectionUpdateMapper,
-};
-
-export const body6: OperationParameter = {
-  parameterPath: ["options", "body"],
-  mapper: ElasticMonitorUpgradeMapper,
+  mapper: ElasticMonitorUpgradeMapper
 };
 
 export const ips: OperationQueryParameter = {
@@ -195,9 +171,9 @@ export const ips: OperationQueryParameter = {
   mapper: {
     serializedName: "ips",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const name: OperationQueryParameter = {
@@ -205,9 +181,9 @@ export const name: OperationQueryParameter = {
   mapper: {
     serializedName: "name",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const privateEndpointGuid: OperationQueryParameter = {
@@ -215,9 +191,9 @@ export const privateEndpointGuid: OperationQueryParameter = {
   mapper: {
     serializedName: "privateEndpointGuid",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const privateEndpointName: OperationQueryParameter = {
@@ -225,9 +201,9 @@ export const privateEndpointName: OperationQueryParameter = {
   mapper: {
     serializedName: "privateEndpointName",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
 export const rulesetId: OperationQueryParameter = {
@@ -235,12 +211,12 @@ export const rulesetId: OperationQueryParameter = {
   mapper: {
     serializedName: "rulesetId",
     type: {
-      name: "String",
-    },
-  },
+      name: "String"
+    }
+  }
 };
 
-export const body7: OperationParameter = {
+export const body6: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: UserEmailIdMapper,
+  mapper: UserEmailIdMapper
 };

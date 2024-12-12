@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { SearchField as GeneratedSearchField } from "../../src/generated/service/models/index";
+import { SearchField as GeneratedSearchField } from "../../src/generated/service/models/index";
 import { KnownAnalyzerNames } from "../../src/index";
-import type { ComplexField, SearchField } from "../../src/serviceModels";
+import { ComplexField, SearchField } from "../../src/serviceModels";
 import { convertFieldsToGenerated, convertFieldsToPublic } from "../../src/serviceUtils";
 
 describe("serviceUtils", function () {

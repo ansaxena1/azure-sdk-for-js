@@ -10,15 +10,16 @@ const log = createPrinter("build-package");
 
 export const commandInfo = makeCommandInfo("build-package", "build a package for production");
 
-const TSHY_BIN_PATH = path.resolve(__dirname, "..", "..", "..", "node_modules", ".bin", "tshy");
+const DOT_BIN_PATH = path.resolve(__dirname, "..", "..", "..", "node_modules", ".bin");
 
 export default leafCommand(commandInfo, async () => {
-  log.info(`Building package with tshy from ${TSHY_BIN_PATH}`);
+  const command = path.join(DOT_BIN_PATH, "tshy");
+  log.info(`Building package with tshy from ${command}`);
 
   await concurrently(
     [
       {
-        command: TSHY_BIN_PATH,
+        command,
       },
     ],
     { raw: true },

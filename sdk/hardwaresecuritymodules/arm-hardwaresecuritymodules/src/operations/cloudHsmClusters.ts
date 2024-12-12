@@ -16,7 +16,7 @@ import { AzureHSMResourceProvider } from "../azureHSMResourceProvider";
 import {
   SimplePollerLike,
   OperationState,
-  createHttpPoller,
+  createHttpPoller
 } from "@azure/core-lro";
 import { createLroSpec } from "../lroImpl";
 import {
@@ -34,18 +34,8 @@ import {
   CloudHsmClustersGetOptionalParams,
   CloudHsmClustersGetResponse,
   CloudHsmClustersDeleteOptionalParams,
-  CloudHsmClustersDeleteResponse,
-  CloudHsmClustersValidateBackupPropertiesOptionalParams,
-  CloudHsmClustersValidateBackupPropertiesResponse,
-  CloudHsmClustersBackupOptionalParams,
-  CloudHsmClustersBackupResponse,
-  CloudHsmClustersValidateRestorePropertiesOptionalParams,
-  CloudHsmClustersValidateRestorePropertiesResponse,
-  RestoreRequestProperties,
-  CloudHsmClustersRestoreOptionalParams,
-  CloudHsmClustersRestoreResponse,
   CloudHsmClustersListByResourceGroupNextResponse,
-  CloudHsmClustersListBySubscriptionNextResponse,
+  CloudHsmClustersListBySubscriptionNextResponse
 } from "../models";
 
 /// <reference lib="esnext.asynciterable" />
@@ -69,7 +59,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    */
   public listByResourceGroup(
     resourceGroupName: string,
-    options?: CloudHsmClustersListByResourceGroupOptionalParams,
+    options?: CloudHsmClustersListByResourceGroupOptionalParams
   ): PagedAsyncIterableIterator<CloudHsmCluster> {
     const iter = this.listByResourceGroupPagingAll(resourceGroupName, options);
     return {
@@ -86,16 +76,16 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
         return this.listByResourceGroupPagingPage(
           resourceGroupName,
           options,
-          settings,
+          settings
         );
-      },
+      }
     };
   }
 
   private async *listByResourceGroupPagingPage(
     resourceGroupName: string,
     options?: CloudHsmClustersListByResourceGroupOptionalParams,
-    settings?: PageSettings,
+    settings?: PageSettings
   ): AsyncIterableIterator<CloudHsmCluster[]> {
     let result: CloudHsmClustersListByResourceGroupResponse;
     let continuationToken = settings?.continuationToken;
@@ -110,7 +100,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
       result = await this._listByResourceGroupNext(
         resourceGroupName,
         continuationToken,
-        options,
+        options
       );
       continuationToken = result.nextLink;
       let page = result.value || [];
@@ -121,11 +111,11 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
 
   private async *listByResourceGroupPagingAll(
     resourceGroupName: string,
-    options?: CloudHsmClustersListByResourceGroupOptionalParams,
+    options?: CloudHsmClustersListByResourceGroupOptionalParams
   ): AsyncIterableIterator<CloudHsmCluster> {
     for await (const page of this.listByResourceGroupPagingPage(
       resourceGroupName,
-      options,
+      options
     )) {
       yield* page;
     }
@@ -136,7 +126,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * @param options The options parameters.
    */
   public listBySubscription(
-    options?: CloudHsmClustersListBySubscriptionOptionalParams,
+    options?: CloudHsmClustersListBySubscriptionOptionalParams
   ): PagedAsyncIterableIterator<CloudHsmCluster> {
     const iter = this.listBySubscriptionPagingAll(options);
     return {
@@ -151,13 +141,13 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
           throw new Error("maxPageSize is not supported by this operation.");
         }
         return this.listBySubscriptionPagingPage(options, settings);
-      },
+      }
     };
   }
 
   private async *listBySubscriptionPagingPage(
     options?: CloudHsmClustersListBySubscriptionOptionalParams,
-    settings?: PageSettings,
+    settings?: PageSettings
   ): AsyncIterableIterator<CloudHsmCluster[]> {
     let result: CloudHsmClustersListBySubscriptionResponse;
     let continuationToken = settings?.continuationToken;
@@ -178,7 +168,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
   }
 
   private async *listBySubscriptionPagingAll(
-    options?: CloudHsmClustersListBySubscriptionOptionalParams,
+    options?: CloudHsmClustersListBySubscriptionOptionalParams
   ): AsyncIterableIterator<CloudHsmCluster> {
     for await (const page of this.listBySubscriptionPagingPage(options)) {
       yield* page;
@@ -189,7 +179,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * Create or Update a Cloud HSM Cluster in the specified subscription.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param location The geo-location where the resource lives
    * @param options The options parameters.
    */
@@ -197,7 +187,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
     resourceGroupName: string,
     cloudHsmClusterName: string,
     location: string,
-    options?: CloudHsmClustersCreateOrUpdateOptionalParams,
+    options?: CloudHsmClustersCreateOrUpdateOptionalParams
   ): Promise<
     SimplePollerLike<
       OperationState<CloudHsmClustersCreateOrUpdateResponse>,
@@ -206,20 +196,21 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<CloudHsmClustersCreateOrUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -228,8 +219,8 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -237,15 +228,15 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
     const lro = createLroSpec({
       sendOperationFn,
       args: { resourceGroupName, cloudHsmClusterName, location, options },
-      spec: createOrUpdateOperationSpec,
+      spec: createOrUpdateOperationSpec
     });
     const poller = await createHttpPoller<
       CloudHsmClustersCreateOrUpdateResponse,
@@ -253,7 +244,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
     >(lro, {
       restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "original-uri",
+      resourceLocationConfig: "original-uri"
     });
     await poller.poll();
     return poller;
@@ -263,7 +254,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * Create or Update a Cloud HSM Cluster in the specified subscription.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param location The geo-location where the resource lives
    * @param options The options parameters.
    */
@@ -271,13 +262,13 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
     resourceGroupName: string,
     cloudHsmClusterName: string,
     location: string,
-    options?: CloudHsmClustersCreateOrUpdateOptionalParams,
+    options?: CloudHsmClustersCreateOrUpdateOptionalParams
   ): Promise<CloudHsmClustersCreateOrUpdateResponse> {
     const poller = await this.beginCreateOrUpdate(
       resourceGroupName,
       cloudHsmClusterName,
       location,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -286,13 +277,13 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * Update a Cloud HSM Cluster in the specified subscription.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param options The options parameters.
    */
   async beginUpdate(
     resourceGroupName: string,
     cloudHsmClusterName: string,
-    options?: CloudHsmClustersUpdateOptionalParams,
+    options?: CloudHsmClustersUpdateOptionalParams
   ): Promise<
     SimplePollerLike<
       OperationState<CloudHsmClustersUpdateResponse>,
@@ -301,20 +292,21 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
   > {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ): Promise<CloudHsmClustersUpdateResponse> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -323,8 +315,8 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -332,15 +324,15 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
     const lro = createLroSpec({
       sendOperationFn,
       args: { resourceGroupName, cloudHsmClusterName, options },
-      spec: updateOperationSpec,
+      spec: updateOperationSpec
     });
     const poller = await createHttpPoller<
       CloudHsmClustersUpdateResponse,
@@ -348,7 +340,7 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
     >(lro, {
       restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "location",
+      resourceLocationConfig: "location"
     });
     await poller.poll();
     return poller;
@@ -358,18 +350,18 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * Update a Cloud HSM Cluster in the specified subscription.
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param options The options parameters.
    */
   async beginUpdateAndWait(
     resourceGroupName: string,
     cloudHsmClusterName: string,
-    options?: CloudHsmClustersUpdateOptionalParams,
+    options?: CloudHsmClustersUpdateOptionalParams
   ): Promise<CloudHsmClustersUpdateResponse> {
     const poller = await this.beginUpdate(
       resourceGroupName,
       cloudHsmClusterName,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -378,17 +370,17 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * Gets the specified Cloud HSM Cluster
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param options The options parameters.
    */
   get(
     resourceGroupName: string,
     cloudHsmClusterName: string,
-    options?: CloudHsmClustersGetOptionalParams,
+    options?: CloudHsmClustersGetOptionalParams
   ): Promise<CloudHsmClustersGetResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, cloudHsmClusterName, options },
-      getOperationSpec,
+      getOperationSpec
     );
   }
 
@@ -396,35 +388,31 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * Deletes the specified Cloud HSM Cluster
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param options The options parameters.
    */
   async beginDelete(
     resourceGroupName: string,
     cloudHsmClusterName: string,
-    options?: CloudHsmClustersDeleteOptionalParams,
-  ): Promise<
-    SimplePollerLike<
-      OperationState<CloudHsmClustersDeleteResponse>,
-      CloudHsmClustersDeleteResponse
-    >
-  > {
+    options?: CloudHsmClustersDeleteOptionalParams
+  ): Promise<SimplePollerLike<OperationState<void>, void>> {
     const directSendOperation = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ): Promise<CloudHsmClustersDeleteResponse> => {
+      spec: coreClient.OperationSpec
+    ): Promise<void> => {
       return this.client.sendOperationRequest(args, spec);
     };
     const sendOperationFn = async (
       args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
+      spec: coreClient.OperationSpec
     ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
+      let currentRawResponse:
+        | coreClient.FullOperationResponse
+        | undefined = undefined;
       const providedCallback = args.options?.onResponse;
       const callback: coreClient.RawResponseCallback = (
         rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
+        flatResponse: unknown
       ) => {
         currentRawResponse = rawResponse;
         providedCallback?.(rawResponse, flatResponse);
@@ -433,8 +421,8 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
         ...args,
         options: {
           ...args.options,
-          onResponse: callback,
-        },
+          onResponse: callback
+        }
       };
       const flatResponse = await directSendOperation(updatedArgs, spec);
       return {
@@ -442,23 +430,20 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
         rawResponse: {
           statusCode: currentRawResponse!.status,
           body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
+          headers: currentRawResponse!.headers.toJSON()
+        }
       };
     };
 
     const lro = createLroSpec({
       sendOperationFn,
       args: { resourceGroupName, cloudHsmClusterName, options },
-      spec: deleteOperationSpec,
+      spec: deleteOperationSpec
     });
-    const poller = await createHttpPoller<
-      CloudHsmClustersDeleteResponse,
-      OperationState<CloudHsmClustersDeleteResponse>
-    >(lro, {
+    const poller = await createHttpPoller<void, OperationState<void>>(lro, {
       restoreFrom: options?.resumeFrom,
       intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "location",
+      resourceLocationConfig: "location"
     });
     await poller.poll();
     return poller;
@@ -468,18 +453,18 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * Deletes the specified Cloud HSM Cluster
    * @param resourceGroupName The name of the resource group. The name is case insensitive.
    * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
+   *                            Cloud HSM Cluster names must be between 3 and 24 characters in length.
    * @param options The options parameters.
    */
   async beginDeleteAndWait(
     resourceGroupName: string,
     cloudHsmClusterName: string,
-    options?: CloudHsmClustersDeleteOptionalParams,
-  ): Promise<CloudHsmClustersDeleteResponse> {
+    options?: CloudHsmClustersDeleteOptionalParams
+  ): Promise<void> {
     const poller = await this.beginDelete(
       resourceGroupName,
       cloudHsmClusterName,
-      options,
+      options
     );
     return poller.pollUntilDone();
   }
@@ -492,11 +477,11 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    */
   private _listByResourceGroup(
     resourceGroupName: string,
-    options?: CloudHsmClustersListByResourceGroupOptionalParams,
+    options?: CloudHsmClustersListByResourceGroupOptionalParams
   ): Promise<CloudHsmClustersListByResourceGroupResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, options },
-      listByResourceGroupOperationSpec,
+      listByResourceGroupOperationSpec
     );
   }
 
@@ -505,392 +490,12 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    * @param options The options parameters.
    */
   private _listBySubscription(
-    options?: CloudHsmClustersListBySubscriptionOptionalParams,
+    options?: CloudHsmClustersListBySubscriptionOptionalParams
   ): Promise<CloudHsmClustersListBySubscriptionResponse> {
     return this.client.sendOperationRequest(
       { options },
-      listBySubscriptionOperationSpec,
+      listBySubscriptionOperationSpec
     );
-  }
-
-  /**
-   * Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster
-   * resource in the specified subscription.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param options The options parameters.
-   */
-  async beginValidateBackupProperties(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    options?: CloudHsmClustersValidateBackupPropertiesOptionalParams,
-  ): Promise<
-    SimplePollerLike<
-      OperationState<CloudHsmClustersValidateBackupPropertiesResponse>,
-      CloudHsmClustersValidateBackupPropertiesResponse
-    >
-  > {
-    const directSendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ): Promise<CloudHsmClustersValidateBackupPropertiesResponse> => {
-      return this.client.sendOperationRequest(args, spec);
-    };
-    const sendOperationFn = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
-      const providedCallback = args.options?.onResponse;
-      const callback: coreClient.RawResponseCallback = (
-        rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
-      ) => {
-        currentRawResponse = rawResponse;
-        providedCallback?.(rawResponse, flatResponse);
-      };
-      const updatedArgs = {
-        ...args,
-        options: {
-          ...args.options,
-          onResponse: callback,
-        },
-      };
-      const flatResponse = await directSendOperation(updatedArgs, spec);
-      return {
-        flatResponse,
-        rawResponse: {
-          statusCode: currentRawResponse!.status,
-          body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
-      };
-    };
-
-    const lro = createLroSpec({
-      sendOperationFn,
-      args: { resourceGroupName, cloudHsmClusterName, options },
-      spec: validateBackupPropertiesOperationSpec,
-    });
-    const poller = await createHttpPoller<
-      CloudHsmClustersValidateBackupPropertiesResponse,
-      OperationState<CloudHsmClustersValidateBackupPropertiesResponse>
-    >(lro, {
-      restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "azure-async-operation",
-    });
-    await poller.poll();
-    return poller;
-  }
-
-  /**
-   * Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster
-   * resource in the specified subscription.
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param options The options parameters.
-   */
-  async beginValidateBackupPropertiesAndWait(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    options?: CloudHsmClustersValidateBackupPropertiesOptionalParams,
-  ): Promise<CloudHsmClustersValidateBackupPropertiesResponse> {
-    const poller = await this.beginValidateBackupProperties(
-      resourceGroupName,
-      cloudHsmClusterName,
-      options,
-    );
-    return poller.pollUntilDone();
-  }
-
-  /**
-   * Create a backup of the Cloud HSM Cluster in the specified subscription
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param options The options parameters.
-   */
-  async beginBackup(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    options?: CloudHsmClustersBackupOptionalParams,
-  ): Promise<
-    SimplePollerLike<
-      OperationState<CloudHsmClustersBackupResponse>,
-      CloudHsmClustersBackupResponse
-    >
-  > {
-    const directSendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ): Promise<CloudHsmClustersBackupResponse> => {
-      return this.client.sendOperationRequest(args, spec);
-    };
-    const sendOperationFn = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
-      const providedCallback = args.options?.onResponse;
-      const callback: coreClient.RawResponseCallback = (
-        rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
-      ) => {
-        currentRawResponse = rawResponse;
-        providedCallback?.(rawResponse, flatResponse);
-      };
-      const updatedArgs = {
-        ...args,
-        options: {
-          ...args.options,
-          onResponse: callback,
-        },
-      };
-      const flatResponse = await directSendOperation(updatedArgs, spec);
-      return {
-        flatResponse,
-        rawResponse: {
-          statusCode: currentRawResponse!.status,
-          body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
-      };
-    };
-
-    const lro = createLroSpec({
-      sendOperationFn,
-      args: { resourceGroupName, cloudHsmClusterName, options },
-      spec: backupOperationSpec,
-    });
-    const poller = await createHttpPoller<
-      CloudHsmClustersBackupResponse,
-      OperationState<CloudHsmClustersBackupResponse>
-    >(lro, {
-      restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "azure-async-operation",
-    });
-    await poller.poll();
-    return poller;
-  }
-
-  /**
-   * Create a backup of the Cloud HSM Cluster in the specified subscription
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param options The options parameters.
-   */
-  async beginBackupAndWait(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    options?: CloudHsmClustersBackupOptionalParams,
-  ): Promise<CloudHsmClustersBackupResponse> {
-    const poller = await this.beginBackup(
-      resourceGroupName,
-      cloudHsmClusterName,
-      options,
-    );
-    return poller.pollUntilDone();
-  }
-
-  /**
-   * Queued validating pre restore operation
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param options The options parameters.
-   */
-  async beginValidateRestoreProperties(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    options?: CloudHsmClustersValidateRestorePropertiesOptionalParams,
-  ): Promise<
-    SimplePollerLike<
-      OperationState<CloudHsmClustersValidateRestorePropertiesResponse>,
-      CloudHsmClustersValidateRestorePropertiesResponse
-    >
-  > {
-    const directSendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ): Promise<CloudHsmClustersValidateRestorePropertiesResponse> => {
-      return this.client.sendOperationRequest(args, spec);
-    };
-    const sendOperationFn = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
-      const providedCallback = args.options?.onResponse;
-      const callback: coreClient.RawResponseCallback = (
-        rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
-      ) => {
-        currentRawResponse = rawResponse;
-        providedCallback?.(rawResponse, flatResponse);
-      };
-      const updatedArgs = {
-        ...args,
-        options: {
-          ...args.options,
-          onResponse: callback,
-        },
-      };
-      const flatResponse = await directSendOperation(updatedArgs, spec);
-      return {
-        flatResponse,
-        rawResponse: {
-          statusCode: currentRawResponse!.status,
-          body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
-      };
-    };
-
-    const lro = createLroSpec({
-      sendOperationFn,
-      args: { resourceGroupName, cloudHsmClusterName, options },
-      spec: validateRestorePropertiesOperationSpec,
-    });
-    const poller = await createHttpPoller<
-      CloudHsmClustersValidateRestorePropertiesResponse,
-      OperationState<CloudHsmClustersValidateRestorePropertiesResponse>
-    >(lro, {
-      restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "azure-async-operation",
-    });
-    await poller.poll();
-    return poller;
-  }
-
-  /**
-   * Queued validating pre restore operation
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param options The options parameters.
-   */
-  async beginValidateRestorePropertiesAndWait(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    options?: CloudHsmClustersValidateRestorePropertiesOptionalParams,
-  ): Promise<CloudHsmClustersValidateRestorePropertiesResponse> {
-    const poller = await this.beginValidateRestoreProperties(
-      resourceGroupName,
-      cloudHsmClusterName,
-      options,
-    );
-    return poller.pollUntilDone();
-  }
-
-  /**
-   * Restores all key materials of a specified Cloud HSM Cluster
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param restoreRequestProperties Restore Operation Required properties
-   * @param options The options parameters.
-   */
-  async beginRestore(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    restoreRequestProperties: RestoreRequestProperties,
-    options?: CloudHsmClustersRestoreOptionalParams,
-  ): Promise<
-    SimplePollerLike<
-      OperationState<CloudHsmClustersRestoreResponse>,
-      CloudHsmClustersRestoreResponse
-    >
-  > {
-    const directSendOperation = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ): Promise<CloudHsmClustersRestoreResponse> => {
-      return this.client.sendOperationRequest(args, spec);
-    };
-    const sendOperationFn = async (
-      args: coreClient.OperationArguments,
-      spec: coreClient.OperationSpec,
-    ) => {
-      let currentRawResponse: coreClient.FullOperationResponse | undefined =
-        undefined;
-      const providedCallback = args.options?.onResponse;
-      const callback: coreClient.RawResponseCallback = (
-        rawResponse: coreClient.FullOperationResponse,
-        flatResponse: unknown,
-      ) => {
-        currentRawResponse = rawResponse;
-        providedCallback?.(rawResponse, flatResponse);
-      };
-      const updatedArgs = {
-        ...args,
-        options: {
-          ...args.options,
-          onResponse: callback,
-        },
-      };
-      const flatResponse = await directSendOperation(updatedArgs, spec);
-      return {
-        flatResponse,
-        rawResponse: {
-          statusCode: currentRawResponse!.status,
-          body: currentRawResponse!.parsedBody,
-          headers: currentRawResponse!.headers.toJSON(),
-        },
-      };
-    };
-
-    const lro = createLroSpec({
-      sendOperationFn,
-      args: {
-        resourceGroupName,
-        cloudHsmClusterName,
-        restoreRequestProperties,
-        options,
-      },
-      spec: restoreOperationSpec,
-    });
-    const poller = await createHttpPoller<
-      CloudHsmClustersRestoreResponse,
-      OperationState<CloudHsmClustersRestoreResponse>
-    >(lro, {
-      restoreFrom: options?.resumeFrom,
-      intervalInMs: options?.updateIntervalInMs,
-      resourceLocationConfig: "azure-async-operation",
-    });
-    await poller.poll();
-    return poller;
-  }
-
-  /**
-   * Restores all key materials of a specified Cloud HSM Cluster
-   * @param resourceGroupName The name of the resource group. The name is case insensitive.
-   * @param cloudHsmClusterName The name of the Cloud HSM Cluster within the specified resource group.
-   *                            Cloud HSM Cluster names must be between 3 and 23 characters in length.
-   * @param restoreRequestProperties Restore Operation Required properties
-   * @param options The options parameters.
-   */
-  async beginRestoreAndWait(
-    resourceGroupName: string,
-    cloudHsmClusterName: string,
-    restoreRequestProperties: RestoreRequestProperties,
-    options?: CloudHsmClustersRestoreOptionalParams,
-  ): Promise<CloudHsmClustersRestoreResponse> {
-    const poller = await this.beginRestore(
-      resourceGroupName,
-      cloudHsmClusterName,
-      restoreRequestProperties,
-      options,
-    );
-    return poller.pollUntilDone();
   }
 
   /**
@@ -902,11 +507,11 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
   private _listByResourceGroupNext(
     resourceGroupName: string,
     nextLink: string,
-    options?: CloudHsmClustersListByResourceGroupNextOptionalParams,
+    options?: CloudHsmClustersListByResourceGroupNextOptionalParams
   ): Promise<CloudHsmClustersListByResourceGroupNextResponse> {
     return this.client.sendOperationRequest(
       { resourceGroupName, nextLink, options },
-      listByResourceGroupNextOperationSpec,
+      listByResourceGroupNextOperationSpec
     );
   }
 
@@ -917,11 +522,11 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
    */
   private _listBySubscriptionNext(
     nextLink: string,
-    options?: CloudHsmClustersListBySubscriptionNextOptionalParams,
+    options?: CloudHsmClustersListBySubscriptionNextOptionalParams
   ): Promise<CloudHsmClustersListBySubscriptionNextResponse> {
     return this.client.sendOperationRequest(
       { nextLink, options },
-      listBySubscriptionNextOperationSpec,
+      listBySubscriptionNextOperationSpec
     );
   }
 }
@@ -929,355 +534,217 @@ export class CloudHsmClustersImpl implements CloudHsmClusters {
 const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
 const createOrUpdateOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
   httpMethod: "PUT",
   responses: {
     200: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     201: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     202: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     204: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   requestBody: {
     parameterPath: {
       tags: ["options", "tags"],
       location: ["location"],
-      identity: ["options", "identity"],
       sku: ["options", "sku"],
+      identity: ["options", "identity"],
+      provisioningState: ["options", "provisioningState"],
       autoGeneratedDomainNameLabelScope: [
         "options",
-        "autoGeneratedDomainNameLabelScope",
+        "autoGeneratedDomainNameLabelScope"
       ],
+      securityDomain: ["options", "securityDomain"],
+      hsms: ["options", "hsms"],
       publicNetworkAccess: ["options", "publicNetworkAccess"],
+      privateEndpointConnections: ["options", "privateEndpointConnections"],
+      restoreProperties: ["options", "restoreProperties"],
+      backupProperties: ["options", "backupProperties"]
     },
-    mapper: { ...Mappers.CloudHsmCluster, required: true },
+    mapper: { ...Mappers.CloudHsmCluster, required: true }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
+    Parameters.cloudHsmClusterName
   ],
   headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
-  serializer,
+  serializer
 };
 const updateOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
   httpMethod: "PATCH",
   responses: {
     200: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     201: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     202: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     204: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   requestBody: {
     parameterPath: {
       tags: ["options", "tags"],
+      sku: ["options", "sku"],
       identity: ["options", "identity"],
+      backupProperties: ["options", "backupProperties"]
     },
-    mapper: { ...Mappers.CloudHsmClusterPatchParameters, required: true },
+    mapper: { ...Mappers.CloudHsmClusterPatchParameters, required: true }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
+    Parameters.cloudHsmClusterName
   ],
   headerParameters: [Parameters.contentType, Parameters.accept],
   mediaType: "json",
-  serializer,
+  serializer
 };
 const getOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.CloudHsmCluster,
+      bodyMapper: Mappers.CloudHsmCluster
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
+    Parameters.cloudHsmClusterName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const deleteOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}",
   httpMethod: "DELETE",
   responses: {
-    200: {
-      headersMapper: Mappers.CloudHsmClustersDeleteHeaders,
-    },
-    201: {
-      headersMapper: Mappers.CloudHsmClustersDeleteHeaders,
-    },
-    202: {
-      headersMapper: Mappers.CloudHsmClustersDeleteHeaders,
-    },
-    204: {
-      headersMapper: Mappers.CloudHsmClustersDeleteHeaders,
-    },
+    200: {},
+    201: {},
+    202: {},
+    204: {},
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   queryParameters: [Parameters.apiVersion],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
+    Parameters.cloudHsmClusterName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const listByResourceGroupOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters",
+  path:
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.CloudHsmClusterListResult,
+      bodyMapper: Mappers.CloudHsmClusterListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   queryParameters: [Parameters.apiVersion, Parameters.skiptoken],
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
-    Parameters.resourceGroupName,
+    Parameters.resourceGroupName
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const listBySubscriptionOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters",
+  path:
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.CloudHsmClusterListResult,
+      bodyMapper: Mappers.CloudHsmClusterListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   queryParameters: [Parameters.apiVersion, Parameters.skiptoken],
   urlParameters: [Parameters.$host, Parameters.subscriptionId],
   headerParameters: [Parameters.accept],
-  serializer,
-};
-const validateBackupPropertiesOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/validateBackupProperties",
-  httpMethod: "POST",
-  responses: {
-    200: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersValidateBackupPropertiesHeaders,
-    },
-    201: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersValidateBackupPropertiesHeaders,
-    },
-    202: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersValidateBackupPropertiesHeaders,
-    },
-    204: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersValidateBackupPropertiesHeaders,
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
-  },
-  requestBody: Parameters.backupRequestProperties,
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
-  ],
-  headerParameters: [Parameters.contentType, Parameters.accept],
-  mediaType: "json",
-  serializer,
-};
-const backupOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backup",
-  httpMethod: "POST",
-  responses: {
-    200: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersBackupHeaders,
-    },
-    201: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersBackupHeaders,
-    },
-    202: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersBackupHeaders,
-    },
-    204: {
-      bodyMapper: Mappers.BackupResult,
-      headersMapper: Mappers.CloudHsmClustersBackupHeaders,
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
-  },
-  requestBody: Parameters.backupRequestProperties,
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
-  ],
-  headerParameters: [Parameters.contentType, Parameters.accept],
-  mediaType: "json",
-  serializer,
-};
-const validateRestorePropertiesOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/validateRestoreProperties",
-  httpMethod: "POST",
-  responses: {
-    200: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersValidateRestorePropertiesHeaders,
-    },
-    201: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersValidateRestorePropertiesHeaders,
-    },
-    202: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersValidateRestorePropertiesHeaders,
-    },
-    204: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersValidateRestorePropertiesHeaders,
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
-  },
-  requestBody: Parameters.restoreRequestProperties,
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
-  ],
-  headerParameters: [Parameters.contentType, Parameters.accept],
-  mediaType: "json",
-  serializer,
-};
-const restoreOperationSpec: coreClient.OperationSpec = {
-  path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restore",
-  httpMethod: "POST",
-  responses: {
-    200: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersRestoreHeaders,
-    },
-    201: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersRestoreHeaders,
-    },
-    202: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersRestoreHeaders,
-    },
-    204: {
-      bodyMapper: Mappers.RestoreResult,
-      headersMapper: Mappers.CloudHsmClustersRestoreHeaders,
-    },
-    default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
-  },
-  requestBody: Parameters.restoreRequestProperties1,
-  queryParameters: [Parameters.apiVersion],
-  urlParameters: [
-    Parameters.$host,
-    Parameters.subscriptionId,
-    Parameters.resourceGroupName,
-    Parameters.cloudHsmClusterName,
-  ],
-  headerParameters: [Parameters.contentType, Parameters.accept],
-  mediaType: "json",
-  serializer,
+  serializer
 };
 const listByResourceGroupNextOperationSpec: coreClient.OperationSpec = {
   path: "{nextLink}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.CloudHsmClusterListResult,
+      bodyMapper: Mappers.CloudHsmClusterListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
     Parameters.resourceGroupName,
-    Parameters.nextLink,
+    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };
 const listBySubscriptionNextOperationSpec: coreClient.OperationSpec = {
   path: "{nextLink}",
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.CloudHsmClusterListResult,
+      bodyMapper: Mappers.CloudHsmClusterListResult
     },
     default: {
-      bodyMapper: Mappers.ErrorResponse,
-    },
+      bodyMapper: Mappers.CloudHsmClusterError
+    }
   },
   urlParameters: [
     Parameters.$host,
     Parameters.subscriptionId,
-    Parameters.nextLink,
+    Parameters.nextLink
   ],
   headerParameters: [Parameters.accept],
-  serializer,
+  serializer
 };

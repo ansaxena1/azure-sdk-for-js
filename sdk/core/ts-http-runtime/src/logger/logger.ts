@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Debugger } from "./debug.js";
-import debug from "./debug.js";
+import debug, { Debugger } from "./debug.js";
 export { Debugger } from "./debug.js";
 
 const registeredLoggers = new Set<TypeSpecRuntimeDebugger>();

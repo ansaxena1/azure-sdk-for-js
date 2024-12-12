@@ -1,10 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
-import type { PollOperation, PollOperationState } from "@azure/core-lro";
-import { Poller } from "@azure/core-lro";
-import type { KeyVaultClient } from "../generated/keyVaultClient.js";
+import { OperationOptions } from "@azure/core-client";
+import { PollOperation, PollOperationState, Poller } from "@azure/core-lro";
+import { KeyVaultClient } from "../generated/keyVaultClient.js";
 import { delay } from "@azure/core-util";
 
 /**

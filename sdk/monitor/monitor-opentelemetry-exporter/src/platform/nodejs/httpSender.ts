@@ -1,19 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-
-import url from "node:url";
+import url from "url";
 import { diag } from "@opentelemetry/api";
-import type { FullOperationResponse } from "@azure/core-client";
+import { FullOperationResponse } from "@azure/core-client";
 import { redirectPolicyName } from "@azure/core-rest-pipeline";
-import type { SenderResult } from "../../types.js";
-import type {
+import { SenderResult } from "../../types";
+import {
   TelemetryItem as Envelope,
+  ApplicationInsightsClient,
   ApplicationInsightsClientOptionalParams,
   TrackOptionalParams,
-} from "../../generated/index.js";
-import { ApplicationInsightsClient } from "../../generated/index.js";
-import type { AzureMonitorExporterOptions } from "../../config.js";
-import { BaseSender } from "./baseSender.js";
+} from "../../generated";
+import { AzureMonitorExporterOptions } from "../../config";
+import { BaseSender } from "./baseSender";
 
 const applicationInsightsResource = "https://monitor.azure.com//.default";
 

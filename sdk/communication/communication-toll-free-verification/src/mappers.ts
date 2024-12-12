@@ -4,4 +4,4 @@
 export {
   BusinessInformation as BusinessInformationMapper,
   BusinessPointOfContact as BusinessPointOfContactMapper,
-} from "./generated/src/models/mappers.js";
+} from "./generated/src/models/mappers";

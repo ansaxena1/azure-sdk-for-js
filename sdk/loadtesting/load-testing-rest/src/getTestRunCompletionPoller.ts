@@ -1,12 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import { AbortError } from "@azure/abort-controller";
-import type { CancelOnProgress, OperationState, SimplePollerLike } from "@azure/core-lro";
-import type { TestRunCompletionPoller, PolledOperationOptions } from "./models";
-import type { AzureLoadTestingClient } from "./clientDefinitions";
-import type {
+import { AbortError, AbortSignalLike } from "@azure/abort-controller";
+import { CancelOnProgress, OperationState, SimplePollerLike } from "@azure/core-lro";
+import { TestRunCompletionPoller, PolledOperationOptions } from "./models";
+import { AzureLoadTestingClient } from "./clientDefinitions";
+import {
   TestRunCreateOrUpdate200Response,
   TestRunCreateOrUpdate201Response,
   TestRunGet200Response,

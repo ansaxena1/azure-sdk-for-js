@@ -1,12 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Recorder, RecorderStartOptions } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable, env, isPlaybackMode } from "@azure-tools/test-recorder";
+import {
+  Recorder,
+  RecorderStartOptions,
+  assertEnvironmentVariable,
+  env,
+  isPlaybackMode,
+} from "@azure-tools/test-recorder";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { AttestationClientOptions } from "../../src/index.js";
-import { AttestationAdministrationClient, AttestationClient } from "../../src/index.js";
-import { pemFromBase64 } from "../utils/helpers.js";
+import {
+  AttestationAdministrationClient,
+  AttestationClient,
+  AttestationClientOptions,
+} from "../../src/";
+import "./env";
+import { pemFromBase64 } from "../utils/helpers";
 
 const envSetupForPlayback: { [k: string]: string } = {
   ATTESTATION_LOCATION_SHORT_NAME: "wus",

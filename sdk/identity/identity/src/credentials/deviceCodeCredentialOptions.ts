@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CredentialPersistenceOptions } from "./credentialPersistenceOptions.js";
-import type { InteractiveCredentialOptions } from "./interactiveCredentialOptions.js";
+import { CredentialPersistenceOptions } from "./credentialPersistenceOptions";
+import { InteractiveCredentialOptions } from "./interactiveCredentialOptions";
 
 /**
  * Provides the user code and verification URI where the code must be

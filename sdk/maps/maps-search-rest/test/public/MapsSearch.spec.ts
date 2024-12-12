@@ -1,15 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Context } from "mocha";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { env, Recorder } from "@azure-tools/test-recorder";
 import { isNodeLike } from "@azure/core-util";
 import { createTestCredential } from "@azure-tools/test-credential";
 import { assert } from "chai";
 import { createClient, createRecorder } from "./utils/recordedClient";
-import type { MapsSearchClient } from "../../src";
-import MapsSearch, { isUnexpected } from "../../src";
+import MapsSearch, { isUnexpected, MapsSearchClient } from "../../src";
 
 describe("Authentication", function () {
   let recorder: Recorder;

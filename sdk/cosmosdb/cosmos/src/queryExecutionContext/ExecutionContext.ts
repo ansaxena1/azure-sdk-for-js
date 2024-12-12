@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
-import type { Response } from "../request";
+import { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
+import { Response } from "../request";
 
 /** @hidden */
 export interface ExecutionContext {

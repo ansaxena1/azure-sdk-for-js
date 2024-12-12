@@ -12,9 +12,9 @@ import {
   PipelineResponse,
   SendRequest,
 } from "@azure/core-rest-pipeline";
-import { SmsImpl } from "./operations/index.js";
-import { Sms } from "./operationsInterfaces/index.js";
-import { SmsApiClientOptionalParams } from "./models/index.js";
+import { SmsImpl } from "./operations";
+import { Sms } from "./operationsInterfaces";
+import { SmsApiClientOptionalParams } from "./models";
 
 export class SmsApiClient extends coreClient.ServiceClient {
   endpoint: string;

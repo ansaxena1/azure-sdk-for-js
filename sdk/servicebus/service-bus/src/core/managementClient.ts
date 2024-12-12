@@ -2,46 +2,41 @@
 // Licensed under the MIT License.
 
 import Long from "long";
-import type {
+import {
   EventContext,
   ReceiverOptions,
-  SenderOptions,
-  Typed,
-  Message as RheaMessage,
-} from "rhea-promise";
-import {
   message as RheaMessageUtil,
+  SenderOptions,
   generate_uuid,
   string_to_uuid,
   types,
+  Typed,
   ReceiverEvents,
+  Message as RheaMessage,
 } from "rhea-promise";
-import type {
-  MessagingError,
-  SendRequestOptions,
-  RetryOptions,
-  AmqpAnnotatedMessage,
-} from "@azure/core-amqp";
 import {
   ConditionErrorNameMapper,
   Constants,
   defaultCancellableLock,
+  MessagingError,
   RequestResponseLink,
+  SendRequestOptions,
+  RetryOptions,
+  AmqpAnnotatedMessage,
 } from "@azure/core-amqp";
-import type { ConnectionContext } from "../connectionContext.js";
-import type { ServiceBusReceivedMessage, ServiceBusMessage } from "../serviceBusMessage.js";
+import { ConnectionContext } from "../connectionContext.js";
 import {
   DispositionType,
+  ServiceBusReceivedMessage,
+  ServiceBusMessage,
   ServiceBusMessageImpl,
   toRheaMessage,
   fromRheaMessage,
   updateScheduledTime,
   updateMessageId,
 } from "../serviceBusMessage.js";
-import type { RequestResponseLinkOptions } from "./linkEntity.js";
-import { LinkEntity } from "./linkEntity.js";
-import type { ServiceBusLogger } from "../log.js";
-import { managementClientLogger, receiverLogger, senderLogger } from "../log.js";
+import { LinkEntity, RequestResponseLinkOptions } from "./linkEntity.js";
+import { managementClientLogger, receiverLogger, senderLogger, ServiceBusLogger } from "../log.js";
 import { toBuffer, waitForSendable } from "../util/utils.js";
 import {
   InvalidMaxMessageCountError,
@@ -54,18 +49,18 @@ import {
 import { max32BitNumber } from "../util/constants.js";
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 import { Buffer } from "buffer";
-import type { OperationOptionsBase } from "./../modelsToBeSharedWithEventHubs.js";
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { ReceiveMode } from "../models.js";
+import { OperationOptionsBase } from "./../modelsToBeSharedWithEventHubs.js";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { ReceiveMode } from "../models.js";
 import { translateServiceBusError } from "../serviceBusError.js";
 import { defaultDataTransformer, tryToJsonDecode } from "../dataTransformer.js";
 import { delay, isDefined, isObjectWithProperties } from "@azure/core-util";
-import type {
+import {
   RuleProperties,
   SqlRuleAction,
   SqlRuleFilter,
 } from "../serializers/ruleResourceSerializer.js";
-import type { ListRequestOptions } from "../serviceBusAtomManagementClient.js";
+import { ListRequestOptions } from "../serviceBusAtomManagementClient.js";
 
 /**
  * @internal

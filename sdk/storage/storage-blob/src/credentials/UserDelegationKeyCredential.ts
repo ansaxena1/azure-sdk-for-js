@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { createHmac } from "crypto";
-import type { UserDelegationKey } from "../BlobServiceClient";
+import { UserDelegationKey } from "../BlobServiceClient";
 
 /**
  * ONLY AVAILABLE IN NODE.JS RUNTIME.

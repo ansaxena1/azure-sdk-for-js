@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure/core-client";
-import type {
+import { OperationOptions } from "@azure/core-client";
+import {
   PhoneNumberAssignmentType,
   PhoneNumberSearchRequest,
   PhoneNumbersListAreaCodesOptionalParams,
   PhoneNumberType,
-} from "./generated/src/models/index.js";
+} from "./generated/src/models/";
 
 /**
  * The result of the phone numbers purchase operation.
@@ -113,9 +113,9 @@ export {
   OperatorInformationOptions,
   OperatorInformationResult,
   OperatorNumberType,
-} from "./generated/src/models/index.js";
+} from "./generated/src/models/";
 
-export { SipRoutingError, SipTrunkRoute } from "./generated/src/siprouting/models/index.js";
+export { SipRoutingError, SipTrunkRoute } from "./generated/src/siprouting/models";
 
 /**
  * Represents a SIP trunk for routing calls. See RFC 4904.

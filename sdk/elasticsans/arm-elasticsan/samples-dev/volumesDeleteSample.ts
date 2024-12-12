@@ -21,7 +21,7 @@ dotenv.config();
  * This sample demonstrates how to Delete an Volume.
  *
  * @summary Delete an Volume.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/Volumes_Delete_MaximumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/Volumes_Delete_MaximumSet_Gen.json
  */
 async function volumesDeleteMaximumSetGen() {
   const subscriptionId =
@@ -53,7 +53,7 @@ async function volumesDeleteMaximumSetGen() {
  * This sample demonstrates how to Delete an Volume.
  *
  * @summary Delete an Volume.
- * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/preview/2024-06-01-preview/examples/Volumes_Delete_MinimumSet_Gen.json
+ * x-ms-original-file: specification/elasticsan/resource-manager/Microsoft.ElasticSan/stable/2024-05-01/examples/Volumes_Delete_MinimumSet_Gen.json
  */
 async function volumesDeleteMinimumSetGen() {
   const subscriptionId =

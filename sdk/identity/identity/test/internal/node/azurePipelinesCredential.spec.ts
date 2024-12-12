@@ -1,10 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PipelineResponse } from "@azure/core-rest-pipeline";
-import { createHttpHeaders, createPipelineRequest } from "@azure/core-rest-pipeline";
-import { handleOidcResponse } from "../../../src/credentials/azurePipelinesCredential.js";
-import { describe, it, assert, beforeEach } from "vitest";
+import {
+  PipelineResponse,
+  createHttpHeaders,
+  createPipelineRequest,
+} from "@azure/core-rest-pipeline";
+import { handleOidcResponse } from "../../../src/credentials/azurePipelinesCredential";
+import { assert } from "@azure-tools/test-utils";
 
 describe("AzurePipelinesCredential (internal)", function () {
   let response: PipelineResponse;

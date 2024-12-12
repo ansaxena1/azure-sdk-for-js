@@ -2,11 +2,14 @@
 // Licensed under the MIT License.
 
 import Long from "long";
-import type { ConnectionContext } from "../connectionContext.js";
+import { ConnectionContext } from "../connectionContext.js";
 import { logger, receiverLogger } from "../log.js";
-import type { ReceiveMode } from "../models.js";
-import type { ServiceBusReceivedMessage } from "../serviceBusMessage.js";
-import { isAmqpAnnotatedMessage, isServiceBusMessage } from "../serviceBusMessage.js";
+import { ReceiveMode } from "../models.js";
+import {
+  isAmqpAnnotatedMessage,
+  isServiceBusMessage,
+  ServiceBusReceivedMessage,
+} from "../serviceBusMessage.js";
 import { isDefined } from "@azure/core-util";
 
 /**

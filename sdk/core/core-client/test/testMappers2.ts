@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { CompositeMapper } from "../src/interfaces.js";
+import { CompositeMapper } from "../src/interfaces.js";
 
 export const JobOutput: CompositeMapper = {
   type: {

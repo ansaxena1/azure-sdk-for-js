@@ -2,8 +2,7 @@
 // Licensed under the MIT License.
 
 import { hmac } from "./hmac";
-import type { HTTPMethod } from "../common";
-import { ResourceType, Constants } from "../common";
+import { HTTPMethod, ResourceType, Constants } from "../common";
 
 export async function generateHeaders(
   masterKey: string,

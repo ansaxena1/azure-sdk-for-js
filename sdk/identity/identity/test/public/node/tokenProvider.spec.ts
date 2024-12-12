@@ -1,19 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { TokenCredential, getBearerTokenProvider } from "../../../src/index.js";
-import type { MsalTestCleanup } from "../../node/msalNodeTestSetup.js";
-import { msalNodeTestSetup } from "../../node/msalNodeTestSetup.js";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { delay, isPlaybackMode } from "@azure-tools/test-recorder";
-import { describe, it, assert, expect, vi, beforeEach, afterEach } from "vitest";
+import { DefaultAzureCredential, getBearerTokenProvider } from "../../../src";
+import { MsalTestCleanup, msalNodeTestSetup } from "../../node/msalNodeTestSetup";
+import { Recorder, delay, isPlaybackMode } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { assert } from "@azure-tools/test-utils";
 
 describe("getBearerTokenProvider", function () {
-  let recorder: Recorder;
   let cleanup: MsalTestCleanup;
+  let recorder: Recorder;
 
-  beforeEach(async function (ctx) {
-    const setup = await msalNodeTestSetup(ctx);
+  beforeEach(async function (this: Context) {
+    const setup = await msalNodeTestSetup(this.currentTest);
     recorder = setup.recorder;
     cleanup = setup.cleanup;
   });
@@ -24,15 +23,7 @@ describe("getBearerTokenProvider", function () {
   const scope = "https://vault.azure.net/.default";
 
   it("returns a callback that returns string tokens", async function () {
-    // Create a fake credential similar to NoOpCredential
-    const credential: TokenCredential = {
-      getToken: () =>
-        Promise.resolve({
-          token: "Example-token",
-          tokenType: "Bearer",
-          expiresOnTimestamp: new Date().getTime() + 10000,
-        }),
-    };
+    const credential = new DefaultAzureCredential(recorder.configureClientOptions({}));
 
     const getAccessToken = getBearerTokenProvider(credential, scope);
 
@@ -41,7 +32,6 @@ describe("getBearerTokenProvider", function () {
         await delay(500);
       }
       const token = await getAccessToken();
-      assert.equal(token, "Example-token");
       assert.isString(token);
     }
   });

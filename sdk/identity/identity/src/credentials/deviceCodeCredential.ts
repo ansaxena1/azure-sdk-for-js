@@ -1,24 +1,23 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
+import { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
 import {
   processMultiTenantRequest,
   resolveAdditionallyAllowedTenantIds,
   resolveTenantId,
-} from "../util/tenantIdUtils.js";
-import type {
+} from "../util/tenantIdUtils";
+import {
   DeviceCodeCredentialOptions,
   DeviceCodeInfo,
   DeviceCodePromptCallback,
-} from "./deviceCodeCredentialOptions.js";
-import type { AuthenticationRecord } from "../msal/types.js";
-import { credentialLogger } from "../util/logging.js";
-import { ensureScopes } from "../util/scopeUtils.js";
-import { tracingClient } from "../util/tracing.js";
-import type { MsalClient } from "../msal/nodeFlows/msalClient.js";
-import { createMsalClient } from "../msal/nodeFlows/msalClient.js";
-import { DeveloperSignOnClientId } from "../constants.js";
+} from "./deviceCodeCredentialOptions";
+import { AuthenticationRecord } from "../msal/types";
+import { credentialLogger } from "../util/logging";
+import { ensureScopes } from "../util/scopeUtils";
+import { tracingClient } from "../util/tracing";
+import { MsalClient, createMsalClient } from "../msal/nodeFlows/msalClient";
+import { DeveloperSignOnClientId } from "../constants";
 
 const logger = credentialLogger("DeviceCodeCredential");
 

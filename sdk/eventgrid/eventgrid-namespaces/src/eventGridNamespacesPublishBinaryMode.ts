@@ -1,19 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
+  isUnexpected,
   EventGridContext as Client,
   PublishCloudEvent200Response,
   PublishCloudEventDefaultResponse,
 } from "./cadl-generated/rest/index";
-import { isUnexpected } from "./cadl-generated/rest/index";
-import type { StreamableMethod } from "@azure-rest/core-client";
-import { operationOptionsToRequestParameters } from "@azure-rest/core-client";
-import type { PublishCloudEventOptionalParams } from "./cadl-generated/models/options";
-import type { RawHttpHeadersInput } from "@azure/core-rest-pipeline";
+import { StreamableMethod, operationOptionsToRequestParameters } from "@azure-rest/core-client";
+import { PublishCloudEventOptionalParams } from "./cadl-generated/models/options";
+import { RawHttpHeadersInput } from "@azure/core-rest-pipeline";
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 import { Buffer } from "buffer";
-import type { CloudEvent } from "./cadl-generated";
+import { CloudEvent } from "./cadl-generated";
 
 export async function publishCloudEventInBinaryMode(
   context: Client,

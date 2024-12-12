@@ -10,6 +10,7 @@ import {
   ExceptionPolicyItem,
   JobRouterAdministrationClient,
 } from "@azure/communication-job-router";
+import { assert } from "chai";
 dotenv.config();
 
 const connectionString = process.env["COMMUNICATION_CONNECTION_STRING"] || "";

@@ -2,15 +2,15 @@
 // Licensed under the MIT License.
 
 import rhea from "rhea";
-import type {
+import {
   ConnectionCloseEvent,
+  MockServer,
   MockServerOptions,
   OnMessagesEvent,
   ReceiverOpenEvent,
   SenderCloseEvent,
   SenderOpenEvent,
 } from "../server/mockServer.js";
-import { MockServer } from "../server/mockServer.js";
 import {
   generateBadPartitionInfoResponse,
   generatePartitionInfoResponse,

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 /// <reference lib="esnext.asynciterable" />
-import type {
+import {
   DynamicAlphaIdConfiguration,
   GetConfigurationOptions,
   UpsertConfigurationOptions,
@@ -10,17 +10,16 @@ import type {
   GetPreRegisteredAlphaIdCountriesOptions,
   AlphaId,
   SupportedCountries,
-} from "./models.js";
+} from "./models";
 import { isKeyCredential, parseClientArguments } from "@azure/communication-common";
-import type { KeyCredential, TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
-import type { CommonClientOptions, InternalClientPipelineOptions } from "@azure/core-client";
-import { AlphaIDsClient as AlphaIDsGeneratedClient } from "./generated/src/index.js";
+import { KeyCredential, TokenCredential, isTokenCredential } from "@azure/core-auth";
+import { CommonClientOptions, InternalClientPipelineOptions } from "@azure/core-client";
+import { AlphaIDsClient as AlphaIDsGeneratedClient } from "./generated/src";
 import { createCommunicationAuthPolicy } from "@azure/communication-common";
-import { logger } from "./utils/index.js";
-import { tracingClient } from "./generated/src/tracing.js";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
-import { createAlphaIDsPagingPolicy } from "./utils/customPipelinePolicies.js";
+import { logger } from "./utils";
+import { tracingClient } from "./generated/src/tracing";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { createAlphaIDsPagingPolicy } from "./utils/customPipelinePolicies";
 
 /**
  * Client options used to configure the AlphaIdsClient API requests.

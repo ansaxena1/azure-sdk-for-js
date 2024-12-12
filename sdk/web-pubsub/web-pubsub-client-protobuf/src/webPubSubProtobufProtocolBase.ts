@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AckMessage,
   AckMessageError,
   ConnectedMessage,
@@ -12,14 +12,15 @@ import type {
   WebPubSubMessage,
   JSONTypes,
 } from "@azure/web-pubsub-client";
-import type { IMessageData, IUpstreamMessage } from "./generated/clientProto.js";
 import {
   DownstreamMessage,
+  IMessageData,
+  IUpstreamMessage,
   MessageData,
   UpstreamMessage,
   google,
 } from "./generated/clientProto.js";
-import type Long from "long";
+import Long from "long";
 
 /**
  * The "protobuf.reliable.webpubsub.azure.v1" protocol

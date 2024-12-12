@@ -1,30 +1,29 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type {
+import { AbortSignalLike } from "@azure/abort-controller";
+import {
+  getDefaultProxySettings,
   RequestBodyType as HttpRequestBody,
   TransferProgressEvent,
 } from "@azure/core-rest-pipeline";
-import { getDefaultProxySettings } from "@azure/core-rest-pipeline";
-import type { TokenCredential } from "@azure/core-auth";
-import { isTokenCredential } from "@azure/core-auth";
+import { isTokenCredential, TokenCredential } from "@azure/core-auth";
 import { isNode } from "@azure/core-util";
-import type { PollOperationState } from "@azure/core-lro";
+import { PollOperationState } from "@azure/core-lro";
 import { randomUUID } from "@azure/core-util";
-import type { Readable } from "stream";
+import { Readable } from "stream";
 
 import { BlobDownloadResponse } from "./BlobDownloadResponse";
 import { BlobQueryResponse } from "./BlobQueryResponse";
 import { AnonymousCredential } from "./credentials/AnonymousCredential";
 import { StorageSharedKeyCredential } from "./credentials/StorageSharedKeyCredential";
-import type {
+import {
   AppendBlob,
   Blob as StorageBlob,
   BlockBlob,
   PageBlob,
 } from "./generated/src/operationsInterfaces";
-import type {
+import {
   AppendBlobAppendBlockFromUrlHeaders,
   AppendBlobAppendBlockHeaders,
   AppendBlobCreateHeaders,
@@ -57,7 +56,7 @@ import type {
   PageBlobUploadPagesFromURLHeaders,
   PageBlobUploadPagesHeaders,
 } from "./generated/src";
-import type {
+import {
   AppendBlobAppendBlockFromUrlResponse,
   AppendBlobAppendBlockResponse,
   AppendBlobCreateResponse,
@@ -118,16 +117,18 @@ import type {
   BlobSetLegalHoldResponse,
   BlobSetMetadataResponse,
 } from "./generatedModels";
-import type {
+import {
   AppendBlobRequestConditions,
   BlobDownloadResponseParsed,
   BlobRequestConditions,
   BlockBlobTier,
+  ensureCpkIfSpecified,
   Metadata,
   ObjectReplicationPolicy,
   PageBlobRequestConditions,
   PremiumPageBlobTier,
   Tags,
+  toAccessTier,
   TagConditions,
   MatchConditions,
   ModificationConditions,
@@ -137,23 +138,19 @@ import type {
   HttpAuthorization,
   PollerLikeWithCancellation,
 } from "./models";
-import { ensureCpkIfSpecified, toAccessTier } from "./models";
-import type {
+import {
   PageBlobGetPageRangesDiffResponse,
   PageBlobGetPageRangesResponse,
+  rangeResponseFromModel,
 } from "./PageBlobRangeResponse";
-import { rangeResponseFromModel } from "./PageBlobRangeResponse";
-import type { PipelineLike, StoragePipelineOptions } from "./Pipeline";
-import { newPipeline, isPipelineLike } from "./Pipeline";
-import type {
+import { newPipeline, PipelineLike, isPipelineLike, StoragePipelineOptions } from "./Pipeline";
+import {
+  BlobBeginCopyFromUrlPoller,
   BlobBeginCopyFromUrlPollState,
   CopyPollerBlobClient,
 } from "./pollers/BlobStartCopyFromUrlPoller";
-import { BlobBeginCopyFromUrlPoller } from "./pollers/BlobStartCopyFromUrlPoller";
-import type { Range } from "./Range";
-import { rangeToString } from "./Range";
-import type { CommonOptions } from "./StorageClient";
-import { StorageClient } from "./StorageClient";
+import { Range, rangeToString } from "./Range";
+import { CommonOptions, StorageClient } from "./StorageClient";
 import { Batch } from "./utils/Batch";
 import { BufferScheduler } from "../../storage-common/src";
 import {
@@ -169,7 +166,6 @@ import {
   URLConstants,
 } from "./utils/constants";
 import { tracingClient } from "./utils/tracing";
-import type { WithResponse } from "./utils/utils.common";
 import {
   appendToURLPath,
   appendToURLQuery,
@@ -186,6 +182,7 @@ import {
   toBlobTagsString,
   toQuerySerialization,
   toTags,
+  WithResponse,
 } from "./utils/utils.common";
 import {
   fsCreateReadStream,
@@ -193,16 +190,16 @@ import {
   readStreamToLocalFile,
   streamToBuffer,
 } from "./utils/utils.node";
-import type { SASProtocol } from "./sas/SASQueryParameters";
-import type { SasIPRange } from "./sas/SasIPRange";
+import { SASProtocol } from "./sas/SASQueryParameters";
+import { SasIPRange } from "./sas/SasIPRange";
 import {
   generateBlobSASQueryParameters,
   generateBlobSASQueryParametersInternal,
 } from "./sas/BlobSASSignatureValues";
-import type { BlobSASPermissions } from "./sas/BlobSASPermissions";
+import { BlobSASPermissions } from "./sas/BlobSASPermissions";
 import { BlobLeaseClient } from "./BlobLeaseClient";
-import type { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
-import type { UserDelegationKey } from "./BlobServiceClient";
+import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
+import { UserDelegationKey } from "./BlobServiceClient";
 
 /**
  * Options to configure the {@link BlobClient.beginCopyFromURL} operation.
@@ -2247,7 +2244,7 @@ export class BlobClient extends StorageClient {
    * @param userDelegationKey -  Return value of `blobServiceClient.getUserDelegationKey()`
    * @returns The SAS URI consisting of the URI to the resource represented by this client, followed by the generated SAS token.
    */
-
+  /* eslint-disable-next-line @azure/azure-sdk/ts-naming-options*/
   public generateUserDelegationSasStringToSign(
     options: BlobGenerateSasUrlOptions,
     userDelegationKey: UserDelegationKey,

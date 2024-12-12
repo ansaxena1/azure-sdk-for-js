@@ -2,14 +2,17 @@
 // Licensed under the MIT License.
 /* eslint-disable no-unused-expressions */
 import assert from "assert";
-import type {
+import {
   Container,
+  CosmosClient,
+  CosmosDbDiagnosticLevel,
   CosmosDiagnostics,
   Database,
   DatabaseDefinition,
   FailedRequestAttemptDiagnostic,
   GatewayStatistics,
   MetadataLookUpDiagnostic,
+  MetadataLookUpType,
   PartitionKey,
   PartitionKeyDefinition,
   PermissionDefinition,
@@ -17,25 +20,18 @@ import type {
   Response,
   UserDefinition,
 } from "../../../src";
-import { CosmosClient, CosmosDbDiagnosticLevel, MetadataLookUpType } from "../../../src";
-import type {
-  ItemDefinition,
-  ItemResponse,
-  PermissionResponse,
-  Resource,
-  User,
-} from "../../../src";
-import type { UserResponse } from "../../../src";
+import { ItemDefinition, ItemResponse, PermissionResponse, Resource, User } from "../../../src";
+import { UserResponse } from "../../../src";
 import { endpoint } from "../common/_testConfig";
 import { masterKey } from "../common/_fakeTestSecrets";
-import type { DatabaseRequest } from "../../../src";
-import type { ContainerRequest } from "../../../src";
+import { DatabaseRequest } from "../../../src";
+import { ContainerRequest } from "../../../src";
 import { AssertionError, expect } from "chai";
 import {
   DiagnosticNodeInternal,
   DiagnosticNodeType,
 } from "../../../src/diagnostics/DiagnosticNodeInternal";
-import type { ExtractPromise } from "../../../src/utils/diagnostics";
+import { ExtractPromise } from "../../../src/utils/diagnostics";
 import { getCurrentTimestampInMs } from "../../../src/utils/time";
 import { extractPartitionKeys } from "../../../src/extractPartitionKey";
 
@@ -46,7 +42,6 @@ export const defaultClient = new CosmosClient({
   endpoint,
   key: masterKey,
   connectionPolicy: { enableBackgroundEndpointRefreshing: false },
-  diagnosticLevel: CosmosDbDiagnosticLevel.info,
 });
 
 export const defaultComputeGatewayClient = new CosmosClient({

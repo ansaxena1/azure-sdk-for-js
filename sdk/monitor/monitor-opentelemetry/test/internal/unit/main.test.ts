@@ -3,24 +3,26 @@
 
 import * as assert from "assert";
 import * as sinon from "sinon";
-import type { Context, TracerProvider } from "@opentelemetry/api";
-import { metrics, trace } from "@opentelemetry/api";
+import { metrics, trace, Context, TracerProvider } from "@opentelemetry/api";
 import { logs } from "@opentelemetry/api-logs";
-import type { AzureMonitorOpenTelemetryOptions } from "../../../src/index";
-import { useAzureMonitor, shutdownAzureMonitor } from "../../../src/index";
-import type { MeterProvider } from "@opentelemetry/sdk-metrics";
-import type { StatsbeatEnvironmentConfig } from "../../../src/types";
+import {
+  useAzureMonitor,
+  AzureMonitorOpenTelemetryOptions,
+  shutdownAzureMonitor,
+} from "../../../src/index";
+import { MeterProvider } from "@opentelemetry/sdk-metrics";
 import {
   AZURE_MONITOR_STATSBEAT_FEATURES,
+  StatsbeatEnvironmentConfig,
   StatsbeatFeature,
   StatsbeatInstrumentation,
   StatsbeatInstrumentationMap,
 } from "../../../src/types";
 import { getOsPrefix } from "../../../src/utils/common";
-import type { ReadableSpan, Span, SpanProcessor } from "@opentelemetry/sdk-trace-base";
-import type { LogRecordProcessor, LogRecord } from "@opentelemetry/sdk-logs";
+import { ReadableSpan, Span, SpanProcessor } from "@opentelemetry/sdk-trace-base";
+import { LogRecordProcessor, LogRecord } from "@opentelemetry/sdk-logs";
 import { getInstance } from "../../../src/utils/statsbeat";
-import type { Instrumentation, InstrumentationConfig } from "@opentelemetry/instrumentation";
+import { Instrumentation, InstrumentationConfig } from "@opentelemetry/instrumentation";
 
 const testInstrumentation: Instrumentation = {
   instrumentationName: "@opentelemetry/instrumentation-fs",

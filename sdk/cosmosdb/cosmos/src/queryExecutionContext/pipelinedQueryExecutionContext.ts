@@ -1,22 +1,21 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { ClientContext } from "../ClientContext";
-import type { Response, FeedOptions } from "../request";
-import type { PartitionedQueryExecutionInfo, QueryInfo } from "../request/ErrorResponse";
-import { ErrorResponse } from "../request/ErrorResponse";
-import type { CosmosHeaders } from "./CosmosHeaders";
+import { ClientContext } from "../ClientContext";
+import { Response, FeedOptions } from "../request";
+import { ErrorResponse, PartitionedQueryExecutionInfo, QueryInfo } from "../request/ErrorResponse";
+import { CosmosHeaders } from "./CosmosHeaders";
 import { OffsetLimitEndpointComponent } from "./EndpointComponent/OffsetLimitEndpointComponent";
 import { OrderByEndpointComponent } from "./EndpointComponent/OrderByEndpointComponent";
 import { OrderedDistinctEndpointComponent } from "./EndpointComponent/OrderedDistinctEndpointComponent";
 import { UnorderedDistinctEndpointComponent } from "./EndpointComponent/UnorderedDistinctEndpointComponent";
 import { GroupByEndpointComponent } from "./EndpointComponent/GroupByEndpointComponent";
-import type { ExecutionContext } from "./ExecutionContext";
+import { ExecutionContext } from "./ExecutionContext";
 import { getInitialHeader, mergeHeaders } from "./headerUtils";
 import { OrderByQueryExecutionContext } from "./orderByQueryExecutionContext";
 import { ParallelQueryExecutionContext } from "./parallelQueryExecutionContext";
 import { GroupByValueEndpointComponent } from "./EndpointComponent/GroupByValueEndpointComponent";
-import type { SqlQuerySpec } from "./SqlQuerySpec";
-import type { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
+import { SqlQuerySpec } from "./SqlQuerySpec";
+import { DiagnosticNodeInternal } from "../diagnostics/DiagnosticNodeInternal";
 import { NonStreamingOrderByDistinctEndpointComponent } from "./EndpointComponent/NonStreamingOrderByDistinctEndpointComponent";
 import { NonStreamingOrderByEndpointComponent } from "./EndpointComponent/NonStreamingOrderByEndpointComponent";
 
@@ -38,7 +37,6 @@ export class PipelinedQueryExecutionContext implements ExecutionContext {
     private options: FeedOptions,
     private partitionedQueryExecutionInfo: PartitionedQueryExecutionInfo,
     correlatedActivityId: string,
-    private emitRawOrderByPayload: boolean = false,
   ) {
     this.endpoint = null;
     this.pageSize = options["maxItemCount"];
@@ -87,14 +85,12 @@ export class PipelinedQueryExecutionContext implements ExecutionContext {
           sortOrders,
           this.vectorSearchBufferSize,
           partitionedQueryExecutionInfo.queryInfo.offset,
-          this.emitRawOrderByPayload,
         );
       } else {
         this.endpoint = new NonStreamingOrderByDistinctEndpointComponent(
           context,
           partitionedQueryExecutionInfo.queryInfo,
           this.vectorSearchBufferSize,
-          this.emitRawOrderByPayload,
         );
       }
     } else {
@@ -110,7 +106,6 @@ export class PipelinedQueryExecutionContext implements ExecutionContext {
             this.partitionedQueryExecutionInfo,
             correlatedActivityId,
           ),
-          this.emitRawOrderByPayload,
         );
       } else {
         this.endpoint = new ParallelQueryExecutionContext(
@@ -288,7 +283,7 @@ export class PipelinedQueryExecutionContext implements ExecutionContext {
     const hasLimit = queryInfo.limit || queryInfo.limit === 0;
     if (!hasTop && !hasLimit) {
       throw new ErrorResponse(
-        "Executing a non-streaming search query without TOP or LIMIT can consume a large number of RUs " +
+        "Executing a vector search query without TOP or LIMIT can consume a large number of RUs " +
           "very fast and have long runtimes. Please ensure you are using one of the above two filters " +
           "with your vector search query.",
       );

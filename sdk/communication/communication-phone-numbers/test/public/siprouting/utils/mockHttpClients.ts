@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   HttpClient,
   HttpHeaders,
   PipelineRequest,
   PipelineResponse,
 } from "@azure/core-rest-pipeline";
-import type { SipTrunk } from "../../../../src/index.js";
+import { SipTrunk } from "../../../../src";
 
 export const createMockHttpClient = <T = Record<string, unknown>>(
   status: number = 200,

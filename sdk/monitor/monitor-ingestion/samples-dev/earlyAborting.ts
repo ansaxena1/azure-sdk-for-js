@@ -10,20 +10,21 @@ import { DefaultAzureCredential } from "@azure/identity";
 import {
   isAggregateLogsUploadError,
   LogsIngestionClient,
-  type LogsUploadFailure,
+  LogsUploadFailure,
 } from "@azure/monitor-ingestion";
-import "dotenv/config";
 
-async function main(): Promise<void> {
+require("dotenv").config();
+
+async function main() {
   const logsIngestionEndpoint = process.env.LOGS_INGESTION_ENDPOINT || "logs_ingestion_endpoint";
   const streamName = process.env.STREAM_NAME || "data_stream_name";
   const credential = new DefaultAzureCredential();
   const client = new LogsIngestionClient(logsIngestionEndpoint, credential);
-  const abortController = new AbortController();
+  let abortController = new AbortController();
 
-  function errorCallback(uploadLogsError: LogsUploadFailure): void {
+  function errorCallback(uploadLogsError: LogsUploadFailure) {
     if (
-      uploadLogsError.cause.message ===
+      (uploadLogsError.cause as Error).message ===
       "Data collection rule with immutable Id 'immutable-id-123' not found."
     ) {
       abortController.abort();
@@ -48,7 +49,7 @@ async function main(): Promise<void> {
     });
   } catch (e) {
     if (isAggregateLogsUploadError(e)) {
-      const aggregateErrors = e.errors;
+      let aggregateErrors = e.errors;
       if (aggregateErrors.length > 0) {
         console.log(
           "Some logs have failed to complete ingestion. Number of error batches=",

@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { OperationOptions } from "@azure-rest/core-client";
-import type {
+import { OperationOptions } from "@azure-rest/core-client";
+import {
   BrokerProperties,
   PublishCloudEventOptionalParams,
   ReceiveCloudEventsOptionalParams,
@@ -50,7 +50,7 @@ export interface RejectEventsOptions extends RejectCloudEventsOptionalParams {}
 export interface RenewEventLocksOptions extends RenewCloudEventLocksOptionalParams {}
 
 /** Known values of {@link ReleaseDelay} that the service accepts. */
-export enum KnownReleaseDelay {
+export const enum KnownReleaseDelay {
   /** Ten Minutes */
   TenMinutes = "600",
 

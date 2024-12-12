@@ -3,7 +3,7 @@
 
 import rhea from "rhea";
 import { EventEmitter } from "events";
-import type { ListenOptions } from "net";
+import { ListenOptions } from "net";
 import { convertBufferToMessages } from "../utils/convertBufferToMessage.js";
 
 export interface MockServerOptions {

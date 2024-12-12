@@ -2,23 +2,28 @@
 // Licensed under the MIT License.
 
 import { assert } from "chai";
-import type { Context } from "mocha";
-import type { Recorder } from "@azure-tools/test-recorder";
+import { Context } from "mocha";
+import { Recorder } from "@azure-tools/test-recorder";
 import { RestError } from "@azure/core-rest-pipeline";
 
-import type {
+import {
   AssetConversion,
   AssetConversionInputSettings,
   AssetConversionOutputSettings,
   AssetConversionPollerLike,
   AssetConversionSettings,
+  KnownAssetConversionStatus,
+  RemoteRenderingClient,
   RenderingSession,
   RenderingSessionPollerLike,
   RenderingSessionSettings,
 } from "../../src";
-import { KnownAssetConversionStatus, RemoteRenderingClient } from "../../src";
-import type { AccessToken, GetTokenOptions, TokenCredential } from "@azure/core-auth";
-import { AzureKeyCredential } from "@azure/core-auth";
+import {
+  AccessToken,
+  AzureKeyCredential,
+  GetTokenOptions,
+  TokenCredential,
+} from "@azure/core-auth";
 import { createClient, createRecorder, recorderStartOptions } from "../utils/recordedClient";
 
 import { assertEnvironmentVariable, isPlaybackMode } from "@azure-tools/test-recorder";

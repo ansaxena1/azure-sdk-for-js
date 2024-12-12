@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { formatPreferHeader } from "../../../src/internal/util.js";
-import { describe, it, assert } from "vitest";
+import { assert } from "chai";
+import { formatPreferHeader } from "../../../src/internal/util";
 
 describe("Utils unit tests", () => {
   type PreferHeadersArg = Parameters<typeof formatPreferHeader>[0];

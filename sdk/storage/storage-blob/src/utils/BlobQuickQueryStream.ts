@@ -3,11 +3,11 @@
 
 import { Readable } from "stream";
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { TransferProgressEvent } from "@azure/core-rest-pipeline";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { TransferProgressEvent } from "@azure/core-rest-pipeline";
 
 import { AvroReadableFromStream, AvroReader } from "../../../storage-internal-avro/src";
-import type { BlobQueryError } from "../Clients";
+import { BlobQueryError } from "../Clients";
 
 export interface BlobQuickQueryStreamOptions {
   /**

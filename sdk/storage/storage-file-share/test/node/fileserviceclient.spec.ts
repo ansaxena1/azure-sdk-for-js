@@ -12,10 +12,9 @@ import {
   recorderEnvSetup,
   uriSanitizers,
 } from "../utils";
-import type { StorageSharedKeyCredential, ShareItem } from "../../src";
-import { ShareServiceClient, newPipeline } from "../../src";
+import { ShareServiceClient, newPipeline, StorageSharedKeyCredential, ShareItem } from "../../src";
 import { delay, Recorder } from "@azure-tools/test-recorder";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("FileServiceClient Node.js only", () => {
   let recorder: Recorder;

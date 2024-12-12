@@ -8,12 +8,13 @@ import {
   parseJsonToken,
   powerShellErrors,
   powerShellPublicErrorMessages,
-} from "../../../src/credentials/azurePowerShellCredential.js";
-import { AzurePowerShellCredential } from "../../../src/index.js";
-import type { GetTokenOptions } from "@azure/core-auth";
-import { commandStack } from "../../../src/credentials/azurePowerShellCredential.js";
-import { processUtils } from "../../../src/util/processUtils.js";
-import { describe, it, assert, expect, vi, afterEach } from "vitest";
+} from "../../../src/credentials/azurePowerShellCredential";
+import { AzurePowerShellCredential } from "../../../src";
+import { GetTokenOptions } from "@azure/core-auth";
+import Sinon from "sinon";
+import { assert } from "@azure-tools/test-utils";
+import { commandStack } from "../../../src/credentials/azurePowerShellCredential";
+import { processUtils } from "../../../src/util/processUtils";
 
 function resetCommandStack(): void {
   commandStack[0] = formatCommand("pwsh");
@@ -28,9 +29,12 @@ describe("AzurePowerShellCredential", function () {
   const scope = "https://vault.azure.net/.default";
   const tenantIdErrorMessage =
     "Invalid tenant id provided. You can locate your tenant id by following the instructions listed here: https://learn.microsoft.com/partner-center/find-ids-and-domain-names.";
-
+  let sandbox: Sinon.SinonSandbox;
+  beforeEach(() => {
+    sandbox = Sinon.createSandbox();
+  });
   afterEach(() => {
-    vi.restoreAllMocks();
+    sandbox.restore();
     resetCommandStack();
   });
 
@@ -42,11 +46,9 @@ describe("AzurePowerShellCredential", function () {
   });
 
   it("throws an expected error if the user hasn't logged in through PowerShell", async function () {
-    vi.spyOn(processUtils, "execFile")
-      .mockResolvedValueOnce("") // The first call checks that the command is available.
-      .mockImplementationOnce(() => {
-        throw new Error(`Get-AzAccessToken: ${powerShellErrors.login}`);
-      });
+    const stub = sandbox.stub(processUtils, "execFile");
+    stub.onCall(0).returns(Promise.resolve("")); // The first call checks that the command is available.
+    stub.onCall(1).throws(new Error(`Get-AzAccessToken: ${powerShellErrors.login}`));
 
     const credential = new AzurePowerShellCredential();
 
@@ -63,11 +65,9 @@ describe("AzurePowerShellCredential", function () {
   });
 
   it("throws an expected error if the user hasn't installed the Az.Account module", async function () {
-    vi.spyOn(processUtils, "execFile")
-      .mockResolvedValueOnce("") // The first call checks that the command is available.
-      .mockImplementationOnce(() => {
-        throw new Error(`Get-AzAccessToken: ${powerShellErrors.installed}`);
-      });
+    const stub = sandbox.stub(processUtils, "execFile");
+    stub.onCall(0).returns(Promise.resolve("")); // The first call checks that the command is available.
+    stub.onCall(1).throws(new Error(powerShellErrors.installed));
 
     const credential = new AzurePowerShellCredential();
 
@@ -84,16 +84,12 @@ describe("AzurePowerShellCredential", function () {
   });
 
   it("throws an expected error if PowerShell isn't installed", async function () {
-    const stub = vi.spyOn(processUtils, "execFile");
-    stub.mockImplementationOnce(() => {
-      throw new Error();
-    });
+    const stub = sandbox.stub(processUtils, "execFile");
+    stub.onCall(0).throws(new Error());
 
     // Additionally stub the second call on windows, for the fallback to Windows PowerShell
     if (process.platform === "win32") {
-      stub.mockImplementationOnce(() => {
-        throw new Error();
-      });
+      stub.onCall(1).throws(new Error());
     }
 
     const credential = new AzurePowerShellCredential();
@@ -114,9 +110,10 @@ describe("AzurePowerShellCredential", function () {
   });
 
   it("throws an expected error if PowerShell returns something that isn't valid JSON", async function () {
-    vi.spyOn(processUtils, "execFile")
-      .mockResolvedValueOnce("")
-      .mockResolvedValueOnce("Not valid JSON");
+    const stub = sandbox.stub(processUtils, "execFile");
+    let idx = 0;
+    stub.onCall(idx++).returns(Promise.resolve("")); // The first call checks that the command is available.
+    stub.onCall(idx++).returns(Promise.resolve("Not valid JSON"));
 
     const credential = new AzurePowerShellCredential();
 
@@ -137,12 +134,11 @@ describe("AzurePowerShellCredential", function () {
 
   if (process.platform === "win32") {
     it("throws an expected error if PowerShell returns something that isn't valid JSON (Windows PowerShell fallback)", async function () {
-      vi.spyOn(processUtils, "execFile")
-        .mockImplementationOnce(() => {
-          throw new Error();
-        })
-        .mockResolvedValueOnce("")
-        .mockResolvedValueOnce("Not valid JSON");
+      const stub = sandbox.stub(processUtils, "execFile");
+      let idx = 0;
+      stub.onCall(idx++).throws(new Error());
+      stub.onCall(idx++).returns(Promise.resolve("")); // The first call checks that the command is available.
+      stub.onCall(idx++).returns(Promise.resolve("Not valid JSON"));
 
       const credential = new AzurePowerShellCredential();
 
@@ -170,9 +166,9 @@ describe("AzurePowerShellCredential", function () {
       Type: "Bearer",
     };
 
-    vi.spyOn(processUtils, "execFile")
-      .mockResolvedValueOnce("")
-      .mockResolvedValueOnce(JSON.stringify(tokenResponse));
+    const stub = sandbox.stub(processUtils, "execFile");
+    stub.onCall(0).returns(Promise.resolve("")); // The first call checks that the command is available.
+    stub.onCall(1).returns(Promise.resolve(JSON.stringify(tokenResponse)));
 
     const credential = new AzurePowerShellCredential();
 
@@ -189,10 +185,9 @@ describe("AzurePowerShellCredential", function () {
       Type: "Bearer",
     };
 
-    const stub = vi
-      .spyOn(processUtils, "execFile")
-      .mockResolvedValueOnce("") // The first call checks that the command is available.
-      .mockResolvedValueOnce(JSON.stringify(tokenResponse));
+    const stub = sandbox.stub(processUtils, "execFile");
+    stub.onCall(0).returns(Promise.resolve("")); // The first call checks that the command is available.
+    stub.onCall(1).returns(Promise.resolve(JSON.stringify(tokenResponse)));
 
     const credential = new AzurePowerShellCredential();
 
@@ -228,11 +223,12 @@ describe("AzurePowerShellCredential", function () {
       tenantId === " " ? "whitespace" : tenantId === "\0" ? "null character" : `"${tenantId}"`;
     it(`rejects invalid tenant id of ${testCase} in getToken`, async function () {
       const credential = new AzurePowerShellCredential();
-      await expect(
+      await assert.isRejected(
         credential.getToken("https://service/.default", {
           tenantId: tenantId,
         }),
-      ).rejects.toThrow(tenantIdErrorMessage);
+        tenantIdErrorMessage,
+      );
     });
     it(`rejects invalid tenant id of ${testCase} in constructor`, function () {
       assert.throws(() => {
@@ -250,7 +246,8 @@ describe("AzurePowerShellCredential", function () {
           : `"${inputScope}"`;
     it(`rejects invalid scope of ${testCase}`, async function () {
       const credential = new AzurePowerShellCredential();
-      await expect(credential.getToken(inputScope)).rejects.toThrow(
+      await assert.isRejected(
+        credential.getToken(inputScope),
         "Invalid scope was specified by the user or calling client",
       );
     });

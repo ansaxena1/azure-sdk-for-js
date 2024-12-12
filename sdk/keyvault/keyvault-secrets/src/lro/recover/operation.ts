@@ -1,18 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type {
+import { AbortSignalLike } from "@azure/abort-controller";
+import {
   DeletedSecret,
   GetSecretOptions,
   KeyVaultSecret,
   SecretProperties,
 } from "../../secretsModels.js";
-import type { KeyVaultSecretPollOperationState } from "../keyVaultSecretPoller.js";
-import { KeyVaultSecretPollOperation } from "../keyVaultSecretPoller.js";
-import type { KeyVaultClient } from "../../generated/keyVaultClient.js";
+import {
+  KeyVaultSecretPollOperation,
+  KeyVaultSecretPollOperationState,
+} from "../keyVaultSecretPoller.js";
+import { KeyVaultClient } from "../../generated/keyVaultClient.js";
 import { getSecretFromSecretBundle } from "../../transformations.js";
-import type { OperationOptions } from "@azure/core-client";
+import { OperationOptions } from "@azure/core-client";
 import { tracingClient } from "../../tracing.js";
 
 /**

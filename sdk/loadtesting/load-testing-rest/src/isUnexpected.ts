@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   TestCreateOrUpdate200Response,
   TestCreateOrUpdate201Response,
   TestCreateOrUpdateDefaultResponse,

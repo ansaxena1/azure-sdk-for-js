@@ -1,38 +1,41 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { AbortSignalLike } from "@azure/abort-controller";
-import type { OperationOptions } from "@azure/core-client";
+import { AbortSignalLike } from "@azure/abort-controller";
+import { OperationOptions } from "@azure/core-client";
 
-import type {
+import {
   HealthResponse as BeginAnalyzeHealthcareResponse,
   HealthcareJobState,
   HealthStatusOptionalParams as HealthcareJobStatusOptions,
   TextDocumentBatchStatistics,
   TextDocumentInput,
 } from "../../generated/models";
-import type {
+import {
   AnalyzeHealthcareEntitiesResult,
   AnalyzeHealthcareEntitiesResultArray,
   PagedAnalyzeHealthcareEntitiesResult,
   PagedAsyncIterableAnalyzeHealthcareEntitiesResult,
-} from "../../analyzeHealthcareEntitiesResult";
-import {
   makeHealthcareEntitiesErrorResult,
   makeHealthcareEntitiesResult,
 } from "../../analyzeHealthcareEntitiesResult";
-import type { PageSettings } from "@azure/core-paging";
-import type { StringIndexType } from "../../util";
-import { addStrEncodingParam, getOperationId, nextLinkToTopAndSkip, throwError } from "../../util";
-import type {
+import { PageSettings } from "@azure/core-paging";
+import {
+  StringIndexType,
+  addStrEncodingParam,
+  getOperationId,
+  nextLinkToTopAndSkip,
+  throwError,
+} from "../../util";
+import {
+  AnalysisPollOperation,
   AnalysisPollOperationState,
   OperationMetadata as AnalyzeHealthcareEntitiesOperationMetadata,
 } from "../poller";
-import { AnalysisPollOperation } from "../poller";
-import type { GeneratedClient as Client } from "../../generated";
+import { GeneratedClient as Client } from "../../generated";
 import { processAndCombineSuccessfulAndErroneousDocuments } from "../../textAnalyticsResult";
-import type { TextAnalyticsOperationOptions } from "../../textAnalyticsOperationOptions";
-import type { TracingClient } from "@azure/core-tracing";
+import { TextAnalyticsOperationOptions } from "../../textAnalyticsOperationOptions";
+import { TracingClient } from "@azure/core-tracing";
 
 /**
  * @internal

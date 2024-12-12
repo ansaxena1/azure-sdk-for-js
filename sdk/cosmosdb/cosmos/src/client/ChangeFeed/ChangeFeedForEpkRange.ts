@@ -2,19 +2,17 @@
 // Licensed under the MIT License.
 import { ChangeFeedRange } from "./ChangeFeedRange";
 import { ChangeFeedIteratorResponse } from "./ChangeFeedIteratorResponse";
-import type { PartitionKeyRangeCache } from "../../routing";
-import { QueryRange } from "../../routing";
+import { PartitionKeyRangeCache, QueryRange } from "../../routing";
 import { FeedRangeQueue } from "./FeedRangeQueue";
-import type { ClientContext } from "../../ClientContext";
-import type { Container, Resource } from "../../client";
+import { ClientContext } from "../../ClientContext";
+import { Container, Resource } from "../../client";
 import { Constants, SubStatusCodes, StatusCodes, ResourceType } from "../../common";
-import type { Response, FeedOptions } from "../../request";
-import { ErrorResponse } from "../../request";
+import { Response, FeedOptions, ErrorResponse } from "../../request";
 import { CompositeContinuationToken } from "./CompositeContinuationToken";
-import type { ChangeFeedPullModelIterator } from "./ChangeFeedPullModelIterator";
+import { ChangeFeedPullModelIterator } from "./ChangeFeedPullModelIterator";
 import { extractOverlappingRanges } from "./changeFeedUtils";
-import type { InternalChangeFeedIteratorOptions } from "./InternalChangeFeedOptions";
-import type { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
+import { InternalChangeFeedIteratorOptions } from "./InternalChangeFeedOptions";
+import { DiagnosticNodeInternal } from "../../diagnostics/DiagnosticNodeInternal";
 import { getEmptyCosmosDiagnostics, withDiagnostics } from "../../utils/diagnostics";
 import { ChangeFeedMode } from "./ChangeFeedMode";
 /**

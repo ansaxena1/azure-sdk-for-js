@@ -4,17 +4,16 @@
 import os from "node:os";
 import fs from "node:fs";
 import childProcess from "child_process";
-import type { Recorder } from "@azure-tools/test-recorder";
-import { env, isLiveMode, isPlaybackMode } from "@azure-tools/test-recorder";
+import { env, isLiveMode, isPlaybackMode, Recorder } from "@azure-tools/test-recorder";
 import { SecretClient } from "@azure/keyvault-secrets";
-import type { ClientSecretCredential } from "@azure/identity";
+import { ClientSecretCredential } from "@azure/identity";
 import { isNodeLike } from "@azure/core-util";
 
-import type { CertificateClient } from "../../src/index.js";
+import { CertificateClient } from "../../src/index.js";
 import { assertThrowsAbortError } from "./utils/common.js";
 import { testPollerProperties } from "./utils/recorderUtils.js";
 import { authenticate } from "./utils/testAuthentication.js";
-import type TestClient from "./utils/testClient.js";
+import TestClient from "./utils/testClient.js";
 import { toSupportTracing } from "@azure-tools/test-utils-vitest";
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 expect.extend({ toSupportTracing });

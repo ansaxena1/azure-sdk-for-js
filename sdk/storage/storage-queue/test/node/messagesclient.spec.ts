@@ -11,10 +11,10 @@ import {
 } from "../utils";
 import { Recorder } from "@azure-tools/test-recorder";
 import { QueueClient } from "../../src/QueueClient";
-import type { TokenCredential } from "@azure/core-auth";
+import { TokenCredential } from "@azure/core-auth";
 import { assertClientUsesTokenCredential } from "../utils/assert";
 import { newPipeline } from "../../src";
-import type { Context } from "mocha";
+import { Context } from "mocha";
 
 describe("QueueClient message methods, Node.js only", () => {
   let queueName: string;

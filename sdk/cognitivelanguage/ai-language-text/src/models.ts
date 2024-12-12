@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   AbstractiveSummary,
   AssessmentSentiment,
   ClassificationCategory,
@@ -20,6 +20,8 @@ import type {
   HealthcareAssertion,
   HealthcareEntityCategory,
   KeyPhraseExtractionAction,
+  KnownErrorCode,
+  KnownInnerErrorCode,
   LanguageDetectionAction,
   LinkedEntity,
   PiiEntityRecognitionAction,
@@ -34,10 +36,9 @@ import type {
   TextDocumentStatistics,
   TokenSentimentLabel,
 } from "./generated";
-import { KnownErrorCode, KnownInnerErrorCode } from "./generated";
-import type { CommonClientOptions, OperationOptions } from "@azure/core-client";
-import type { OperationState, SimplePollerLike } from "@azure/core-lro";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { CommonClientOptions, OperationOptions } from "@azure/core-client";
+import { OperationState, SimplePollerLike } from "@azure/core-lro";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
 
 /**
  * Configuration options for {@link TextAnalysisClient}.

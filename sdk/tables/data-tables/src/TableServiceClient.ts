@@ -1,28 +1,34 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type {
+import {
   GetPropertiesResponse,
   GetStatisticsResponse,
   ServiceProperties,
   SetPropertiesOptions,
   SetPropertiesResponse,
 } from "./generatedModels";
-import type {
+import {
   InternalClientPipelineOptions,
   OperationOptions,
   ServiceClientOptions,
 } from "@azure/core-client";
-import type {
+import {
   ListTableItemsOptions,
   TableItem,
   TableQueryOptions,
   TableServiceClientOptions,
 } from "./models";
-import type { NamedKeyCredential, SASCredential, TokenCredential } from "@azure/core-auth";
-import { isNamedKeyCredential, isSASCredential, isTokenCredential } from "@azure/core-auth";
+import {
+  NamedKeyCredential,
+  SASCredential,
+  TokenCredential,
+  isNamedKeyCredential,
+  isSASCredential,
+  isTokenCredential,
+} from "@azure/core-auth";
 import { COSMOS_SCOPE, STORAGE_SCOPE, TablesLoggingAllowedHeaderNames } from "./utils/constants";
-import type { Service, Table } from "./generated";
+import { Service, Table } from "./generated";
 import {
   injectSecondaryEndpointHeader,
   tablesSecondaryEndpointPolicy,
@@ -30,9 +36,9 @@ import {
 import { parseXML, stringifyXML } from "@azure/core-xml";
 
 import { GeneratedClient } from "./generated/generatedClient";
-import type { PagedAsyncIterableIterator } from "@azure/core-paging";
-import type { Pipeline } from "@azure/core-rest-pipeline";
-import type { TableItemResultPage } from "./models";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { Pipeline } from "@azure/core-rest-pipeline";
+import { TableItemResultPage } from "./models";
 import { apiVersionPolicy } from "./utils/apiVersionPolicy";
 import { getClientParamsFromConnectionString } from "./utils/connectionString";
 import { handleTableAlreadyExists } from "./utils/errorHelpers";

@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-
 import { ChildProcess, fork } from "child_process";
 import workerThreads from "worker_threads";
 import {

@@ -7,14 +7,13 @@
  *
  */
 
-import type { PolicyModification } from "./index.js";
-import * as Mappers from "../generated/models/mappers.js";
+import { PolicyModification } from "./index";
+import * as Mappers from "../generated/models/mappers";
 
-import type { PolicyResult as GeneratedPolicyResult } from "../generated/models/index.js";
+import { PolicyResult as GeneratedPolicyResult } from "../generated/models";
 
-import { TypeDeserializer } from "../utils/typeDeserializer.js";
-import type { AttestationSigner } from "./attestationSigner.js";
-import { _attestationSignerFromGenerated } from "./attestationSigner.js";
+import { TypeDeserializer } from "../utils/typeDeserializer";
+import { AttestationSigner, _attestationSignerFromGenerated } from "./attestationSigner";
 
 /**
  * The result of a policy certificate modification

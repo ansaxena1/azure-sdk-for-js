@@ -1,26 +1,25 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type * as msalBrowser from "@azure/msal-browser";
+import * as msalBrowser from "@azure/msal-browser";
 
-import type { AccessToken, GetTokenOptions } from "@azure/core-auth";
-import type { AuthenticationRecord, MsalResult } from "../types.js";
-import { AuthenticationRequiredError, CredentialUnavailableError } from "../../errors.js";
-import type { CredentialLogger } from "../../util/logging.js";
-import { formatSuccess } from "../../util/logging.js";
-import type { MsalFlow, MsalFlowOptions } from "./flows.js";
-import { ensureValidMsalToken, getAuthority, getKnownAuthorities, msalToPublic } from "../utils.js";
+import { AccessToken, GetTokenOptions } from "@azure/core-auth";
+import { AuthenticationRecord, MsalResult } from "../types";
+import { AuthenticationRequiredError, CredentialUnavailableError } from "../../errors";
+import { CredentialLogger, formatSuccess } from "../../util/logging";
+import { MsalFlow, MsalFlowOptions } from "./flows";
+import { ensureValidMsalToken, getAuthority, getKnownAuthorities, msalToPublic } from "../utils";
 import {
   processMultiTenantRequest,
   resolveAdditionallyAllowedTenantIds,
   resolveTenantId,
-} from "../../util/tenantIdUtils.js";
+} from "../../util/tenantIdUtils";
 
-import type { BrowserLoginStyle } from "../../credentials/interactiveBrowserCredentialOptions.js";
-import type { CredentialFlowGetTokenOptions } from "../credentials.js";
-import { DefaultTenantId } from "../../constants.js";
-import type { LogPolicyOptions } from "@azure/core-rest-pipeline";
-import type { MultiTenantTokenCredentialOptions } from "../../credentials/multiTenantTokenCredentialOptions.js";
+import { BrowserLoginStyle } from "../../credentials/interactiveBrowserCredentialOptions";
+import { CredentialFlowGetTokenOptions } from "../credentials";
+import { DefaultTenantId } from "../../constants";
+import { LogPolicyOptions } from "@azure/core-rest-pipeline";
+import { MultiTenantTokenCredentialOptions } from "../../credentials/multiTenantTokenCredentialOptions";
 
 /**
  * Union of the constructor parameters that all MSAL flow types take.
@@ -219,7 +218,6 @@ export abstract class MsalBrowser implements MsalBrowserFlow {
       token: result.accessToken,
       expiresOnTimestamp: result.expiresOn.getTime(),
       refreshAfterTimestamp: result.refreshOn?.getTime(),
-      tokenType: "Bearer",
-    } as AccessToken;
+    };
   }
 }

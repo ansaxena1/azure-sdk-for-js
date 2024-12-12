@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { PipelinePolicy } from "@azure/core-rest-pipeline";
+import { PipelinePolicy } from "@azure/core-rest-pipeline";
 import * as zlib from "zlib";
-import { promisify } from "node:util";
+import { promisify } from "util";
 const gzip = promisify(zlib.gzip);
 
 /**
@@ -15,13 +15,13 @@ export const GZippingPolicy: PipelinePolicy = {
   name: gZippingPolicyName,
   sendRequest: async (req, next) => {
     if (req.body) {
-      const buffer = await gzipping(req.body as string | ArrayBuffer | NodeJS.ArrayBufferView);
+      const buffer = await gzipping(req.body);
       req.body = buffer;
     }
     return next(req);
   },
 };
 
-function gzipping(body: string | ArrayBuffer | NodeJS.ArrayBufferView): Promise<Buffer> {
+function gzipping(body: any): Promise<Buffer> {
   return gzip(body);
 }

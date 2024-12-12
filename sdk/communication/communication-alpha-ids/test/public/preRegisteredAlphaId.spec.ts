@@ -1,26 +1,28 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import type { Recorder } from "@azure-tools/test-recorder";
-import type { AlphaIdsClient } from "../../src/index.js";
-import { createRecordedClient } from "./utils/recordedClient.js";
-import type { FullOperationResponse, OperationOptions } from "@azure/core-client";
-import { describe, it, assert, beforeEach, afterEach } from "vitest";
+
+import { Context } from "mocha";
+import { Recorder } from "@azure-tools/test-recorder";
+import { AlphaIdsClient } from "../../src";
+import { assert } from "chai";
+import { createRecordedClient } from "./utils/recordedClient";
+import { FullOperationResponse, OperationOptions } from "@azure/core-client";
 
 describe(`AlphaIdsClient - Preregistered Alpha Ids Operations`, function () {
   let recorder: Recorder;
   let client: AlphaIdsClient;
 
-  beforeEach(async function (ctx) {
-    ({ client, recorder } = await createRecordedClient(ctx));
+  beforeEach(async function (this: Context) {
+    ({ client, recorder } = await createRecordedClient(this));
   });
 
-  afterEach(async function (ctx) {
-    if (!ctx.task.pending) {
+  afterEach(async function (this: Context) {
+    if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("can list all pre-registered alpha ids", { timeout: 40000 }, async function () {
+  it("can list all pre-registered alpha ids", async function () {
     let configurationResponse: FullOperationResponse | undefined;
     const getConfigurationRequest: OperationOptions = {
       onResponse: (response) => {
@@ -65,9 +67,9 @@ describe(`AlphaIdsClient - Preregistered Alpha Ids Operations`, function () {
         )}, ${JSON.stringify(error)}`,
       );
     }
-  });
+  }).timeout(40000);
 
-  it("can list all pre-registered alpha ids countries", { timeout: 20000 }, async function () {
+  it("can list all pre-registered alpha ids countries", async function () {
     let configurationResponse: FullOperationResponse | undefined;
     const getConfigurationRequest: OperationOptions = {
       onResponse: (response) => {
@@ -87,5 +89,5 @@ describe(`AlphaIdsClient - Preregistered Alpha Ids Operations`, function () {
         )}, ${JSON.stringify(error)}`,
       );
     }
-  });
+  }).timeout(20000);
 });

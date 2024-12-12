@@ -2,48 +2,52 @@
 // Licensed under the MIT License.
 
 import * as dotenv from "dotenv";
-import { isNodeLike } from "@azure/core-util";
-import fs from "node:fs";
-import type { RecorderStartOptions, TestInfo } from "@azure-tools/test-recorder";
+import { isNode } from "@azure/core-util";
+import fs from "fs";
 import {
   Recorder,
+  RecorderStartOptions,
   env,
   assertEnvironmentVariable,
   isRecordMode,
   isPlaybackMode,
 } from "@azure-tools/test-recorder";
-import { generateToken } from "./connectionUtils.js";
-import type { CommunicationIdentityClientOptions } from "@azure/communication-identity";
-import { CommunicationIdentityClient } from "@azure/communication-identity";
-import type {
+import { Test } from "mocha";
+import { generateToken } from "./connectionUtils";
+import {
+  CommunicationIdentityClient,
+  CommunicationIdentityClientOptions,
+} from "@azure/communication-identity";
+import {
   CommunicationUserIdentifier,
   CommunicationIdentifier,
-  CommunicationIdentifierKind,
-} from "@azure/communication-common";
-import {
   serializeCommunicationIdentifier,
   isPhoneNumberIdentifier,
   createIdentifierFromRawId,
+  CommunicationIdentifierKind,
 } from "@azure/communication-common";
-import type { CallAutomationClientOptions, CallAutomationEvent } from "../../src/index.js";
-import { CallAutomationClient, parseCallAutomationEvent } from "../../src/index.js";
-import type { CommunicationIdentifierModel } from "../../src/generated/src/index.js";
+import {
+  CallAutomationClient,
+  CallAutomationClientOptions,
+  CallAutomationEvent,
+  parseCallAutomationEvent,
+} from "../../src";
+import { CommunicationIdentifierModel } from "../../src/generated/src";
+import { assert } from "chai";
 import {
   createDefaultHttpClient,
   createHttpHeaders,
   createPipelineRequest,
 } from "@azure/core-rest-pipeline";
-import type {
+import {
+  ServiceBusClient,
   ServiceBusReceiver,
   ServiceBusReceivedMessage,
   ProcessErrorArgs,
 } from "@azure/service-bus";
-import { ServiceBusClient } from "@azure/service-bus";
-import type { PhoneNumbersClientOptions } from "@azure/communication-phone-numbers";
-import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
-import { assert } from "vitest";
+import { PhoneNumbersClient, PhoneNumbersClientOptions } from "@azure/communication-phone-numbers";
 
-if (isNodeLike) {
+if (isNode) {
   dotenv.config();
 }
 
@@ -125,7 +129,7 @@ export const recorderOptions: RecorderStartOptions = {
   ],
 };
 
-export async function createRecorder(context: TestInfo | undefined): Promise<Recorder> {
+export async function createRecorder(context: Test | undefined): Promise<Recorder> {
   const recorder = new Recorder(context);
   await recorder.start(recorderOptions);
   await recorder.setMatcher("HeaderlessMatcher");
@@ -271,7 +275,7 @@ export async function waitForEvent(
 export function persistEvents(testName: string): void {
   if (isRecordMode()) {
     // sanitize the events values accordingly
-    const sanitizedEvents: any[] = [];
+    const sanatizedEvents: any[] = [];
     for (const event of eventsToPersist) {
       const jsonData = JSON.parse(event);
       sanitizeObject(jsonData, [
@@ -282,10 +286,10 @@ export function persistEvents(testName: string): void {
         "correlationId",
         "serverCallId",
       ]);
-      sanitizedEvents.push(jsonData);
+      sanatizedEvents.push(jsonData);
     }
 
-    const jsonArrayString = JSON.stringify(sanitizedEvents, null, 2);
+    const jsonArrayString = JSON.stringify(sanatizedEvents, null, 2);
     fs.writeFile(`recordings\\${testName}.json`, jsonArrayString, (err) => {
       if (err) throw err;
     });
@@ -299,10 +303,10 @@ export function persistEvents(testName: string): void {
 export async function loadPersistedEvents(testName: string): Promise<void> {
   if (isPlaybackMode()) {
     let data: string = "";
-    // Different OS has different file system path format.
+    // Different OS has differnt file system path format.
     try {
       data = fs.readFileSync(`recordings\\${testName}.json`, "utf-8");
-    } catch {
+    } catch (e) {
       console.log("original path doesn't work");
       data = fs.readFileSync(`recordings/${testName}.json`, "utf-8");
     }
@@ -327,7 +331,7 @@ export async function getPhoneNumbers(recorder: Recorder): Promise<string[]> {
   return phoneNumbers;
 }
 
-function sanitizeObject(obj: any, keysToSanitize: string[]): void {
+function sanitizeObject(obj: any, keysToSanitize: string[]) {
   for (const key in obj) {
     if (typeof obj[key] === "object") {
       sanitizeObject(obj[key], keysToSanitize);

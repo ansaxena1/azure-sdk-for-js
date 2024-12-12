@@ -1,14 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import type { Test } from "mocha";
+import { Test } from "mocha";
 
-import type { RecorderStartOptions } from "@azure-tools/test-recorder";
-import { assertEnvironmentVariable, Recorder } from "@azure-tools/test-recorder";
+import {
+  assertEnvironmentVariable,
+  Recorder,
+  RecorderStartOptions,
+} from "@azure-tools/test-recorder";
 
 import { EventGridSenderClient, EventGridReceiverClient } from "../../../src";
 import { createTestCredential } from "@azure-tools/test-credential";
-import type { AdditionalPolicyConfig } from "@azure/core-client";
+import { AdditionalPolicyConfig } from "@azure/core-client";
 
 export interface RecordedV2Client {
   senderClient: EventGridSenderClient;
