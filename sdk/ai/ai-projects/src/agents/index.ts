@@ -17,18 +17,20 @@ import { CreateVectorStoreFileBatchOptions, CreateVectorStoreFileOptions, FileSt
 import { createVectorStoreFile, createVectorStoreFileAndPoll, deleteVectorStoreFile, getVectorStoreFile, listVectorStoreFiles } from "./vectorStoresFiles.js";
 import { cancelVectorStoreFileBatch, createVectorStoreFileBatch, createVectorStoreFileBatchAndPoll, getVectorStoreFileBatch, listVectorStoreFileBatchFiles } from "./vectorStoresFileBatches.js";
 import { PollingOptions, ListQueryParameters, OptionalRequestParameters, AgentRunResponse } from "./customModels.js";
+
+type CreateAgentInputOptions = {options: Omit<CreateAgentOptions, "model">} & {requestParameters: OptionalRequestParameters};
+
+type ListAgentInputOptions = {options: ListQueryParameters} & {requestParameters: OptionalRequestParameters};
 export interface AgentsOperations {
   /** Creates a new agent. */
   createAgent: (
     model: string,
-    options?: Omit<CreateAgentOptions, "model">,
-    requestParams?: OptionalRequestParameters
+    options?: CreateAgentInputOptions
   ) => Promise<AgentOutput>;
 
   /** Gets a list of agents that were previously created. */
   listAgents: (
-    options?: ListQueryParameters,
-    requestParams?: OptionalRequestParameters
+    options?: ListAgentInputOptions
   ) => Promise<OpenAIPageableListOfAgentOutput>;
   /** Retrieves an existing agent. */
   getAgent: (
@@ -283,10 +285,10 @@ export interface AgentsOperations {
 
 function getAgents(context: Client): AgentsOperations {
   return {
-    createAgent: (model: string, options?: Omit<CreateAgentOptions, "model">, requestParams?: OptionalRequestParameters) =>
-      createAgent(context, { body: { ...options, model }, ...requestParams }),
-    listAgents: (options?: ListQueryParameters, requestParams?: OptionalRequestParameters) =>
-      listAgents(context, { queryParameters: options as Record<string, unknown>, ...requestParams }),
+    createAgent: (model: string, options?: CreateAgentInputOptions) =>
+      createAgent(context, { body: { ...options?.options, model }, ...options?.requestParameters }),
+    listAgents: (options?: ListAgentInputOptions ) =>
+      listAgents(context, { queryParameters: options?.options as Record<string, unknown>, ...options?.requestParameters }),
     getAgent: (assistantId: string, requestParams?: OptionalRequestParameters) =>
       getAgent(context, assistantId, requestParams),
     updateAgent: (
