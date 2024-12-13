@@ -9,7 +9,7 @@ import { ClientOptions } from '@azure-rest/core-client';
 import { Paged } from '@azure/core-paging';
 import { RequestParameters } from '@azure-rest/core-client';
 import { StreamableMethod } from '@azure-rest/core-client';
-import { TokenCredential } from '@azure/core-auth';
+import type { TokenCredential } from '@azure/core-auth';
 
 // @public
 export interface AgentDeletionStatusOutput {
@@ -175,6 +175,12 @@ export class AIProjectsClient {
     readonly connections: ConnectionsOperations;
     readonly evaluations: EvaluationsOperations;
     static fromConnectionString(connectionString: string, credential: TokenCredential, options?: AIProjectsClientOptions): AIProjectsClient;
+    // (undocumented)
+    readonly scope: {
+        subscriptionId: string;
+        resourceGroupName: string;
+        projectName: string;
+    };
     readonly telemetry: TelemetryOperations;
 }
 

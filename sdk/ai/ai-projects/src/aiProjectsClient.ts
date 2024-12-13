@@ -1,12 +1,17 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { TokenCredential } from "@azure/core-auth";
-import createClient, { ProjectsClientOptions } from "./generated/src/projectsClient.js";
-import { AgentsOperations, getAgentsOperations } from "./agents/index.js";
-import { ConnectionsOperations, getConnectionsOperations } from "./connections/index.js";
-import { EvaluationsOperations, getEvaluationsOperations } from "./evaluations/index.js";
-import { getTelemetryOperations, TelemetryOperations } from "./telemetry/index.js";
-import { Client } from "@azure-rest/core-client";
+import type { Client } from "@azure-rest/core-client";
+import type { TokenCredential } from "@azure/core-auth";
+import type { AgentsOperations } from "./agents/index.js";
+import { getAgentsOperations } from "./agents/index.js";
+import type { ConnectionsOperations } from "./connections/index.js";
+import { getConnectionsOperations } from "./connections/index.js";
+import type { EvaluationsOperations } from "./evaluations/index.js";
+import { getEvaluationsOperations } from "./evaluations/index.js";
+import type { ProjectsClientOptions } from "./generated/src/projectsClient.js";
+import createClient from "./generated/src/projectsClient.js";
+import type { TelemetryOperations } from "./telemetry/index.js";
+import { getTelemetryOperations } from "./telemetry/index.js";
 
 export interface AIProjectsClientOptions extends ProjectsClientOptions {
 }
@@ -14,6 +19,7 @@ export interface AIProjectsClientOptions extends ProjectsClientOptions {
 export class AIProjectsClient {
   private _client: Client;
   private _connectionClient: Client;
+  private _evaluationsClient: Client;
   private _telemetryClient: Client;
 
   /*
@@ -45,7 +51,10 @@ export class AIProjectsClient {
       resourceGroupName,
       projectName,
       credential,
-      { ...options, endpoint: connectionEndPoint })
+      { ...options, endpoint: connectionEndPoint });
+    
+    const evaluationsEndpoint = `https://management.azure.com/raisvc/v1.0/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/${projectName}`
+    this._evaluationsClient = createClient(endpointParam, subscriptionId, resourceGroupName, projectName, credential, { ...options, apiVersion: "2024-07-01-preview", endpoint: evaluationsEndpoint});
 
     this._telemetryClient = createClient(endpointParam, subscriptionId,
       resourceGroupName,
@@ -55,9 +64,13 @@ export class AIProjectsClient {
 
     this.agents = getAgentsOperations(this._client);
     this.connections = getConnectionsOperations(this._connectionClient);
-    this.evaluations = getEvaluationsOperations(this._client);
+    this.evaluations = getEvaluationsOperations(this._evaluationsClient);
     this.telemetry = getTelemetryOperations(this._telemetryClient, this.connections);
-
+    this.scope = {
+      subscriptionId,
+      resourceGroupName,
+      projectName,
+    };
   }
 
   /**
@@ -110,4 +123,10 @@ export class AIProjectsClient {
 
   /** The operation groups for telemetry */
   public readonly telemetry: TelemetryOperations;
+
+  public readonly scope: {
+    subscriptionId: string;
+    resourceGroupName: string;
+    projectName: string;
+  };
 }
