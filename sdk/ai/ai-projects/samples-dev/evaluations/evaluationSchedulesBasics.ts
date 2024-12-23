@@ -5,11 +5,12 @@ import type { EvaluatorConfiguration } from "@azure/ai-projects";
 import { AIProjectsClient } from "@azure/ai-projects";
 import { DefaultAzureCredential } from "@azure/identity";
 
+import { delay } from "@azure/core-util";
 import * as dotenv from "dotenv";
 import type { ApplicationInsightsConfiguration, EvaluationSchedule, RecurrenceTrigger } from "../../src/index.js";
 dotenv.config();
 
-const connectionString = process.env["AZURE_AI_PROJECTS_CONNECTION_STRING"] || "<endpoint>;<subscription>;<resource group>;<project>";
+const connectionString = process.env["AZURE_AI_PROJECTS_CONNECTION_STRING"] || "<project connection string>";
 
 export async function main(): Promise<void> {
     const client = AIProjectsClient.fromConnectionString(connectionString || "", new DefaultAzureCredential());
@@ -24,9 +25,9 @@ export async function main(): Promise<void> {
     const f1EvaluatorConfiguration: EvaluatorConfiguration = {
       id: "azureml://registries/model-evaluation-dev-01/models/F1ScoreEval/versions/1",
       initParams: {
-        columnMapping: {
-          response: `${data.message}`,
-          groundTruth: `${data.itemType}`,
+        "column_mapping": {
+          response: "${data.message}",
+          ground_truth: "${data.itemType}",
 
         }
       }
@@ -45,6 +46,7 @@ export async function main(): Promise<void> {
     const name = "CANARY-ONLINE-EVAL-TEST-WS-ENV-104";
     const description = "Testing Online eval command job in CANARY environment";
     const tags = {"tag1": "value1", "tag2": "value2"};
+    const properties = {"AzureMSIClientId": "sample_client_id"};
 
     const schedule: EvaluationSchedule = {
       data: appInsightsConfig,
@@ -52,18 +54,20 @@ export async function main(): Promise<void> {
       trigger: recurrenceTrigger,
       description: description,
       tags: tags,
+      properties: properties
     };
 
     const evaluationSchedule = await client.evaluations.createOrReplaceSchedule(name, schedule);
-    // console.log(`Created evaluation schedule, status: ${evaluationSchedule.provisioningState}`);
-    console.log(`Created evaluation schedule: ${evaluationSchedule}`);
+    console.log(`Created evaluation schedule: ${evaluationSchedule.name}`);
+    await delay(30000);
 
     const getEvaluationSchedule = await client.evaluations.getSchedule(name);
-    console.log(`Get evaluation schedule: ${getEvaluationSchedule}`);
+    console.log(`Retrieved evaluation schedule: ${getEvaluationSchedule.name}`);
 
     const schedules = await client.evaluations.listSchedules();
+    console.log("Listing evaluation schedules:");
     schedules.value.forEach(x => {
-      console.log(`Schedule: ${x}`);
+      console.log(`Schedule ${x.name} has status: ${x.provisioningState}`);
     });
     await client.evaluations.disableSchedule(name);
     console.log("Disabled evaluation schedule");

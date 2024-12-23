@@ -3,7 +3,7 @@
 
 import type { Client } from "@azure-rest/core-client";
 import { createRestError } from "@azure-rest/core-client";
-import type { EvaluationSchedule, PagedEvaluationScheduleOutput } from "../agents/inputOutputs.js";
+import type { EvaluationScheduleOutput, PagedEvaluationScheduleOutput } from "../agents/inputOutputs.js";
 import type { CreateOrReplaceScheduleParameters, DisableScheduleParameters, GetScheduleParameters, ListScheduleParameters } from "../generated/src/parameters.js";
 
 const expectedGetStatuses = ["200"];
@@ -15,7 +15,7 @@ export async function getSchedule(
     context: Client,
     evaluationName: string,
     options?: GetScheduleParameters,
-  ): Promise<EvaluationSchedule> {
+  ): Promise<EvaluationScheduleOutput> {
     const result = await context
     .path("/evaluations/schedules/{evaluationName}", evaluationName)
     .get(options);
@@ -30,7 +30,7 @@ export async function createOrReplaceSchedule(
     context: Client,
     scheduleName: string, 
     options?: CreateOrReplaceScheduleParameters,
-  ): Promise<EvaluationSchedule> {
+  ): Promise<EvaluationScheduleOutput> {
     const result = await context
     .path("/evaluations/schedules/{scheduleName}", scheduleName)
     .put(options);

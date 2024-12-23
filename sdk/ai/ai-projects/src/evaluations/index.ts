@@ -4,7 +4,7 @@
 
 import type { Client } from "@azure-rest/core-client";
 import type { OptionalRequestParameters } from "../agents/customModels.js";
-import type { Evaluation, EvaluationOutput, EvaluationSchedule, PagedEvaluationOutput, PagedEvaluationScheduleOutput } from "../agents/inputOutputs.js";
+import type { Evaluation, EvaluationOutput, EvaluationSchedule, EvaluationScheduleOutput, PagedEvaluationOutput, PagedEvaluationScheduleOutput } from "../agents/inputOutputs.js";
 import type { ListQueryParamProperties } from "../generated/src/parameters.js";
 import { createEvaluation, getEvaluation, listEvaluations, updateEvaluation } from "./evaluations.js";
 import { createOrReplaceSchedule, disableSchedule, getSchedule, listSchedules } from "./evaluationSchedules.js";
@@ -35,13 +35,13 @@ export interface EvaluationsOperations {
   getSchedule: (
     evaluationName: string,
     requestParams?: OptionalRequestParameters
-  ) => Promise<EvaluationSchedule>;
+  ) => Promise<EvaluationScheduleOutput>;
   /** Create or replace operation template. */
   createOrReplaceSchedule: (
     scheduleName: string,
     resource: EvaluationSchedule,
     requestParams?: OptionalRequestParameters
-  ) => Promise<EvaluationSchedule>;
+  ) => Promise<EvaluationScheduleOutput>;
   /** Resource list operation template. */
   listSchedules: (
     options?: ListQueryParamProperties,

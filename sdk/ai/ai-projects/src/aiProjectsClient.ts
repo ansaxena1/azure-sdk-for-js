@@ -53,8 +53,8 @@ export class AIProjectsClient {
       credential,
       { ...options, endpoint: connectionEndPoint });
     
-    const evaluationsEndpoint = `https://management.azure.com/raisvc/v1.0/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/${projectName}`
-    this._evaluationsClient = createClient(endpointParam, subscriptionId, resourceGroupName, projectName, credential, { ...options, apiVersion: "2024-07-01-preview", endpoint: evaluationsEndpoint});
+    const evaluationsEndpoint = `${endpointParam}/raisvc/v1.0/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/${projectName}`
+    this._evaluationsClient = createClient(endpointParam, subscriptionId, resourceGroupName, projectName, credential, { ...options, apiVersion: "2024-07-01-preview", endpoint: evaluationsEndpoint, credentials: { scopes: ["https://ml.azure.com/.default"] } });
 
     this._telemetryClient = createClient(endpointParam, subscriptionId,
       resourceGroupName,
@@ -67,9 +67,9 @@ export class AIProjectsClient {
     this.evaluations = getEvaluationsOperations(this._evaluationsClient);
     this.telemetry = getTelemetryOperations(this._telemetryClient, this.connections);
     this.scope = {
-      subscriptionId,
-      resourceGroupName,
-      projectName,
+      "subscription_id": subscriptionId,
+      "resource_group_name": resourceGroupName,
+      "project_name": projectName,
     };
   }
 
@@ -125,8 +125,8 @@ export class AIProjectsClient {
   public readonly telemetry: TelemetryOperations;
 
   public readonly scope: {
-    subscriptionId: string;
-    resourceGroupName: string;
-    projectName: string;
+    "subscription_id": string;
+    "resource_group_name": string;
+    "project_name": string;
   };
 }

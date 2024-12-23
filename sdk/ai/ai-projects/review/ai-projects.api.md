@@ -177,9 +177,9 @@ export class AIProjectsClient {
     static fromConnectionString(connectionString: string, credential: TokenCredential, options?: AIProjectsClientOptions): AIProjectsClient;
     // (undocumented)
     readonly scope: {
-        subscriptionId: string;
-        resourceGroupName: string;
-        projectName: string;
+        "subscription_id": string;
+        "resource_group_name": string;
+        "project_name": string;
     };
     readonly telemetry: TelemetryOperations;
 }
@@ -455,10 +455,10 @@ export interface EvaluationScheduleOutput {
 // @public (undocumented)
 export interface EvaluationsOperations {
     createEvaluation: (evaluation: Evaluation, requestParams?: OptionalRequestParameters) => Promise<EvaluationOutput>;
-    createOrReplaceSchedule: (scheduleName: string, resource: EvaluationSchedule, requestParams?: OptionalRequestParameters) => Promise<EvaluationSchedule>;
+    createOrReplaceSchedule: (scheduleName: string, resource: EvaluationSchedule, requestParams?: OptionalRequestParameters) => Promise<EvaluationScheduleOutput>;
     disableSchedule: (scheduleName: string, requestParams?: OptionalRequestParameters) => Promise<void>;
     getEvaluation: (evaluationId: string, requestParams?: OptionalRequestParameters) => Promise<EvaluationOutput>;
-    getSchedule: (evaluationName: string, requestParams?: OptionalRequestParameters) => Promise<EvaluationSchedule>;
+    getSchedule: (evaluationName: string, requestParams?: OptionalRequestParameters) => Promise<EvaluationScheduleOutput>;
     listEvaluations: (options?: ListQueryParamProperties, requestParams?: OptionalRequestParameters) => Promise<PagedEvaluationOutput>;
     listSchedules: (options?: ListQueryParamProperties, requestParams?: OptionalRequestParameters) => Promise<PagedEvaluationScheduleOutput>;
     updateEvaluation: (evaluationId: string, resource: Evaluation, requestParams?: OptionalRequestParameters) => Promise<EvaluationOutput>;
